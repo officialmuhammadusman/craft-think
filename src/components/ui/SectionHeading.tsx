@@ -46,8 +46,8 @@ export function SectionHeading({
       {eyebrow && (
         <span
           className={cn(
-            "text-sm font-semibold uppercase tracking-widest",
-            aiAccent ? "text-[#14B8A6]" : "text-[#4F46E5]"
+            "rounded-full border px-4 py-1.5 text-sm font-semibold uppercase tracking-widest",
+            aiAccent ? "border-[#14B8A6]/30 bg-[#F0FDFA] text-[#0F766E]" : "border-[#4F46E5]/20 bg-[#EEF2FF] text-[#4F46E5]"
           )}
         >
           {eyebrow}

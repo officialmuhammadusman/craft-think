@@ -41,7 +41,7 @@ export const siteConfig = {
     { label: "Services", href: "/services", hasMegaMenu: true },
     { label: "Work", href: "/work", hasDropdown: true },
     { label: "Process", href: "/process" },
-    { label: "About CEO", href: "/about" },
+    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
 
@@ -173,7 +173,7 @@ export const siteConfig = {
     company: [
       { label: "Work", href: "/work" },
       { label: "Process", href: "/process" },
-      { label: "About CEO", href: "/about" },
+      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
   },

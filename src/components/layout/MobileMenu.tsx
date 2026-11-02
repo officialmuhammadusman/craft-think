@@ -1,206 +1,72 @@
 "use client";
-
 /**
- * MobileMenu.tsx — Full-screen mobile navigation overlay.
- * Opens from the hamburger button in the header.
- * Services expand as accordions in 4 groups (Build, Manage, Design & AI, Featured).
- * Closes when a link is tapped, or Escape is pressed.
- * Trap focus while open for accessibility.
+ * MobileMenu — full-screen, app-like. Real search form at the top
+ * (routes to /guide?q=, the old version was a non-working grey pill),
+ * service accordions, plain nav links, contact row, and a sticky CTA
+ * bar pinned to the bottom of the panel (not floating over content).
+ * Closes on link click, Escape, and the close button. Body scroll locked.
  */
-
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  X,
-  ChevronDown,
-  Monitor,
-  Briefcase,
-  ShoppingCart,
-  Smartphone,
-  Users,
-  CalendarCheck,
-  UserCheck,
-  Palette,
-  Bot,
-  Wrench,
-  ShieldCheck,
-  Search,
-  Mail,
-  Phone,
-  Globe,
-  Code2,
-} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { X, ChevronDown, Monitor, Briefcase, ShoppingCart, Smartphone, Users, CalendarCheck, UserCheck, Palette, Bot, Wrench, ShieldCheck, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-const iconMap = {
-  Monitor,
-  Briefcase,
-  ShoppingCart,
-  Smartphone,
-  Users,
-  CalendarCheck,
-  UserCheck,
-  Palette,
-  Bot,
-  Wrench,
-  ShieldCheck,
-} as const;
-
+const iconMap = { Monitor, Briefcase, ShoppingCart, Smartphone, Users, CalendarCheck, UserCheck, Palette, Bot, Wrench, ShieldCheck } as const;
 type IconName = keyof typeof iconMap;
 
-interface MobileMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  // Track which service accordion group is expanded (null = all closed)
-  const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
+export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [expandedGroup, setExpandedGroup] = useState<string | null>("Build");
+  const [query, setQuery] = useState("");
+  const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close the menu and reset accordions (event handler, not an effect).
-  const handleClose = useCallback(() => {
-    setExpandedGroup(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const search = (e: React.FormEvent) => {
+    e.preventDefault();
     onClose();
-  }, [onClose]);
-
-  // Close on Escape
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") handleClose();
-    }
-    if (isOpen) document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, handleClose]);
-
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  // Focus first element when menu opens
-  useEffect(() => {
-    if (isOpen && menuRef.current) {
-      const firstFocusable = menuRef.current.querySelector<HTMLElement>(
-        "button, a, input"
-      );
-      firstFocusable?.focus();
-    }
-  }, [isOpen]);
-
-  const toggleGroup = (heading: string) => {
-    setExpandedGroup((prev) => (prev === heading ? null : heading));
+    router.push(query.trim() ? `/guide?q=${encodeURIComponent(query.trim())}` : "/guide");
   };
 
   return (
-    <div
-      ref={menuRef}
-      id="mobile-menu"
-      aria-label="Mobile navigation"
-      aria-hidden={!isOpen}
-      className={cn(
-        // Full-screen overlay, fixed, above everything
-        "fixed inset-0 z-[100] flex flex-col bg-white",
-        "transition-transform duration-300 ease-in-out motion-safe:transition-transform",
-        isOpen ? "translate-x-0" : "translate-x-full"
-      )}
-    >
-      {/* ── Top bar: Search + Close ───────────────────────────────────────── */}
-      <div className="flex items-center justify-between gap-3 border-b border-[#E7E9F2] px-4 py-4">
-        {/* Search — TODO: wire to AI Search in Prompt 2 */}
-        <div className="flex flex-1 items-center gap-2 rounded-full bg-[#F6F7FB] px-4 py-2.5">
-          <Search size={16} className="text-[#64748B]" />
-          <span className="text-sm text-[#64748B]">Search services…</span>
-        </div>
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          aria-label="Close menu"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220] hover:bg-[#F6F7FB] transition-colors duration-150"
-        >
-          <X size={20} />
-        </button>
+    <div ref={menuRef} id="mobile-menu" aria-label="Mobile navigation" className="fixed inset-0 z-[100] flex flex-col bg-white lg:hidden">
+      <div className="flex items-center gap-3 border-b border-[#E7E9F2] px-4 py-3">
+        <form onSubmit={search} className="flex min-h-[48px] flex-1 items-center gap-2 rounded-full bg-[#F6F7FB] px-4">
+          <Search size={18} className="shrink-0 text-[#64748B]" />
+          <label className="sr-only" htmlFor="mobile-search">Search services or ask the AI guide</label>
+          <input id="mobile-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="What do you need help with?" className="min-w-0 flex-1 bg-transparent text-base text-[#0B1220] outline-none placeholder:text-[#64748B]" />
+          <button type="submit" className="shrink-0 text-base font-semibold text-[#4F46E5]">Ask AI</button>
+        </form>
+        <button type="button" onClick={onClose} aria-label="Close menu" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220]"><X size={22} /></button>
       </div>
 
-      {/* ── Scrollable nav area ───────────────────────────────────────────── */}
-      <nav
-        aria-label="Main navigation"
-        className="flex-1 overflow-y-auto px-4 py-4 pb-36"
-        // pb-36 ensures content is not hidden behind mobile sticky CTA bar
-      >
-
-        {/* ── Services accordion groups ─────────────────────────────────── */}
-        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">
-          Services
-        </p>
-
+      <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-4 py-4">
+        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Services</p>
         {siteConfig.megaMenu.columns.map((col) => (
           <div key={col.heading} className="mb-1">
-            {/* Accordion toggle button */}
-            <button
-              onClick={() => toggleGroup(col.heading)}
-              aria-expanded={expandedGroup === col.heading}
-              aria-controls={`mobile-group-${col.heading}`}
-              className={cn(
-                "flex w-full items-center justify-between rounded-xl px-3 py-3",
-                "text-sm font-semibold text-[#0B1220]",
-                "hover:bg-[#F6F7FB] transition-colors duration-150",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-inset"
-              )}
-            >
+            <button type="button" onClick={() => setExpandedGroup((p) => (p === col.heading ? null : col.heading))} aria-expanded={expandedGroup === col.heading} className="flex min-h-[52px] w-full items-center justify-between rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
               {col.heading}
-              <ChevronDown
-                size={16}
-                className={cn(
-                  "text-[#64748B] transition-transform duration-200",
-                  expandedGroup === col.heading && "rotate-180"
-                )}
-              />
+              <ChevronDown size={18} className={cn("text-[#64748B] transition-transform", expandedGroup === col.heading && "rotate-180")} />
             </button>
-
-            {/* Accordion content */}
-            <div
-              id={`mobile-group-${col.heading}`}
-              className={cn(
-                "overflow-hidden transition-all duration-200 ease-in-out",
-                expandedGroup === col.heading
-                  ? "max-h-[600px] opacity-100"
-                  : "max-h-0 opacity-0"
-              )}
-            >
-              <ul className="flex flex-col gap-0.5 pb-2 pl-2" role="list">
+            <div className={cn("overflow-hidden transition-all duration-200", expandedGroup === col.heading ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0")}>
+              <ul className="flex flex-col gap-0.5 pb-2 pl-1">
                 {col.items.map((item) => {
                   const Icon = iconMap[item.icon as IconName];
                   return (
                     <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={handleClose}
-                        className={cn(
-                          "group flex items-center gap-3 rounded-xl px-3 py-3",
-                          "hover:bg-[#EEF2FF] transition-colors duration-150",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-inset"
-                        )}
-                      >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEF2FF] text-[#4F46E5]">
-                          {Icon && <Icon size={16} strokeWidth={1.75} />}
-                        </span>
-                        <span>
-                          <span className="block text-sm font-medium text-[#0B1220]">
-                            {item.title}
-                          </span>
-                          <span className="block text-xs text-[#64748B] leading-snug">
-                            {item.description}
-                          </span>
-                        </span>
+                      <Link href={item.href} onClick={onClose} className="flex min-h-[56px] items-center gap-3 rounded-xl px-3 py-2 hover:bg-[#EEF2FF]">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]">{Icon && <Icon size={18} />}</span>
+                        <span><span className="block text-base font-medium text-[#0B1220]">{item.title}</span><span className="block text-sm leading-snug text-[#64748B]">{item.description}</span></span>
                       </Link>
                     </li>
                   );
@@ -209,96 +75,25 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
           </div>
         ))}
-
-        {/* ── Divider ───────────────────────────────────────────────────── */}
         <div className="my-4 border-t border-[#E7E9F2]" />
-
-        {/* ── Other nav links ───────────────────────────────────────────── */}
-        <ul className="flex flex-col gap-0.5" role="list">
-          {[
-            { label: "Work", href: "/work" },
-            { label: "Process", href: "/process" },
-            { label: "About CEO", href: "/about" },
-            { label: "Contact", href: "/contact" },
-          ].map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                onClick={handleClose}
-                className="flex items-center rounded-xl px-3 py-3 text-sm font-medium text-[#0B1220] hover:bg-[#F6F7FB] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-inset"
-              >
-                {link.label}
-              </Link>
-            </li>
+        <ul className="flex flex-col gap-0.5">
+          {[{ label: "Work", href: "/work" }, { label: "Process", href: "/process" }, { label: "About", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "AI Guide", href: "/guide" }, { label: "Get an Estimate", href: "/estimate" }, { label: "Free Audit", href: "/audit" }, { label: "FAQ", href: "/faq" }].map((link) => (
+            <li key={link.href}><Link href={link.href} onClick={onClose} className="flex min-h-[52px] items-center rounded-xl px-3 text-base font-medium text-[#0B1220] hover:bg-[#F6F7FB]">{link.label}</Link></li>
           ))}
         </ul>
-
-        {/* ── Divider ───────────────────────────────────────────────────── */}
-        <div className="my-4 border-t border-[#E7E9F2]" />
-
-        {/* ── Contact info ──────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-3 px-3">
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="flex items-center gap-2 text-sm text-[#475569] hover:text-[#4F46E5] transition-colors"
-          >
-            <Mail size={15} />
-            {siteConfig.email}
-          </a>
-          <a
-            href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-            className="flex items-center gap-2 text-sm text-[#475569] hover:text-[#4F46E5] transition-colors"
-          >
-            <Phone size={15} />
-            {siteConfig.phone}
-          </a>
-
-          {/* Social links */}
-          <div className="flex items-center gap-3 pt-1">
-            {true && (
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569] hover:text-[#4F46E5] hover:border-[#4F46E5] transition-colors"
-              >
-                <Globe size={16} />
-              </a>
-            )}
-            {true && (
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569] hover:text-[#0B1220] hover:border-[#0B1220] transition-colors"
-              >
-                <Code2 size={16} />
-              </a>
-            )}
+        <div className="mt-5 flex flex-col gap-3 px-3 pb-4">
+          <a href={`mailto:${siteConfig.email}`} className="flex min-h-[48px] items-center gap-2 break-all text-base text-[#475569]"><Mail size={17} className="shrink-0" />{siteConfig.email}</a>
+          <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="flex min-h-[48px] items-center gap-2 text-base text-[#475569]"><Phone size={17} className="shrink-0" />{siteConfig.phone}</a>
+          <div className="flex gap-3 pt-1">
+            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Globe size={18} /></a>
+            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Code2 size={18} /></a>
           </div>
         </div>
-
       </nav>
 
-      {/* ── Featured CTA at bottom ────────────────────────────────────────── */}
-      <div className="border-t border-[#E7E9F2] bg-white px-4 py-4">
-        <div className="rounded-2xl bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] p-4 text-white">
-          <p className="text-xs font-semibold text-[#14B8A6] mb-1">
-            Not sure what you need?
-          </p>
-          <p className="text-sm font-semibold text-white mb-3">
-            Talk to our AI guide — it will find the right service for you.
-          </p>
-          <Link
-            href="/contact"
-            onClick={handleClose}
-            className="flex items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-sm font-semibold text-white hover:bg-[#4338CA] transition-colors"
-          >
-            Book a Free Consultation
-          </Link>
-        </div>
+      <div className="border-t border-[#E7E9F2] bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+        <Link href="/contact" onClick={onClose} className="flex min-h-[52px] items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white">Book a Free Consultation</Link>
+        <Link href="/guide" onClick={onClose} className="mt-2 flex min-h-[52px] items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</Link>
       </div>
     </div>
   );

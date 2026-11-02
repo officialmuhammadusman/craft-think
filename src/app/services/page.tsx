@@ -16,8 +16,8 @@ export default function ServicesPage() {
           <SectionHeading as="h1" eyebrow="What We Build" title="Services, in plain language" subtitle="No jargon first. Pick the problem you have — the technical detail is inside each page." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
-              <Link key={s.slug} href={`/services/${s.slug}`} className="overflow-hidden rounded-2xl border border-[#E7E9F2] bg-white shadow-sm transition hover:border-[#4F46E5] hover:shadow-md">
-                <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-44 w-full object-cover" />
+              <Link key={s.slug} href={`/services/${s.slug}`} className="ct-card group overflow-hidden">
+                <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="p-6">
                   <h2 className="ct-h4">{s.title}</h2>
                   <p className="mt-2 text-[#475569]">{s.line}</p>

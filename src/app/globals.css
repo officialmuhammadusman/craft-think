@@ -86,6 +86,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   background-color: #ffffff;
   color: #0b1220;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -185,6 +186,28 @@ body {
     padding-top: 48px;
     padding-bottom: 48px;
   }
+}
+
+/* ── Premium card + hero helpers ─────────────────────────────────────── */
+.ct-card {
+  border-radius: 24px;
+  border: 1px solid #e7e9f2;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(11, 18, 32, 0.06), 0 4px 16px rgba(11, 18, 32, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.ct-card:hover {
+  transform: translateY(-4px);
+  border-color: #4f46e5;
+  box-shadow: 0 12px 32px rgba(11, 18, 32, 0.12);
+}
+.ct-hero-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 40%, transparent 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-card, .ct-card:hover { transform: none; }
 }
 
 /* ── Focus ring — global fallback ────────────────────────────────────── */

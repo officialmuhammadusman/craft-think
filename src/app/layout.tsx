@@ -83,8 +83,8 @@ export default function RootLayout({
           <Header />
 
           {/* Page content — grows to fill available space */}
-          <main className="flex-1 pt-16">
-            {/* pt-16 (64px) offsets the fixed header height */}
+          <main className="flex-1 pt-[72px]">
+            {/* pt-[72px] offsets the fixed 72px header height */}
             {children}
           </main>
 

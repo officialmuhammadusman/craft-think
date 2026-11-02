@@ -5,6 +5,7 @@
  * Copyright line pulls year dynamically.
  */
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
@@ -28,12 +29,10 @@ export function Footer() {
               aria-label={`${siteConfig.agencyName} — Home`}
               className="inline-flex items-center gap-2 mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] rounded"
             >
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#4F46E5] text-white text-sm font-bold select-none">
-                C
-              </span>
+              <Image src="/images/brand/logo-mark.webp" alt="" width={32} height={32} className="h-8 w-8 rounded-lg object-cover" />
               <span className="text-lg font-bold">
                 <span className="text-white">Craft</span>
-                <span className="text-[#4F46E5]">Think</span>
+                <span className="text-[#818CF8]">Think</span>
               </span>
             </Link>
 

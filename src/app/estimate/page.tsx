@@ -12,7 +12,8 @@ export default function EstimatePage() {
       <section className="ct-section">
         <Container width="narrow">
           <SectionHeading as="h1" eyebrow="Estimate" title="Get a Project Estimate" subtitle="Answer a few quick questions and get a rough range — no commitment, no fixed price promised here." />
-          <div className="mt-10"><EstimateForm /></div>
+          <ol className="mt-10 grid gap-4 sm:grid-cols-3">{["1. Answer 3 quick questions","2. See a rough range + timeline","3. Book a free call for a firm quote"].map((s) => (<li key={s} className="rounded-[20px] border border-[#E7E9F2] bg-white px-5 py-4 text-base font-semibold shadow-sm">{s}</li>))}</ol>
+          <div className="mt-6"><EstimateForm /></div>
           <p className="mt-4 text-sm text-[#64748B]">Ranges are based on an analyst framework, not published fixed prices. Your firm quote is confirmed in writing after a free consultation.</p>
         </Container>
       </section>

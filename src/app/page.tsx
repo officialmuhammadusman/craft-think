@@ -79,7 +79,7 @@ export default function HomePage() {
                 Software that fits the way your business <em className="ct-serif-accent text-[#4F46E5]">actually</em> works.
               </h1>
               <p className="ct-body-lg max-w-xl text-[#475569]">
-                We build websites, mobile apps, booking and CRM systems, and AI assistants — designed with you, built for your customers, and supported after launch.
+                We build websites, mobile apps, booking and CRM systems, and AI solutions powered by RAG and automation — designed with you, built for your customers, and supported after launch.
               </p>
               <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-6">
                 <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a free call</Button>

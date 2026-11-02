@@ -2,8 +2,10 @@
 
 /**
  * StickyMobileCTA.tsx — Fixed bottom bar on mobile only.
- * Two buttons: "Book a Free Consultation" (primary) and "Get an Estimate" (secondary).
- * Hidden on desktop (lg and above).
+ * Two buttons: "Book a Free Consultation" (primary) and "Talk with me" (secondary,
+ * opens the Think chat sheet via the craftthink:open-ai event — NOT a link to a page).
+ * "Get an Estimate" was REMOVED from this bar per user request (estimate stays
+ * reachable from footer/in-page links). Hidden on desktop (lg and above).
  * The layout.tsx adds pb-[80px] on mobile so the footer is never hidden behind this bar.
  */
 import Link from "next/link";
@@ -36,14 +38,15 @@ export function StickyMobileCTA() {
         Book a Free Consultation
       </Link>
 
-      {/* Secondary: Get an Estimate */}
-      <Link
-        href="/estimate"
-        id="mobile-cta-estimate"
+      {/* Secondary: Talk with me — opens the Think chat sheet, same event as the header */}
+      <button
+        type="button"
+        id="mobile-cta-talk"
+        onClick={() => window.dispatchEvent(new CustomEvent("craftthink:open-ai"))}
         className="flex-1 flex items-center justify-center text-center rounded-full border border-[#E7E9F2] bg-white px-2 py-2.5 sm:py-3 text-sm leading-tight sm:text-base font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
       >
-        Get an Estimate
-      </Link>
+        Talk with me
+      </button>
     </div>
   );
 }

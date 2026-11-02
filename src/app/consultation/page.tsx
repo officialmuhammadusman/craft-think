@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -35,13 +35,13 @@ export default async function ConsultationPage({ searchParams }: { searchParams?
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><Mail size={20} /></span>
               <span><span className="block text-sm font-semibold uppercase tracking-widest text-[#64748B]">Email</span><span className="block break-all text-base font-semibold">{siteConfig.email}</span></span>
             </a>
-            <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="ct-card flex min-h-[72px] items-center gap-4 p-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><Phone size={20} /></span>
-              <span><span className="block text-sm font-semibold uppercase tracking-widest text-[#64748B]">Phone</span><span className="block text-base font-semibold">{siteConfig.phone}</span></span>
+            <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="ct-card flex min-h-[72px] items-center gap-4 p-5">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><MessageCircle size={20} /></span>
+              <span><span className="block text-sm font-semibold uppercase tracking-widest text-[#64748B]">WhatsApp</span><span className="block text-base font-semibold">{siteConfig.phone}</span></span>
             </a>
             <div className="rounded-[24px] bg-[#0B1220] p-6 text-white">
               <p className="text-base font-bold">Working remotely with clients worldwide.</p>
-              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use the form, email or phone above until then.</p>
+              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use the form, email or WhatsApp above until then.</p>
             </div>
           </div>
           <ConsultationForm initialMessage={initialMessage} />

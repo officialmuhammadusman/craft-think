@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone, Globe, Code2, MessageCircle } from "lucide-react";
+import { Mail, Globe, Code2, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Contact", description: "Book a free 
 export default function ContactPage() {
   const cards = [
     { icon: Mail, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-    { icon: Phone, label: "Phone", value: siteConfig.phone, href: `tel:${siteConfig.phone.replace(/\s/g, "")}` },
+    { icon: MessageCircle, label: "WhatsApp", value: siteConfig.phone, href: "https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." },
     { icon: Globe, label: "LinkedIn", value: "linkedin.com/in/muhammadusman-webdev", href: "https://linkedin.com/in/muhammadusman-webdev" },
     { icon: Code2, label: "GitHub", value: "github.com/officialmuhammadusman", href: "https://github.com/officialmuhammadusman" },
   ];
@@ -26,13 +26,9 @@ export default function ContactPage() {
                 <span><span className="block text-sm font-semibold uppercase tracking-widest text-[#64748B]">{c.label}</span><span className="block break-all text-base font-semibold">{c.value}</span></span>
               </a>
             ))}
-            <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="ct-card flex min-h-[72px] items-center gap-4 p-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><MessageCircle size={20} /></span>
-              <span><span className="block text-sm font-semibold uppercase tracking-widest text-[#64748B]">WhatsApp</span><span className="block text-base font-semibold">Chat with us on WhatsApp</span></span>
-            </a>
             <div className="rounded-[24px] bg-[#0B1220] p-6 text-white">
               <p className="text-base font-bold">Working remotely with clients worldwide.</p>
-              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use email or phone above until then.</p>
+              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use email or WhatsApp above until then.</p>
             </div>
           </div>
           <ContactForm />

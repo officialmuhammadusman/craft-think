@@ -12,7 +12,7 @@
  * social links, no fake logos, no gradients.
  */
 import Link from "next/link";
-import { Mail, Phone, Globe, Code2, MessageCircle } from "lucide-react";
+import { Mail, Globe, Code2, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { LogoMark } from "@/components/ui/LogoMark";
 
@@ -67,7 +67,7 @@ export function Footer() {
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-white/50">Contact</p>
             <a href={`mailto:${siteConfig.email}`} className="mt-4 flex min-h-[48px] items-start gap-2 break-words text-sm text-white/75 hover:text-white"><Mail size={17} className="mt-0.5 shrink-0" />{siteConfig.email}</a>
-            <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Phone size={17} className="shrink-0" />{siteConfig.phone}</a>
+            <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><MessageCircle size={17} className="shrink-0" />{siteConfig.phone}</a>
             <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><MessageCircle size={17} className="shrink-0" />WhatsApp</a>
             <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Globe size={17} className="shrink-0" />LinkedIn</a>
             <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Code2 size={17} className="shrink-0" />GitHub</a>

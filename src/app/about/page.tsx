@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Globe, Mail, Phone, GraduationCap, Code2, Bot } from "lucide-react";
+import { Globe, Mail, GraduationCap, Code2, Bot, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -83,7 +83,7 @@ export default function AboutPage() {
           <Reveal className="mt-6">
             <div className="grid gap-4 sm:grid-cols-2">
               <a href={`mailto:${siteConfig.email}`} className="ct-card flex min-h-[72px] items-center gap-3 p-5"><Mail size={20} className="shrink-0 text-[#4F46E5]" /><span className="break-all text-base font-semibold">{siteConfig.email}</span></a>
-              <a href={`tel:${siteConfig.phone.replace(/ /g, "")}`} className="ct-card flex min-h-[72px] items-center gap-3 p-5"><Phone size={20} className="shrink-0 text-[#4F46E5]" /><span className="text-base font-semibold">{siteConfig.phone}</span></a>
+              <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="ct-card flex min-h-[72px] items-center gap-3 p-5"><MessageCircle size={20} className="shrink-0 text-[#4F46E5]" /><span className="text-base font-semibold">{siteConfig.phone}</span></a>
               <a href="https://linkedin.com/in/muhammadusman-webdev" target="_blank" rel="noopener noreferrer" className="ct-card flex min-h-[72px] items-center gap-3 p-5"><span className="text-base font-semibold">LinkedIn · muhammadusman-webdev</span></a>
               <a href="https://github.com/officialmuhammadusman" target="_blank" rel="noopener noreferrer" className="ct-card flex min-h-[72px] items-center gap-3 p-5"><span className="text-base font-semibold">GitHub · officialmuhammadusman</span></a>
             </div>

@@ -210,6 +210,27 @@ body {
   .ct-card, .ct-card:hover { transform: none; }
 }
 
+/* ── ScienceSoft-pattern visual language (CraftThink colours only) ─────
+   White pages, deep navy headings, bright indigo links/buttons, light
+   grey alternating sections, structured service lists with divider rows,
+   and a key-facts bar with a navy top rule. No ScienceSoft text, logo,
+   images or trademarks are used — only this generic layout language. */
+.scn-keyfacts {
+  border-top: 4px solid #0b1220;
+}
+.ct-offering-card {
+  border-top: 4px solid #4f46e5;
+}
+.ct-offering-card ul li {
+  border-bottom: 1px solid #e7e9f2;
+}
+.ct-offering-card ul li:last-child {
+  border-bottom: 0;
+}
+/* Simple fade-up on scroll is handled by Reveal.tsx (Framer Motion);
+   hover lift is handled by .ct-card above. Both already respect
+   prefers-reduced-motion (see the media query above). */
+
 /* ── Focus ring — global fallback ────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid #4f46e5;

@@ -27,7 +27,7 @@ export function CtaBand({ title = "Not sure where to start?", text = "Book a fre
             <Image src="/images/brand/hero-abstract.png" alt="CraftThink brand abstract — indigo and teal shapes" width={900} height={600} className="w-full rounded-[24px] border border-white/20 object-cover shadow-2xl" />
             <div className="absolute -bottom-4 left-4 flex gap-6 rounded-2xl border border-white/20 bg-white px-5 py-4 shadow-xl">
               <span><span className="block text-xl font-bold text-[#0B1220]">11</span><span className="text-xs text-[#64748B]">Services</span></span>
-              <span><span className="block text-xl font-bold text-[#0B1220]">5</span><span className="text-xs text-[#64748B]">Projects</span></span>
+              <span><span className="block text-xl font-bold text-[#0B1220]">6</span><span className="text-xs text-[#64748B]">Projects</span></span>
               <span><span className="block text-xl font-bold text-[#0B1220]">6</span><span className="text-xs text-[#64748B]">Process steps</span></span>
             </div>
           </div>

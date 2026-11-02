@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import { projects } from "@/data/content";
+import { verifiedLiveLinks } from "@/data/offering";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -54,7 +55,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <div className="ct-card p-7">
                 <p className="text-sm font-bold uppercase tracking-widest text-[#64748B]">Built with</p>
                 <p className="mt-2 text-base leading-relaxed">{p.stack}</p>
-                {p.live && <p className="mt-3 text-base"><strong>Live:</strong> {p.live}</p>}
+                {verifiedLiveLinks[p.slug] ? (
+                  <p className="mt-3 text-base"><strong>Live:</strong>{" "}
+                    <a href={verifiedLiveLinks[p.slug]} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#4F46E5]">{verifiedLiveLinks[p.slug].replace("https://", "")} ↗</a>
+                  </p>
+                ) : (
+                  <p className="mt-3 text-base text-[#64748B]">Live demo on request — ask in a free consultation. The old live link for this project is not shown as working, so we do not claim it.</p>
+                )}
               </div>
               <div className="rounded-[24px] bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] p-7 text-white shadow-xl">
                 <p className="text-sm font-bold uppercase tracking-widest text-white/50">Want something like this?</p>

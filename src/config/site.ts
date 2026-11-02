@@ -39,10 +39,21 @@ export const siteConfig = {
   // Items with `hasMegaMenu: true` open the full mega menu panel.
   nav: [
     { label: "Services", href: "/services", hasMegaMenu: true },
+    { label: "Industries", href: "/work", hasDropdown: true },
     { label: "Work", href: "/work", hasDropdown: true },
-    { label: "Process", href: "/process" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
+  ],
+
+  // ── Industries Dropdown ───────────────────────────────────────────────
+  // Mirrors src/data/offering.ts industries; Process stays in footer/mobile.
+  industriesDropdown: [
+    { label: "Healthcare", href: "/work?industry=healthcare" },
+    { label: "Finance & Business", href: "/work?industry=business" },
+    { label: "HR & Staff", href: "/work?industry=business" },
+    { label: "Sports & Clubs", href: "/work?industry=sports" },
+    { label: "SaaS & Digital Products", href: "/work?industry=saas" },
+    { label: "Travel & Tourism", href: "/work?industry=travel" },
   ],
 
   // ── Services Mega Menu ────────────────────────────────────────────────────
@@ -156,6 +167,7 @@ export const siteConfig = {
     { label: "Healthcare", href: "/work?industry=healthcare" },
     { label: "Business", href: "/work?industry=business" },
     { label: "Sports", href: "/work?industry=sports" },
+    { label: "Travel & Tourism", href: "/work?industry=travel" },
   ],
 
   // ── Footer Link Groups ────────────────────────────────────────────────────

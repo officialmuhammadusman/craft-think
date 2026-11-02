@@ -169,7 +169,7 @@ export const services: Service[] = [
 export type Project = {
   slug: string;
   title: string;
-  industry: "saas" | "healthcare" | "business" | "sports";
+  industry: "saas" | "healthcare" | "business" | "sports" | "travel";
   industryLabel: string;
   line: string;
   problem: string;
@@ -238,6 +238,20 @@ export const projects: Project[] = [
     imageAlt: "A point-of-sale and billing dashboard",
   },
   {
+    slug: "book-dubai-guide",
+    title: "BookDubaiGuide — Dubai Tours Booking",
+    industry: "travel",
+    industryLabel: "Travel & Tourism",
+    line: "Dubai tours booked in minutes, with hotel pickup and no advance deposit.",
+    problem: "Visitors to Dubai had to search separate sites for desert safaris, buggy rides, yacht cruises and city tours, with unclear pickup, payment and cancellation rules.",
+    built: ["23 curated experiences in one booking site, grouped as Desert Safaris, Buggy/ATV, City Tours, Water Sports & Cruises, and Aerial Tours", "Red dune safaris and 1000cc Polaris buggy experiences, alongside luxury yacht cruises and city tours", "Hotel pickup across Dubai, with clear pickup details shown before booking", "Pay on pickup with no advance deposit, free cancellation 4–5 hours before, and instant WhatsApp confirmation"],
+    result: "Travellers can choose, book and confirm a tour in minutes — and the business takes bookings without phone calls, with pickup and payment rules clear up front.",
+    stack: "Booking website with tour listings, hotel pickup scheduling and WhatsApp confirmation",
+    live: "bookdubaiguide.com",
+    image: "/images/work/work-dubai.jpg",
+    imageAlt: "A traveller booking a Dubai tour online — project visual, not a screenshot of the live site",
+  },
+  {
     slug: "padel-connect",
     title: "Padel Connect — Smart Matchmaking",
     industry: "sports",
@@ -295,6 +309,7 @@ export function guideAnswer(input: string): GuideReply {
   if (has("app", "android", "iphone", "ios", "mobile")) return { text: "A mobile app puts your business in your customer's pocket. We build one React Native app for both iOS and Android, with bookings or memberships inside, plus an admin panel for you.", serviceHref: "/services/mobile-apps", serviceLabel: "Mobile Apps", projectHref: "/work/padel-connect", projectLabel: "Padel Connect" };
   if (has("ai", "chatbot", "assistant", "answer customer", "automate")) return { text: "An AI assistant can answer your customers from your own business data, with answers checked before they are shown — and it hands over to a human when it is unsure.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
   if (has("crm", "customer", "sales", "billing", "manage business", "pos")) return { text: "A CRM and business system puts customers, sales, staff and billing in one place, instead of spreadsheets and separate tools.", serviceHref: "/services/crm", serviceLabel: "CRM & Business Management Systems", projectHref: "/work/cliender", projectLabel: "Cliender" };
+  if (has("tour", "dubai", "desert", "safari", "buggy", "yacht", "travel")) return { text: "A tours booking site puts every experience in one place — desert safaris, buggy rides, yacht cruises and city tours — with hotel pickup and a clear booking and cancellation flow.", serviceHref: "/services/booking", serviceLabel: "Booking & Appointment Systems", projectHref: "/work/book-dubai-guide", projectLabel: "BookDubaiGuide" };
   if (has("book", "appointment", "schedule", "reservation", "clinic", "salon", "court")) return { text: "A booking system lets customers book, pay and come — without phone calls. Slots are locked so two people cannot book the same time.", serviceHref: "/services/booking", serviceLabel: "Booking & Appointment Systems", projectHref: "/work/telemedicine", projectLabel: "Mejora Tu Dolor" };
   if (has("shop", "store", "sell", "ecommerce", "e-commerce", "checkout", "product")) return { text: "An online store lets you sell, take payments and manage orders in one place, with a checkout that works well on phones.", serviceHref: "/services/online-store", serviceLabel: "Online Store / E-commerce", projectHref: "/work/cliender", projectLabel: "Cliender" };
   if (has("hr", "staff", "leave", "payroll", "employee", "hiring")) return { text: "An HR and staff system handles leave, payroll checks, hiring and onboarding in one place, with clear approvals and an audit log.", serviceHref: "/services/hr-systems", serviceLabel: "HR & Staff Systems", projectHref: "/work/hr-management-system", projectLabel: "HR Management System" };

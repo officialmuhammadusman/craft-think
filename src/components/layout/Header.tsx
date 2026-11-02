@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openMenu, setOpenMenu] = useState<"services" | "work" | null>(null);
+  const [openMenu, setOpenMenu] = useState<"services" | "industries" | "work" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -45,7 +45,7 @@ export function Header() {
     return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("mousedown", onDown); };
   }, [openMenu]);
 
-  const scheduleOpen = (menu: "services" | "work") => {
+  const scheduleOpen = (menu: "services" | "industries" | "work") => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpenMenu(menu);
   };
@@ -53,7 +53,7 @@ export function Header() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setOpenMenu(null), 140);
   };
-  const toggle = (menu: "services" | "work") => setOpenMenu((v) => (v === menu ? null : menu));
+  const toggle = (menu: "services" | "industries" | "work") => setOpenMenu((v) => (v === menu ? null : menu));
 
   const linkClass = "flex min-h-[48px] items-center rounded-xl px-3 py-2 text-[15px] font-medium text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]";
 
@@ -74,27 +74,49 @@ export function Header() {
                     Services <ChevronDown size={16} className={cn("transition-transform", openMenu === "services" && "rotate-180")} />
                   </button>
                 </div>
+                <div onMouseEnter={() => scheduleOpen("industries")} onMouseLeave={scheduleClose}>
+                  <button type="button" aria-haspopup="true" aria-expanded={openMenu === "industries"} onClick={() => toggle("industries")} className={cn(linkClass, "gap-1", openMenu === "industries" && "bg-[#EEF2FF] text-[#4F46E5]")}>
+                    Industries <ChevronDown size={16} className={cn("transition-transform", openMenu === "industries" && "rotate-180")} />
+                  </button>
+                </div>
                 <div onMouseEnter={() => scheduleOpen("work")} onMouseLeave={scheduleClose}>
                   <button type="button" aria-haspopup="true" aria-expanded={openMenu === "work"} onClick={() => toggle("work")} className={cn(linkClass, "gap-1", openMenu === "work" && "bg-[#EEF2FF] text-[#4F46E5]")}>
                     Work <ChevronDown size={16} className={cn("transition-transform", openMenu === "work" && "rotate-180")} />
                   </button>
                 </div>
-                <Link href="/process" onClick={() => setOpenMenu(null)} className={linkClass}>Process</Link>
                 <Link href="/about" onClick={() => setOpenMenu(null)} className={linkClass}>About</Link>
                 <Link href="/contact" onClick={() => setOpenMenu(null)} className={linkClass}>Contact</Link>
               </nav>
 
               {/* Services mega menu — inside the same hover wrapper, so no flicker */}
               {openMenu === "services" && (
-                <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute left-1/2 top-full z-50 w-[min(1080px,calc(100vw-2rem))] -translate-x-1/2 pt-3">
+                <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute left-1/2 top-full z-50 w-[min(1240px,calc(100vw-2rem))] -translate-x-1/2 pt-3">
                   <MegaMenu onClose={() => setOpenMenu(null)} />
                 </div>
               )}
-              {openMenu === "work" && (
-                <div onMouseEnter={() => scheduleOpen("work")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-56 pt-3">
+
+              {openMenu === "industries" && (
+                <div onMouseEnter={() => scheduleOpen("industries")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-72 pt-3">
                   <div className="overflow-hidden rounded-2xl border border-[#E7E9F2] bg-white p-2 shadow-xl" role="menu">
-                    <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Work by industry</p>
-                    {siteConfig.workDropdown.map((item) => (
+                    <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Industries we serve</p>
+                    {siteConfig.industriesDropdown.map((item) => (
+                      <Link key={item.label + item.href} href={item.href} role="menuitem" onClick={() => setOpenMenu(null)} className="block min-h-[48px] rounded-xl px-3 py-3 text-base text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5]">{item.label}</Link>
+                    ))}
+                    <Link href="/work" onClick={() => setOpenMenu(null)} className="mt-1 block min-h-[48px] rounded-xl bg-[#F6F7FB] px-3 py-3 text-base font-semibold text-[#4F46E5]">View all work →</Link>
+                  </div>
+                </div>
+              )}
+              {openMenu === "work" && (
+                <div onMouseEnter={() => scheduleOpen("work")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-72 pt-3">
+                  <div className="overflow-hidden rounded-2xl border border-[#E7E9F2] bg-white p-2 shadow-xl" role="menu">
+                    <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Featured projects</p>
+                    {[
+                      { label: "HR Management System", href: "/work/hr-management-system" },
+                      { label: "RAG AI Assistant", href: "/work/rag-ai-assistant" },
+                      { label: "Mejora Tu Dolor — Telemedicine", href: "/work/telemedicine" },
+                      { label: "Cliender — Business SaaS", href: "/work/cliender" },
+                      { label: "Padel Connect", href: "/work/padel-connect" },
+                    ].map((item) => (
                       <Link key={item.href} href={item.href} role="menuitem" onClick={() => setOpenMenu(null)} className="block min-h-[48px] rounded-xl px-3 py-3 text-base text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5]">{item.label}</Link>
                     ))}
                     <Link href="/work" onClick={() => setOpenMenu(null)} className="mt-1 block min-h-[48px] rounded-xl bg-[#F6F7FB] px-3 py-3 text-base font-semibold text-[#4F46E5]">View all work →</Link>

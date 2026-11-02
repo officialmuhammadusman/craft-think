@@ -56,7 +56,7 @@ export function Button({
 }: ButtonProps) {
   const baseClasses = cn(
     // Base styles shared across all variants
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold",
+    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold",
     "transition-all duration-200 ease-in-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2",
     "min-h-[48px]", // Minimum tap target for mobile (48px)

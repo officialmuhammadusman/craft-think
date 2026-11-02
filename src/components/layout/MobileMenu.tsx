@@ -9,15 +9,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Monitor, Briefcase, ShoppingCart, Smartphone, Users, CalendarCheck, UserCheck, Palette, Bot, Wrench, ShieldCheck, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
+import { X, ChevronDown, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { offeringGroups, industries } from "@/data/offering";
 
-const iconMap = { Monitor, Briefcase, ShoppingCart, Smartphone, Users, CalendarCheck, UserCheck, Palette, Bot, Wrench, ShieldCheck } as const;
-type IconName = keyof typeof iconMap;
 
 export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [expandedGroup, setExpandedGroup] = useState<string | null>("Build");
+  const [expandedGroup, setExpandedGroup] = useState<string | null>("AI Transformation");
   const [query, setQuery] = useState("");
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -51,30 +50,31 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
       </div>
 
       <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-4 py-4">
-        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Services</p>
-        {siteConfig.megaMenu.columns.map((col) => (
-          <div key={col.heading} className="mb-1">
-            <button type="button" onClick={() => setExpandedGroup((p) => (p === col.heading ? null : col.heading))} aria-expanded={expandedGroup === col.heading} className="flex min-h-[52px] w-full items-center justify-between rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
-              {col.heading}
-              <ChevronDown size={18} className={cn("text-[#64748B] transition-transform", expandedGroup === col.heading && "rotate-180")} />
+        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Explore our offering</p>
+        {offeringGroups.map((group) => (
+          <div key={group.title} className="mb-1">
+            <button type="button" onClick={() => setExpandedGroup((p) => (p === group.title ? null : group.title))} aria-expanded={expandedGroup === group.title} className="flex min-h-[52px] w-full items-center justify-between rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
+              {group.title}
+              <ChevronDown size={18} className={cn("text-[#64748B] transition-transform", expandedGroup === group.title && "rotate-180")} />
             </button>
-            <div className={cn("overflow-hidden transition-all duration-200", expandedGroup === col.heading ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0")}>
+            <div className={cn("overflow-hidden transition-all duration-200", expandedGroup === group.title ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0")}>
+              <p className="px-3 pb-1 text-sm leading-snug text-[#64748B]">{group.description}</p>
               <ul className="flex flex-col gap-0.5 pb-2 pl-1">
-                {col.items.map((item) => {
-                  const Icon = iconMap[item.icon as IconName];
-                  return (
-                    <li key={item.href}>
-                      <Link href={item.href} onClick={onClose} className="flex min-h-[56px] items-center gap-3 rounded-xl px-3 py-2 hover:bg-[#EEF2FF]">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]">{Icon && <Icon size={18} />}</span>
-                        <span><span className="block text-base font-medium text-[#0B1220]">{item.title}</span><span className="block text-sm leading-snug text-[#64748B]">{item.description}</span></span>
-                      </Link>
-                    </li>
-                  );
-                })}
+                {group.links.map((link) => (
+                  <li key={link.href + link.label}>
+                    <Link href={link.href} onClick={onClose} className="flex min-h-[52px] items-center rounded-xl px-3 py-2 text-base text-[#0B1220] hover:bg-[#EEF2FF]">{link.label}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         ))}
+        <p className="mb-2 mt-4 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Industries</p>
+        <ul className="flex flex-col gap-0.5">
+          {industries.map((ind) => (
+            <li key={ind.label}><Link href={ind.href} onClick={onClose} className="flex min-h-[52px] items-center rounded-xl px-3 text-base font-medium text-[#0B1220] hover:bg-[#F6F7FB]">{ind.label}</Link></li>
+          ))}
+        </ul>
         <div className="my-4 border-t border-[#E7E9F2]" />
         <ul className="flex flex-col gap-0.5">
           {[{ label: "Work", href: "/work" }, { label: "Process", href: "/process" }, { label: "About", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "AI Guide", href: "/guide" }, { label: "Get an Estimate", href: "/estimate" }, { label: "Free Audit", href: "/audit" }, { label: "FAQ", href: "/faq" }].map((link) => (

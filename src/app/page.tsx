@@ -82,7 +82,10 @@ export default function HomePage() {
               <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a Free Consultation</Button>
               <p className="text-sm text-white/50">11 services · 6 delivered projects · Free first consultation</p>
             </div>
-            <div className="min-w-0 pb-2 pt-2">
+            {/* Extra bottom padding on phones/tablets so the mockup's
+                bottom (AI card) is never hidden under the fixed mobile
+                CTA bar or the floating Ask AI button while on screen. */}
+            <div className="min-w-0 pb-24 pt-2 lg:pb-2">
               <DashboardMockup />
             </div>
           </div>

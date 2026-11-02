@@ -10,7 +10,7 @@ import { Sparkles } from "lucide-react";
  */
 export function DashboardMockup() {
   return (
-    <div className="relative mx-auto w-full min-w-0 max-w-[560px]">
+    <div className="relative mx-auto w-full min-w-0 max-w-full lg:max-w-[560px]">
       <div className="relative overflow-hidden rounded-[24px] border border-white/20 bg-white shadow-2xl">
         {/* Window chrome */}
         <div className="flex items-center gap-2 border-b border-[#E7E9F2] bg-[#F6F7FB] px-5 py-3">
@@ -19,9 +19,14 @@ export function DashboardMockup() {
           <span className="h-3 w-3 rounded-full bg-[#16A34A]/70" />
           <span className="ml-3 min-w-0 flex-1 truncate rounded-full bg-white px-3 py-1 text-xs font-medium text-[#64748B]">craftthink.dev — your business, in one place</span>
         </div>
-        <div className="grid grid-cols-[52px_1fr] sm:grid-cols-[160px_1fr]">
+        {/* No phantom column: single column below xl (sidebar hidden),
+            sidebar column only on xl, so phones AND tablets get the full
+            width. Previously grid-cols-[52px_1fr] reserved a 52px column
+            for the hidden sidebar on phones, and grid auto-placement put
+            the main dashboard into that 52px column, squeezing it. */}
+        <div className="grid grid-cols-1 xl:grid-cols-[160px_1fr]">
           {/* Sidebar */}
-          <div className="hidden flex-col gap-1 border-r border-[#E7E9F2] bg-white p-3 sm:flex">
+          <div className="hidden flex-col gap-1 border-r border-[#E7E9F2] bg-white p-3 xl:flex">
             {["Dashboard", "Customers", "Bookings", "Sales", "AI Assistant"].map((item, i) => (
               <span key={item} className={`rounded-lg px-3 py-2 text-sm font-medium ${i === 0 ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#475569]"}`}>{item}</span>
             ))}
@@ -43,16 +48,16 @@ export function DashboardMockup() {
               ].map((k) => (
                 <div key={k.label} className="min-w-0 rounded-2xl border border-[#E7E9F2] bg-[#F6F7FB] p-2.5 sm:p-3">
                   <p className="text-xs text-[#64748B]">{k.label}</p>
-                  <p className="mt-1 break-words text-sm font-bold text-[#0B1220]">{k.value}</p>
+                  <p className="mt-1 break-words text-xs font-bold text-[#0B1220] sm:text-sm">{k.value}</p>
                 </div>
               ))}
             </div>
             {/* Chart — pure CSS bars, no fake numbers */}
             <div className="mt-4 rounded-2xl border border-[#E7E9F2] p-4">
               <p className="text-sm font-semibold text-[#0B1220]">Bookings and sales, at a glance</p>
-              <div className="mt-4 flex h-24 items-end gap-2 sm:gap-3">
+              <div className="mt-4 flex h-24 min-w-0 items-end gap-2 sm:gap-3">
                 {[38, 55, 42, 68, 52, 82, 96].map((h, i) => (
-                  <div key={i} className="flex-1 rounded-t-lg bg-[#4F46E5]" style={{ height: `${h}%`, opacity: 0.45 + (i / 7) * 0.55 }} />
+                  <div key={i} className="min-w-0 flex-1 rounded-t-lg bg-[#4F46E5]" style={{ height: `${h}%`, opacity: 0.45 + (i / 7) * 0.55 }} />
                 ))}
               </div>
               <div className="mt-2 flex justify-between text-xs text-[#64748B]"><span>Mon</span><span>Sun</span></div>

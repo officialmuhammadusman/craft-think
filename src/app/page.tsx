@@ -68,8 +68,8 @@ export default function HomePage() {
       {/* HERO — headline, one line, one CTA, one trust line, one visual */}
       <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-[#0B1220]">
         <Container width="wide">
-          <div className="relative z-10 grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
-            <div className="flex flex-col items-start gap-6 text-left">
+          <div className="relative z-10 grid min-w-0 grid-cols-1 items-center gap-10 py-12 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
+            <div className="flex min-w-0 flex-col items-start gap-6 text-left">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white">
                 <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Software house · Remote clients worldwide
               </span>
@@ -79,10 +79,10 @@ export default function HomePage() {
               <p className="ct-body-lg max-w-xl text-white/70">
                 CraftThink builds websites, apps, booking and CRM systems, and AI assistants — designed, built and supported by one team, led by CEO Muhammad Usman.
               </p>
-              <Button href="/consultation" size="lg">Book a Free Consultation</Button>
+              <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a Free Consultation</Button>
               <p className="text-sm text-white/50">11 services · 6 delivered projects · Free first consultation</p>
             </div>
-            <div className="pb-2 pt-2">
+            <div className="min-w-0 pb-2 pt-2">
               <DashboardMockup />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={(i % 3) * 0.06}>
                 <Link href={`/services/${s.slug}`} className="ct-tile group block h-full">
                   <div className="relative overflow-hidden bg-[#EEF2FF]">
-                    <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-52 w-full object-cover" />
+                    <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
                     <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">Service</span>
                   </div>
                   <div className="border-t-4 border-[#4F46E5] p-6">
@@ -119,7 +119,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg">View all 11 services →</Button></div>
+          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg" className="w-full sm:w-auto">View all 11 services →</Button></div>
         </Container>
       </section>
 
@@ -128,10 +128,10 @@ export default function HomePage() {
         <Container>
           <Reveal><SectionHeading eyebrow="Work" title="Work that changed how businesses run" subtitle="One outcome per project. Full problem, build and result on each case page." /></Reveal>
           <Reveal>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Link href="/work" className="flex min-h-[44px] items-center rounded-full bg-[#0B1220] px-4 text-sm font-semibold text-white">All work</Link>
+            <div data-lenis-prevent className="-mx-4 mt-8 flex flex-nowrap gap-2 overflow-x-auto overscroll-contain px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+              <Link href="/work" className="flex min-h-[48px] shrink-0 items-center rounded-full bg-[#0B1220] px-4 text-sm font-semibold text-white">All work</Link>
               {industries.map((ind) => (
-                <Link key={ind.label} href={ind.href} className="flex min-h-[44px] items-center rounded-full border border-[#E7E9F2] bg-white px-4 text-sm font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">
+                <Link key={ind.label} href={ind.href} className="flex min-h-[48px] shrink-0 items-center rounded-full border border-[#E7E9F2] bg-white px-4 text-sm font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">
                   {ind.label}
                 </Link>
               ))}
@@ -146,7 +146,7 @@ export default function HomePage() {
                   <article className="ct-tile group flex h-full flex-col">
                     <Link href={`/work/${p.slug}`} className="block">
                       <div className="relative overflow-hidden bg-[#EEF2FF]">
-                        <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="h-52 w-full object-cover" />
+                        <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
                         <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">{p.industryLabel}</span>
                       </div>
                       <div className="p-6 pb-0">
@@ -227,7 +227,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </ol>
-          <div className="mt-8 text-center"><Button href="/process" variant="secondary" size="lg">How we run projects — full detail</Button></div>
+          <div className="mt-8 text-center"><Button href="/process" variant="secondary" size="lg" className="w-full sm:w-auto">How we run projects — full detail</Button></div>
         </Container>
       </section>
 
@@ -267,21 +267,20 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* FINAL CTA — the footer's old colour: flat solid dark navy
-          band, one action, CEO quote inside (no standalone CEO section).
-          The footer below is now white, so the dark band stands out.
-          Button is solid indigo on dark navy. */}
-      <section className="bg-[#0B1220] py-16 text-white sm:py-20">
+      {/* FINAL CTA — WHITE banner (colour swap: the footer now takes
+          the dark navy). Dark text, solid indigo button, light top
+          border so it never merges with the white tools strip above. */}
+      <section className="border-t border-[#E7E9F2] bg-white py-16 text-[#0B1220] sm:py-20">
         <Container>
           <div className="flex flex-col items-start gap-5">
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white">Free consultation · No obligation</span>
-            <h2 className="ct-section-title !text-white max-w-2xl">Not sure where to start?</h2>
-            <p className="max-w-xl text-lg leading-relaxed text-white/80">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>
-            <p className="max-w-xl text-lg italic leading-relaxed text-white/90">“You talk to the person leading your project, not a ticket queue.” — Muhammad Usman, CEO &amp; Founder, CraftThink</p>
+            <span className="rounded-full border border-[#E7E9F2] bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#4F46E5]">Free consultation · No obligation</span>
+            <h2 className="ct-section-title max-w-2xl">Not sure where to start?</h2>
+            <p className="max-w-xl text-lg leading-relaxed text-[#475569]">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>
+            <p className="max-w-xl text-lg italic leading-relaxed text-[#0B1220]">“You talk to the person leading your project, not a ticket queue.” — Muhammad Usman, CEO &amp; Founder, CraftThink</p>
             <div className="flex flex-wrap gap-3">
-              <Button href="/consultation" size="lg">Book a Free Consultation</Button>
+              <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a Free Consultation</Button>
             </div>
-            <p className="flex items-center gap-2 text-sm text-white/60"><Globe size={16} /> {siteConfig.email} · {siteConfig.phone} · Working remotely with clients worldwide</p>
+            <p className="flex flex-wrap items-center gap-2 break-words text-sm text-[#64748B]"><Globe size={16} className="shrink-0" /> {siteConfig.email} · {siteConfig.phone} · Working remotely with clients worldwide</p>
           </div>
         </Container>
       </section>

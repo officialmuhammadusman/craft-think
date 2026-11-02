@@ -1,22 +1,27 @@
 "use client";
 /**
- * MobileMenu — full-screen, app-like. Real search form at the top
- * (routes to /guide?q=, the old version was a non-working grey pill),
- * service accordions, plain nav links, contact row, and a sticky CTA
- * bar pinned to the bottom of the panel (not floating over content).
- * Closes on link click, Escape, and the close button. Body scroll locked.
+ * MobileMenu — full-screen, app-like menu (redesigned, phone-first).
+ * Top: search + ONE clear X (the only close control). Then large
+ * icon + label rows for the main destinations (Services, Work,
+ * Process, About, Contact, Consultation, AI Guide) — thumb-friendly
+ * 56px rows, so the menu is not confusing. Below that, services
+ * grouped as simple accordions (all collapsed by default, no
+ * mega-menu, no 80vh internal scroll). Bottom: sticky CTA bar.
+ * Closes on link click, Escape, and the X. Body scroll locked,
+ * safe-area padding top and bottom, Lenis opted out so the menu
+ * list scrolls natively on phones.
  */
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
+import { X, ChevronDown, Search, Mail, Phone, Globe, Code2, LayoutGrid, Briefcase, Workflow, User, CalendarDays, Bot } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { megaMenuGroups, industries } from "@/data/offering";
 
 
 export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [expandedGroup, setExpandedGroup] = useState<string | null>("AI Transformation");
+  const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -38,7 +43,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   };
 
   return (
-    <div ref={menuRef} id="mobile-menu" aria-label="Mobile navigation" className="fixed inset-0 z-[100] flex flex-col bg-white lg:hidden">
+    <div ref={menuRef} id="mobile-menu" aria-label="Mobile navigation" data-lenis-prevent className="fixed inset-0 z-[100] flex flex-col overscroll-contain bg-white pt-[env(safe-area-inset-top)] lg:hidden">
       <div className="flex items-center gap-3 border-b border-[#E7E9F2] px-4 py-3">
         <form onSubmit={search} className="flex min-h-[48px] flex-1 items-center gap-2 rounded-full bg-[#F6F7FB] px-4">
           <Search size={18} className="shrink-0 text-[#64748B]" />
@@ -49,8 +54,28 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
         <button type="button" onClick={onClose} aria-label="Close menu" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220]"><X size={22} /></button>
       </div>
 
-      <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-4 py-4">
-        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Explore our offering</p>
+      <nav aria-label="Main navigation" data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+        {/* App-like main destinations first: icon + label, 56px rows */}
+        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Menu</p>
+        <ul className="mb-5 flex flex-col gap-1">
+          {[
+            { label: "Services", href: "/services", icon: LayoutGrid },
+            { label: "Work", href: "/work", icon: Briefcase },
+            { label: "Process", href: "/process", icon: Workflow },
+            { label: "About", href: "/about", icon: User },
+            { label: "Contact", href: "/contact", icon: Mail },
+            { label: "Book a Free Consultation", href: "/consultation", icon: CalendarDays },
+            { label: "AI Guide", href: "/guide", icon: Bot },
+          ].map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} onClick={onClose} className="flex min-h-[56px] items-center gap-3 rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><link.icon size={20} /></span>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Services by group</p>
         {megaMenuGroups.map((group) => (
           <div key={group.title} className="mb-1">
             <button type="button" onClick={() => setExpandedGroup((p) => (p === group.title ? null : group.title))} aria-expanded={expandedGroup === group.title} className="flex min-h-[52px] w-full items-center justify-between rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">

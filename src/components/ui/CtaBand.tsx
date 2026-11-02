@@ -3,27 +3,27 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
-/** Final CTA band: the footer's old colour — flat solid dark navy
-    #0B1220, white text, ONE action. The footer is now white, so the
-    dark band sits clearly above it. The button is solid indigo
-    (primary) on dark navy. "Book a Free Consultation" is a plain
-    link to the /consultation page. No gradient, no glow. */
+/** Final CTA band: WHITE (colour swap — the footer now takes the
+    dark navy). Dark navy text, solid indigo primary button, light
+    top border so a white banner never merges with a white section
+    above it. ONE action: plain link to /consultation. No gradient,
+    no glow. */
 export function CtaBand({ title = "Not sure where to start?", text = "Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation." }: { title?: string; text?: string }) {
   return (
-    <section className="bg-[#0B1220] py-16 text-white sm:py-20">
+    <section className="border-t border-[#E7E9F2] bg-white py-16 text-[#0B1220] sm:py-20">
       <Container>
         <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div className="flex flex-col items-start gap-5 text-left">
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white">Free consultation · No obligation</span>
-            <h2 className="ct-h2 !text-white max-w-2xl">{title}</h2>
-            <p className="max-w-xl text-lg leading-relaxed text-white/80">{text}</p>
+            <span className="rounded-full border border-[#E7E9F2] bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#4F46E5]">Free consultation · No obligation</span>
+            <h2 className="ct-h2 max-w-2xl">{title}</h2>
+            <p className="max-w-xl text-lg leading-relaxed text-[#475569]">{text}</p>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" href="/consultation">Book a Free Consultation</Button>
             </div>
-            <p className="text-sm text-white/60">{siteConfig.email} · {siteConfig.phone} · {siteConfig.tagline}</p>
+            <p className="flex flex-wrap gap-2 break-words text-sm text-[#64748B]">{siteConfig.email} · {siteConfig.phone} · {siteConfig.tagline}</p>
           </div>
           <div className="relative hidden lg:block">
-            <div className="rounded-[24px] border border-white/20 shadow-2xl">
+            <div className="rounded-[24px] border border-[#E7E9F2] shadow-2xl">
               <Image src="/images/brand/hero-abstract.png" alt="CraftThink brand abstract" width={900} height={600} className="w-full rounded-[23px] object-cover" />
             </div>
           </div>

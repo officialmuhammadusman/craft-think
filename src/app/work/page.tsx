@@ -24,7 +24,7 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {list.map((p) => (
                 <Link key={p.slug} href={`/work/${p.slug}`} className="ct-card group overflow-hidden">
-                  <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="p-6">
                     <p className="text-sm font-semibold uppercase tracking-widest text-[#4F46E5]">{p.industryLabel}</p>
                     <h2 className="ct-h4 mt-1">{p.title}</h2>

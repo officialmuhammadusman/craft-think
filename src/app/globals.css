@@ -336,3 +336,16 @@ body {
    multi-colour gradient backgrounds, buttons, text or borders anywhere
    in layout chrome. */
 section { scroll-margin-top: 88px; } /* 72px slim header + 16px breathing room, so anchored sections are never clipped under the sticky header */
+
+/* ── Phone-first guards (mobile-app feel, desktop untouched) ────────── */
+/* Media can never exceed its container on phones; cards never force a
+   minimum width wider than the phone. */
+img, video, svg { max-width: 100%; }
+.ct-tile, .ct-card { min-width: 0; }
+main { min-width: 0; }
+/* Hero headline: 44px minimum was too large on a 360px phone — cap it
+   on small screens only; desktop clamp is unchanged. */
+@media (max-width: 640px) {
+  .ct-display-xl { font-size: clamp(2.25rem, 11vw, 2.75rem); }
+  .ct-section-title { font-size: clamp(1.75rem, 8vw, 2rem); }
+}

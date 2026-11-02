@@ -48,6 +48,53 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
               <h2 className="ct-h3 mt-10">How we build it</h2>
               <p className="mt-3 text-lg text-[#475569]">{s.build}</p>
+
+              {s.outcome && (
+                <>
+                  <h2 className="ct-h3 mt-10">The outcome</h2>
+                  <p className="mt-3 rounded-[24px] bg-[#F6F7FB] p-6 text-lg text-[#0B1220]">{s.outcome}</p>
+                </>
+              )}
+
+              {s.deliverables && s.deliverables.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">What you receive</h2>
+                  <ul className="mt-4 flex flex-col gap-3">
+                    {s.deliverables.map((d) => (
+                      <li key={d} className="flex gap-3 rounded-[20px] border border-[#E7E9F2] bg-white p-4 text-[#0B1220] shadow-sm"><CheckCircle2 size={20} className="mt-0.5 shrink-0 text-[#16A34A]" />{d}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {s.capabilities && s.capabilities.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">In detail</h2>
+                  <p className="mt-3 text-lg text-[#475569]">The technical detail, in plain language — so you can see exactly what is included before you commit.</p>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {s.capabilities.map((c) => (
+                      <article key={c.title} className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
+                        <h3 className="ct-h4">{c.title}</h3>
+                        <p className="mt-2 text-[#475569]">{c.description}</p>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {s.techStack && s.techStack.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">Technology, in plain terms</h2>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {s.techStack.map((t) => (
+                      <article key={t.name} className="rounded-[20px] border border-[#E7E9F2] bg-[#F6F7FB] p-5">
+                        <h3 className="ct-h4">{t.name}</h3>
+                        <p className="mt-2 text-[#475569]">{t.description}</p>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             <aside className="flex flex-col gap-5 lg:sticky lg:top-24">

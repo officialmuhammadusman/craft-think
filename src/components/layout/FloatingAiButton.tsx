@@ -7,16 +7,16 @@ import { Bot, X } from "lucide-react";
 import { AiGuide } from "@/components/ai/AiGuide";
 
 /**
- * FloatingAiButton — the previous chatbot window design, unchanged,
- * with the real scroll fix: the whole window opts out of Lenis
- * smooth scroll (data-lenis-prevent). Lenis hijacks wheel/touch
- * events for the page, which is why scrolling over the chat used to
- * scroll the page and only dragging the scrollbar scrolled the chat.
- * With data-lenis-prevent, the WHOLE window area scrolls natively:
- * over messages it scrolls the message list, over the rest it scrolls
- * the window content — and overscroll-contain stops it ever reaching
- * the page behind. Not a separate page, not a side drawer. The full
- * /guide page still exists, linked from the header.
+ * FloatingAiButton — chatbot window on desktop, BOTTOM SHEET on
+ * phones (user-requested, app-like). Phones (<=640px): full width
+ * with small side margins, ~85dvh tall, rounded top corners, a
+ * drag-handle pill at the top, sitting ABOVE the sticky mobile CTA
+ * bar (bottom offset clears it) — never covered by it. Desktop
+ * (>=1024px): the existing bottom-right window (~400px).
+ * data-lenis-prevent + overscroll-contain are kept everywhere: they
+ * fix the Lenis scroll-stealing bug. Not a separate page, not a
+ * side drawer. The full /guide page still exists, linked from the
+ * header.
  */
 export function FloatingAiButton() {
   // Keyed remount on route change closes the chat window, without
@@ -45,9 +45,12 @@ function FloatingAiButtonInner() {
           role="dialog"
           aria-modal="false"
           aria-label="CraftThink AI chat"
-          className="fixed bottom-24 right-4 z-[95] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col overflow-hidden overscroll-contain rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 lg:bottom-6 lg:right-6"
-          style={{ height: "min(620px, calc(100dvh - 120px))" }}
+          className="fixed bottom-[calc(88px+env(safe-area-inset-bottom))] left-3 right-3 z-[95] flex h-[min(85dvh,calc(100dvh-104px-env(safe-area-inset-bottom)))] w-auto flex-col overflow-hidden overscroll-contain rounded-t-[24px] rounded-b-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 sm:left-auto sm:right-4 sm:h-[min(620px,calc(100dvh-120px))] sm:w-[calc(100vw-2rem)] sm:max-w-[420px] lg:bottom-6 lg:right-6"
+
         >
+          <div aria-hidden="true" className="flex shrink-0 justify-center bg-white pb-1 pt-2.5 sm:hidden">
+            <span className="h-1.5 w-10 rounded-full bg-[#E7E9F2]" />
+          </div>
           <div className="flex shrink-0 items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]">
@@ -88,7 +91,7 @@ function FloatingAiButtonInner() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close AI chat" : "Ask the AI guide"}
         aria-expanded={open}
-        className="fixed bottom-24 right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 lg:bottom-6 lg:right-6"
+        className="fixed bottom-[calc(88px+env(safe-area-inset-bottom))] right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 sm:bottom-24 lg:bottom-6 lg:right-6"
       >
         <span className="h-2 w-2 rounded-full bg-[#14B8A6]" />
         {open ? "Close chat" : "Ask AI"}

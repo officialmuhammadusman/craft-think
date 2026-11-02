@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 type Msg = { role: "user" | "guide"; text: string; reply?: GuideReply };
 
-const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to answer customers", "I need a booking system", "How much does it cost?"];
+const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to answer customers", "I need a booking system", "How much does it cost?", "I need LangChain / LangGraph agents", "I need a multi-agent system", "I need AI that answers from my documents"];
 
 /**
  * Premium guided-demo chat. Answers ONLY from the site's own knowledge

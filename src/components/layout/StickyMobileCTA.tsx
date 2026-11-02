@@ -31,7 +31,7 @@ export function StickyMobileCTA() {
       <Link
         href="/consultation"
         id="mobile-cta-book"
-        className="flex-1 flex items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-sm font-semibold text-white hover:bg-[#4338CA] active:bg-[#312E81] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
+        className="flex-1 flex items-center justify-center rounded-full bg-[#4F46E5] px-2 py-3 text-base font-semibold text-white hover:bg-[#4338CA] active:bg-[#312E81] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
       >
         Book a Free Consultation
       </Link>
@@ -40,7 +40,7 @@ export function StickyMobileCTA() {
       <Link
         href="/estimate"
         id="mobile-cta-estimate"
-        className="flex-1 flex items-center justify-center rounded-full border border-[#E7E9F2] bg-white px-4 py-3 text-sm font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
+        className="flex-1 flex items-center justify-center rounded-full border border-[#E7E9F2] bg-white px-2 py-3 text-base font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
       >
         Get an Estimate
       </Link>

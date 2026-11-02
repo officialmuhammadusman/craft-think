@@ -40,12 +40,61 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <h2 className="ct-h3 mt-10">The problem</h2>
               <p className="mt-3 text-lg text-[#475569]">{p.problem}</p>
 
+              {p.longDescription && (
+                <>
+                  <h2 className="ct-h3 mt-10">In detail</h2>
+                  <p className="mt-3 text-lg text-[#475569]">{p.longDescription}</p>
+                </>
+              )}
+
               <h2 className="ct-h3 mt-10">What we built</h2>
               <ul className="mt-4 flex flex-col gap-3">
                 {p.built.map((b) => (
                   <li key={b} className="flex gap-3 rounded-[20px] border border-[#E7E9F2] bg-white p-4 text-[#0B1220] shadow-sm"><CheckCircle2 size={20} className="mt-0.5 shrink-0 text-[#16A34A]" />{b}</li>
                 ))}
               </ul>
+
+              {p.features && p.features.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">Features</h2>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {p.features.map((f) => (
+                      <article key={f.title} className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
+                        <h3 className="ct-h4">{f.title}</h3>
+                        <p className="mt-2 text-[#475569]">{f.description}</p>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {p.decisions && p.decisions.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">Technical decisions</h2>
+                  <div className="mt-4 flex flex-col gap-4">
+                    {p.decisions.map((d) => (
+                      <article key={d.title} className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
+                        <h3 className="ct-h4">{d.title}</h3>
+                        <p className="mt-2 text-[#475569]">{d.explanation}</p>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {p.challenges && p.challenges.length > 0 && (
+                <>
+                  <h2 className="ct-h3 mt-10">Challenges &amp; solutions</h2>
+                  <div className="mt-4 flex flex-col gap-4">
+                    {p.challenges.map((c) => (
+                      <article key={c.problem} className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
+                        <p className="font-semibold text-[#0B1220]">Problem: {c.problem}</p>
+                        <p className="mt-2 text-[#475569]">Solution: {c.solution}</p>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
 
               <h2 className="ct-h3 mt-10">The business result</h2>
               <p className="mt-3 rounded-[24px] bg-[#F6F7FB] p-6 text-lg text-[#0B1220]">{p.result}</p>

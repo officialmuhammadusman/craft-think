@@ -90,12 +90,12 @@ function FloatingAiButtonInner() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close AI chat" : "Ask the AI guide"}
+        aria-label={open ? "Close AI chat" : "Talk with me"}
         aria-expanded={open}
         className="fixed bottom-[calc(88px+env(safe-area-inset-bottom))] right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 sm:bottom-24 lg:bottom-6 lg:right-6"
       >
         <span className="h-2 w-2 rounded-full bg-[#14B8A6]" />
-        {open ? "Close chat" : "Ask AI"}
+        {open ? "Close chat" : "Talk with me"}
       </button>
     </>
   );

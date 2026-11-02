@@ -49,7 +49,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
           <Search size={18} className="shrink-0 text-[#64748B]" />
           <label className="sr-only" htmlFor="mobile-search">Search services or ask the AI guide</label>
           <input id="mobile-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="What do you need help with?" className="min-w-0 flex-1 bg-transparent text-base text-[#0B1220] outline-none placeholder:text-[#64748B]" />
-          <button type="submit" className="shrink-0 text-base font-semibold text-[#4F46E5]">Ask AI</button>
+          <button type="submit" className="shrink-0 text-base font-semibold text-[#4F46E5]">Talk</button>
         </form>
         <button type="button" onClick={onClose} aria-label="Close menu" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220]"><X size={22} /></button>
       </div>
@@ -118,7 +118,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 
       <div className="border-t border-[#E7E9F2] bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <Link href="/consultation" onClick={onClose} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white shadow-lg">Book a Free Consultation</Link>
-        <Link href="/guide" onClick={onClose} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</Link>
+        <Link href="/guide" onClick={onClose} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Talk with Think — free</Link>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { HeroPathCollage } from "@/components/home/HeroPathCollage";
+import { HeroBento } from "@/components/home/HeroBento";
 
 export const metadata: Metadata = {
   title: "CraftThink — Software, built with thought, guided by AI",
@@ -65,33 +65,35 @@ const whyChoose = [
 export default function HomePage() {
   return (
     <>
-      {/* HERO — Concept A "The Path": LIGHT brand hero. Left 55% copy,
-          right 45% flat collage of CraftThink's own project types,
-          joined by the indigo path signature. Dark hero + dashboard
-          mockup are gone. */}
+      {/* HERO — Concept C "Work, Not Words": LIGHT editorial hero.
+          Centred statement on top (headline left-aligned within the
+          centred column), then a 4-tile bento of CraftThink's own
+          project types — the work proves the claim before scrolling.
+          Concept A's path collage is gone from the hero (its file
+          stays in place, unused, like DashboardMockup before it). */}
       <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-white">
         <Container width="wide">
-          <div className="relative z-10 grid min-w-0 grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-20">
-            <div className="flex min-w-0 flex-col items-start gap-6 text-left">
+          <div className="relative z-10 flex min-w-0 flex-col items-center gap-10 py-12 sm:py-16 lg:py-20">
+            <div className="flex w-full max-w-3xl min-w-0 flex-col items-center gap-6 text-center">
               <span className="ct-eyebrow">Software house · Remote clients worldwide</span>
-              <h1 id="hero-heading" className="ct-display-xl text-[#0B1220]">
-                Software that fits the way your business{" "}
-                <em className="ct-serif-accent text-[#4F46E5]">actually</em> works.
+              <h1 id="hero-heading" className="ct-display-xl text-left text-[#0B1220]">
+                Websites, apps, and AI assistants — built around your customers.
               </h1>
-              <p className="ct-body-lg max-w-xl text-[#475569]">
-                We build websites, mobile apps, booking and CRM systems, and AI assistants — designed with you, built for your customers, and supported after launch.
+              <p className="ct-body-lg max-w-2xl text-left text-[#475569]">
+                A small, senior team that designs and builds the whole thing: the website your customers find, the app they use, the booking system that saves you time, and the assistant that answers them.
               </p>
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <div className="flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6">
                 <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a free call</Button>
-                <Button href="/work" variant="outline" size="lg" className="w-full sm:w-auto">See our work</Button>
+                <Link href="/process" className="flex min-h-[48px] items-center gap-1.5 text-base font-semibold text-[#4F46E5] hover:text-[#4338CA]">
+                  See how we work <ArrowRight size={17} />
+                </Link>
               </div>
-              <p className="text-sm text-[#64748B]">You&apos;ll talk directly with the person leading your project.</p>
             </div>
-            {/* Extra bottom padding on phones/tablets so the collage
+            {/* Extra bottom padding on phones/tablets so the bento
                 bottom is never hidden under the fixed mobile CTA bar
                 or the floating Ask AI button while on screen. */}
-            <div className="min-w-0 pb-24 pt-2 lg:pb-2">
-              <HeroPathCollage />
+            <div className="w-full min-w-0 pb-24 lg:pb-2">
+              <HeroBento />
             </div>
           </div>
         </Container>

@@ -13,7 +13,7 @@ import { X, ChevronDown, Search, Mail, Phone, Globe, Code2 } from "lucide-react"
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useOverlays } from "@/components/layout/Overlays";
-import { offeringGroups, industries } from "@/data/offering";
+import { megaMenuGroups, industries } from "@/data/offering";
 
 
 export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -53,7 +53,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 
       <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-4 py-4">
         <p className="mb-2 px-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Explore our offering</p>
-        {offeringGroups.map((group) => (
+        {megaMenuGroups.map((group) => (
           <div key={group.title} className="mb-1">
             <button type="button" onClick={() => setExpandedGroup((p) => (p === group.title ? null : group.title))} aria-expanded={expandedGroup === group.title} className="flex min-h-[52px] w-full items-center justify-between rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
               {group.title}
@@ -94,7 +94,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
       </nav>
 
       <div className="border-t border-[#E7E9F2] bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-        <button type="button" onClick={() => { onClose(); openConsult(); }} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white">Book a Free Consultation</button>
+        <button type="button" onClick={() => { onClose(); openConsult(); }} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white shadow-lg">Book a Free Consultation</button>
         <button type="button" onClick={() => { onClose(); openAi(); }} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</button>
       </div>
     </div>

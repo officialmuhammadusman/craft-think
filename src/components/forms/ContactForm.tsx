@@ -14,7 +14,7 @@ function Form() {
   const [message, setMessage] = useState(q.get("problem") || "");
   const mailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent("CraftThink consultation request")}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nService: ${service}\nBudget range: ${budget}\n\n${message}`)}`;
   return sent ? (
-    <div className="rounded-2xl border border-[#E7E9F2] bg-[#F0FDFA] p-6">
+    <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
       <h2 className="ct-h3">Thank you — your message is ready to send</h2>
       <p className="mt-2 text-[#475569]">This demo site has no backend, so your form is not stored anywhere. Click below to open your email app with your message prefilled to {siteConfig.email}, or email us directly.</p>
       <div className="mt-4 flex flex-wrap gap-3"><Button href={mailto}>Open Email to Send →</Button><Button href="/estimate" variant="secondary">Try the Estimator Instead</Button></div>

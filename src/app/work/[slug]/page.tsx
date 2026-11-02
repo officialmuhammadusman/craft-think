@@ -63,7 +63,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   <p className="mt-3 text-base text-[#64748B]">Live demo on request — ask in a free consultation. The old live link for this project is not shown as working, so we do not claim it.</p>
                 )}
               </div>
-              <div className="rounded-[24px] bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] p-7 text-white shadow-xl">
+              <div className="rounded-[24px] bg-[#0B1220] p-7 text-white shadow-xl">
                 <p className="text-sm font-bold uppercase tracking-widest text-white/50">Want something like this?</p>
                 <p className="ct-h4 mt-2 !text-white">Book a free consultation.</p>
                 <p className="mt-2 text-white/70">We will show you the closest project, and give you a clear next step — with no obligation.</p>

@@ -181,6 +181,9 @@ export const siteConfig = {
       { label: "Booking & Appointments", href: "/services/booking" },
       { label: "UI/UX Design", href: "/services/ui-ux-design" },
       { label: "AI Solutions & Assistant", href: "/services/ai-solutions" },
+      { label: "HR & Staff Systems", href: "/services/hr-systems" },
+      { label: "Fix & Improve Software", href: "/services/fix-improve" },
+      { label: "Testing, Support & Care", href: "/services/testing-care" },
     ],
     company: [
       { label: "Work", href: "/work" },

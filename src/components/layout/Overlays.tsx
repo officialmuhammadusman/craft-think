@@ -12,7 +12,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AiGuide } from "@/components/ai/AiGuide";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
@@ -30,9 +30,9 @@ function Panel({ title, subtitle, onClose, children }: { title: string; subtitle
   }, [onClose]);
   return (
     <div className="fixed inset-0 z-[120]" role="dialog" aria-modal="true" aria-label={title}>
-      <button type="button" aria-label="Close panel" onClick={onClose} className="absolute inset-0 h-full w-full cursor-default bg-[#0B1220]/50 backdrop-blur-[2px]" />
+      <div aria-hidden="true" onClick={onClose} className="absolute inset-0 h-full w-full cursor-default bg-[#0B1220]/50 backdrop-blur-[2px]" />
       <div className="ct-panel-in absolute bottom-0 right-0 top-0 flex w-full max-w-[560px] flex-col overflow-hidden bg-white shadow-2xl sm:rounded-l-[24px]">
-        <div className="flex items-start justify-between gap-4 border-b border-[#E7E9F2] bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] px-6 py-5 text-white">
+        <div className="flex items-start justify-between gap-4 border-b border-[#E7E9F2] bg-[#0B1220] px-6 py-5 text-white">
           <div>
             <p className="text-lg font-bold">{title}</p>
             <p className="mt-0.5 text-sm leading-snug text-white/60">{subtitle}</p>
@@ -56,7 +56,7 @@ function ConsultationForm({ onClose }: { onClose: () => void }) {
   const mailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent("CraftThink consultation request")}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nWhat you need: ${need}\n\n${message}`)}`;
   if (sent) {
     return (
-      <div className="rounded-2xl border border-[#E7E9F2] bg-[#F0FDFA] p-6">
+      <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
         <h3 className="ct-h3">Thank you — your message is ready to send</h3>
         <p className="mt-2 text-[#475569]">This site has no backend, so your form is not stored anywhere. Click below to open your email app with your message prefilled to {siteConfig.email}.</p>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -98,7 +98,7 @@ function OverlayProviderInner({ children }: { children: ReactNode }) {
       {children}
       {panel === "ai" && (
         <Panel title="Ask the CraftThink Guide" subtitle="Guided demo — answers come only from this site's services, projects and FAQs." onClose={close}>
-          <AiGuide />
+          <AiGuide bare />
         </Panel>
       )}
       {panel === "consult" && (
@@ -117,9 +117,9 @@ export function FloatingAiButton() {
       type="button"
       onClick={openAi}
       aria-label="Ask the AI guide"
-      className="ct-ai-pulse fixed bottom-24 right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#14B8A6] px-5 text-base font-bold text-white shadow-xl transition-transform hover:-translate-y-0.5 hover:bg-[#0F766E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#14B8A6] focus-visible:ring-offset-2 lg:bottom-6 lg:right-6"
+      className="fixed bottom-24 right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 lg:bottom-6 lg:right-6"
     >
-      <Sparkles size={20} className="ct-sparkle" />
+      <span className="h-2 w-2 rounded-full bg-[#14B8A6]" />
       Ask AI
     </button>
   );

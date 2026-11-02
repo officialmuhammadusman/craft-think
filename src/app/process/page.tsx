@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { processSteps, facilities } from "@/data/content";
+import { successPractices } from "@/data/offering";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -32,6 +33,20 @@ export default function ProcessPage() {
               </article>
             ))}
           </div>
+        </Container>
+      </section>
+      <section className="ct-section bg-white">
+        <Container>
+          <SectionHeading eyebrow="Delivery standards" title="Eight practices that keep projects on track" subtitle="The full detail lives here, on the process page — the homepage shows only the four phases." />
+          <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {successPractices.map((pr, i) => (
+              <li key={pr.title} className="ct-card p-6">
+                <p className="font-display text-2xl font-bold text-[#4F46E5]">{String(i + 1).padStart(2, "0")}</p>
+                <h3 className="ct-h4 mt-2">{pr.title}</h3>
+                <p className="mt-2 text-[#475569]">{pr.text}</p>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
       <CtaBand />

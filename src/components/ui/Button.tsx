@@ -25,13 +25,14 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  // Primary: indigo background, white text — main CTA
+  // Primary: ONE flat solid accent — indigo #4F46E5, hover #4338CA.
+  // No gradient, no shine, no violet glow.
   primary:
-    "bg-[#4F46E5] text-white hover:bg-[#4338CA] active:bg-[#312E81] shadow-sm hover:shadow-md",
+    "bg-[#4F46E5] text-white shadow-md hover:bg-[#4338CA] active:translate-y-0",
   // Secondary: white background, dark text, grey border
   secondary:
     "bg-white text-[#0B1220] border border-[#E7E9F2] hover:border-[#4F46E5] hover:text-[#4F46E5]",
-  // Outline: transparent, indigo border and text — used for "Ask AI" in header
+  // Outline: transparent, indigo border and text
   outline:
     "bg-transparent text-[#4F46E5] border border-[#4F46E5] hover:bg-[#EEF2FF]",
 };
@@ -56,7 +57,7 @@ export function Button({
 }: ButtonProps) {
   const baseClasses = cn(
     // Base styles shared across all variants
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold",
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold",
     "transition-all duration-200 ease-in-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2",
     "min-h-[48px]", // Minimum tap target for mobile (48px)

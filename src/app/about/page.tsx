@@ -41,7 +41,7 @@ export default function AboutPage() {
                 <Image src="/images/about/about-workspace.jpg" alt="A developer workspace with a laptop and notebook" width={1200} height={700} className="w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
                 <div className="absolute -bottom-5 left-5 right-5 flex items-center justify-between gap-3 rounded-[20px] border border-[#E7E9F2] bg-white px-5 py-4 shadow-xl sm:left-8 sm:right-auto">
                   <span><span className="block text-base font-bold text-[#0B1220]">Muhammad Usman</span><span className="text-sm text-[#64748B]">CEO & Founder · CraftThink</span></span>
-                  <span className="rounded-full bg-[#F0FDFA] px-3 py-1 text-xs font-bold text-[#0F766E]">CEO-led</span>
+                  <span className="rounded-full bg-[#EEF2FF] px-3 py-1 text-xs font-bold text-[#4F46E5]">CEO-led</span>
                 </div>
                 <p className="mt-8 text-sm text-[#64748B]">Workspace photo, not a photo of Muhammad Usman. A real CEO photo will replace it when supplied.</p>
               </div>
@@ -60,10 +60,10 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={0.08}>
               <article className="ct-card h-full p-7">
-                <h2 className="flex items-center gap-2 ct-h3"><Bot size={22} className="text-[#14B8A6]" /> Applied AI</h2>
+                <h2 className="flex items-center gap-2 ct-h3"><Bot size={22} className="text-[#4F46E5]" /> Applied AI</h2>
                 <p className="mt-3 text-[#475569]">AI that answers from your own business data, with answers checked before they are shown — and a human handover when it is unsure.</p>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {aiStack.map((s) => (<span key={s} className="rounded-full border border-[#E7E9F2] bg-[#F0FDFA] px-3 py-1.5 text-sm font-medium">{s}</span>))}
+                  {aiStack.map((s) => (<span key={s} className="rounded-full border border-[#E7E9F2] bg-[#EEF2FF] px-3 py-1.5 text-sm font-medium text-[#4F46E5]">{s}</span>))}
                 </div>
               </article>
             </Reveal>

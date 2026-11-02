@@ -36,6 +36,7 @@ export const offeringGroups: OfferingGroup[] = [
       { label: "Business Websites & Portfolios", href: "/services/business-websites" },
       { label: "Online Store / E-commerce", href: "/services/online-store" },
       { label: "Mobile Apps", href: "/services/mobile-apps" },
+      { label: "UI/UX Design", href: "/services/ui-ux-design" },
     ],
   },
   {
@@ -209,52 +210,27 @@ export type SuccessPractice = {
 };
 
 export const successPractices: SuccessPractice[] = [
-  {
-    title: "Scoping",
-    text: "We write down what is in and what is out, in plain words, before building. You approve the scope, so there is no surprise feature bill at the end.",
-    href: "/process",
-    cta: "See the process",
-  },
-  {
-    title: "Resource Planning",
-    text: "One clear point of contact and a team planned around your project — design, frontend, backend, mobile and AI, only where your project actually needs them.",
-    href: "/process",
-    cta: "See the process",
-  },
-  {
-    title: "Cost Estimation",
-    text: "A rough range first from the Estimator, then a firm quote after a free consultation. Milestones are agreed in writing before we start.",
-    href: "/estimate",
-    cta: "Get an estimate",
-  },
-  {
-    title: "Risk Management",
-    text: "We start with a free audit for existing software, prototype before full build for new software, and test before every release — so problems are found early, not at launch.",
-    href: "/audit",
-    cta: "Get a free audit",
-  },
-  {
-    title: "Change Management",
-    text: "When your needs change, we agree the change, its cost and its effect on the timeline in writing first — then build it. No silent scope creep in either direction.",
-    href: "/process",
-    cta: "See the process",
-  },
-  {
-    title: "Success Measurement",
-    text: "Success is measured in business words, not code words: bookings without phone calls, less manual HR work, customers and sales in one place, faster approvals.",
-    href: "/work",
-    cta: "See the results",
-  },
-  {
-    title: "Project Reporting",
-    text: "Weekly progress and demos, in plain language, planned around your time zone as far as possible. You see what is built, what is next, and what needs your decision.",
-    href: "/process",
-    cta: "See the process",
-  },
-  {
-    title: "Collaboration",
-    text: "You talk to the people building your software, not a ticket queue. One contact, clear answers, and your feedback built into the next demo — not filed away.",
-    href: "/contact",
-    cta: "Book a consultation",
-  },
+  { title: "Scope Lock", text: "What is in, what is out — agreed before building, so the price never surprises you.", href: "/process", cta: "See the process" },
+  { title: "Right-Sized Team", text: "Only the skills your project needs — design, code, mobile or AI — nothing billed for show.", href: "/process", cta: "See the process" },
+  { title: "Price Clarity", text: "A rough range first, a firm written quote after consultation, milestones agreed up front.", href: "/estimate", cta: "Get an estimate" },
+  { title: "Early Risk Checks", text: "A free audit for existing software, a prototype for new builds — problems found early, not at launch.", href: "/audit", cta: "Get a free audit" },
+  { title: "Change Log", text: "Every change agreed in writing first: cost, timeline effect, then build. No silent scope creep.", href: "/process", cta: "See the process" },
+  { title: "Outcome Metrics", text: "Success counted in bookings, sales and time saved — not in lines of code.", href: "/work", cta: "See the results" },
+  { title: "Weekly Report", text: "One short weekly update: what shipped, what is next, what needs your decision.", href: "/process", cta: "See the process" },
+  { title: "Direct Line", text: "Talk to the people building your software, not a ticket queue.", href: "/contact", cta: "Book a consultation" },
 ];
+
+/**
+ * megaMenuGroups — the mega menu (and mobile menu) must never repeat a
+ * service. This keeps only /services/ links, first occurrence wins, and
+ * drops groups that end up empty. Result: all 11 services, exactly once.
+ */
+export const megaMenuGroups: OfferingGroup[] = (() => {
+  const seen = new Set<string>();
+  return offeringGroups
+    .map((g) => ({
+      ...g,
+      links: g.links.filter((l) => l.href.startsWith("/services/") && !seen.has(l.href) && seen.add(l.href)),
+    }))
+    .filter((g) => g.links.length > 0);
+})();

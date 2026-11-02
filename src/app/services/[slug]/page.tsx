@@ -51,7 +51,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
 
             <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
-              <div className="rounded-[24px] bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] p-7 text-white shadow-xl">
+              <div className="rounded-[24px] bg-[#0B1220] p-7 text-white shadow-xl">
                 <p className="text-sm font-bold uppercase tracking-widest text-white/50">Start here</p>
                 <p className="ct-h4 mt-2 !text-white">Get a rough range, then a firm quote — free.</p>
                 <p className="mt-2 text-white/70">No commitment. We confirm the price in writing after a free consultation.</p>

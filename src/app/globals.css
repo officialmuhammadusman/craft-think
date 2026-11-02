@@ -4,8 +4,11 @@
  * All brand colours, fonts, and spacing tokens live here.
  * Do NOT add Tailwind v3 tailwind.config.ts — this project uses v4.
  *
- * Colour balance rule: 80% white/navy/grey, 15% indigo, 5% teal/cyan MAX.
- * Teal is ONLY for AI elements — never use teal on the main CTA button.
+ * FLAT ACCENT RULE (2026-11-02 correction): ONE flat solid accent only —
+ * indigo #4F46E5 on white/grey/dark-navy #0B1220. Teal #14B8A6 ONLY as a
+ * tiny AI dot, never as a gradient, button, card or section background.
+ * NO multi-colour gradients anywhere in layout chrome. A gradient may
+ * live only inside a hero artwork image file itself, never in CSS.
  */
 
 @import "tailwindcss";
@@ -33,14 +36,13 @@
   --color-primary-deep: #312e81;
   --color-primary-soft: #eef2ff;
 
-  /* AI accent — USE SPARINGLY, 5% max, NEVER on main CTA */
+  /* AI accent — ONLY as a tiny dot (e.g. the AI button dot). Never a
+     button, card, section background or gradient. */
   --color-ai: #14b8a6;
-  --color-ai-glow: #06b6d4;
-  --color-ai-soft: #f0fdfa;
 
-  /* Dark hero gradient stops */
+  /* Dark hero ground — flat navy, no gradient */
   --color-hero-from: #0b1220;
-  --color-hero-to: #1e1b4b;
+  --color-hero-to: #0b1220;
 
   /* Status only (not brand) */
   --color-success: #16a34a;
@@ -201,11 +203,6 @@ body {
   border-color: #4f46e5;
   box-shadow: 0 12px 32px rgba(11, 18, 32, 0.12);
 }
-.ct-hero-grid {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 40%, transparent 100%);
-}
 @media (prefers-reduced-motion: reduce) {
   .ct-card, .ct-card:hover { transform: none; }
 }
@@ -237,23 +234,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .ct-menu-in { animation: ct-menu-in 0.22s ease-out both; }
-@keyframes ct-glow-move {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
-  50% { transform: translate(30px, -20px) scale(1.15); opacity: 1; }
-}
-.ct-glow-anim { animation: ct-glow-move 9s ease-in-out infinite; }
-.ct-glow-anim-slow { animation: ct-glow-move 13s ease-in-out infinite reverse; }
-@keyframes ct-sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.35) rotate(20deg); opacity: 0.75; }
-}
-.ct-sparkle { animation: ct-sparkle 2.2s ease-in-out infinite; }
-@keyframes ct-ai-ring {
-  0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.45); }
-  70% { box-shadow: 0 0 0 16px rgba(20, 184, 166, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
-}
-.ct-ai-pulse { animation: ct-ai-ring 2.4s ease-out infinite; }
 @keyframes ct-panel-in {
   from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: translateX(0); }
@@ -261,7 +241,7 @@ body {
 .ct-panel-in { animation: ct-panel-in 0.28s ease-out both; }
 .ct-hero-title { font-size: clamp(2.75rem, 7vw, 4.75rem); }
 @media (prefers-reduced-motion: reduce) {
-  .ct-menu-in, .ct-glow-anim, .ct-glow-anim-slow, .ct-sparkle, .ct-ai-pulse, .ct-panel-in { animation: none !important; }
+  .ct-menu-in, .ct-panel-in { animation: none !important; }
 }
 
 /* ── Editorial premium system (full redesign) ─────────────────────────
@@ -334,12 +314,6 @@ body {
 .ct-editorial-img:hover img {
   transform: scale(1.04);
 }
-@keyframes ct-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.ct-float { animation: ct-float 5s ease-in-out infinite; }
-.ct-float-slow { animation: ct-float 7s ease-in-out infinite; }
 @keyframes ct-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -349,36 +323,29 @@ body {
   width: max-content;
   animation: ct-marquee 30s linear infinite;
 }
-@keyframes ct-hero-glow {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-  50% { transform: translate(40px, -30px) scale(1.2); opacity: 1; }
-}
-.ct-hero-glow { animation: ct-hero-glow 10s ease-in-out infinite; }
-.ct-hero-glow-slow { animation: ct-hero-glow 14s ease-in-out infinite reverse; }
 .ct-mega-scroll {
   max-height: 80vh;
   overflow-y: auto;
 }
 @media (prefers-reduced-motion: reduce) {
-  .ct-float, .ct-float-slow, .ct-marquee-track, .ct-hero-glow, .ct-hero-glow-slow { animation: none !important; }
+  .ct-marquee-track { animation: none !important; }
 }
 
 /* ── Branded thinking-path motif ───────────────────────────────────────
    The logo mark's "thinking path": a rising dotted line ending in a teal
    dot. Used in the hero and final CTA as a brand signature, never as a
    copied logo from another company. */
-@keyframes ct-path-draw {
-  0% { stroke-dashoffset: 320; opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 1; }
-}
-.ct-think-path { stroke-dasharray: 8 8; animation: ct-path-draw 6s ease-in-out infinite alternate; }
-@media (prefers-reduced-motion: reduce) {
-  .ct-think-path { animation: none !important; }
-}
+
 
 /* ── Focus ring — global fallback ────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid #4f46e5;
   outline-offset: 2px;
 }
+
+/* ── FLAT ACCENT CORRECTION 2026-11-02 ───────────────────────────────
+   The gradient theme above was reverted: one flat solid indigo accent
+   (#4F46E5) on white/grey/dark-navy, teal only as a tiny AI dot. No
+   multi-colour gradient backgrounds, buttons, text or borders anywhere
+   in layout chrome. */
+section { scroll-margin-top: 88px; } /* 72px slim header + 16px breathing room, so anchored sections are never clipped under the sticky header */

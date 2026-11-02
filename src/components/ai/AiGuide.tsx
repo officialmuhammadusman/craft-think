@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bot, Send, Sparkles, User } from "lucide-react";
+import { ArrowRight, Bot, Send, User } from "lucide-react";
 import { guideAnswer, type GuideReply } from "@/data/content";
 import { Button } from "@/components/ui/Button";
 
@@ -14,7 +14,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * base (guideAnswer in src/data/content.ts). No backend, no external AI API.
  * Suggestions are shown as cards (service + project), not plain links.
  */
-export function AiGuide({ initial = "" }: { initial?: string }) {
+export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
     { role: "guide", text: "Hello! I am the CraftThink guide (demo). Tell me in plain words what you need help with, and I will point you to the right service and a similar project. I only answer from CraftThink's own services, projects, process and FAQs." },
   ]);
@@ -49,21 +49,23 @@ export function AiGuide({ initial = "" }: { initial?: string }) {
 
   return (
     <div className="overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl">
-      <div className="flex items-start justify-between gap-4 bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] px-6 py-5 text-white">
+      {!bare && (
+      <div className="flex items-start justify-between gap-4 bg-[#0B1220] px-6 py-5 text-white">
         <div className="flex items-start gap-3">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#14B8A6]/20 text-[#14B8A6]"><Bot size={22} /></span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]"><Bot size={22} /></span>
           <div>
             <p className="text-lg font-bold">Ask the CraftThink Guide</p>
             <p className="mt-0.5 max-w-md text-sm leading-snug text-white/60">Guided demo — answers come only from this site&apos;s services, projects and FAQs. No live AI API is connected yet.</p>
           </div>
         </div>
-        <span className="hidden shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-[#14B8A6] sm:flex"><Sparkles size={13} /> Guided demo</span>
+        <span className="hidden shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white sm:flex"><span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Guided demo</span>
       </div>
+      )}
 
       <div ref={scrollRef} className="flex max-h-[460px] flex-col gap-4 overflow-y-auto px-5 py-5 sm:px-6" aria-live="polite">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
-            <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#F0FDFA] text-[#0F766E]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
+            <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
             <div className={`max-w-[85%] rounded-[20px] px-4 py-3 ${m.role === "user" ? "rounded-tr-sm bg-[#4F46E5] text-white" : "rounded-tl-sm bg-[#F6F7FB] text-[#0B1220]"}`}>
               <p className="text-base leading-relaxed">{m.text}</p>
               {m.reply?.serviceHref && (
@@ -100,10 +102,10 @@ export function AiGuide({ initial = "" }: { initial?: string }) {
 
       <div className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-5 sm:px-6">
         <p className="text-base font-bold">Want us to follow up? Leave your details:</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+        <div className="mt-3 flex flex-col gap-3">
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" aria-label="Your email" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
-          <Button href={contactHref}>Continue to Contact →</Button>
+          <Button href={contactHref} className="w-full">Continue to Contact →</Button>
         </div>
         <p className="mt-2 text-sm text-[#64748B]">This sends nothing by itself — it opens the contact form with your details prefilled. No backend stores your details on this demo site.</p>
       </div>

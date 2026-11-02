@@ -8,9 +8,9 @@
  * No ScienceSoft text, stats or trademarks.
  */
 import Link from "next/link";
-import { ArrowRight, Cloud, Code2, Compass, Database, LayoutGrid, LifeBuoy, Lock, Mail, Phone, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowRight, Code2, Compass, LayoutGrid, Mail, Phone, ShieldCheck, Sparkles, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { offeringGroups } from "@/data/offering";
+import { megaMenuGroups } from "@/data/offering";
 
 const GROUP_ICONS: Record<string, typeof Sparkles> = {
   "AI Transformation": Sparkles,
@@ -18,16 +18,13 @@ const GROUP_ICONS: Record<string, typeof Sparkles> = {
   "IT Consulting": Compass,
   "Application Services": LayoutGrid,
   "Testing & QA": ShieldCheck,
-  "Data & AI (RAG)": Database,
-  "Help Desk & Support": LifeBuoy,
-  "Infrastructure & DevOps": Cloud,
-  "Cybersecurity & Security": Lock,
 };
 
 export function MegaMenu({ onClose }: { onClose: () => void }) {
   const { featured } = siteConfig.megaMenu;
   return (
-    <div id="mega-menu-services" role="region" aria-label="Services menu" className="ct-menu-in max-h-[80vh] overflow-y-auto rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl">
+    <div id="mega-menu-services" role="region" aria-label="Services menu" className="ct-menu-in max-h-[80vh] overflow-hidden overflow-y-auto rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl">
+      <div aria-hidden="true" className="h-1.5 bg-[#4F46E5]" />
       {/* Panel header: title + visible close button, so it never feels stuck open */}
       <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-[#E7E9F2] bg-white px-6 py-4">
         <p className="text-base font-bold text-[#0B1220]">All services <span className="font-medium text-[#64748B]">— grouped by what they do for you</span></p>
@@ -37,7 +34,7 @@ export function MegaMenu({ onClose }: { onClose: () => void }) {
       </div>
       <div className="grid lg:grid-cols-[1fr_300px]">
         <div className="grid sm:grid-cols-2 xl:grid-cols-3">
-          {offeringGroups.map((group) => {
+          {megaMenuGroups.map((group) => {
             const Icon = GROUP_ICONS[group.title] ?? Sparkles;
             return (
               <div key={group.title} className="border-b border-[#E7E9F2] p-5 sm:p-6">
@@ -45,7 +42,6 @@ export function MegaMenu({ onClose }: { onClose: () => void }) {
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EEF2FF] text-[#4F46E5]"><Icon size={16} /></span>
                   {group.title}
                 </p>
-                <p className="mb-3 text-sm leading-snug text-[#475569]">{group.description}</p>
                 <ul className="flex flex-col gap-1">
                   {group.links.map((link) => (
                     <li key={link.href + link.label}>
@@ -59,8 +55,9 @@ export function MegaMenu({ onClose }: { onClose: () => void }) {
             );
           })}
         </div>
-        <div className="flex flex-col gap-4 bg-gradient-to-br from-[#0B1220] to-[#1E1B4B] p-6 text-white">
-          <Link href="/guide" onClick={onClose} className="flex min-h-[48px] items-center gap-2 rounded-lg text-base font-semibold text-[#14B8A6] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#14B8A6]">
+        <div className="flex flex-col gap-4 bg-[#0B1220] p-6 text-white">
+          <Link href="/guide" onClick={onClose} className="flex min-h-[48px] items-center gap-2 rounded-lg text-base font-semibold text-white hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-[#14B8A6]" />
             <Sparkles size={17} /> {featured.aiPrompt}
           </Link>
           <div className="border-t border-white/10 pt-4">
@@ -70,14 +67,14 @@ export function MegaMenu({ onClose }: { onClose: () => void }) {
               <p className="mt-1 text-sm leading-snug text-white/60">{featured.caseStudyDescription}</p>
             </Link>
           </div>
-          <Link href={featured.ctaHref} onClick={onClose} className="mt-auto inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-base font-semibold text-white hover:bg-[#4338CA]">{featured.ctaLabel}</Link>
+          <Link href={featured.ctaHref} onClick={onClose} className="mt-auto inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-base font-semibold text-white shadow-lg">{featured.ctaLabel}</Link>
           <div className="flex flex-col gap-2 border-t border-white/10 pt-3 text-sm text-white/60">
-            <a href={`mailto:${siteConfig.email}`} className="flex min-h-[48px] items-center gap-2 break-all hover:text-white"><Mail size={14} className="shrink-0" />{siteConfig.email}</a>
+            <a href={`mailto:${siteConfig.email}`} className="flex min-h-[48px] items-center gap-2 break-words text-sm hover:text-white"><Mail size={14} className="shrink-0" />{siteConfig.email}</a>
             <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="flex min-h-[48px] items-center gap-2 hover:text-white"><Phone size={14} className="shrink-0" />{siteConfig.phone}</a>
           </div>
         </div>
       </div>
-      <Link href="/services" onClick={onClose} className="flex min-h-[56px] items-center justify-between bg-[#F6F7FB] px-6 py-3 text-base font-semibold text-[#4F46E5] hover:bg-[#EEF2FF]">
+      <Link href="/services" onClick={onClose} className="flex min-h-[56px] items-center justify-between bg-[#EEF2FF] px-6 py-3 text-base font-semibold text-[#4F46E5] hover:bg-[#EEF2FF]">
         View all 11 services <ArrowRight size={18} />
       </Link>
     </div>

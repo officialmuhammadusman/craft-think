@@ -9,6 +9,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { OverlayProvider, FloatingAiButton } from "@/components/layout/Overlays";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { LenisProvider } from "@/components/layout/LenisProvider";
 import { siteConfig } from "@/config/site";
@@ -79,20 +80,29 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-[#0B1220]">
         {/* Lenis smooth scroll wrapper — disabled if prefers-reduced-motion */}
         <LenisProvider>
-          {/* Sticky header — sits above all page content */}
-          <Header />
+          {/* OverlayProvider supplies the floating AI button and the
+              AI / consultation slide-over panels to Header, CtaBand
+              and every page. Header must live inside it (it calls
+              useOverlays). */}
+          <OverlayProvider>
+            {/* Sticky header — sits above all page content */}
+            <Header />
 
-          {/* Page content — grows to fill available space */}
-          <main className="flex-1 pt-[72px]">
-            {/* pt-[72px] offsets the fixed 72px header height */}
-            {children}
-          </main>
+            {/* Page content — grows to fill available space */}
+            <main className="flex-1 pt-[72px]">
+              {/* pt-[72px] offsets the fixed 72px header height */}
+              {children}
+            </main>
 
-          {/* Footer */}
-          <Footer />
+            {/* Footer */}
+            <Footer />
 
-          {/* Mobile-only fixed bottom CTA bar */}
-          <StickyMobileCTA />
+            {/* Floating AI button (bottom-right, pulse ring) */}
+            <FloatingAiButton />
+
+            {/* Mobile-only fixed bottom CTA bar */}
+            <StickyMobileCTA />
+          </OverlayProvider>
         </LenisProvider>
       </body>
     </html>

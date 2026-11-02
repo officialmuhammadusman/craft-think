@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { X, ChevronDown, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { useOverlays } from "@/components/layout/Overlays";
 import { offeringGroups, industries } from "@/data/offering";
 
 
@@ -19,6 +20,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   const [expandedGroup, setExpandedGroup] = useState<string | null>("AI Transformation");
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const { openAi, openConsult } = useOverlays();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -84,16 +86,16 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
         <div className="mt-5 flex flex-col gap-3 px-3 pb-4">
           <a href={`mailto:${siteConfig.email}`} className="flex min-h-[48px] items-center gap-2 break-all text-base text-[#475569]"><Mail size={17} className="shrink-0" />{siteConfig.email}</a>
           <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="flex min-h-[48px] items-center gap-2 text-base text-[#475569]"><Phone size={17} className="shrink-0" />{siteConfig.phone}</a>
-          <div className="flex gap-3 pt-1">
-            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Globe size={18} /></a>
-            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Code2 size={18} /></a>
+          <div className="flex flex-col gap-2 pt-1">
+            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#0B1220]"><span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Globe size={18} /></span>LinkedIn</a>
+            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#0B1220]"><span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569]"><Code2 size={18} /></span>GitHub</a>
           </div>
         </div>
       </nav>
 
       <div className="border-t border-[#E7E9F2] bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-        <Link href="/contact" onClick={onClose} className="flex min-h-[52px] items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white">Book a Free Consultation</Link>
-        <Link href="/guide" onClick={onClose} className="mt-2 flex min-h-[52px] items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</Link>
+        <button type="button" onClick={() => { onClose(); openConsult(); }} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white">Book a Free Consultation</button>
+        <button type="button" onClick={() => { onClose(); openAi(); }} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</button>
       </div>
     </div>
   );

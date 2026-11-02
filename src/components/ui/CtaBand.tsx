@@ -1,10 +1,14 @@
+"use client";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { useOverlays } from "@/components/layout/Overlays";
 import { siteConfig } from "@/config/site";
 
-/** Premium dark final CTA: gradient, glow, brand abstract, real counts only. */
+/** Premium dark final CTA: gradient, glow, brand abstract, real counts only.
+    "Book a Free Consultation" opens the consultation slide-over panel. */
 export function CtaBand({ title = "Not sure where to start?", text = "Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation." }: { title?: string; text?: string }) {
+  const { openConsult } = useOverlays();
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0B1220] via-[#171344] to-[#1E1B4B] py-16 sm:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -18,7 +22,7 @@ export function CtaBand({ title = "Not sure where to start?", text = "Book a fre
             <h2 className="ct-h2 !text-white max-w-2xl">{title}</h2>
             <p className="max-w-xl text-lg leading-relaxed text-white/70">{text}</p>
             <div className="flex flex-wrap gap-3">
-              <Button href="/contact" size="lg">Book a Free Consultation</Button>
+              <Button size="lg" onClick={openConsult}>Book a Free Consultation</Button>
               <Button href="/estimate" size="lg" variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20">Get an Estimate</Button>
             </div>
             <p className="text-sm text-white/50">{siteConfig.email} · {siteConfig.phone} · {siteConfig.tagline}</p>

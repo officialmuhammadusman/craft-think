@@ -231,6 +231,138 @@ body {
    hover lift is handled by .ct-card above. Both already respect
    prefers-reduced-motion (see the media query above). */
 
+/* ── Visual-fix pass: menu, hero glow, AI pulse, float ───────────────── */
+@keyframes ct-menu-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ct-menu-in { animation: ct-menu-in 0.22s ease-out both; }
+@keyframes ct-glow-move {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate(30px, -20px) scale(1.15); opacity: 1; }
+}
+.ct-glow-anim { animation: ct-glow-move 9s ease-in-out infinite; }
+.ct-glow-anim-slow { animation: ct-glow-move 13s ease-in-out infinite reverse; }
+@keyframes ct-sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.35) rotate(20deg); opacity: 0.75; }
+}
+.ct-sparkle { animation: ct-sparkle 2.2s ease-in-out infinite; }
+@keyframes ct-ai-ring {
+  0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.45); }
+  70% { box-shadow: 0 0 0 16px rgba(20, 184, 166, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+}
+.ct-ai-pulse { animation: ct-ai-ring 2.4s ease-out infinite; }
+@keyframes ct-panel-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.ct-panel-in { animation: ct-panel-in 0.28s ease-out both; }
+.ct-hero-title { font-size: clamp(2.75rem, 7vw, 4.75rem); }
+@media (prefers-reduced-motion: reduce) {
+  .ct-menu-in, .ct-glow-anim, .ct-glow-anim-slow, .ct-sparkle, .ct-ai-pulse, .ct-panel-in { animation: none !important; }
+}
+
+/* ── Editorial premium system (full redesign) ─────────────────────────
+   Oversized display type, distinct section identities, image tiles with
+   zoom/lift, alternating editorial rows, marquee trust strip, float and
+   glow animation. Colours stay navy #0B1220 / indigo #4F46E5 / teal
+   #14B8A6 only — no random colours. */
+.ct-display-xl {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(2.75rem, 7.5vw, 4.5rem); /* 44px → 72px */
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+.ct-section-title {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3rem); /* 32px → 48px */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: #0b1220;
+}
+.ct-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(79, 70, 229, 0.25);
+  background: #eef2ff;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4f46e5;
+}
+.ct-eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #14b8a6;
+}
+.ct-tile {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid #e7e9f2;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(11, 18, 32, 0.06), 0 6px 20px rgba(11, 18, 32, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ct-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 44px rgba(11, 18, 32, 0.14);
+}
+.ct-tile img {
+  transition: transform 0.6s ease;
+}
+.ct-tile:hover img {
+  transform: scale(1.06);
+}
+.ct-editorial-img {
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(11, 18, 32, 0.18);
+}
+.ct-editorial-img img {
+  transition: transform 0.6s ease;
+}
+.ct-editorial-img:hover img {
+  transform: scale(1.04);
+}
+@keyframes ct-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.ct-float { animation: ct-float 5s ease-in-out infinite; }
+.ct-float-slow { animation: ct-float 7s ease-in-out infinite; }
+@keyframes ct-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ct-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ct-marquee 30s linear infinite;
+}
+@keyframes ct-hero-glow {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  50% { transform: translate(40px, -30px) scale(1.2); opacity: 1; }
+}
+.ct-hero-glow { animation: ct-hero-glow 10s ease-in-out infinite; }
+.ct-hero-glow-slow { animation: ct-hero-glow 14s ease-in-out infinite reverse; }
+.ct-mega-scroll {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-float, .ct-float-slow, .ct-marquee-track, .ct-hero-glow, .ct-hero-glow-slow { animation: none !important; }
+}
+
 /* ── Focus ring — global fallback ────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid #4f46e5;

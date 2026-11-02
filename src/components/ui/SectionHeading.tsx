@@ -46,8 +46,8 @@ export function SectionHeading({
       {eyebrow && (
         <span
           className={cn(
-            "rounded-full border px-4 py-1.5 text-sm font-semibold uppercase tracking-widest",
-            aiAccent ? "border-[#14B8A6]/30 bg-[#F0FDFA] text-[#0F766E]" : "border-[#4F46E5]/20 bg-[#EEF2FF] text-[#4F46E5]"
+            "ct-eyebrow",
+            aiAccent && "border-[#14B8A6]/40 bg-[#F0FDFA] text-[#0F766E]"
           )}
         >
           {eyebrow}
@@ -58,11 +58,9 @@ export function SectionHeading({
         id={id}
         className={cn(
           "font-bold text-[#0B1220] leading-tight",
-          // Fluid heading sizes following the design spec
-          Tag === "h1" &&
-            "text-[clamp(2.25rem,5vw,3.5rem)] tracking-[-0.02em]",
-          Tag === "h2" &&
-            "text-[clamp(1.75rem,4vw,2.5rem)] tracking-[-0.015em]",
+          // Editorial sizes: hero 44-72px, section titles 32-48px
+          Tag === "h1" && "ct-display-xl",
+          Tag === "h2" && "ct-section-title",
           Tag === "h3" &&
             "text-[clamp(1.375rem,3vw,1.75rem)]"
         )}

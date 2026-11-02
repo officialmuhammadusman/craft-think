@@ -13,16 +13,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, Menu, ChevronDown, Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { projects } from "@/data/content";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Button } from "@/components/ui/Button";
+import { useOverlays } from "@/components/layout/Overlays";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState<"services" | "industries" | "work" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navRef = useRef<HTMLDivElement>(null);
+  // Ref on the whole header, so the full-width services panel counts as
+  // "inside" for outside-click, and moving button -> panel never closes it.
+  const navRef = useRef<HTMLElement>(null);
+  const { openAi, openConsult } = useOverlays();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -59,7 +64,7 @@ export function Header() {
 
   return (
     <>
-      <header className={cn("fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E7E9F2] transition-shadow", isScrolled && "shadow-[0_8px_30px_rgba(11,18,32,0.08)]")}>
+      <header ref={navRef} className={cn("fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E7E9F2] transition-shadow", isScrolled && "shadow-[0_8px_30px_rgba(11,18,32,0.08)]")}>
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="flex h-[72px] items-center justify-between gap-4">
             <Link href="/" aria-label="CraftThink — Home" className="flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]">
@@ -67,7 +72,7 @@ export function Header() {
               <span className="font-display text-xl font-bold tracking-tight"><span className="text-[#0B1220]">Craft</span><span className="text-[#4F46E5]">Think</span></span>
             </Link>
 
-            <div ref={navRef} className="relative hidden lg:block">
+            <div className="relative hidden lg:block">
               <nav aria-label="Primary navigation" className="flex items-center gap-1">
                 <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose}>
                   <button type="button" aria-haspopup="true" aria-expanded={openMenu === "services"} onClick={() => toggle("services")} className={cn(linkClass, "gap-1", openMenu === "services" && "bg-[#EEF2FF] text-[#4F46E5]")}>
@@ -88,12 +93,9 @@ export function Header() {
                 <Link href="/contact" onClick={() => setOpenMenu(null)} className={linkClass}>Contact</Link>
               </nav>
 
-              {/* Services mega menu — inside the same hover wrapper, so no flicker */}
-              {openMenu === "services" && (
-                <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute left-1/2 top-full z-50 w-[min(1240px,calc(100vw-2rem))] -translate-x-1/2 pt-3">
-                  <MegaMenu onClose={() => setOpenMenu(null)} />
-                </div>
-              )}
+              {/* Industries / Work dropdowns render here, anchored to the nav.
+                  The Services mega menu renders at header level below, full
+                  width, centred on the page — not on the narrow nav. */}
 
               {openMenu === "industries" && (
                 <div onMouseEnter={() => scheduleOpen("industries")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-72 pt-3">
@@ -110,14 +112,8 @@ export function Header() {
                 <div onMouseEnter={() => scheduleOpen("work")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-72 pt-3">
                   <div className="overflow-hidden rounded-2xl border border-[#E7E9F2] bg-white p-2 shadow-xl" role="menu">
                     <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Featured projects</p>
-                    {[
-                      { label: "HR Management System", href: "/work/hr-management-system" },
-                      { label: "RAG AI Assistant", href: "/work/rag-ai-assistant" },
-                      { label: "Mejora Tu Dolor — Telemedicine", href: "/work/telemedicine" },
-                      { label: "Cliender — Business SaaS", href: "/work/cliender" },
-                      { label: "Padel Connect", href: "/work/padel-connect" },
-                    ].map((item) => (
-                      <Link key={item.href} href={item.href} role="menuitem" onClick={() => setOpenMenu(null)} className="block min-h-[48px] rounded-xl px-3 py-3 text-base text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5]">{item.label}</Link>
+                    {projects.map((item) => (
+                      <Link key={item.slug} href={`/work/${item.slug}`} role="menuitem" onClick={() => setOpenMenu(null)} className="block min-h-[48px] rounded-xl px-3 py-3 text-base text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5]">{item.title}</Link>
                     ))}
                     <Link href="/work" onClick={() => setOpenMenu(null)} className="mt-1 block min-h-[48px] rounded-xl bg-[#F6F7FB] px-3 py-3 text-base font-semibold text-[#4F46E5]">View all work →</Link>
                   </div>
@@ -127,13 +123,30 @@ export function Header() {
 
             <div className="hidden shrink-0 items-center gap-2 lg:flex">
               <Link href="/guide" aria-label="Search with the AI guide" className="flex h-11 w-11 items-center justify-center rounded-full text-[#475569] hover:bg-[#EEF2FF] hover:text-[#4F46E5]"><Search size={19} /></Link>
-              <Link href="/guide" className="hidden items-center gap-1.5 rounded-full border border-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-[#4F46E5] hover:bg-[#EEF2FF] xl:flex"><Sparkles size={15} className="text-[#14B8A6]" /> Ask AI</Link>
-              <Button href="/contact" size="sm">Book a Free Consultation</Button>
+              <button type="button" onClick={openAi} className="hidden min-h-[48px] items-center gap-1.5 rounded-full border border-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-[#4F46E5] hover:bg-[#EEF2FF] xl:flex"><Sparkles size={15} className="ct-sparkle text-[#14B8A6]" /> Ask AI</button>
+              <Button size="sm" onClick={openConsult}>Book a Free Consultation</Button>
             </div>
 
             <button type="button" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu" className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220] lg:hidden"><Menu size={22} /></button>
           </div>
         </div>
+
+        {/* Services mega menu — FULL WIDTH, anchored to the header itself
+            (not the narrow nav), so it is centred on the page. Hovering
+            from the button into this panel keeps it open; it scrolls
+            internally at 80vh so 9 groups never run off the screen. */}
+        {openMenu === "services" && (
+          <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute inset-x-0 top-full z-50 hidden lg:block">
+            <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+              <div className="ct-menu-in pt-3">
+                <div className="flex justify-end pb-2">
+                  <button type="button" onClick={() => setOpenMenu(null)} aria-label="Close services menu" className="flex min-h-[44px] items-center gap-1 rounded-full bg-white px-4 text-sm font-semibold text-[#0B1220] shadow-md ring-1 ring-[#E7E9F2] hover:text-[#4F46E5]">Close menu ✕</button>
+                </div>
+                <MegaMenu onClose={() => setOpenMenu(null)} />
+              </div>
+            </div>
+          </div>
+        )}
       </header>
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </>

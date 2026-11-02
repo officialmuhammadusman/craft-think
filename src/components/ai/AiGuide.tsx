@@ -15,8 +15,12 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * Suggestions are shown as cards (service + project), not plain links.
  *
  * Scroll fix only (design unchanged): the message list uses
- * overscroll-contain, so scrolling inside the chat never scrolls the
- * page behind it.
+ * overscroll-contain AND data-lenis-prevent. The site-wide Lenis
+ * smooth scroll hijacks wheel/touch events, which is why the chat
+ * only scrolled when its scrollbar was dragged directly — Lenis was
+ * sending the scroll to the page instead. data-lenis-prevent tells
+ * Lenis to leave this area alone, so the whole chat area scrolls
+ * natively and the page behind never moves.
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
@@ -66,7 +70,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       </div>
       )}
 
-      <div ref={scrollRef} className="flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
+      <div ref={scrollRef} data-lenis-prevent className="flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
@@ -91,7 +95,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
 
       <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
         <p className="mb-2 text-sm font-semibold text-[#64748B]">Try one of these:</p>
-        <div className="flex flex-wrap gap-2">
+        <div data-lenis-prevent className="flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
             <button key={s} type="button" onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">{s}</button>
           ))}

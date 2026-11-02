@@ -8,11 +8,15 @@ import { AiGuide } from "@/components/ai/AiGuide";
 
 /**
  * FloatingAiButton — the previous chatbot window design, unchanged,
- * with one fix only: scrolling inside the chat scrolls the chat
- * content, never the page behind it. The window and its inner scroll
- * area both use overscroll-contain, so scroll chaining to the page
- * is stopped at the chat boundary. Not a separate page, not a side
- * drawer. The full /guide page still exists, linked from the header.
+ * with the real scroll fix: the whole window opts out of Lenis
+ * smooth scroll (data-lenis-prevent). Lenis hijacks wheel/touch
+ * events for the page, which is why scrolling over the chat used to
+ * scroll the page and only dragging the scrollbar scrolled the chat.
+ * With data-lenis-prevent, the WHOLE window area scrolls natively:
+ * over messages it scrolls the message list, over the rest it scrolls
+ * the window content — and overscroll-contain stops it ever reaching
+ * the page behind. Not a separate page, not a side drawer. The full
+ * /guide page still exists, linked from the header.
  */
 export function FloatingAiButton() {
   // Keyed remount on route change closes the chat window, without
@@ -37,6 +41,7 @@ function FloatingAiButtonInner() {
     <>
       {open && (
         <div
+          data-lenis-prevent
           role="dialog"
           aria-modal="false"
           aria-label="CraftThink AI chat"
@@ -73,7 +78,7 @@ function FloatingAiButtonInner() {
               </button>
             </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          <div data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
             <AiGuide bare />
           </div>
         </div>

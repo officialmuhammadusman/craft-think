@@ -38,7 +38,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO: full-bleed, layered visual, animated glows ── */}
-      <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-gradient-to-br from-[#0B1220] via-[#14113F] to-[#1E1B4B]">
+      <section aria-labelledby="hero-heading" className="relative flex min-h-[88vh] items-center overflow-hidden bg-gradient-to-br from-[#0B1220] via-[#14113F] to-[#1E1B4B]">
         <div aria-hidden="true" className="ct-hero-grid absolute inset-0" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="ct-hero-glow absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-[#4F46E5]/25 blur-[120px]" />
@@ -51,7 +51,7 @@ export default function HomePage() {
                 <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> A guided software house · Working remotely with clients worldwide
               </span>
               <h1 id="hero-heading" className="ct-display-xl !text-white">
-                Software, built with thought, <span className="text-[#818CF8]">guided by AI</span>
+                Software, built with thought, <span className="bg-gradient-to-r from-[#A5B4FC] via-[#818CF8] to-[#2DD4BF] bg-clip-text text-transparent">guided by AI</span>
               </h1>
               <p className="ct-body-lg max-w-xl text-white/70">
                 We build websites, apps, business systems and AI assistants — and we guide you to the right solution, in plain language, before you pay anything.
@@ -81,14 +81,14 @@ export default function HomePage() {
       <section className="bg-[#0B1220] py-14 text-white">
         <Container>
           <p className="mb-8 text-center text-xs font-bold uppercase tracking-widest text-white/50">Key facts — what CraftThink actually offers</p>
-          <ul className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-white/15">
             {[
               { n: "11", label: "Services", note: "Websites, apps, CRM, booking, AI and more" },
               { n: "6", label: "Case studies", note: "HR, AI, healthcare, SaaS, sports and travel" },
               { n: "6", label: "Process steps", note: "Discover → Design → Build → Test → Launch → Support" },
               { n: "Worldwide", label: "Remote clients", note: "CEO-led, one shareable link, from Fiverr, Upwork and email" },
             ].map((s) => (
-              <li key={s.label} className="border-l-2 border-[#4F46E5] pl-5 text-left sm:border-l-0 sm:border-t-2 sm:pl-0 sm:pt-5 sm:text-center">
+              <li key={s.label} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
                 <p className="font-display text-5xl font-bold text-white">{s.n}</p>
                 <p className="mt-1 text-base font-semibold text-[#818CF8]">{s.label}</p>
                 <p className="mt-1 text-sm leading-snug text-white/60">{s.note}</p>
@@ -110,6 +110,7 @@ export default function HomePage() {
                     <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-52 w-full object-cover" />
                     <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">Service</span>
                   </div>
+                  <div aria-hidden="true" className="h-1.5 bg-gradient-to-r from-[#4F46E5] via-[#312E81] to-[#14B8A6]" />
                   <div className="p-6">
                     <h3 className="ct-h4">{s.title}</h3>
                     <p className="mt-2 text-[#475569]">{s.line}</p>
@@ -145,21 +146,16 @@ export default function HomePage() {
           <Reveal className="mt-10"><AiGuide /></Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              { title: "RAG Agentic AI Assistant", text: "Answers checked against a business's own documents, not guessed.", href: "/work/rag-ai-assistant", img: "/images/work/work-ai.jpg", alt: "Abstract visualisation of an AI assistant at work" },
-              { title: "AI for booking & healthcare", text: "Patients describe their problem first and are routed to the right specialist.", href: "/work/telemedicine", img: "/images/work/work-telemedicine.jpg", alt: "A doctor consulting a patient on a tablet" },
-              { title: "AI that answers customers", text: "Same questions, answered instantly — with a human handover when unsure.", href: "/services/ai-solutions", img: "/images/services/service-ai.jpg", alt: "Abstract visualisation of artificial intelligence" },
+              { title: "RAG Agentic AI Assistant", text: "Answers checked against a business's own documents, not guessed.", href: "/work/rag-ai-assistant" },
+              { title: "AI for booking & healthcare", text: "Patients describe their problem first and are routed to the right specialist.", href: "/work/telemedicine" },
+              { title: "AI that answers customers", text: "Same questions, answered instantly — with a human handover when unsure.", href: "/services/ai-solutions" },
             ].map((a) => (
               <Reveal key={a.title}>
-                <Link href={a.href} className="ct-tile group block h-full">
-                  <div className="relative overflow-hidden">
-                    <Image src={a.img} alt={a.alt} width={800} height={520} className="h-44 w-full object-cover" />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">AI in action</span>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="ct-h4">{a.title}</h3>
-                    <p className="mt-2 text-[#475569]">{a.text}</p>
-                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See it <ArrowRight size={17} /></p>
-                  </div>
+                <Link href={a.href} className="group block h-full rounded-[24px] border border-[#E7E9F2] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F0FDFA] text-[#14B8A6]"><Bot size={22} className="ct-sparkle" /></span>
+                  <h3 className="ct-h4 mt-4">{a.title}</h3>
+                  <p className="mt-2 rounded-2xl rounded-tl-sm bg-[#F6F7FB] p-3 text-sm text-[#475569]">{a.text}</p>
+                  <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See it <ArrowRight size={17} /></p>
                 </Link>
               </Reveal>
             ))}
@@ -174,15 +170,13 @@ export default function HomePage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((ind, i) => (
               <Reveal key={ind.label} delay={(i % 3) * 0.06}>
-                <Link href={ind.href} className="ct-tile group block h-full">
-                  <div className="relative overflow-hidden">
-                    <Image src={industryImages[ind.label] || "/images/work/work-hr.jpg"} alt={`${ind.label} — project visual, not a client screenshot`} width={800} height={520} className="h-48 w-full object-cover" />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">{ind.label}</span>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="ct-h4">{ind.label}</h3>
-                    <p className="mt-2 text-[#475569]">{ind.description}</p>
-                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">All {ind.label} work <ArrowRight size={17} /></p>
+                <Link href={ind.href} className="group relative block h-72 overflow-hidden rounded-[24px] shadow-md transition hover:shadow-xl">
+                  <Image src={industryImages[ind.label] || "/images/work/work-hr.jpg"} alt={`${ind.label} — project visual, not a client screenshot`} width={800} height={520} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/45 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                    <h3 className="font-display text-xl font-bold !text-white">{ind.label}</h3>
+                    <p className="mt-1 text-sm text-white/80">{ind.description}</p>
+                    <p className="mt-3 flex items-center gap-1 font-semibold text-[#2DD4BF]">All {ind.label} work <ArrowRight size={16} /></p>
                   </div>
                 </Link>
               </Reveal>
@@ -243,8 +237,7 @@ export default function HomePage() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {facilities.map((f, i) => (
               <Reveal key={f.title} delay={(i % 3) * 0.06}>
-                <article className="ct-tile h-full p-7">
-                  <span className="mb-4 block h-1.5 w-12 rounded-full bg-[#4F46E5]" />
+                <article className="h-full rounded-r-[24px] border-l-4 border-[#14B8A6] bg-[#F6F7FB] p-7">
                   <h3 className="ct-h4">{f.title}</h3>
                   <p className="mt-2 text-[#475569]">{f.text}</p>
                 </article>
@@ -260,17 +253,20 @@ export default function HomePage() {
           </div>
           <div className="mt-16">
             <Reveal><SectionHeading eyebrow="Process" title="How we work, step by step" subtitle="You approve the design before we build, and you see progress every week." /></Reveal>
-            <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {processSteps.map((s, i) => (
-                <Reveal key={s.n} delay={(i % 3) * 0.06}>
-                  <li className="ct-tile relative h-full p-7">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#4F46E5] font-display text-xl font-bold text-white shadow-lg">{s.n}</span>
-                    <h3 className="ct-h4 mt-5">{s.title}</h3>
-                    <p className="mt-2 text-[#475569]">{s.text}</p>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
+            <div className="relative mt-10">
+              <div aria-hidden="true" className="absolute left-0 right-0 top-[52px] hidden h-0.5 bg-[#E7E9F2] lg:block" />
+              <ol className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {processSteps.map((s, i) => (
+                  <Reveal key={s.n} delay={(i % 3) * 0.06}>
+                    <li className="relative h-full p-7 pt-0">
+                      <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-[#4F46E5] font-display text-xl font-bold text-white shadow-lg ring-4 ring-white">{s.n}</span>
+                      <h3 className="ct-h4 mt-5">{s.title}</h3>
+                      <p className="mt-2 text-[#475569]">{s.text}</p>
+                    </li>
+                  </Reveal>
+                ))}
+              </ol>
+            </div>
             <div className="mt-8 text-center"><Button href="/process" variant="secondary" size="lg">Full process & facilities</Button></div>
           </div>
         </Container>
@@ -280,14 +276,16 @@ export default function HomePage() {
       <section className="ct-section bg-[#EEF2FF]">
         <Container>
           <Reveal><SectionHeading eyebrow="Secure the success of your project" title="Eight practices that keep your project on track" subtitle="Agreed in writing, checked weekly, and measured in business results." /></Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 flex flex-col divide-y divide-[#E7E9F2] border-y border-[#E7E9F2]">
             {successPractices.map((p, i) => (
               <Reveal key={p.title} delay={(i % 4) * 0.05}>
-                <article className="ct-tile flex h-full flex-col p-6">
-                  <span className="font-display text-4xl font-bold text-[#4F46E5]/25">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="ct-h4 mt-3">{p.title}</h3>
-                  <p className="mt-2 flex-1 text-[#475569]">{p.text}</p>
-                  <Link href={p.href} className="mt-4 flex min-h-[48px] items-center gap-1 font-semibold text-[#4F46E5]">{p.cta} <ArrowRight size={16} /></Link>
+                <article className="flex flex-col gap-4 py-6 sm:flex-row sm:items-start sm:gap-8">
+                  <span className="w-20 shrink-0 font-display text-5xl font-bold text-[#4F46E5]/30">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="flex-1">
+                    <h3 className="ct-h4">{p.title}</h3>
+                    <p className="mt-1 text-[#475569]">{p.text}</p>
+                  </div>
+                  <Link href={p.href} className="flex min-h-[48px] shrink-0 items-center gap-1 font-semibold text-[#4F46E5]">{p.cta} <ArrowRight size={16} /></Link>
                 </article>
               </Reveal>
             ))}
@@ -298,7 +296,7 @@ export default function HomePage() {
       {/* ── CEO STRIP ── */}
       <section className="ct-section bg-white">
         <Container>
-          <div className="ct-tile grid gap-8 overflow-hidden p-7 sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <span className="ct-eyebrow">Led by the CEO</span>
               <h2 className="ct-section-title mt-4">A software house you can actually talk to</h2>
@@ -308,9 +306,13 @@ export default function HomePage() {
                 <Button href="/contact">Book a Free Consultation</Button>
               </div>
             </div>
-            <div className="relative overflow-hidden rounded-[24px]">
-              <Image src="/images/hero/hero-team.jpg" alt="A software team working together — project visual, not a client photo" width={800} height={520} className="h-full min-h-[220px] w-full object-cover" />
-              <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-[#0B1220]"><Globe size={16} className="text-[#4F46E5]" /> Working remotely with clients worldwide</span>
+            <div className="relative">
+              <Image src="/images/hero/hero-team.jpg" alt="A software team working together — project visual, not a client photo" width={800} height={520} className="h-full min-h-[280px] w-full rounded-[24px] object-cover shadow-xl" />
+              <div className="absolute -bottom-6 left-4 rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-xl sm:left-8">
+                <p className="flex items-center gap-2 font-display text-lg font-bold text-[#0B1220]"><span className="h-2.5 w-2.5 rounded-full bg-[#14B8A6]" /> {siteConfig.ceoName}</p>
+                <p className="mt-1 text-sm font-semibold text-[#4F46E5]">CEO & Founder, CraftThink</p>
+                <p className="mt-1 flex items-center gap-1 text-sm text-[#64748B]"><Globe size={14} className="text-[#4F46E5]" /> Working remotely with clients worldwide</p>
+              </div>
             </div>
           </div>
         </Container>

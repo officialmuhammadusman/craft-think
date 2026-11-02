@@ -30,6 +30,10 @@ export function HeroVisual() {
           <DashboardMockup />
         </div>
       </div>
+      <svg aria-hidden="true" viewBox="0 0 200 80" className="absolute -bottom-8 -left-6 z-10 hidden w-52 lg:block">
+        <path d="M4 72 C 50 70, 70 30, 110 34 S 170 10, 188 8" fill="none" stroke="#14B8A6" strokeWidth="3" strokeLinecap="round" className="ct-think-path" />
+        <circle cx="190" cy="7" r="6" fill="#14B8A6" />
+      </svg>
       <div className="ct-float absolute -top-3 left-4 flex items-center gap-2 rounded-full border border-white/30 bg-white/95 px-4 py-2 text-sm font-bold text-[#0B1220] shadow-xl sm:left-8">
         <Sparkles size={16} className="ct-sparkle text-[#14B8A6]" />
         AI-guided · No jargon

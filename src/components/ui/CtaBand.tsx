@@ -12,6 +12,10 @@ export function CtaBand({ title = "Not sure where to start?", text = "Book a fre
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0B1220] via-[#171344] to-[#1E1B4B] py-16 sm:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <svg viewBox="0 0 300 100" className="absolute bottom-6 right-8 hidden w-72 opacity-40 lg:block">
+          <path d="M4 92 C 60 90, 90 40, 150 44 S 260 12, 288 10" fill="none" stroke="#14B8A6" strokeWidth="3" strokeLinecap="round" className="ct-think-path" />
+          <circle cx="292" cy="9" r="7" fill="#14B8A6" />
+        </svg>
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#4F46E5]/30 blur-[100px]" />
         <div className="absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-[#14B8A6]/20 blur-[100px]" />
       </div>

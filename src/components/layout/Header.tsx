@@ -65,11 +65,22 @@ export function Header() {
   return (
     <>
       <header ref={navRef} className={cn("fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E7E9F2] transition-shadow", isScrolled && "shadow-[0_8px_30px_rgba(11,18,32,0.08)]")}>
+        {/* Branded top bar — navy, tagline + direct contact, never a generic strip */}
+        <div className="flex h-9 items-center bg-[#0B1220] text-white">
+          <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-4 px-4 text-xs sm:px-6 lg:px-8">
+            <p className="truncate font-medium text-white/80">Software, built with thought, guided by AI. Led by CEO Muhammad Usman.</p>
+            <div className="hidden shrink-0 items-center gap-4 md:flex">
+              <a href={`mailto:${siteConfig.email}`} className="text-white/80 hover:text-white">{siteConfig.email}</a>
+              <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="font-semibold text-[#2DD4BF] hover:text-white">{siteConfig.phone}</a>
+            </div>
+            <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="shrink-0 font-semibold text-[#2DD4BF] md:hidden">{siteConfig.phone}</a>
+          </div>
+        </div>
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="flex h-[72px] items-center justify-between gap-4">
             <Link href="/" aria-label="CraftThink — Home" className="flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]">
-              <Image src="/images/brand/logo-mark.webp" alt="" width={36} height={36} className="h-9 w-9 rounded-lg object-cover" />
-              <span className="font-display text-xl font-bold tracking-tight"><span className="text-[#0B1220]">Craft</span><span className="text-[#4F46E5]">Think</span></span>
+              <Image src="/images/brand/logo-mark.webp" alt="" width={44} height={44} className="h-11 w-11 rounded-xl object-cover ring-1 ring-[#E7E9F2]" />
+              <span className="font-display text-2xl font-bold tracking-tight"><span className="text-[#0B1220]">Craft</span><span className="text-[#4F46E5]">Think</span></span>
             </Link>
 
             <div className="relative hidden lg:block">
@@ -123,7 +134,7 @@ export function Header() {
 
             <div className="hidden shrink-0 items-center gap-2 lg:flex">
               <Link href="/guide" aria-label="Search with the AI guide" className="flex h-11 w-11 items-center justify-center rounded-full text-[#475569] hover:bg-[#EEF2FF] hover:text-[#4F46E5]"><Search size={19} /></Link>
-              <button type="button" onClick={openAi} className="hidden min-h-[48px] items-center gap-1.5 rounded-full border border-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-[#4F46E5] hover:bg-[#EEF2FF] xl:flex"><Sparkles size={15} className="ct-sparkle text-[#14B8A6]" /> Ask AI</button>
+              <button type="button" onClick={openAi} className="hidden min-h-[48px] items-center gap-2 rounded-full border border-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-[#4F46E5] hover:bg-[#EEF2FF] xl:flex"><span className="h-2 w-2 rounded-full bg-[#14B8A6]" /><Sparkles size={15} className="ct-sparkle text-[#14B8A6]" /> Ask AI</button>
               <Button size="sm" onClick={openConsult}>Book a Free Consultation</Button>
             </div>
 

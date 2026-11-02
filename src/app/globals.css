@@ -363,6 +363,20 @@ body {
   .ct-float, .ct-float-slow, .ct-marquee-track, .ct-hero-glow, .ct-hero-glow-slow { animation: none !important; }
 }
 
+/* ── Branded thinking-path motif ───────────────────────────────────────
+   The logo mark's "thinking path": a rising dotted line ending in a teal
+   dot. Used in the hero and final CTA as a brand signature, never as a
+   copied logo from another company. */
+@keyframes ct-path-draw {
+  0% { stroke-dashoffset: 320; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+.ct-think-path { stroke-dasharray: 8 8; animation: ct-path-draw 6s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .ct-think-path { animation: none !important; }
+}
+
 /* ── Focus ring — global fallback ────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid #4f46e5;

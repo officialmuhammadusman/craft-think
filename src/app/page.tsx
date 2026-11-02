@@ -127,7 +127,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg" className="w-full sm:w-auto">View all 11 services →</Button></div>
+          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg" className="w-full sm:w-auto">View all services →</Button></div>
         </Container>
       </section>
 

@@ -13,7 +13,7 @@ const BASE: Record<string, { low: number; high: number; weeks: string }> = {
   "Business website + booking / CRM": { low: 2000, high: 6000, weeks: "4–8 weeks" },
   "Custom SaaS / CRM / HR system": { low: 5000, high: 20000, weeks: "8–16 weeks, in phases" },
   "Mobile app": { low: 4000, high: 15000, weeks: "8–14 weeks, in phases" },
-  "AI assistant / RAG": { low: 2000, high: 8000, weeks: "4–10 weeks" },
+  "AI solutions / RAG & automation": { low: 2000, high: 8000, weeks: "4–10 weeks" },
   "Fix / speed-up sprint": { low: 500, high: 2000, weeks: "1–2 weeks" },
 };
 
@@ -22,9 +22,9 @@ export function EstimateForm() {
   const [size, setSize] = useState("small");
   const [features, setFeatures] = useState(1);
   const base = BASE[type];
-  const sizeMul = size === "small" ? 1 : size === "medium" ? 1.4 : 1.9;
-  const low = Math.round((base.low * sizeMul + (features - 1) * 400) / 100) * 100;
-  const high = Math.round((base.high * sizeMul + (features - 1) * 800) / 100) * 100;
+  const sizeMul = size === "small" ? 1 : size === "medium" ? 1.2 : 1.4;
+  const low = Math.round((base.low * sizeMul + (features - 1) * 200) / 100) * 100;
+  const high = Math.round((base.high * sizeMul + (features - 1) * 400) / 100) * 100;
   return (
     <div className="rounded-2xl border border-[#E7E9F2] bg-white p-6 shadow-sm">
       <div className="grid gap-4">
@@ -45,10 +45,14 @@ export function EstimateForm() {
         </label>
       </div>
       <div className="mt-6 rounded-2xl bg-[#EEF2FF] p-6">
-        <p className="text-sm font-bold uppercase tracking-widest text-[#4F46E5]">Estimate only — not a fixed price</p>
+        {/* Consultation-led result: the firm estimate comes on the call.
+            The range below is only an indicative starting range. */}
+        <p className="text-base font-bold text-[#0B1220]">Your firm estimate is given on your free consultation call.</p>
+        <p className="mt-1 text-[#475569]">Tell us your project on the call and we will confirm the price in writing — no fixed price is promised here.</p>
+        <div className="mt-4"><Button href={`/consultation?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Indicative range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
+        <p className="mt-5 text-sm font-bold uppercase tracking-widest text-[#4F46E5]">Indicative starting range only — not a quote</p>
         <p className="ct-h2 mt-2">${low.toLocaleString()} – ${high.toLocaleString()}+</p>
         <p className="mt-1 text-[#475569]">Rough timeline: {base.weeks}. Final price depends on your exact pages, features and content, and is confirmed in writing after a free consultation.</p>
-        <div className="mt-4"><Button href={`/consultation?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Rough range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
         <p className="mt-3 text-sm text-[#475569]">Or see <Link href="/audit" className="font-semibold text-[#4F46E5] underline">the free audit</Link> if you already have software.</p>
       </div>
     </div>

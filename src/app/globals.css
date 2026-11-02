@@ -89,8 +89,27 @@ html {
 .ct-sheet-up {
   animation: ct-sheet-up 0.35s ease-out;
 }
+/* Drill-down drawer slide-in (phone menu): slides in from right to
+   left like a drawer, instead of appearing instantly.
+   Applied via className="ct-drawer-in" on the drill panel. */
+@keyframes ct-drawer-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.ct-drawer-in {
+  animation: ct-drawer-in 0.3s ease-out;
+}
 @media (prefers-reduced-motion: reduce) {
   .ct-sheet-up {
+    animation: none;
+  }
+  .ct-drawer-in {
     animation: none;
   }
   /* Hero path: static line, no drawing animation */

@@ -28,6 +28,14 @@ export function FloatingAiButton() {
 function FloatingAiButtonInner() {
   const [open, setOpen] = useState(false);
 
+  // Header (Tier 1 sparkle button) and the phone menu open this chat
+  // via a window event, since the chat owns its own open state.
+  useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("craftthink:open-ai", openChat);
+    return () => window.removeEventListener("craftthink:open-ai", openChat);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {

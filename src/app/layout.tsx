@@ -94,8 +94,9 @@ export default function RootLayout({
           <Header />
 
           {/* Page content — grows to fill available space */}
-          <main className="flex-1 pt-[72px]">
-            {/* pt-[72px] offsets the fixed slim 72px header (no top bar) */}
+          <main className="flex-1 pt-[64px] lg:pt-[112px]">
+            {/* Offsets the fixed two-tier header: 64px single row on
+                phones, 64px Tier 1 + 48px Tier 2 = 112px on desktop. */}
             {children}
           </main>
 

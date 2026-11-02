@@ -23,7 +23,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "guide", text: "Hello! I am your assistant." },
+    { role: "guide", text: "Hello! I am Think." },
   ]);
   const [input, setInput] = useState(initial);
   const [name, setName] = useState("");
@@ -72,7 +72,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         <div className="flex items-start gap-3">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]"><Bot size={22} /></span>
           <div>
-            <p className="text-lg font-bold">Ask the CraftThink Guide</p>
+            <p className="text-lg font-bold">Ask Think</p>
             <p className="mt-0.5 max-w-md text-sm leading-snug text-white/60">Guided demo — answers come only from this site&apos;s services, projects and FAQs. No live AI API is connected yet.</p>
           </div>
         </div>

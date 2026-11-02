@@ -46,13 +46,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      {/* HERO — title + promise + image (best available service visual) */}
+      {/* HERO — centred: service name as the heading, content below it.
+          No "All services" back link (user-requested removal). */}
       <section className="ct-section pb-0">
         <Container>
-          <Link href="/services" className="flex min-h-[48px] items-center text-base font-semibold text-[#4F46E5]">← All services</Link>
-          <span className="mt-4 block"><span className="ct-eyebrow">Service</span></span>
-          <h1 className="ct-h1 mt-4">{s.title}</h1>
-          <p className="ct-body-lg mt-4 max-w-3xl text-[#475569]">{s.line}</p>
+          <div className="flex flex-col items-center text-center">
+            <span className="ct-eyebrow">Service</span>
+            <h1 className="ct-h1 mt-4">{s.title}</h1>
+            <p className="ct-body-lg mx-auto mt-4 max-w-3xl text-[#475569]">{s.line}</p>
+          </div>
           <div className="mt-8">
             <Image src={s.image} alt={s.imageAlt} width={1200} height={700} className="w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
             <p className="mt-2 text-sm text-[#64748B]">Service visual — illustrative image for this service, not a client screenshot.</p>

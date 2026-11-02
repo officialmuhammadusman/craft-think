@@ -143,7 +143,7 @@ export const siteConfig = {
       caseStudyTitle: "HR Management System",
       caseStudyDescription:
         "Less manual HR work, faster approvals.",
-      caseStudyHref: "/work/hr-management",
+      caseStudyHref: "/work/hr-management-system",
       ctaLabel: "Book a Free Consultation",
       ctaHref: "/contact",
     },

@@ -8,7 +8,7 @@
  * Trap focus while open for accessibility.
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   X,
@@ -27,8 +27,8 @@ import {
   Search,
   Mail,
   Phone,
-  Linkedin,
-  Github,
+  Globe,
+  Code2,
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -59,14 +59,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Close the menu and reset accordions (event handler, not an effect).
+  const handleClose = useCallback(() => {
+    setExpandedGroup(null);
+    onClose();
+  }, [onClose]);
+
   // Close on Escape
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     }
     if (isOpen) document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, handleClose]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -74,7 +80,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      setExpandedGroup(null); // Reset accordion when closed
     }
     return () => {
       document.body.style.overflow = "";
@@ -117,7 +122,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
         {/* Close button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Close menu"
           className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220] hover:bg-[#F6F7FB] transition-colors duration-150"
         >
@@ -178,7 +183,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={onClose}
+                        onClick={handleClose}
                         className={cn(
                           "group flex items-center gap-3 rounded-xl px-3 py-3",
                           "hover:bg-[#EEF2FF] transition-colors duration-150",
@@ -219,7 +224,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <li key={link.href}>
               <Link
                 href={link.href}
-                onClick={onClose}
+                onClick={handleClose}
                 className="flex items-center rounded-xl px-3 py-3 text-sm font-medium text-[#0B1220] hover:bg-[#F6F7FB] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-inset"
               >
                 {link.label}
@@ -250,7 +255,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Social links */}
           <div className="flex items-center gap-3 pt-1">
-            {siteConfig.links.linkedin !== "TODO" && (
+            {true && (
               <a
                 href={siteConfig.links.linkedin}
                 target="_blank"
@@ -258,10 +263,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 aria-label="LinkedIn"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569] hover:text-[#4F46E5] hover:border-[#4F46E5] transition-colors"
               >
-                <Linkedin size={16} />
+                <Globe size={16} />
               </a>
             )}
-            {siteConfig.links.github !== "TODO" && (
+            {true && (
               <a
                 href={siteConfig.links.github}
                 target="_blank"
@@ -269,7 +274,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 aria-label="GitHub"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E7E9F2] text-[#475569] hover:text-[#0B1220] hover:border-[#0B1220] transition-colors"
               >
-                <Github size={16} />
+                <Code2 size={16} />
               </a>
             )}
           </div>
@@ -288,7 +293,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </p>
           <Link
             href="/contact"
-            onClick={onClose}
+            onClick={handleClose}
             className="flex items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-sm font-semibold text-white hover:bg-[#4338CA] transition-colors"
           >
             Book a Free Consultation

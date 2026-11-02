@@ -12,6 +12,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Menu, ChevronDown } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { MegaMenu } from "@/components/layout/MegaMenu";
@@ -94,13 +95,14 @@ export function Header() {
               aria-label={`${siteConfig.agencyName} — Home`}
               className="flex items-center gap-2 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] rounded-lg"
             >
-              {/* Small indigo C-mark — designer logo replaces this later */}
-              <span
-                aria-hidden="true"
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#4F46E5] text-white text-sm font-bold select-none"
-              >
-                C
-              </span>
+              {/* CraftThink logo mark — generated brand image, designer can replace the file later */}
+              <Image
+                src="/images/brand/logo-mark.webp"
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-lg object-cover"
+              />
               {/* Wordmark: "Craft" navy, "Think" indigo */}
               <span className="text-xl font-bold tracking-tight select-none">
                 <span className="text-[#0B1220]">Craft</span>
@@ -209,23 +211,23 @@ export function Header() {
 
             {/* ── Desktop Right Actions ──────────────────────────────────── */}
             <div className="hidden lg:flex items-center gap-2 shrink-0">
-              {/* Search icon — TODO: wire to AI Search in Prompt 2 */}
-              <button
-                aria-label="Search — coming soon"
-                title="AI Search — coming in next update"
+              {/* Search icon — opens the AI guide */}
+              <Link
+                href="/guide"
+                aria-label="Search with the AI guide"
                 className="flex h-9 w-9 items-center justify-center rounded-full text-[#475569] hover:text-[#4F46E5] hover:bg-[#EEF2FF] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
               >
                 <Search size={18} />
-              </button>
+              </Link>
 
-              {/* Ask AI — outline button — TODO: wire to AI Guide in Prompt 2 */}
-              <button
-                aria-label="Ask AI Guide — coming soon"
-                title="AI Guide — coming in next update"
+              {/* Ask AI — opens the AI guide */}
+              <Link
+                href="/guide"
+                aria-label="Ask the AI guide"
                 className="hidden xl:flex items-center gap-1.5 rounded-full border border-[#4F46E5] px-4 py-2 text-sm font-semibold text-[#4F46E5] hover:bg-[#EEF2FF] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
               >
                 Ask AI
-              </button>
+              </Link>
 
               {/* Primary CTA */}
               <Button

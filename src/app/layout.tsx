@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.agencyName} — Software, built with thought, guided by AI`,
     description: siteConfig.description,
     url: `https://${siteConfig.domain}`,
-    // TODO: Add og:image in Prompt 2 when designer delivers brand images
+    images: [{ url: "/images/brand/craftthink-og.png", width: 1200, height: 630, alt: "CraftThink — Software, built with thought, guided by AI" }],
   },
   twitter: {
     card: "summary_large_image",

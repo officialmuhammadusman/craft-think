@@ -5,7 +5,7 @@
  * Copyright line pulls year dynamically.
  */
 import Link from "next/link";
-import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function Footer() {
@@ -117,7 +117,7 @@ export function Footer() {
                   aria-label="LinkedIn profile"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/60 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
                 >
-                  <Linkedin size={16} />
+                  <Globe size={16} />
                 </a>
                 <a
                   href={siteConfig.links.github}
@@ -126,7 +126,7 @@ export function Footer() {
                   aria-label="GitHub profile"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/60 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
                 >
-                  <Github size={16} />
+                  <Code2 size={16} />
                 </a>
               </li>
             </ul>

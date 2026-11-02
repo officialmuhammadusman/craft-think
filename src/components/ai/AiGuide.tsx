@@ -14,17 +14,16 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * base (guideAnswer in src/data/content.ts). No backend, no external AI API.
  * Suggestions are shown as cards (service + project), not plain links.
  *
- * Scroll fix only (design unchanged): the message list uses
- * overscroll-contain AND data-lenis-prevent. The site-wide Lenis
- * smooth scroll hijacks wheel/touch events, which is why the chat
- * only scrolled when its scrollbar was dragged directly — Lenis was
- * sending the scroll to the page instead. data-lenis-prevent tells
- * Lenis to leave this area alone, so the whole chat area scrolls
- * natively and the page behind never moves.
+ * Scroll fix (design unchanged): the sheet wrapper is the ONE scroll
+ * container in bare mode — the message list has no max-h/overflow, so
+ * scrolling over messages reaches the sheet instead of being trapped
+ * inside a nested list. data-lenis-prevent is kept on the sheet and
+ * the message area so Lenis never steals wheel/touch scroll. On the
+ * full /guide page (bare=false) the inner list keeps its own scroll.
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "guide", text: "Hello! I am the CraftThink guide (demo). Tell me in plain words what you need help with, and I will point you to the right service and a similar project. I only answer from CraftThink's own services, projects, process and FAQs." },
+    { role: "guide", text: "Hello! I am your assistant." },
   ]);
   const [input, setInput] = useState(initial);
   const [name, setName] = useState("");
@@ -42,7 +41,18 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => { scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }); }, [messages]);
+  // Single-scroll-area fix: in bare mode (chat sheet) the message list is
+  // NOT its own scroll container (see below) — the sheet wrapper is the
+  // one scroll area, so new messages scroll THAT container to the bottom.
+  // On the full /guide page (bare=false) the inner list still scrolls.
+  useEffect(() => {
+    if (bare) {
+      const outer = scrollRef.current?.closest("[data-chat-scroll]");
+      outer?.scrollTo({ top: outer.scrollHeight, behavior: "smooth" });
+    } else {
+      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages, bare]);
 
   function ask(text: string) {
     const clean = text.trim();
@@ -70,7 +80,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       </div>
       )}
 
-      <div ref={scrollRef} data-lenis-prevent className="flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
+      <div ref={scrollRef} data-lenis-prevent className={bare ? "flex flex-col gap-4 px-5 py-5 sm:px-6" : "flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"} aria-live="polite">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>

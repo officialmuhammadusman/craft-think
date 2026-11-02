@@ -73,6 +73,28 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Bottom-sheet slide-up entrance (AI chat sheet/window): slides up
+   from the bottom like a menu opening, instead of appearing instantly.
+   Applied via className="ct-sheet-up" on the sheet container. */
+@keyframes ct-sheet-up {
+  from {
+    transform: translateY(48px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.ct-sheet-up {
+  animation: ct-sheet-up 0.35s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-sheet-up {
+    animation: none;
+  }
+}
+
 /* Disable smooth scroll if user prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {

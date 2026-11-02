@@ -42,10 +42,11 @@ function FloatingAiButtonInner() {
       {open && (
         <div
           data-lenis-prevent
+          data-chat-scroll
           role="dialog"
           aria-modal="false"
           aria-label="CraftThink AI chat"
-          className="fixed bottom-[calc(88px+env(safe-area-inset-bottom))] left-3 right-3 z-[95] flex h-[min(85dvh,calc(100dvh-104px-env(safe-area-inset-bottom)))] w-auto flex-col overflow-hidden overscroll-contain rounded-t-[24px] rounded-b-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 sm:left-auto sm:right-4 sm:h-[min(620px,calc(100dvh-120px))] sm:w-[calc(100vw-2rem)] sm:max-w-[420px] lg:bottom-6 lg:right-6"
+          className="ct-sheet-up fixed bottom-[calc(88px+env(safe-area-inset-bottom))] left-3 right-3 z-[95] flex h-[min(85dvh,calc(100dvh-104px-env(safe-area-inset-bottom)))] w-auto flex-col overflow-hidden overscroll-contain rounded-t-[24px] rounded-b-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 sm:left-auto sm:right-4 sm:h-[min(620px,calc(100dvh-120px))] sm:w-[calc(100vw-2rem)] sm:max-w-[420px] lg:bottom-6 lg:right-6"
 
         >
           <div aria-hidden="true" className="flex shrink-0 justify-center bg-white pb-1 pt-2.5 sm:hidden">

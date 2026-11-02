@@ -2,10 +2,12 @@
  * Footer — DARK NAVY band again (#0B1220, white text, 4px solid
  * indigo top border): the colour swap — the banner above it is now
  * WHITE, and the footer takes the banner's old dark colour.
- * 4 columns on desktop (Brand, Services all 11, Company + Resources,
+ * 4 columns on desktop (Brand, Services, Company + Resources,
  * Contact), SINGLE-COLUMN stack on phones (no 2-column squeeze),
- * all links >=48px, email break-words. No address, no city, no
- * invented social links, no fake logos, no gradients.
+ * all links >=48px, email break-words. Every column shows exactly
+ * 4 items, like Contact — Services shows the first 4 services and
+ * its heading links to /services where all 11 live. No address,
+ * no city, no invented social links, no fake logos, no gradients.
  */
 import Link from "next/link";
 import { Mail, Phone, Globe, Code2 } from "lucide-react";
@@ -27,9 +29,9 @@ export function Footer() {
             <p className="mt-3 text-sm text-white/60">Working remotely with clients worldwide.</p>
           </div>
           <nav aria-label="Services">
-            <p className="text-xs font-bold uppercase tracking-widest text-white/50">Services</p>
+            <Link href="/services" className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white">Services</Link>
             <ul className="mt-4 flex flex-col gap-1">
-              {siteConfig.footerLinks.services.map((l) => (
+              {siteConfig.footerLinks.services.slice(0, 4).map((l) => (
                 <li key={l.href}><Link href={l.href} className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">{l.label}</Link></li>
               ))}
             </ul>

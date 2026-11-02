@@ -46,6 +46,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams?
           </div>
           <ConsultationForm initialMessage={initialMessage} />
         </div>
+        <p className="mt-6 text-center text-sm text-[#64748B]">Please note: your chosen date and time is a request confirmed by email — this site has no calendar connection yet, so no slot is guaranteed and no double-booking protection applies until we confirm it by email.</p>
         <p className="mt-6 text-center text-sm text-[#64748B]">{siteConfig.tagline}</p>
       </Container>
     </section>

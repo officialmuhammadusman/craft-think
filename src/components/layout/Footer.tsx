@@ -2,8 +2,8 @@
  * Footer — DARK NAVY band again (#0B1220, white text, 4px solid
  * indigo top border): the colour swap — the banner above it is now
  * WHITE, and the footer takes the banner's old dark colour.
- * 5 columns on desktop (Brand, Services, Company, Free Tools,
- * Contact), SINGLE-COLUMN stack on phones (no 2-column squeeze),
+ * 6 columns on desktop (Brand, Services, Company, Free Tools,
+ * Explore, Contact), SINGLE-COLUMN stack on phones (no 2-column squeeze),
  * all links >=48px, email break-words. Every link column shows
  * exactly 4 items, like Contact — Services shows the first 4
  * services and its heading links to /services where all 11 live;
@@ -12,7 +12,7 @@
  * social links, no fake logos, no gradients.
  */
 import Link from "next/link";
-import { Mail, Phone, Globe, Code2 } from "lucide-react";
+import { Mail, Phone, Globe, Code2, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { LogoMark } from "@/components/ui/LogoMark";
 
@@ -21,7 +21,7 @@ export function Footer() {
   return (
     <footer className="border-t-4 border-[#4F46E5] bg-[#0B1220] text-white">
       <div className="mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-6">
           <div>
             <Link href="/" className="flex items-center gap-2.5">
               <LogoMark size={44} className="h-11 w-11 rounded-xl object-cover ring-1 ring-white/20" />
@@ -55,10 +55,20 @@ export function Footer() {
               <li><Link href="/faq" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">FAQ</Link></li>
             </ul>
           </nav>
+          <nav aria-label="Explore">
+            <p className="text-xs font-bold uppercase tracking-widest text-white/50">Explore</p>
+            <ul className="mt-4 flex flex-col gap-1">
+              <li><Link href="/search" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">Search the site</Link></li>
+              <li><Link href="/insights" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">Insights</Link></li>
+              <li><Link href="/proposal" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">Proposal generator</Link></li>
+              <li><Link href="/brief" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">Project brief</Link></li>
+            </ul>
+          </nav>
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-white/50">Contact</p>
             <a href={`mailto:${siteConfig.email}`} className="mt-4 flex min-h-[48px] items-start gap-2 break-words text-sm text-white/75 hover:text-white"><Mail size={17} className="mt-0.5 shrink-0" />{siteConfig.email}</a>
             <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Phone size={17} className="shrink-0" />{siteConfig.phone}</a>
+            <a href="https://wa.me/923135263300?text=Hi%20CraftThink%2C%20I%20need%20help%20with%20my%20business%20software." target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><MessageCircle size={17} className="shrink-0" />WhatsApp</a>
             <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Globe size={17} className="shrink-0" />LinkedIn</a>
             <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-[48px] items-center gap-2 text-sm text-white/75 hover:text-white"><Code2 size={17} className="shrink-0" />GitHub</a>
           </div>

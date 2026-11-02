@@ -20,6 +20,22 @@ export const siteConfig = {
   email: "official.muhammadusman01@gmail.com",
   phone: "+92 313 526 3300",
 
+  // ── Working Hours (consultation slots) ────────────────────────────────────
+  // Used ONLY to generate the consultation time-slot picker. No calendar
+  // connection exists yet, so a picked slot is a REQUEST confirmed by
+  // email, not a confirmed booking. Booking link stays TODO (see links).
+  workingHours: {
+    days: "Monday–Saturday",
+    daysShort: "Mon–Sat",
+    startHour: 10,
+    startMinute: 0,
+    endHour: 19,
+    endMinute: 0,
+    slotMinutes: 30,
+    timezone: "Asia/Karachi",
+    timezoneLabel: "PKT",
+  },
+
   // ── Leadership ────────────────────────────────────────────────────────────
   ceoName: "Muhammad Usman",
   ceoTitle: "CEO & Founder",

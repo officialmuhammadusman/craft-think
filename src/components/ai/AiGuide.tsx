@@ -10,8 +10,12 @@ type Msg = { role: "user" | "guide"; text: string; reply?: GuideReply };
 const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to answer customers", "I need a booking system", "How much does it cost?", "I need LangChain / LangGraph agents", "I need a multi-agent system", "I need AI that answers from my documents"];
 
 /**
- * Premium guided-demo chat. Answers ONLY from the site's own knowledge
- * base (guideAnswer in src/data/content.ts). No backend, no external AI API.
+ * Premium guided-demo chat. It tries POST /api/think first: when a real
+ * AI key is configured server-side, Think answers from the site's own
+ * data via that provider. When the API is gated ({ ai: false }) or the
+ * request fails, it falls back SILENTLY to the rule-based answers from
+ * guideAnswer in src/data/content.ts — unchanged. The visitor never
+ * sees an error for the missing key or a failed provider call.
  * Suggestions are shown as cards (service + project), not plain links.
  *
  * Scroll fix (design unchanged): the sheet wrapper is the ONE scroll
@@ -32,12 +36,45 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const askedInitial = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  async function ask(text: string) {
+    const clean = text.trim();
+    if (!clean) return;
+    // Conversation so far (guide turns become "assistant" for the API),
+    // plus this new question. The API caps and validates it server-side.
+    const history = [
+      ...messages.map((m) => ({ role: (m.role === "user" ? "user" : "assistant") as "user" | "assistant", content: m.text })),
+      { role: "user" as const, content: clean },
+    ];
+    setMessages((m) => [...m, { role: "user", text: clean }]);
+    setProblem(clean);
+    setInput("");
+    // Live AI first. ANY failure or { ai: false } gating falls back
+    // silently to the existing rule-based answer — never an error, and
+    // never an invented answer.
+    try {
+      const res = await fetch("/api/think", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      });
+      const data = (await res.json()) as { ai?: unknown; answer?: unknown };
+      const aiAnswer = typeof data.answer === "string" ? data.answer.trim() : "";
+      if (data?.ai === true && aiAnswer) {
+        setMessages((m) => [...m, { role: "guide", text: aiAnswer }]);
+        return;
+      }
+    } catch {
+      // Fall through to the rule-based answer below.
+    }
+    const reply = guideAnswer(clean);
+    setMessages((m) => [...m, { role: "guide", text: reply.text, reply }]);
+  }
+
   useEffect(() => {
     if (initial && !askedInitial.current) {
       askedInitial.current = true;
-      const reply = guideAnswer(initial);
-      setMessages((m) => [...m, { role: "user", text: initial }, { role: "guide", text: reply.text, reply }]);
-      setProblem(initial);
+      // Same path as a typed question: live AI first, rule-based fallback.
+      ask(initial);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,15 +90,6 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
   }, [messages, bare]);
-
-  function ask(text: string) {
-    const clean = text.trim();
-    if (!clean) return;
-    const reply = guideAnswer(clean);
-    setMessages((m) => [...m, { role: "user", text: clean }, { role: "guide", text: reply.text, reply }]);
-    setProblem(clean);
-    setInput("");
-  }
 
   const contactHref = `/contact?${new URLSearchParams({ name, email, problem: problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 

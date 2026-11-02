@@ -29,7 +29,7 @@ export function StickyMobileCTA() {
     >
       {/* Primary: Book a Free Consultation */}
       <Link
-        href="/contact"
+        href="/consultation"
         id="mobile-cta-book"
         className="flex-1 flex items-center justify-center rounded-full bg-[#4F46E5] px-4 py-3 text-sm font-semibold text-white hover:bg-[#4338CA] active:bg-[#312E81] transition-colors duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2"
       >

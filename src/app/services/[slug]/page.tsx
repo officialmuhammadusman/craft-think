@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <p className="mt-2 text-white/70">No commitment. We confirm the price in writing after a free consultation.</p>
                 <div className="mt-5 flex flex-col gap-3">
                   <Button href="/estimate" size="lg">Get an Estimate</Button>
-                  <Button href="/contact" size="lg" variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20">Book a Free Consultation</Button>
+                  <Button href="/consultation" size="lg" variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20">Book a Free Consultation</Button>
                 </div>
               </div>
               <div className="ct-card p-7">

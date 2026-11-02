@@ -9,7 +9,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { OverlayProvider, FloatingAiButton } from "@/components/layout/Overlays";
+import { FloatingAiButton } from "@/components/layout/FloatingAiButton";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { LenisProvider } from "@/components/layout/LenisProvider";
 import { siteConfig } from "@/config/site";
@@ -80,29 +80,23 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-[#0B1220]">
         {/* Lenis smooth scroll wrapper — disabled if prefers-reduced-motion */}
         <LenisProvider>
-          {/* OverlayProvider supplies the floating AI button and the
-              AI / consultation slide-over panels to Header, CtaBand
-              and every page. Header must live inside it (it calls
-              useOverlays). */}
-          <OverlayProvider>
-            {/* Sticky header — sits above all page content */}
-            <Header />
+          {/* Sticky header — sits above all page content */}
+          <Header />
 
-            {/* Page content — grows to fill available space */}
-            <main className="flex-1 pt-[72px]">
-              {/* pt-[72px] offsets the fixed slim 72px header (no top bar) */}
-              {children}
-            </main>
+          {/* Page content — grows to fill available space */}
+          <main className="flex-1 pt-[72px]">
+            {/* pt-[72px] offsets the fixed slim 72px header (no top bar) */}
+            {children}
+          </main>
 
-            {/* Footer */}
-            <Footer />
+          {/* Footer */}
+          <Footer />
 
-            {/* Floating AI button (bottom-right, pulse ring) */}
-            <FloatingAiButton />
+          {/* Floating AI button — plain link to the /guide page */}
+          <FloatingAiButton />
 
-            {/* Mobile-only fixed bottom CTA bar */}
-            <StickyMobileCTA />
-          </OverlayProvider>
+          {/* Mobile-only fixed bottom CTA bar */}
+          <StickyMobileCTA />
         </LenisProvider>
       </body>
     </html>

@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <p className="ct-h4 mt-2 !text-white">Book a free consultation.</p>
                 <p className="mt-2 text-white/70">We will show you the closest project, and give you a clear next step — with no obligation.</p>
                 <div className="mt-5 flex flex-col gap-3">
-                  <Button href="/contact" size="lg">Book a Free Consultation</Button>
+                  <Button href="/consultation" size="lg">Book a Free Consultation</Button>
                   <Button href="/work" size="lg" variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20">Back to all work</Button>
                 </div>
               </div>

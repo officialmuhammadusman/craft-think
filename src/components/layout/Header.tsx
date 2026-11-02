@@ -1,23 +1,21 @@
 "use client";
 /**
  * Header — SLIM: always solid white, 72px, five nav items + one CTA.
- * Services mega menu, Work dropdown, Process, About, Contact, and a
- * single "Book a Free Consultation" action. No top bar, no search icon,
- * no Ask AI pill in the header (the AI entry lives on the /guide page
- * and the floating AI button). Hover intent + click, Escape +
- * outside-click close, route change closes, no flicker: a single
- * wrapper owns open state and the panel renders inside it.
- * Wordmark: flat indigo — "Craft" dark navy, "Think" solid #4F46E5.
+ * Services and Work are both narrow dropdowns (no mega menu, no
+ * internal scroll, no close button): they close on outside-click,
+ * Escape, and link click. "Book a Free Consultation" is a plain
+ * link to the /consultation page. No top bar, no search icon, no
+ * Ask AI pill in the header (the AI entry lives on the /guide page
+ * and the floating AI button). Wordmark: flat indigo — "Craft"
+ * dark navy, "Think" solid #4F46E5.
  */
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, ChevronDown } from "lucide-react";
 import { LogoMark } from "@/components/ui/LogoMark";
-import { projects } from "@/data/content";
-import { MegaMenu } from "@/components/layout/MegaMenu";
+import { projects, services } from "@/data/content";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Button } from "@/components/ui/Button";
-import { useOverlays } from "@/components/layout/Overlays";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -25,7 +23,6 @@ export function Header() {
   const [openMenu, setOpenMenu] = useState<"services" | "work" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const { openConsult } = useOverlays();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -85,6 +82,18 @@ export function Header() {
                 <Link href="/contact" onClick={() => setOpenMenu(null)} className={linkClass}>Contact</Link>
               </nav>
 
+              {openMenu === "services" && (
+                <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-80 pt-3">
+                  <div className="rounded-2xl border border-[#E7E9F2] bg-white p-2 shadow-xl" role="menu">
+                    <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-[#64748B]">Services</p>
+                    {services.map((item) => (
+                      <Link key={item.slug} href={`/services/${item.slug}`} role="menuitem" onClick={() => setOpenMenu(null)} className="block min-h-[48px] rounded-xl px-3 py-3 text-base text-[#0B1220] hover:bg-[#EEF2FF] hover:text-[#4F46E5]">{item.title}</Link>
+                    ))}
+                    <Link href="/services" onClick={() => setOpenMenu(null)} className="mt-1 block min-h-[48px] rounded-xl bg-[#F6F7FB] px-3 py-3 text-base font-semibold text-[#4F46E5]">View all services →</Link>
+                  </div>
+                </div>
+              )}
+
               {openMenu === "work" && (
                 <div onMouseEnter={() => scheduleOpen("work")} onMouseLeave={scheduleClose} className="absolute left-0 top-full z-50 w-72 pt-3">
                   <div className="overflow-hidden rounded-2xl border border-[#E7E9F2] bg-white p-2 shadow-xl" role="menu">
@@ -99,23 +108,12 @@ export function Header() {
             </div>
 
             <div className="hidden shrink-0 items-center gap-2 lg:flex">
-              <Button size="sm" onClick={openConsult}>Book a Free Consultation</Button>
+              <Button size="sm" href="/consultation">Book a Free Consultation</Button>
             </div>
 
             <button type="button" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu" className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E7E9F2] text-[#0B1220] lg:hidden"><Menu size={22} /></button>
           </div>
         </div>
-
-        {openMenu === "services" && (
-          <div onMouseEnter={() => scheduleOpen("services")} onMouseLeave={scheduleClose} className="absolute inset-x-0 top-full z-50 hidden lg:block">
-            <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-              <div className="ct-menu-in pt-3">
-                {/* Single close control lives inside MegaMenu (its X button). */}
-                <MegaMenu onClose={() => setOpenMenu(null)} />
-              </div>
-            </div>
-          </div>
-        )}
       </header>
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </>

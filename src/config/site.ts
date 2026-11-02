@@ -36,9 +36,9 @@ export const siteConfig = {
 
   // ── Primary Navigation ────────────────────────────────────────────────────
   // Used by Header.tsx and MobileMenu.tsx.
-  // Items with `hasMegaMenu: true` open the full mega menu panel.
+  // Services opens a narrow dropdown (the old full-width mega menu was removed).
   nav: [
-    { label: "Services", href: "/services", hasMegaMenu: true },
+    { label: "Services", href: "/services", hasMegaMenu: false },
     { label: "Industries", href: "/work", hasDropdown: true },
     { label: "Work", href: "/work", hasDropdown: true },
     { label: "About", href: "/about" },
@@ -156,7 +156,7 @@ export const siteConfig = {
         "Less manual HR work, faster approvals.",
       caseStudyHref: "/work/hr-management-system",
       ctaLabel: "Book a Free Consultation",
-      ctaHref: "/contact",
+      ctaHref: "/consultation",
     },
   },
 

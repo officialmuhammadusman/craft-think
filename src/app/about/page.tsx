@@ -29,7 +29,7 @@ export default function AboutPage() {
                 This is a guided software house: a visitor can search, ask the AI guide, explore services and projects, and be guided to the right solution — not just look at a portfolio and leave.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/contact">Book a Free Consultation</Button>
+                <Button href="/consultation">Book a Free Consultation</Button>
                 <Button href="/work" variant="secondary">See Our Work</Button>
               </div>
               <div className="mt-8 flex items-center gap-2 rounded-[20px] border border-[#E7E9F2] bg-[#F6F7FB] px-5 py-4 text-base font-semibold">

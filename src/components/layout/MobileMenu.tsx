@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import { X, ChevronDown, Search, Mail, Phone, Globe, Code2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { useOverlays } from "@/components/layout/Overlays";
 import { megaMenuGroups, industries } from "@/data/offering";
 
 
@@ -20,7 +19,6 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   const [expandedGroup, setExpandedGroup] = useState<string | null>("AI Transformation");
   const [query, setQuery] = useState("");
   const router = useRouter();
-  const { openAi, openConsult } = useOverlays();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -94,8 +92,8 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
       </nav>
 
       <div className="border-t border-[#E7E9F2] bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-        <button type="button" onClick={() => { onClose(); openConsult(); }} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white shadow-lg">Book a Free Consultation</button>
-        <button type="button" onClick={() => { onClose(); openAi(); }} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</button>
+        <Link href="/consultation" onClick={onClose} className="flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#4F46E5] px-4 text-base font-semibold text-white shadow-lg">Book a Free Consultation</Link>
+        <Link href="/guide" onClick={onClose} className="mt-2 flex min-h-[52px] w-full items-center justify-center rounded-full border border-[#E7E9F2] px-4 text-base font-semibold text-[#0B1220]">Ask the AI Guide — free</Link>
       </div>
     </div>
   );

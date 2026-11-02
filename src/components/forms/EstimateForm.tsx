@@ -48,7 +48,7 @@ export function EstimateForm() {
         <p className="text-sm font-bold uppercase tracking-widest text-[#4F46E5]">Estimate only — not a fixed price</p>
         <p className="ct-h2 mt-2">${low.toLocaleString()} – ${high.toLocaleString()}+</p>
         <p className="mt-1 text-[#475569]">Rough timeline: {base.weeks}. Final price depends on your exact pages, features and content, and is confirmed in writing after a free consultation.</p>
-        <div className="mt-4"><Button href={`/contact?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Rough range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
+        <div className="mt-4"><Button href={`/consultation?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Rough range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
         <p className="mt-3 text-sm text-[#475569]">Or see <Link href="/audit" className="font-semibold text-[#4F46E5] underline">the free audit</Link> if you already have software.</p>
       </div>
     </div>

@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
-import { HeroBookButtonClient } from "@/components/home/HeroBookButton";
 
 export const metadata: Metadata = {
   title: "CraftThink — Software, built with thought, guided by AI",
@@ -80,7 +79,7 @@ export default function HomePage() {
               <p className="ct-body-lg max-w-xl text-white/70">
                 CraftThink builds websites, apps, booking and CRM systems, and AI assistants — designed, built and supported by one team, led by CEO Muhammad Usman.
               </p>
-              <HeroBookButton />
+              <Button href="/consultation" size="lg">Book a Free Consultation</Button>
               <p className="text-sm text-white/50">11 services · 6 delivered projects · Free first consultation</p>
             </div>
             <div className="pb-2 pt-2">
@@ -157,7 +156,7 @@ export default function HomePage() {
         <Container>
           <Reveal><SectionHeading eyebrow="Services" title="What we build" subtitle="Eleven services, one team. Choose the outcome you need — the technology follows." /></Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
+            {services.slice(0, 6).map((s, i) => (
               <Reveal key={s.slug} delay={(i % 3) * 0.06}>
                 <Link href={`/services/${s.slug}`} className="ct-tile group block h-full">
                   <div className="relative overflow-hidden bg-[#EEF2FF]">
@@ -173,7 +172,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg">All 11 services</Button></div>
+          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg">View all 11 services →</Button></div>
         </Container>
       </section>
 
@@ -196,7 +195,7 @@ export default function HomePage() {
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {[
               { title: "Fixed Project", best: "One defined product, one agreed price — scope, timeline and price in writing.", cta: "Get an estimate", href: "/estimate" },
-              { title: "Dedicated Team", best: "Ongoing product work, month to month — scale the team up or down as you go.", cta: "Book a consultation", href: "/contact" },
+              { title: "Dedicated Team", best: "Ongoing product work, month to month — scale the team up or down as you go.", cta: "Book a consultation", href: "/consultation" },
               { title: "Support & Care", best: "Software you already run, kept healthy — bug fixes and updates, cancel anytime.", cta: "See support", href: "/services/testing-care" },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 0.06}>
@@ -268,28 +267,23 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* FINAL CTA — dark band, one action, CEO quote inside (no standalone CEO section) */}
-      <section className="bg-[#0B1220] py-16 text-white sm:py-20">
+      {/* FINAL CTA — flat solid indigo band, one action, CEO quote inside
+          (no standalone CEO section). Indigo, not dark navy, so it never
+          merges with the dark footer below it. Button is white-on-indigo. */}
+      <section className="bg-[#4F46E5] py-16 text-white sm:py-20">
         <Container>
           <div className="flex flex-col items-start gap-5">
             <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white">Free consultation · No obligation</span>
             <h2 className="ct-section-title !text-white max-w-2xl">Not sure where to start?</h2>
-            <p className="max-w-xl text-lg leading-relaxed text-white/70">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>
-            <p className="max-w-xl text-lg italic leading-relaxed text-white/80">“You talk to the person leading your project, not a ticket queue.” — Muhammad Usman, CEO &amp; Founder, CraftThink</p>
+            <p className="max-w-xl text-lg leading-relaxed text-white/80">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>
+            <p className="max-w-xl text-lg italic leading-relaxed text-white/90">“You talk to the person leading your project, not a ticket queue.” — Muhammad Usman, CEO &amp; Founder, CraftThink</p>
             <div className="flex flex-wrap gap-3">
-              <HeroBookButton />
+              <Button href="/consultation" size="lg" variant="secondary">Book a Free Consultation</Button>
             </div>
-            <p className="flex items-center gap-2 text-sm text-white/50"><Globe size={16} /> {siteConfig.email} · {siteConfig.phone} · Working remotely with clients worldwide</p>
+            <p className="flex items-center gap-2 text-sm text-white/60"><Globe size={16} /> {siteConfig.email} · {siteConfig.phone} · Working remotely with clients worldwide</p>
           </div>
         </Container>
       </section>
     </>
   );
-}
-
-// Single CTA island: opens the consultation slide-over panel
-// (no backend, mailto submit as before). The homepage itself
-// stays a server component.
-function HeroBookButton() {
-  return <HeroBookButtonClient />;
 }

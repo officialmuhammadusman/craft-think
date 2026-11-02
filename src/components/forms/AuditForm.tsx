@@ -44,7 +44,7 @@ export function AuditForm() {
               <li key={r.id} className="rounded-2xl bg-[#F6F7FB] p-5"><strong>Fix {i + 1}: {r.label}</strong><p className="mt-1 text-[#475569]">{r.fix}</p></li>
             ))}
           </ol>
-          <div className="mt-6"><Button href={`/contact?problem=${encodeURIComponent(`Free audit request${url ? ` for ${url}` : ""}: ${results.map((r) => r.label).join("; ")}`)}`}>Book a Free Consultation →</Button></div>
+          <div className="mt-6"><Button href={`/consultation?problem=${encodeURIComponent(`Free audit request${url ? ` for ${url}` : ""}: ${results.map((r) => r.label).join("; ")}`)}`}>Book a Free Consultation →</Button></div>
         </div>
       )}
     </div>

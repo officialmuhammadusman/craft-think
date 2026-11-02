@@ -267,10 +267,11 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* FINAL CTA — flat solid indigo band, one action, CEO quote inside
-          (no standalone CEO section). Indigo, not dark navy, so it never
-          merges with the dark footer below it. Button is white-on-indigo. */}
-      <section className="bg-[#4F46E5] py-16 text-white sm:py-20">
+      {/* FINAL CTA — the footer's old colour: flat solid dark navy
+          band, one action, CEO quote inside (no standalone CEO section).
+          The footer below is now white, so the dark band stands out.
+          Button is solid indigo on dark navy. */}
+      <section className="bg-[#0B1220] py-16 text-white sm:py-20">
         <Container>
           <div className="flex flex-col items-start gap-5">
             <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white">Free consultation · No obligation</span>
@@ -278,7 +279,7 @@ export default function HomePage() {
             <p className="max-w-xl text-lg leading-relaxed text-white/80">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>
             <p className="max-w-xl text-lg italic leading-relaxed text-white/90">“You talk to the person leading your project, not a ticket queue.” — Muhammad Usman, CEO &amp; Founder, CraftThink</p>
             <div className="flex flex-wrap gap-3">
-              <Button href="/consultation" size="lg" variant="secondary">Book a Free Consultation</Button>
+              <Button href="/consultation" size="lg">Book a Free Consultation</Button>
             </div>
             <p className="flex items-center gap-2 text-sm text-white/60"><Globe size={16} /> {siteConfig.email} · {siteConfig.phone} · Working remotely with clients worldwide</p>
           </div>

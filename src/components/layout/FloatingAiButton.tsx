@@ -1,19 +1,92 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Bot, X } from "lucide-react";
+import { AiGuide } from "@/components/ai/AiGuide";
 
 /**
- * FloatingAiButton — a plain link to the proper /guide page (the AI
- * chatbot page), NOT a drawer. Fixed bottom-right, flat solid indigo,
- * teal dot, "Ask AI". No slide-over, no overlay provider.
+ * FloatingAiButton — a proper AI chatbot window, NOT a separate page
+ * and NOT a side drawer. Tapping "Ask AI" opens a chat window anchored
+ * to the bottom-right (like a normal chatbot widget): fixed size on
+ * desktop, near-full-width on phones, with its own close button.
+ * The full /guide page still exists, linked from the window header.
  */
 export function FloatingAiButton() {
+  // Keyed remount on route change closes the chat window, without
+  // calling setState inside an effect (which the linter forbids).
+  const pathname = usePathname();
+  return <FloatingAiButtonInner key={pathname} />;
+}
+
+function FloatingAiButtonInner() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open ]);
+
   return (
-    <Link
-      href="/guide"
-      aria-label="Ask the AI guide"
-      className="fixed bottom-24 right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 lg:bottom-6 lg:right-6"
-    >
-      <span className="h-2 w-2 rounded-full bg-[#14B8A6]" />
-      Ask AI
-    </Link>
+    <>
+      {open && (
+        <div
+          role="dialog"
+          aria-modal="false"
+          aria-label="CraftThink AI chat"
+          className="fixed bottom-24 right-4 z-[95] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 lg:bottom-6 lg:right-6"
+          style={{ height: "min(620px, calc(100dvh - 120px))" }}
+        >
+          <div className="flex shrink-0 items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]">
+                <Bot size={20} />
+              </span>
+              <div>
+                <p className="text-base font-bold leading-tight">CraftThink Guide</p>
+                <p className="flex items-center gap-1.5 text-xs text-white/60">
+                  <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Guided demo · replies instantly
+                </p>
+              </div>
+            </div>
+            <div className="flex shrink-0 items-center gap-1">
+              <Link
+                href="/guide"
+                onClick={() => setOpen(false)}
+                className="flex min-h-[40px] items-center rounded-full px-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white"
+              >
+                Full page
+              </Link>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close AI chat"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10"
+              >
+                <X size={18} />
+              </button>
+            </div>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <AiGuide bare />
+          </div>
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label={open ? "Close AI chat" : "Ask the AI guide"}
+        aria-expanded={open}
+        className="fixed bottom-24 right-4 z-[90] flex min-h-[56px] items-center gap-2 rounded-full bg-[#4F46E5] px-5 text-base font-bold text-white shadow-lg transition hover:bg-[#4338CA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 lg:bottom-6 lg:right-6"
+      >
+        <span className="h-2 w-2 rounded-full bg-[#14B8A6]" />
+        {open ? "Close chat" : "Ask AI"}
+      </button>
+    </>
   );
 }

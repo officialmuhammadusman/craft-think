@@ -15,8 +15,8 @@
 
 @theme inline {
   /* ── Fonts ──────────────────────────────────────────────────────────── */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-sora);
+  --font-sans: var(--font-instrument-sans);
+  --font-display: var(--font-bricolage);
 
   /* ── Brand Colours ──────────────────────────────────────────────────── */
   /* Backgrounds */
@@ -93,6 +93,11 @@ html {
   .ct-sheet-up {
     animation: none;
   }
+  /* Hero path: static line, no drawing animation */
+  .ct-path-draw path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Disable smooth scroll if user prefers reduced motion */
@@ -113,7 +118,7 @@ body {
   overflow-x: hidden;
   background-color: #ffffff;
   color: #0b1220;
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -134,7 +139,7 @@ body {
 /* Use with: className="ct-display", "ct-h1", "ct-h2", "ct-h3", etc. */
 
 .ct-display {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);   /* 40px → 64px */
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -143,7 +148,7 @@ body {
 }
 
 .ct-h1 {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(2.25rem, 5vw, 3.5rem); /* 36px → 56px */
   line-height: 1.10;
   letter-spacing: -0.02em;
@@ -152,7 +157,7 @@ body {
 }
 
 .ct-h2 {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(1.75rem, 4vw, 2.5rem); /* 28px → 40px */
   line-height: 1.15;
   letter-spacing: -0.015em;
@@ -161,7 +166,7 @@ body {
 }
 
 .ct-h3 {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(1.375rem, 3vw, 1.75rem); /* 22px → 28px */
   line-height: 1.25;
   font-weight: 600;
@@ -259,14 +264,32 @@ body {
    glow animation. Colours stay navy #0B1220 / indigo #4F46E5 / teal
    #14B8A6 only — no random colours. */
 .ct-display-xl {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(2.75rem, 7.5vw, 4.5rem); /* 44px → 72px */
-  line-height: 1.02;
+  line-height: 0.95;
   letter-spacing: -0.03em;
-  font-weight: 700;
+  font-weight: 800;
+}
+
+/* Hero accent word only: Instrument Serif italic, solid colour, never a gradient */
+.ct-serif-accent {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Hero path line: draws once on load (stroke-dashoffset -> 0) */
+@keyframes ct-path-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.ct-path-draw path {
+  animation: ct-path-draw 1.4s ease-out 0.2s forwards;
 }
 .ct-section-title {
-  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-family: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   font-size: clamp(2rem, 4.5vw, 3rem); /* 32px → 48px */
   line-height: 1.1;
   letter-spacing: -0.02em;

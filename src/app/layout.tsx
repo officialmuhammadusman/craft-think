@@ -1,12 +1,13 @@
 /**
  * layout.tsx — Root layout for the CraftThink site.
- * - Loads Sora (display/headings) and Inter (body/UI) from Google Fonts.
+ * - Loads Bricolage Grotesque (display/headings), Instrument Sans
+ *   (body/UI) and Instrument Serif italic (hero accent word only).
  * - Sets SEO metadata from site config.
  * - Wraps all pages with Header, Footer, and StickyMobileCTA.
  * - Initialises Lenis smooth scroll (disabled when prefers-reduced-motion is set).
  */
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingAiButton } from "@/components/layout/FloatingAiButton";
@@ -15,21 +16,30 @@ import { LenisProvider } from "@/components/layout/LenisProvider";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
-/* ── Google Fonts — maximum 2 fonts, display: swap ────────────────────── */
+/* ── Google Fonts — display: swap ─────────────────────────────────────── */
 
-// Headings / Display: Sora — weights 600 and 700
-const sora = Sora({
+// Headings / Display: Bricolage Grotesque — weights 700 and 800
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-sora",
+  weight: ["700", "800"],
+  variable: "--font-bricolage",
   display: "swap",
 });
 
-// Body / UI: Inter — weights 400, 500, 600
-const inter = Inter({
+// Body / UI: Instrument Sans — weights 400, 500, 600
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+// Accent only: Instrument Serif italic — hero headline accent word
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -75,7 +85,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${inter.variable}`}
+      className={`${bricolage.variable} ${instrumentSans.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#0B1220]">
         {/* Lenis smooth scroll wrapper — disabled if prefers-reduced-motion */}

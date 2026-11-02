@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { DashboardMockup } from "@/components/home/DashboardMockup";
+import { HeroPathCollage } from "@/components/home/HeroPathCollage";
 
 export const metadata: Metadata = {
   title: "CraftThink — Software, built with thought, guided by AI",
@@ -65,28 +65,33 @@ const whyChoose = [
 export default function HomePage() {
   return (
     <>
-      {/* HERO — headline, one line, one CTA, one trust line, one visual */}
-      <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-[#0B1220]">
+      {/* HERO — Concept A "The Path": LIGHT brand hero. Left 55% copy,
+          right 45% flat collage of CraftThink's own project types,
+          joined by the indigo path signature. Dark hero + dashboard
+          mockup are gone. */}
+      <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-white">
         <Container width="wide">
-          <div className="relative z-10 grid min-w-0 grid-cols-1 items-center gap-10 py-12 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
+          <div className="relative z-10 grid min-w-0 grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-20">
             <div className="flex min-w-0 flex-col items-start gap-6 text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white">
-                <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Software house · Remote clients worldwide
-              </span>
-              <h1 id="hero-heading" className="ct-display-xl !text-white">
-                Software that wins customers, not just code.
+              <span className="ct-eyebrow">Software house · Remote clients worldwide</span>
+              <h1 id="hero-heading" className="ct-display-xl text-[#0B1220]">
+                Software that fits the way your business{" "}
+                <em className="ct-serif-accent text-[#4F46E5]">actually</em> works.
               </h1>
-              <p className="ct-body-lg max-w-xl text-white/70">
-                CraftThink builds websites, apps, booking and CRM systems, and AI assistants — designed, built and supported by one team, led by CEO Muhammad Usman.
+              <p className="ct-body-lg max-w-xl text-[#475569]">
+                We build websites, mobile apps, booking and CRM systems, and AI assistants — designed with you, built for your customers, and supported after launch.
               </p>
-              <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a Free Consultation</Button>
-              <p className="text-sm text-white/50">11 services · 6 delivered projects · Free first consultation</p>
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <Button href="/consultation" size="lg" className="w-full sm:w-auto">Book a free call</Button>
+                <Button href="/work" variant="outline" size="lg" className="w-full sm:w-auto">See our work</Button>
+              </div>
+              <p className="text-sm text-[#64748B]">You&apos;ll talk directly with the person leading your project.</p>
             </div>
-            {/* Extra bottom padding on phones/tablets so the mockup's
-                bottom (AI card) is never hidden under the fixed mobile
-                CTA bar or the floating Ask AI button while on screen. */}
+            {/* Extra bottom padding on phones/tablets so the collage
+                bottom is never hidden under the fixed mobile CTA bar
+                or the floating Ask AI button while on screen. */}
             <div className="min-w-0 pb-24 pt-2 lg:pb-2">
-              <DashboardMockup />
+              <HeroPathCollage />
             </div>
           </div>
         </Container>

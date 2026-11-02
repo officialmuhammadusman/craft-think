@@ -48,7 +48,27 @@ export default function AboutPage() {
             </Reveal>
           </div>
 
+          {/* Detailed about links: CEO and company each get their own full page */}
           <div className="mt-16 grid gap-6 lg:grid-cols-2">
+            <Reveal>
+              <a href="/about/ceo" className="ct-card flex h-full flex-col p-7 hover:border-[#4F46E5]">
+                <span className="ct-eyebrow">About the CEO</span>
+                <h2 className="ct-h3 mt-3">Meet Muhammad Usman</h2>
+                <p className="mt-3 text-[#475569]">Who leads CraftThink, what he builds himself, how he works with clients, and the technology he uses — in full detail.</p>
+                <span className="mt-5 text-base font-semibold text-[#4F46E5]">About the CEO →</span>
+              </a>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <a href="/about/company" className="ct-card flex h-full flex-col p-7 hover:border-[#4F46E5]">
+                <span className="ct-eyebrow">About the company</span>
+                <h2 className="ct-h3 mt-3">How CraftThink works</h2>
+                <p className="mt-3 text-[#475569]">What CraftThink is, what it builds, how a project runs from first call to support after launch, and what a client gets at every step.</p>
+                <span className="mt-5 text-base font-semibold text-[#4F46E5]">About the company →</span>
+              </a>
+            </Reveal>
+          </div>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
             <Reveal>
               <article className="ct-card h-full p-7">
                 <h2 className="flex items-center gap-2 ct-h3"><Code2 size={22} className="text-[#4F46E5]" /> What we build</h2>

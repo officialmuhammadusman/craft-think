@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="ct-section pb-0">
         <Container>
           <Link href="/work" className="flex min-h-[48px] items-center text-base font-semibold text-[#4F46E5]">← All work</Link>
-          <span className="mt-4 block"><span className="rounded-full border border-[#4F46E5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold uppercase tracking-widest text-[#4F46E5]">{p.industryLabel} · Case study</span></span>
+          <span className="mt-4 block"><span className="ct-eyebrow">{p.industryLabel} · Case study</span></span>
           <h1 className="ct-h1 mt-4">{p.title}</h1>
           <p className="ct-body-lg mt-4 max-w-3xl text-[#475569]">{p.line}</p>
           <div className="mt-8">

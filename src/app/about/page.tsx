@@ -19,7 +19,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <Reveal>
-              <span className="rounded-full border border-[#4F46E5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold uppercase tracking-widest text-[#4F46E5]">About</span>
+              <span className="ct-eyebrow">About</span>
               <h1 className="ct-h1 mt-4">Muhammad Usman</h1>
               <p className="ct-body-lg mt-3 text-[#475569]">CEO & Founder, CraftThink — Full Stack and Applied AI Engineer, 2+ years.</p>
               <p className="mt-6 text-lg leading-relaxed text-[#475569]">

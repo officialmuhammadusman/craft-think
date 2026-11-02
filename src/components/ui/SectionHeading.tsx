@@ -50,7 +50,8 @@ export function SectionHeading({
         <span
           className={cn(
             "ct-eyebrow",
-            aiAccent && "border-[#4F46E5]/40 bg-[#EEF2FF] text-[#4F46E5]"
+            dark && "text-[#A5B4FC]",
+            aiAccent && "text-[#4F46E5]"
           )}
         >
           {eyebrow}

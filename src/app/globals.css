@@ -274,25 +274,24 @@ body {
   color: #0b1220;
 }
 .ct-eyebrow {
+  /* Editorial label, not a pill: small caps indigo text with a short
+     solid bar in front of it. The bar uses currentColor so the label
+     stays readable on dark sections too (lighter indigo there). */
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(79, 70, 229, 0.25);
-  background: #eef2ff;
-  padding: 0.4rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #4f46e5;
 }
 .ct-eyebrow::before {
   content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: #14b8a6;
+  width: 1.5rem;
+  height: 2px;
+  flex-shrink: 0;
+  background: currentColor;
 }
 .ct-tile {
   overflow: hidden;

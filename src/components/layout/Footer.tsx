@@ -2,12 +2,14 @@
  * Footer — DARK NAVY band again (#0B1220, white text, 4px solid
  * indigo top border): the colour swap — the banner above it is now
  * WHITE, and the footer takes the banner's old dark colour.
- * 4 columns on desktop (Brand, Services, Company + Resources,
+ * 5 columns on desktop (Brand, Services, Company, Free Tools,
  * Contact), SINGLE-COLUMN stack on phones (no 2-column squeeze),
- * all links >=48px, email break-words. Every column shows exactly
- * 4 items, like Contact — Services shows the first 4 services and
- * its heading links to /services where all 11 live. No address,
- * no city, no invented social links, no fake logos, no gradients.
+ * all links >=48px, email break-words. Every link column shows
+ * exactly 4 items, like Contact — Services shows the first 4
+ * services and its heading links to /services where all 11 live;
+ * Company and Free Tools are separate columns so the Company
+ * column is not 8 items long. No address, no city, no invented
+ * social links, no fake logos, no gradients.
  */
 import Link from "next/link";
 import { Mail, Phone, Globe, Code2 } from "lucide-react";
@@ -19,7 +21,7 @@ export function Footer() {
   return (
     <footer className="border-t-4 border-[#4F46E5] bg-[#0B1220] text-white">
       <div className="mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
           <div>
             <Link href="/" className="flex items-center gap-2.5">
               <LogoMark size={44} className="h-11 w-11 rounded-xl object-cover ring-1 ring-white/20" />
@@ -36,14 +38,16 @@ export function Footer() {
               ))}
             </ul>
           </nav>
-          <nav aria-label="Company and resources">
+          <nav aria-label="Company">
             <p className="text-xs font-bold uppercase tracking-widest text-white/50">Company</p>
             <ul className="mt-4 flex flex-col gap-1">
               {siteConfig.footerLinks.company.map((l) => (
                 <li key={l.href}><Link href={l.href} className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">{l.label}</Link></li>
               ))}
             </ul>
-            <p className="mt-6 text-xs font-bold uppercase tracking-widest text-white/50">Free tools</p>
+          </nav>
+          <nav aria-label="Free tools">
+            <p className="text-xs font-bold uppercase tracking-widest text-white/50">Free tools</p>
             <ul className="mt-4 flex flex-col gap-1">
               <li><Link href="/guide" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">AI Guide</Link></li>
               <li><Link href="/estimate" className="flex min-h-[48px] items-center text-sm text-white/75 hover:text-white">Get an Estimate</Link></li>

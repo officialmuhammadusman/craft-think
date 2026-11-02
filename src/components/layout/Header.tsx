@@ -6,7 +6,7 @@
  * via a window event) and the solid indigo "Book a Free Consultation"
  * button, the only solid button in the bar.
  * Tier 2 (desktop only, left-aligned): Services ▾, Work ▾, Process,
- * About. Each ▾ item opens a FULL-WIDTH mega-menu panel
+ * About ▾. Each ▾ item opens a FULL-WIDTH mega-menu panel
  * below the header, page behind dimmed, NO X button on the panel.
  * Panel layout (GetYourGuide pattern): NARROW LEFT column of groups
  * (first group selected by default) + WIDE RIGHT grid of links.
@@ -35,7 +35,7 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-type Panel = "services" | "work" | null;
+type Panel = "services" | "work" | "about" | null;
 
 /* Services grouped by visitor intent — real services only, each once. */
 const serviceGroups: { title: string; slugs: string[] }[] = [
@@ -150,7 +150,7 @@ export function Header() {
               {tier2Button("services", "Services")}
               {tier2Button("work", "Work")}
               <Link href="/process" onClick={() => setOpenPanel(null)} className="flex min-h-[48px] items-center border-b-2 border-transparent px-3 text-base font-semibold text-[#0B1220] hover:text-[#4F46E5]">Process</Link>
-              <Link href="/about" onClick={() => setOpenPanel(null)} className="flex min-h-[48px] items-center border-b-2 border-transparent px-3 text-base font-semibold text-[#0B1220] hover:text-[#4F46E5]">About</Link>
+              {tier2Button("about", "About")}
             </nav>
           </div>
         </div>
@@ -190,6 +190,21 @@ export function Header() {
                     </div>
                     <Link href="/services" onClick={() => setOpenPanel(null)} className="mt-4 inline-flex min-h-[48px] items-center px-3 text-base font-semibold text-[#4F46E5]">View all services →</Link>
                   </div>
+                </div>
+              )}
+
+              {openPanel === "about" && (
+                <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
+                  {[
+                    { title: "About CraftThink", href: "/about", line: "Overview — who we are, what we build, and how we work." },
+                    { title: "About the Company", href: "/about/company", line: "How CraftThink works, from first call to support after launch." },
+                    { title: "About the CEO", href: "/about/ceo", line: "Meet Muhammad Usman, the CEO who leads your project personally." },
+                  ].map((item) => (
+                    <Link key={item.href} href={item.href} onClick={() => setOpenPanel(null)} className="block min-h-[72px] rounded-xl px-3 py-3 hover:bg-[#F6F7FB]">
+                      <span className="block text-base font-semibold text-[#0B1220]">{item.title}</span>
+                      <span className="mt-1 block text-sm leading-snug text-[#475569]">{item.line}</span>
+                    </Link>
+                  ))}
                 </div>
               )}
 

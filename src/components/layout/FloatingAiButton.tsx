@@ -60,7 +60,7 @@ function FloatingAiButtonInner() {
               <div>
                 <p className="text-base font-bold leading-tight">Think</p>
                 <p className="flex items-center gap-1.5 text-xs text-white/60">
-                  <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> CraftThink guide · replies instantly
+                  <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Ask in plain words — I guide you to the right service
                 </p>
               </div>
             </div>

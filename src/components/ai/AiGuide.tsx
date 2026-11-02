@@ -23,7 +23,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "guide", text: "Hello! I am Think." },
+    { role: "guide", text: "Hello! I am Think — your guide to CraftThink. Tell me in plain words what your business needs, and I will point you to the right service and a similar project, then help you book a free call." },
   ]);
   const [input, setInput] = useState(initial);
   const [name, setName] = useState("");
@@ -65,6 +65,13 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
 
   const contactHref = `/contact?${new URLSearchParams({ name, email, problem: problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 
+  // Hints: never show all 8 at once. By default show only the first 3.
+  // While the visitor types, show up to 3 hints matching what they typed.
+  const typed = input.trim().toLowerCase();
+  const shownSuggestions = typed
+    ? SUGGESTIONS.filter((s) => s.toLowerCase().includes(typed)).slice(0, 3)
+    : SUGGESTIONS.slice(0, 3);
+
   return (
     <div className="overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl">
       {!bare && (
@@ -103,14 +110,16 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         ))}
       </div>
 
+      {shownSuggestions.length > 0 && (
       <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
-        <p className="mb-2 text-sm font-semibold text-[#64748B]">Try one of these:</p>
+        <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : "Try one of these:"}</p>
         <div data-lenis-prevent className="flex flex-wrap gap-2">
-          {SUGGESTIONS.map((s) => (
+          {shownSuggestions.map((s) => (
             <button key={s} type="button" onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">{s}</button>
           ))}
         </div>
       </div>
+      )}
 
       <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
         <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>

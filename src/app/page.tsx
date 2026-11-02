@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 const techStack = ["Next.js", "React", "React Native", "Node.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "LangChain", "LangGraph", "Pinecone"];
 
 /**
- * Homepage — cut to the top-house shape: hero, proof strip, work,
- * services, engagement models, one 4-phase process, why-choose with
+ * Homepage — cut to the top-house shape: hero, proof strip, services
+ * ("What we build"), work, engagement models, one 4-phase process, why-choose with
  * proof, a one-line tools strip, final CTA. No duplicated sections,
  * no counters, no gradients in layout chrome. One flat accent:
  * solid indigo #4F46E5 on white/grey/dark-navy, teal only as the
@@ -98,6 +98,31 @@ export default function HomePage() {
         </Container>
       </div>
 
+      {/* SERVICES — one presentation only: image tiles */}
+      <section className="ct-section bg-[#F6F7FB]">
+        <Container>
+          <Reveal><SectionHeading eyebrow="Services" title="What we build" subtitle="Eleven services, one team. Choose the outcome you need — the technology follows." /></Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.slice(0, 6).map((s, i) => (
+              <Reveal key={s.slug} delay={(i % 3) * 0.06}>
+                <Link href={`/services/${s.slug}`} className="ct-tile group block h-full">
+                  <div className="relative overflow-hidden bg-[#EEF2FF]">
+                    <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-52 w-full object-cover" />
+                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">Service</span>
+                  </div>
+                  <div className="border-t-4 border-[#4F46E5] p-6">
+                    <h3 className="ct-h4">{s.title}</h3>
+                    <p className="mt-2 text-[#475569]">{s.line}</p>
+                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See who it is for <ArrowRight size={17} /></p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg">View all 11 services →</Button></div>
+        </Container>
+      </section>
+
       {/* WORK — compact carousel-style grid: image + tag + title + one outcome + tech chips */}
       <section className="ct-section bg-white">
         <Container>
@@ -148,31 +173,6 @@ export default function HomePage() {
             })}
           </div>
           <p className="mt-8 text-center text-sm text-[#64748B]">Live-site note: Mejora Tu Dolor, Padel Connect and BookDubaiGuide link out to their live sites. The HR portal link returned a 404 in a recent check and cliender.com now shows a different consultancy, so those two are not linked as live. Project images are project visuals, not client screenshots.</p>
-        </Container>
-      </section>
-
-      {/* SERVICES — one presentation only: image tiles */}
-      <section className="ct-section bg-[#F6F7FB]">
-        <Container>
-          <Reveal><SectionHeading eyebrow="Services" title="What we build" subtitle="Eleven services, one team. Choose the outcome you need — the technology follows." /></Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.slice(0, 6).map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 3) * 0.06}>
-                <Link href={`/services/${s.slug}`} className="ct-tile group block h-full">
-                  <div className="relative overflow-hidden bg-[#EEF2FF]">
-                    <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="h-52 w-full object-cover" />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#4F46E5]">Service</span>
-                  </div>
-                  <div className="border-t-4 border-[#4F46E5] p-6">
-                    <h3 className="ct-h4">{s.title}</h3>
-                    <p className="mt-2 text-[#475569]">{s.line}</p>
-                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See who it is for <ArrowRight size={17} /></p>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg">View all 11 services →</Button></div>
         </Container>
       </section>
 

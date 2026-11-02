@@ -20,6 +20,8 @@ interface SectionHeadingProps {
   className?: string;
   /** Apply AI teal colour to eyebrow — use only for AI-related sections */
   aiAccent?: boolean;
+  /** Light text for dark backgrounds */
+  dark?: boolean;
   /** Optional id for aria-labelledby targets */
   id?: string;
 }
@@ -32,6 +34,7 @@ export function SectionHeading({
   align = "center",
   className,
   aiAccent = false,
+  dark = false,
   id,
 }: SectionHeadingProps) {
   return (
@@ -57,7 +60,8 @@ export function SectionHeading({
       <Tag
         id={id}
         className={cn(
-          "font-bold text-[#0B1220] leading-tight",
+          "font-bold leading-tight",
+          dark ? "!text-white" : "text-[#0B1220]",
           // Editorial sizes: hero 44-72px, section titles 32-48px
           Tag === "h1" && "ct-display-xl",
           Tag === "h2" && "ct-section-title",
@@ -69,7 +73,7 @@ export function SectionHeading({
       </Tag>
 
       {subtitle && (
-        <p className="max-w-[600px] text-[#475569] text-lg leading-relaxed">
+        <p className={cn("max-w-[600px] text-lg leading-relaxed", dark ? "text-white/70" : "text-[#475569]")}>
           {subtitle}
         </p>
       )}

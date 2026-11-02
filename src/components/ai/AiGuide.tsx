@@ -13,8 +13,18 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * Premium guided-demo chat. Answers ONLY from the site's own knowledge
  * base (guideAnswer in src/data/content.ts). No backend, no external AI API.
  * Suggestions are shown as cards (service + project), not plain links.
+ *
+ * Chat-window layout (Intercom/Crisp-style, used by the floating widget):
+ * ONE scroll area only — the message list. The composer is docked at
+ * the bottom and never floats over messages. The message list uses
+ * overscroll-contain, so scrolling inside the chat never scrolls the
+ * page behind it. Auto-scroll only fires when the visitor is already
+ * near the bottom (or just sent a message), so reading history is
+ * never yanked away. In window mode the follow-up form is replaced
+ * by a single "Continue to Contact" handoff button, so the window
+ * stays a chat, not a page stacked inside a page.
  */
-export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
+export function AiGuide({ initial = "", bare = false, inWindow = false }: { initial?: string; bare?: boolean; inWindow?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
     { role: "guide", text: "Hello! I am the CraftThink guide (demo). Tell me in plain words what you need help with, and I will point you to the right service and a similar project. I only answer from CraftThink's own services, projects, process and FAQs." },
   ]);
@@ -24,6 +34,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const [problem, setProblem] = useState("");
   const askedInitial = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const nearBottomRef = useRef(true);
 
   useEffect(() => {
     if (initial && !askedInitial.current) {
@@ -34,7 +45,17 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => { scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }); }, [messages]);
+  // Auto-scroll only when the visitor is already near the bottom, or
+  // when the latest message is theirs (they just sent it). Reading
+  // older history must never be yanked back to the bottom.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const last = messages[messages.length - 1];
+    if (nearBottomRef.current || last?.role === "user") {
+      el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages]);
 
   function ask(text: string) {
     const clean = text.trim();
@@ -48,7 +69,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const contactHref = `/contact?${new URLSearchParams({ name, email, problem: problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 
   return (
-    <div className="overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl">
+    <div className={inWindow ? "flex h-full flex-col overflow-hidden bg-white" : "overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl"}>
       {!bare && (
       <div className="flex items-start justify-between gap-4 bg-[#0B1220] px-6 py-5 text-white">
         <div className="flex items-start gap-3">
@@ -62,7 +83,16 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       </div>
       )}
 
-      <div ref={scrollRef} className="flex max-h-[460px] flex-col gap-4 overflow-y-auto px-5 py-5 sm:px-6" aria-live="polite">
+      <div
+        ref={scrollRef}
+        tabIndex={0}
+        onScroll={(e) => {
+          const el = e.currentTarget;
+          nearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 120;
+        }}
+        className={inWindow ? "flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5" : "flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"}
+        aria-live="polite"
+      >
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
@@ -85,21 +115,27 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         ))}
       </div>
 
-      <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
+      <div className="shrink-0 border-t border-[#E7E9F2] px-5 pb-2 pt-4">
         <p className="mb-2 text-sm font-semibold text-[#64748B]">Try one of these:</p>
-        <div className="flex flex-wrap gap-2">
+        <div className={inWindow ? "flex gap-2 overflow-x-auto overscroll-contain pb-1" : "flex flex-wrap gap-2"}>
           {SUGGESTIONS.map((s) => (
-            <button key={s} type="button" onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">{s}</button>
+            <button key={s} type="button" onClick={() => ask(s)} className="min-h-[48px] shrink-0 rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">{s}</button>
           ))}
         </div>
       </div>
 
-      <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
+      <form className="flex shrink-0 gap-2 border-t border-[#E7E9F2] bg-white p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
         <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>
         <input id="ai-input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="What do you need help with?" className="min-h-[52px] flex-1 rounded-full border border-[#E7E9F2] px-5 text-base outline-none focus:border-[#4F46E5]" />
         <Button type="submit" className="gap-2">Ask <Send size={16} /></Button>
       </form>
 
+      {inWindow ? (
+        <div className="shrink-0 border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-4">
+          <Button href={contactHref} className="w-full">Want a follow-up? Continue to Contact →</Button>
+          <p className="mt-2 text-sm text-[#64748B]">Opens the contact form with your details prefilled. Nothing is stored by this demo.</p>
+        </div>
+      ) : (
       <div className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-5 sm:px-6">
         <p className="text-base font-bold">Want us to follow up? Leave your details:</p>
         <div className="mt-3 flex flex-col gap-3">
@@ -109,6 +145,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         </div>
         <p className="mt-2 text-sm text-[#64748B]">This sends nothing by itself — it opens the contact form with your details prefilled. No backend stores your details on this demo site.</p>
       </div>
+      )}
     </div>
   );
 }

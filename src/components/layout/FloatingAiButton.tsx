@@ -8,10 +8,13 @@ import { AiGuide } from "@/components/ai/AiGuide";
 
 /**
  * FloatingAiButton — a proper AI chatbot window, NOT a separate page
- * and NOT a side drawer. Tapping "Ask AI" opens a chat window anchored
- * to the bottom-right (like a normal chatbot widget): fixed size on
- * desktop, near-full-width on phones, with its own close button.
- * The full /guide page still exists, linked from the window header.
+ * and NOT a side drawer. Tapping "Ask AI" opens an Intercom-style chat
+ * window anchored to the bottom-right: ~400px wide on desktop,
+ * near-full-width on phones, header + ONE scrolling message list +
+ * docked composer. The window itself uses overscroll-contain and the
+ * message list is the only scroll area, so scrolling inside the chat
+ * never scrolls the page behind it. The full /guide page still
+ * exists, linked from the window header.
  */
 export function FloatingAiButton() {
   // Keyed remount on route change closes the chat window, without
@@ -29,6 +32,12 @@ function FloatingAiButtonInner() {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
+    // Like Intercom: move focus into the message field on open, but
+    // only with a fine pointer (desktop) so phones do not get a
+    // keyboard forced open.
+    if (window.matchMedia("(pointer: fine)").matches) {
+      document.getElementById("ai-input")?.focus();
+    }
     return () => document.removeEventListener("keydown", onKey);
   }, [open ]);
 
@@ -39,8 +48,7 @@ function FloatingAiButtonInner() {
           role="dialog"
           aria-modal="false"
           aria-label="CraftThink AI chat"
-          className="fixed bottom-24 right-4 z-[95] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 lg:bottom-6 lg:right-6"
-          style={{ height: "min(620px, calc(100dvh - 120px))" }}
+          className="fixed bottom-24 right-4 z-[95] flex h-[min(640px,calc(100dvh-120px))] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden overscroll-contain rounded-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 lg:bottom-6 lg:right-6"
         >
           <div className="flex shrink-0 items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
             <div className="flex items-center gap-3">
@@ -72,8 +80,8 @@ function FloatingAiButtonInner() {
               </button>
             </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto">
-            <AiGuide bare />
+          <div className="flex min-h-0 flex-1 flex-col">
+            <AiGuide bare inWindow />
           </div>
         </div>
       )}

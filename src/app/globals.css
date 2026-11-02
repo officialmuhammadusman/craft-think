@@ -73,12 +73,13 @@ html {
   text-size-adjust: 100%;
 }
 
-/* Bottom-sheet slide-up entrance (AI chat sheet/window): slides up
-   from the bottom like a menu opening, instead of appearing instantly.
+/* Bottom-sheet slide-up entrance (AI chat sheet/window): rises from
+   the very bottom edge of the screen up to its resting place, like a
+   phone bottom sheet opening — not a small 48px nudge.
    Applied via className="ct-sheet-up" on the sheet container. */
 @keyframes ct-sheet-up {
   from {
-    transform: translateY(48px);
+    transform: translateY(100%);
     opacity: 0;
   }
   to {

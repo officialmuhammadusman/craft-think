@@ -1,0 +1,194 @@
+/**
+ * globals.css — CraftThink design system tokens.
+ * Uses Tailwind v4 @theme inline method.
+ * All brand colours, fonts, and spacing tokens live here.
+ * Do NOT add Tailwind v3 tailwind.config.ts — this project uses v4.
+ *
+ * Colour balance rule: 80% white/navy/grey, 15% indigo, 5% teal/cyan MAX.
+ * Teal is ONLY for AI elements — never use teal on the main CTA button.
+ */
+
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Fonts ──────────────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
+
+  /* ── Brand Colours ──────────────────────────────────────────────────── */
+  /* Backgrounds */
+  --color-bg-main: #ffffff;
+  --color-bg-section: #f6f7fb;
+  --color-bg-card: #ffffff;
+  --color-border: #e7e9f2;
+
+  /* Text */
+  --color-text-primary: #0b1220;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+
+  /* Primary brand — indigo */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-deep: #312e81;
+  --color-primary-soft: #eef2ff;
+
+  /* AI accent — USE SPARINGLY, 5% max, NEVER on main CTA */
+  --color-ai: #14b8a6;
+  --color-ai-glow: #06b6d4;
+  --color-ai-soft: #f0fdfa;
+
+  /* Dark hero gradient stops */
+  --color-hero-from: #0b1220;
+  --color-hero-to: #1e1b4b;
+
+  /* Status only (not brand) */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+
+  /* ── Border radius ───────────────────────────────────────────────────── */
+  --radius-card: 1rem;        /* 16px */
+  --radius-card-lg: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────────────────────────── */
+  --shadow-card: 0 1px 4px 0 rgba(11,18,32,0.06), 0 4px 16px 0 rgba(11,18,32,0.06);
+  --shadow-header: 0 1px 0 0 #e7e9f2, 0 2px 8px 0 rgba(11,18,32,0.06);
+}
+
+/* ── Base reset and body defaults ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth scroll — Lenis JS also handles this; this is the CSS fallback */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Disable smooth scroll if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: #ffffff;
+  color: #0b1220;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Bottom padding on mobile so sticky CTA bar never covers content */
+  padding-bottom: 80px;
+}
+
+/* Remove mobile bottom padding on desktop */
+@media (min-width: 1024px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* ── Fluid typography scale ───────────────────────────────────────────── */
+/* These custom classes match the design spec exactly. */
+/* Use with: className="ct-display", "ct-h1", "ct-h2", "ct-h3", etc. */
+
+.ct-display {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);   /* 40px → 64px */
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: #0b1220;
+}
+
+.ct-h1 {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(2.25rem, 5vw, 3.5rem); /* 36px → 56px */
+  line-height: 1.10;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: #0b1220;
+}
+
+.ct-h2 {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem); /* 28px → 40px */
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  color: #0b1220;
+}
+
+.ct-h3 {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
+  font-size: clamp(1.375rem, 3vw, 1.75rem); /* 22px → 28px */
+  line-height: 1.25;
+  font-weight: 600;
+  color: #0b1220;
+}
+
+.ct-h4 {
+  font-size: clamp(1.125rem, 2vw, 1.25rem); /* 18px → 20px */
+  line-height: 1.30;
+  font-weight: 600;
+  color: #0b1220;
+}
+
+.ct-body-lg {
+  font-size: clamp(1.0625rem, 2vw, 1.125rem); /* 17px → 18px */
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* Body normal — NEVER smaller than 16px on any screen */
+.ct-body {
+  font-size: 1rem; /* 16px */
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.ct-small {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+
+.ct-caption {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* ── Section spacing utility ─────────────────────────────────────────── */
+.ct-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .ct-section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+/* ── Focus ring — global fallback ────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}

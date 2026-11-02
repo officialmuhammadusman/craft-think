@@ -12,11 +12,11 @@
  * Gmail + mailto fallback panel and never claims delivery.
  */
 import { useMemo, useState } from "react";
+import { useScrollToResult } from "@/lib/use-scroll-to-result";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import {
   buildGmailUrl,
-  buildMailtoUrl,
   generateTimeSlots,
   isSpamSubmission,
   todayLocalString,
@@ -51,6 +51,7 @@ function formatSlot(minutes: number): string {
 
 export function ConsultationForm({ initialMessage = "" }: { initialMessage?: string }) {
   const [status, setStatus] = useState<Status>("idle");
+  const resultRef = useScrollToResult(status === "sent" || status === "fallback");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -81,7 +82,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
     honeypot: honeypot || undefined,
   };
   const gmailUrl = buildGmailUrl(siteConfig.email, SUBJECT, payload);
-  const mailto = buildMailtoUrl(siteConfig.email, SUBJECT, payload);
+  const whatsappUrl = `https://wa.me/923135263300?text=${encodeURIComponent(`Hi CraftThink, I need help with my business software.\n\nName: ${name}\nEmail: ${email}${date && time ? `\nRequested slot: ${date} at ${time} PKT` : ""}\n\n${message}`)}`;
 
   // PKT is UTC+5 all year (no daylight saving), so the requested PKT
   // time converts to an exact instant by subtracting 5 hours from UTC.
@@ -131,7 +132,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
+      <div ref={resultRef} className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
         <h3 className="ct-h3">Thank you — your request has been sent</h3>
         <p className="mt-2 text-[#475569]">
           We received your request{date && time ? ` for ${date} at ${time} PKT` : ""} and will confirm it by email.
@@ -146,15 +147,15 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
 
   if (status === "fallback") {
     return (
-      <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
+      <div ref={resultRef} className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
         <h3 className="ct-h3">Your request has not been sent yet</h3>
         <p className="mt-2 text-[#475569]">
           Automatic sending is not set up right now, so your request was not delivered.
-          Click below to open it prefilled{date && time ? `, including your requested slot (${date} at ${time} PKT),` : ""} — in Gmail, or in your own email app — and send it from there.
+          Click below to open it prefilled{date && time ? `, including your requested slot (${date} at ${time} PKT),` : ""} — in Gmail, or in WhatsApp — and send it from there.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Button href={gmailUrl} external>Open in Gmail →</Button>
-          <Button href={mailto} variant="secondary">Open in Email App →</Button>
+          <Button href={whatsappUrl} variant="secondary" external>Open in WhatsApp →</Button>
           <Button variant="secondary" onClick={() => setStatus("idle")}>Edit Message</Button>
         </div>
       </div>
@@ -209,7 +210,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
         {errors.message && <p role="alert" className={errorClass}>{errors.message}</p>}
       </label>
       <Button type="submit" disabled={sending}>{sending ? "Sending…" : "Send Consultation Request"}</Button>
-      <p className="text-sm text-[#64748B]">On submit we first try to send your request directly. If automatic sending is not set up, we will show you Gmail and email-app buttons with your request prefilled — nothing is claimed as sent until it really is. Prefer to write directly? Email us at {siteConfig.email} or call {siteConfig.phone}.</p>
+      <p className="text-sm text-[#64748B]">On submit we first try to send your request directly. If automatic sending is not set up, we will show you Gmail and WhatsApp buttons with your request prefilled — nothing is claimed as sent until it really is. Prefer to write directly? Email us at {siteConfig.email} or call {siteConfig.phone}.</p>
     </form>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
+import { useScrollToResult } from "@/lib/use-scroll-to-result";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import {
   buildGmailUrl,
-  buildMailtoUrl,
   isSpamSubmission,
   validateEnquiry,
   type EnquiryInput,
@@ -29,6 +29,7 @@ function Form() {
   const [budget, setBudget] = useState("");
   const [message, setMessage] = useState(q.get("problem") || "");
   const [honeypot, setHoneypot] = useState("");
+  const resultRef = useScrollToResult(status === "sent" || status === "fallback");
 
   const payload: EnquiryInput = {
     name,
@@ -40,7 +41,7 @@ function Form() {
     extra: { "Budget range": budget || undefined },
   };
   const gmailUrl = buildGmailUrl(siteConfig.email, SUBJECT, payload);
-  const mailto = buildMailtoUrl(siteConfig.email, SUBJECT, payload);
+  const whatsappUrl = `https://wa.me/923135263300?text=${encodeURIComponent(`Hi CraftThink, I need help with my business software.\n\nName: ${name}\nEmail: ${email}\n\n${message}`)}`;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -72,7 +73,7 @@ function Form() {
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
+      <div ref={resultRef} className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
         <h2 className="ct-h3">Thank you — your message has been sent</h2>
         <p className="mt-2 text-[#475569]">We will reply by email to {email}. If you need to add anything, email us directly at {siteConfig.email}.</p>
         <div className="mt-4 flex flex-wrap gap-3"><Button href="/estimate" variant="secondary">Try the Estimator Instead</Button></div>
@@ -82,12 +83,12 @@ function Form() {
 
   if (status === "fallback") {
     return (
-      <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
+      <div ref={resultRef} className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
         <h2 className="ct-h3">Your message has not been sent yet</h2>
-        <p className="mt-2 text-[#475569]">Automatic sending is not set up right now, so your message was not delivered. Click below to open it prefilled — in Gmail, or in your own email app — and send it from there.</p>
+        <p className="mt-2 text-[#475569]">Automatic sending is not set up right now, so your message was not delivered. Click below to open it prefilled — in Gmail, or in WhatsApp — and send it from there.</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Button href={gmailUrl} external>Open in Gmail →</Button>
-          <Button href={mailto} variant="secondary">Open in Email App →</Button>
+          <Button href={whatsappUrl} variant="secondary" external>Open in WhatsApp →</Button>
           <Button variant="secondary" onClick={() => setStatus("idle")}>Edit Message</Button>
         </div>
       </div>
@@ -129,7 +130,7 @@ function Form() {
         {errors.message && <p role="alert" className={errorClass}>{errors.message}</p>}
       </label>
       <Button type="submit" disabled={sending}>{sending ? "Sending…" : "Send Consultation Request"}</Button>
-      <p className="text-sm text-[#64748B]">On submit we first try to send your message directly. If automatic sending is not set up, we will show you Gmail and email-app buttons with your message prefilled — nothing is claimed as sent until it really is.</p>
+      <p className="text-sm text-[#64748B]">On submit we first try to send your message directly. If automatic sending is not set up, we will show you Gmail and WhatsApp buttons with your message prefilled — nothing is claimed as sent until it really is.</p>
     </form>
   );
 }

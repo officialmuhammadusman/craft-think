@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useScrollToResult } from "@/lib/use-scroll-to-result";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import {
   buildGmailUrl,
-  buildMailtoUrl,
   isSpamSubmission,
   validateEnquiry,
   type EnquiryInput,
@@ -37,6 +37,7 @@ export function AuditForm() {
 
   // Send-my-checklist form (shared validation + API-first + Gmail/mailto fallback).
   const [status, setStatus] = useState<Status>("idle");
+  const resultRef = useScrollToResult(status === "sent" || status === "fallback");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,7 +55,7 @@ export function AuditForm() {
     honeypot: honeypot || undefined,
   };
   const gmailUrl = buildGmailUrl(siteConfig.email, SUBJECT, payload);
-  const mailto = buildMailtoUrl(siteConfig.email, SUBJECT, payload);
+  const whatsappUrl = `https://wa.me/923135263300?text=${encodeURIComponent(`Hi CraftThink, I need help with my business software.\n\nName: ${name}\nEmail: ${email}\n\n${message}`)}`;
 
   function showChecklist() {
     setDone(true);
@@ -119,7 +120,7 @@ export function AuditForm() {
               <li key={r.id} className="rounded-2xl bg-[#F6F7FB] p-5"><strong>Fix {i + 1}: {r.label}</strong><p className="mt-1 text-[#475569]">{r.fix}</p></li>
             ))}
           </ol>
-          {status === "sent" ? (
+          <div ref={resultRef}>{status === "sent" ? (
             <div className="mt-6 rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-5">
               <h3 className="ct-h3">Thank you — your audit request has been sent</h3>
               <p className="mt-2 text-[#475569]">We will reply by email to {email}.</p>
@@ -127,10 +128,10 @@ export function AuditForm() {
           ) : status === "fallback" ? (
             <div className="mt-6 rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-5">
               <h3 className="ct-h3">Your request has not been sent yet</h3>
-              <p className="mt-2 text-[#475569]">Automatic sending is not set up right now, so your request was not delivered. Click below to open it prefilled — in Gmail, or in your own email app — and send it from there.</p>
+              <p className="mt-2 text-[#475569]">Automatic sending is not set up right now, so your request was not delivered. Click below to open it prefilled — in Gmail, or in WhatsApp — and send it from there.</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href={gmailUrl} external>Open in Gmail →</Button>
-                <Button href={mailto} variant="secondary">Open in Email App →</Button>
+                <Button href={whatsappUrl} variant="secondary" external>Open in WhatsApp →</Button>
                 <Button variant="secondary" onClick={() => setStatus("idle")}>Edit Message</Button>
               </div>
             </div>
@@ -159,9 +160,9 @@ export function AuditForm() {
                 {errors.message && <p role="alert" className={errorClass}>{errors.message}</p>}
               </label>
               <div><Button type="submit" disabled={sending}>{sending ? "Sending…" : "Send Audit Request"}</Button></div>
-              <p className="text-sm text-[#64748B]">On submit we first try to send your request directly. If automatic sending is not set up, we will show you Gmail and email-app buttons with your request prefilled — nothing is claimed as sent until it really is.</p>
+              <p className="text-sm text-[#64748B]">On submit we first try to send your request directly. If automatic sending is not set up, we will show you Gmail and WhatsApp buttons with your request prefilled — nothing is claimed as sent until it really is.</p>
             </form>
-          )}
+          )}</div>
           <div className="mt-6"><Button href={`/consultation?problem=${encodeURIComponent(summary)}`} variant="secondary">Book a Free Consultation →</Button></div>
         </div>
       )}

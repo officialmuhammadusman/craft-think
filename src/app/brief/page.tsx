@@ -27,6 +27,7 @@
  * must be added here — do not pretend an upload happened before then.
  */
 import { useState } from "react";
+import { useScrollToResult } from "@/lib/use-scroll-to-result";
 import Link from "next/link";
 import { validateForm } from "@/lib/validation";
 import { siteConfig } from "@/config/site";
@@ -67,6 +68,7 @@ export default function BriefPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const resultRef = useScrollToResult<HTMLElement>(submitted);
   const [apiSent, setApiSent] = useState(false);
 
   const briefBody = [
@@ -89,7 +91,7 @@ export default function BriefPage() {
   ].join("\n");
 
   const gmailHref = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(siteConfig.email)}&su=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(briefBody)}`;
-  const mailtoHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(briefBody)}`;
+  const whatsappHref = `https://wa.me/923135263300?text=${encodeURIComponent(`Hi CraftThink, I need help with my business software.\n\nName: ${name}\nEmail: ${email}\n\n${briefBody}`)}`;
 
   function handleFiles(list: FileList | null) {
     if (!list) return;
@@ -155,7 +157,7 @@ export default function BriefPage() {
 
   if (submitted) {
     return (
-      <section className="ct-section">
+      <section ref={resultRef} className="ct-section">
         <Container width="narrow">
           <div className="rounded-2xl border border-[#E7E9F2] bg-[#EEF2FF] p-6">
             <h1 className="ct-h3">{apiSent ? "Thank you — your brief was sent" : "Your brief is ready to send"}</h1>
@@ -184,7 +186,7 @@ export default function BriefPage() {
             )}
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href={gmailHref} external>Open in Gmail to send →</Button>
-              <Button href={mailtoHref} variant="secondary">Open in your email app instead</Button>
+              <Button href={whatsappHref} variant="secondary" external>Open in WhatsApp instead →</Button>
             </div>
             <p className="mt-4 text-sm text-[#64748B]">
               Prefer to talk first? <Link href="/consultation" className="font-semibold text-[#4F46E5]">Book a free consultation</Link> instead.

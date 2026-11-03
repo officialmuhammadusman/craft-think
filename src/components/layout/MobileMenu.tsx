@@ -17,10 +17,9 @@
  * Back returns to the main menu (panel slides back out to the
  * right); X or any link closes the whole menu.
  *
- * Each drill-down panel also carries a small help card at its top:
- * Services → "Not sure what you need? Talk with Think" (opens the
- * existing AI sheet, closing the menu first, as before); Work →
- * "Want work like this? Book a free consultation" (link).
+ * Each drill-down panel opens straight onto its list — no promo
+ * card at the top (user-requested removal; the Services "Talk with
+ * Think" card and the About/Work help cards were all removed).
  * Body scroll locked while any view is open; drill lists scroll
  * natively (overscroll-contain).
  * Desktop header is untouched by this file.
@@ -113,29 +112,8 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-            {/* Help card at the top of each drill panel */}
-            {view === "about" ? (
-              <div className="rounded-[20px] border border-[#E7E9F2] bg-[#EEF2FF] p-5">
-                <p className="text-base font-bold text-[#0B1220]">Who are you working with?</p>
-                <p className="mt-1 text-sm leading-snug text-[#475569]">Meet the company and the CEO who leads your project.</p>
-                <Link href="/consultation" onClick={closeAll} className="mt-3 flex min-h-[48px] w-fit items-center rounded-full bg-[#4F46E5] px-5 text-base font-semibold text-white">Book a Free Consultation</Link>
-              </div>
-            ) : view === "services" ? (
-              <div className="rounded-[20px] border border-[#E7E9F2] bg-[#EEF2FF] p-5">
-                <p className="text-base font-bold text-[#0B1220]">Not sure what you need?</p>
-                <p className="mt-1 text-sm leading-snug text-[#475569]">Talk with Think — it guides you to the right service.</p>
-                <button type="button" onClick={talkWithThink} className="mt-3 flex min-h-[48px] items-center gap-1.5 rounded-full bg-[#4F46E5] px-5 text-base font-semibold text-white">Talk with Think <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /></button>
-              </div>
-            ) : (
-              <div className="rounded-[20px] border border-[#E7E9F2] bg-[#EEF2FF] p-5">
-                <p className="text-base font-bold text-[#0B1220]">Want work like this?</p>
-                <p className="mt-1 text-sm leading-snug text-[#475569]">Book a free consultation and we will show you the plan.</p>
-                <Link href="/consultation" onClick={closeAll} className="mt-3 flex min-h-[48px] w-fit items-center rounded-full bg-[#4F46E5] px-5 text-base font-semibold text-white">Book a Free Consultation</Link>
-              </div>
-            )}
-
             {view === "services" ? (
-              <ul className="mt-4 flex flex-col gap-0.5">
+              <ul className="flex flex-col gap-0.5">
                 {services.map((s) => (
                   <li key={s.slug}>
                     <Link href={`/services/${s.slug}`} onClick={closeAll} className="block min-h-[56px] rounded-xl px-3 py-2.5 hover:bg-[#EEF2FF]">
@@ -149,7 +127,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                 </li>
               </ul>
             ) : view === "about" ? (
-              <ul className="mt-4 flex flex-col gap-0.5">
+              <ul className="flex flex-col gap-0.5">
                 {[
                   { title: "About the Company", href: "/about/company", line: "How CraftThink works, from first call to support after launch." },
                   { title: "About the CEO", href: "/about/ceo", line: "Meet Muhammad Usman, the CEO who leads your project personally." },
@@ -163,7 +141,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                 ))}
               </ul>
             ) : (
-              <ul className="mt-4 flex flex-col gap-0.5">
+              <ul className="flex flex-col gap-0.5">
                 {projects.map((p) => (
                   <li key={p.slug}>
                     <Link href={`/work/${p.slug}`} onClick={closeAll} className="block min-h-[56px] rounded-xl px-3 py-2.5 hover:bg-[#EEF2FF]">

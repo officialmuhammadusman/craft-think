@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Business website and portfolio illustration">
+<rect width="1200" height="700" fill="#F6F7FB"/>
+
+<rect width="1200" height="48" fill="#FFFFFF"/><circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/><rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="60" y="72" width="1080" height="60" rx="14" fill="#FFFFFF"/>
+<rect x="90" y="94" width="130" height="16" rx="8" fill="#0B1220"/>
+<rect x="820" y="94" width="80" height="16" rx="8" fill="#64748B"/><rect x="920" y="94" width="80" height="16" rx="8" fill="#64748B"/>
+<rect x="1020" y="90" width="90" height="24" rx="12" fill="#4F46E5"/>
+<rect x="60" y="156" width="1080" height="220" rx="20" fill="#0B1220"/>
+<text x="100" y="226" font-size="38" fill="#FFFFFF" font-weight="bold">A business website</text><text x="100" y="272" font-size="38" fill="#FFFFFF" font-weight="bold">customers can trust.</text>
+<rect x="100" y="300" width="380" height="14" rx="7" fill="#334155"/>
+<rect x="100" y="328" width="160" height="42" rx="21" fill="#4F46E5"/><text x="126" y="355" font-size="17" fill="#FFFFFF" font-weight="bold">Book a call</text>
+<rect x="880" y="190" width="220" height="150" rx="16" fill="#FFFFFF" opacity="0.12"/>
+<rect x="910" y="220" width="160" height="16" rx="8" fill="#FFFFFF" opacity="0.7"/><rect x="910" y="248" width="120" height="12" rx="6" fill="#FFFFFF" opacity="0.4"/>
+<rect x="60" y="400" width="340" height="150" rx="18" fill="#FFFFFF"/>
+<rect x="90" y="428" width="280" height="90" rx="12" fill="#EEF2FF"/><text x="110" y="480" font-size="18" fill="#0B1220" font-weight="bold">Portfolio</text>
+<rect x="430" y="400" width="340" height="150" rx="18" fill="#FFFFFF"/>
+<rect x="460" y="428" width="280" height="90" rx="12" fill="#EEF2FF"/><text x="480" y="480" font-size="18" fill="#0B1220" font-weight="bold">Services</text>
+<rect x="800" y="400" width="340" height="150" rx="18" fill="#4F46E5"/>
+<rect x="830" y="428" width="280" height="90" rx="12" fill="#FFFFFF" opacity="0.15"/><text x="850" y="480" font-size="18" fill="#FFFFFF" font-weight="bold">Contact us</text>
+<rect x="60" y="574" width="1080" height="56" rx="14" fill="#FFFFFF"/>
+<text x="90" y="610" font-size="17" fill="#64748B">Trusted by growing businesses</text>
+<circle cx="980" cy="602" r="9" fill="#14B8A6"/><circle cx="1010" cy="602" r="9" fill="#14B8A6"/><circle cx="1040" cy="602" r="9" fill="#14B8A6"/>
+</g>
+</svg>

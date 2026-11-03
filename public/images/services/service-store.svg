@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Online store illustration">
+<rect width="1200" height="700" fill="#F6F7FB"/>
+
+<rect width="1200" height="48" fill="#FFFFFF"/><circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/><rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="60" y="72" width="760" height="56" rx="14" fill="#0B1220"/>
+<rect x="90" y="92" width="100" height="16" rx="8" fill="#FFFFFF"/>
+<rect x="560" y="92" width="70" height="16" rx="8" fill="#94A3B8"/><rect x="650" y="92" width="70" height="16" rx="8" fill="#94A3B8"/>
+<rect x="850" y="72" width="290" height="56" rx="14" fill="#FFFFFF"/>
+<rect x="880" y="92" width="90" height="16" rx="8" fill="#0B1220"/><text x="990" y="108" font-size="17" fill="#0B1220" font-weight="bold">Cart</text>
+<circle cx="1090" cy="100" r="16" fill="#4F46E5"/><text x="1085" y="106" font-size="17" fill="#FFFFFF" font-weight="bold">2</text>
+<rect x="60" y="152" width="170" height="220" rx="18" fill="#FFFFFF"/><rect x="80" y="172" width="130" height="100" rx="12" fill="#EEF2FF"/><rect x="80" y="290" width="100" height="14" rx="7" fill="#0B1220"/><rect x="80" y="314" width="70" height="12" rx="6" fill="#64748B"/><rect x="80" y="336" width="130" height="28" rx="14" fill="#4F46E5"/><rect x="250" y="152" width="170" height="220" rx="18" fill="#FFFFFF"/><rect x="270" y="172" width="130" height="100" rx="12" fill="#EEF2FF"/><rect x="270" y="290" width="100" height="14" rx="7" fill="#0B1220"/><rect x="270" y="314" width="70" height="12" rx="6" fill="#64748B"/><rect x="270" y="336" width="130" height="28" rx="14" fill="#4F46E5"/><rect x="440" y="152" width="170" height="220" rx="18" fill="#FFFFFF"/><rect x="460" y="172" width="130" height="100" rx="12" fill="#EEF2FF"/><rect x="460" y="290" width="100" height="14" rx="7" fill="#0B1220"/><rect x="460" y="314" width="70" height="12" rx="6" fill="#64748B"/><rect x="460" y="336" width="130" height="28" rx="14" fill="#4F46E5"/><rect x="630" y="152" width="170" height="220" rx="18" fill="#FFFFFF"/><rect x="650" y="172" width="130" height="100" rx="12" fill="#EEF2FF"/><rect x="650" y="290" width="100" height="14" rx="7" fill="#0B1220"/><rect x="650" y="314" width="70" height="12" rx="6" fill="#64748B"/><rect x="650" y="336" width="130" height="28" rx="14" fill="#4F46E5"/>
+<rect x="60" y="396" width="760" height="220" rx="18" fill="#FFFFFF"/>
+<text x="90" y="436" font-size="22" fill="#0B1220" font-weight="bold">Checkout</text>
+<rect x="90" y="460" width="420" height="34" rx="10" fill="#F6F7FB"/><rect x="90" y="506" width="420" height="34" rx="10" fill="#F6F7FB"/>
+<rect x="540" y="460" width="240" height="80" rx="12" fill="#EEF2FF"/><text x="560" y="492" font-size="17" fill="#4F46E5" font-weight="bold">Payment verified</text>
+<rect x="560" y="508" width="180" height="12" rx="6" fill="#94A3B8"/>
+<rect x="90" y="560" width="200" height="40" rx="20" fill="#4F46E5"/><text x="128" y="586" font-size="17" fill="#FFFFFF" font-weight="bold">Place order</text>
+<rect x="850" y="396" width="290" height="220" rx="18" fill="#0B1220"/>
+<text x="880" y="436" font-size="20" fill="#FFFFFF" font-weight="bold">Your order</text>
+<rect x="880" y="460" width="230" height="12" rx="6" fill="#334155"/><rect x="880" y="484" width="230" height="12" rx="6" fill="#334155"/>
+<rect x="880" y="520" width="230" height="36" rx="10" fill="#4F46E5"/><text x="920" y="544" font-size="17" fill="#FFFFFF" font-weight="bold">Confirmed</text>
+</g>
+</svg>

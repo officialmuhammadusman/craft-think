@@ -181,8 +181,8 @@ export const aiInAction: AiAction[] = [
       "Try it on this page: ask, and the guide points you to the right service and a similar project. When it does not know, it hands you to a free consultation instead of guessing.",
     href: "/guide",
     cta: "Try the AI Guide",
-    image: "/images/services/service-ai.jpg",
-    imageAlt: "Abstract visualisation of artificial intelligence",
+    image: "/images/services/service-ai.svg",
+    imageAlt: "Illustration of an AI assistant answering from documents with sources",
   },
   {
     title: "AI for booking & healthcare",

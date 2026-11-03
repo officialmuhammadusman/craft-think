@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="UI and UX design illustration">
+<rect width="1200" height="700" fill="#F6F7FB"/>
+
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="60" y="60" width="620" height="580" rx="24" fill="#FFFFFF"/>
+<rect x="100" y="100" width="540" height="44" rx="10" fill="#F6F7FB" stroke="#E7E9F2" stroke-dasharray="6 6"/>
+<rect x="100" y="168" width="260" height="170" rx="14" fill="#F6F7FB" stroke="#E7E9F2" stroke-dasharray="6 6"/>
+<rect x="380" y="168" width="260" height="170" rx="14" fill="#F6F7FB" stroke="#E7E9F2" stroke-dasharray="6 6"/>
+<rect x="100" y="362" width="540" height="90" rx="14" fill="#F6F7FB" stroke="#E7E9F2" stroke-dasharray="6 6"/>
+<rect x="100" y="476" width="260" height="120" rx="14" fill="#4F46E5"/>
+<rect x="380" y="476" width="260" height="120" rx="14" fill="#EEF2FF"/>
+<text x="100" y="640" font-size="16" fill="#64748B">Wireframe to finished design</text>
+<rect x="710" y="60" width="430" height="280" rx="24" fill="#0B1220"/>
+<text x="740" y="106" font-size="20" fill="#FFFFFF" font-weight="bold">Colours</text>
+<circle cx="760" cy="150" r="28" fill="#4F46E5"/><circle cx="840" cy="150" r="28" fill="#0B1220" stroke="#334155" stroke-width="2"/>
+<circle cx="920" cy="150" r="28" fill="#14B8A6"/><circle cx="1000" cy="150" r="28" fill="#EEF2FF"/>
+<rect x="740" y="210" width="370" height="14" rx="7" fill="#334155"/><rect x="740" y="236" width="260" height="14" rx="7" fill="#334155"/>
+<rect x="740" y="268" width="160" height="40" rx="20" fill="#4F46E5"/><text x="776" y="294" font-size="16" fill="#FFFFFF" font-weight="bold">Button</text>
+<rect x="710" y="364" width="430" height="276" rx="24" fill="#FFFFFF"/>
+<text x="740" y="406" font-size="20" fill="#0B1220" font-weight="bold">Components</text>
+<rect x="740" y="428" width="370" height="44" rx="12" fill="#F6F7FB"/>
+<rect x="740" y="488" width="170" height="44" rx="22" fill="#EEF2FF"/><text x="786" y="516" font-size="16" fill="#4F46E5" font-weight="bold">Primary</text>
+<rect x="930" y="488" width="170" height="44" rx="22" fill="#FFFFFF" stroke="#E7E9F2"/><text x="982" y="516" font-size="16" fill="#0B1220">Secondary</text>
+<rect x="740" y="552" width="370" height="56" rx="12" fill="#F6F7FB"/>
+</g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Website design layout illustration">
+<rect width="1200" height="700" fill="#F6F7FB"/>
+
+<rect width="1200" height="48" fill="#FFFFFF"/><circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/><rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="60" y="72" width="1080" height="56" rx="14" fill="#0B1220"/>
+<rect x="90" y="92" width="110" height="16" rx="8" fill="#FFFFFF"/>
+<rect x="700" y="92" width="90" height="16" rx="8" fill="#94A3B8"/><rect x="810" y="92" width="90" height="16" rx="8" fill="#94A3B8"/>
+<rect x="920" y="92" width="90" height="16" rx="8" fill="#94A3B8"/><rect x="1030" y="88" width="80" height="24" rx="12" fill="#4F46E5"/>
+<rect x="60" y="152" width="640" height="300" rx="20" fill="#FFFFFF"/>
+<text x="92" y="208" font-size="40" fill="#0B1220" font-weight="bold">Your business,</text><text x="92" y="256" font-size="40" fill="#4F46E5" font-weight="bold">online, properly.</text>
+<rect x="92" y="284" width="420" height="14" rx="7" fill="#E7E9F2"/><rect x="92" y="308" width="340" height="14" rx="7" fill="#E7E9F2"/>
+<rect x="92" y="344" width="170" height="44" rx="22" fill="#4F46E5"/><text x="118" y="372" font-size="17" fill="#FFFFFF" font-weight="bold">Get started</text>
+<rect x="280" y="344" width="170" height="44" rx="22" fill="#EEF2FF"/><text x="312" y="372" font-size="17" fill="#4F46E5" font-weight="bold">See our work</text>
+<rect x="730" y="152" width="410" height="300" rx="20" fill="#4F46E5"/>
+<rect x="760" y="182" width="350" height="150" rx="14" fill="#FFFFFF" opacity="0.92"/>
+<rect x="790" y="210" width="200" height="16" rx="8" fill="#4F46E5"/><rect x="790" y="238" width="260" height="12" rx="6" fill="#C7D2FE"/>
+<rect x="790" y="262" width="180" height="12" rx="6" fill="#C7D2FE"/>
+<circle cx="790" cy="380" r="12" fill="#14B8A6"/><rect x="815" y="372" width="180" height="14" rx="7" fill="#C7D2FE"/>
+<rect x="60" y="480" width="340" height="150" rx="18" fill="#FFFFFF"/><rect x="90" y="508" width="60" height="60" rx="14" fill="#EEF2FF"/>
+<text x="90" y="604" font-size="18" fill="#0B1220" font-weight="bold">Services</text>
+<rect x="430" y="480" width="340" height="150" rx="18" fill="#FFFFFF"/><rect x="460" y="508" width="60" height="60" rx="14" fill="#EEF2FF"/>
+<text x="460" y="604" font-size="18" fill="#0B1220" font-weight="bold">About</text>
+<rect x="800" y="480" width="340" height="150" rx="18" fill="#FFFFFF"/><rect x="830" y="508" width="60" height="60" rx="14" fill="#EEF2FF"/>
+<text x="830" y="604" font-size="18" fill="#0B1220" font-weight="bold">Contact</text>
+</g>
+</svg>

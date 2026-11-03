@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="HR staff system illustration">
+<rect width="1200" height="700" fill="#F6F7FB"/>
+
+<rect width="1200" height="48" fill="#FFFFFF"/><circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/><rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect y="48" width="240" height="652" fill="#0B1220"/>
+<rect x="28" y="76" width="120" height="20" rx="6" fill="#FFFFFF"/>
+<rect x="28" y="120" width="180" height="34" rx="10" fill="#4F46E5"/>
+<rect x="28" y="170" width="150" height="14" rx="7" fill="#334155"/><rect x="28" y="200" width="150" height="14" rx="7" fill="#334155"/>
+<rect x="28" y="230" width="120" height="14" rx="7" fill="#14B8A6"/>
+<text x="272" y="112" font-size="28" fill="#0B1220" font-weight="bold">Your team</text>
+<rect x="272" y="140" width="540" height="76" rx="16" fill="#FFFFFF"/><circle cx="306" cy="178" r="20" fill="#EEF2FF"/><rect x="340" y="168" width="140" height="14" rx="7" fill="#0B1220"/><rect x="340" y="190" width="100" height="11" rx="5" fill="#94A3B8"/><rect x="700" y="164" width="80" height="28" rx="14" fill="#EEF2FF"/><rect x="272" y="232" width="540" height="76" rx="16" fill="#FFFFFF"/><circle cx="306" cy="270" r="20" fill="#EEF2FF"/><rect x="340" y="260" width="140" height="14" rx="7" fill="#0B1220"/><rect x="340" y="282" width="100" height="11" rx="5" fill="#94A3B8"/><rect x="700" y="256" width="80" height="28" rx="14" fill="#EEF2FF"/><rect x="272" y="324" width="540" height="76" rx="16" fill="#FFFFFF"/><circle cx="306" cy="362" r="20" fill="#EEF2FF"/><rect x="340" y="352" width="140" height="14" rx="7" fill="#0B1220"/><rect x="340" y="374" width="100" height="11" rx="5" fill="#94A3B8"/><rect x="700" y="348" width="80" height="28" rx="14" fill="#EEF2FF"/><rect x="272" y="416" width="540" height="76" rx="16" fill="#FFFFFF"/><circle cx="306" cy="454" r="20" fill="#EEF2FF"/><rect x="340" y="444" width="140" height="14" rx="7" fill="#0B1220"/><rect x="340" y="466" width="100" height="11" rx="5" fill="#94A3B8"/><rect x="700" y="440" width="80" height="28" rx="14" fill="#EEF2FF"/><rect x="272" y="508" width="540" height="76" rx="16" fill="#FFFFFF"/><circle cx="306" cy="546" r="20" fill="#EEF2FF"/><rect x="340" y="536" width="140" height="14" rx="7" fill="#0B1220"/><rect x="340" y="558" width="100" height="11" rx="5" fill="#94A3B8"/><rect x="700" y="532" width="80" height="28" rx="14" fill="#EEF2FF"/>
+<rect x="840" y="140" width="320" height="300" rx="18" fill="#FFFFFF"/>
+<text x="868" y="182" font-size="20" fill="#0B1220" font-weight="bold">Leave requests</text>
+<rect x="868" y="206" width="264" height="70" rx="12" fill="#F6F7FB"/><text x="884" y="236" font-size="16" fill="#0B1220" font-weight="bold">Annual leave</text><text x="884" y="260" font-size="14" fill="#64748B">Awaiting approval</text>
+<rect x="868" y="292" width="120" height="38" rx="19" fill="#4F46E5"/><text x="892" y="317" font-size="15" fill="#FFFFFF" font-weight="bold">Approve</text>
+<rect x="1000" y="292" width="120" height="38" rx="19" fill="#F6F7FB"/><text x="1032" y="317" font-size="15" fill="#0B1220">Decline</text>
+<rect x="868" y="348" width="264" height="12" rx="6" fill="#E7E9F2"/>
+<rect x="840" y="464" width="320" height="150" rx="18" fill="#4F46E5"/>
+<text x="868" y="506" font-size="20" fill="#FFFFFF" font-weight="bold">Roles &amp; permissions</text><text x="868" y="536" font-size="16" fill="#C7D2FE">Each person sees only</text><text x="868" y="560" font-size="16" fill="#C7D2FE">what their job needs</text>
+</g>
+</svg>

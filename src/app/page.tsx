@@ -103,7 +103,7 @@ export default function HomePage() {
       <div className="scroll-mt-[88px] border-b border-[#E7E9F2] bg-[#F6F7FB] py-4">
         <Container>
           <p className="text-center text-sm font-bold uppercase tracking-widest text-[#0B1220]">
-            11 services <span className="mx-3 text-[#4F46E5]">·</span> 6 delivered projects <span className="mx-3 text-[#4F46E5]">·</span> Remote clients worldwide
+            11 services <span className="mx-3 text-[#4F46E5]">·</span> 7 delivered projects <span className="mx-3 text-[#4F46E5]">·</span> Remote clients worldwide
           </p>
         </Container>
       </div>
@@ -219,7 +219,7 @@ export default function HomePage() {
             {[
               { title: "Talk to the person in charge", text: "Your contact is CEO Muhammad Usman, the person leading your project — not a ticket queue.", href: "/about/ceo" },
               { title: "A written plan before you pay", text: "Scope, timeline and price agreed in writing first, through discovery, build, launch and support.", href: "/process" },
-              { title: "Real work you can open", text: "Six case studies, with live sites linked wherever they exist, so you judge the work itself.", href: "/work" },
+              { title: "Real work you can open", text: "Seven case studies, with live sites linked wherever they exist, so you judge the work itself.", href: "/work" },
               { title: "Support after launch", text: "Monitoring, fixes and updates on a care plan you can cancel anytime — you own the code and data.", href: "/services/testing-care" },
             ].map((t) => (
               <Reveal key={t.title}>

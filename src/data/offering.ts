@@ -148,6 +148,13 @@ export const industries: Industry[] = [
     projectLabel: "RAG AI Assistant",
   },
   {
+    label: "Media & Entertainment",
+    href: "/work?industry=entertainment",
+    description: "Movies, TV shows, celebrities, jobs and services in one screen-entertainment directory.",
+    projectHref: "/work/actors-index",
+    projectLabel: "Actors Index",
+  },
+  {
     label: "Travel & Tourism",
     href: "/work?industry=travel",
     description: "Desert safaris, buggy rides, yacht cruises and city tours, booked in one place with hotel pickup.",
@@ -200,6 +207,7 @@ export const verifiedLiveLinks: Record<string, string> = {
   "telemedicine": "https://mejoratudolor.cl",
   "padel-connect": "https://padel-fe.vercel.app",
   "book-dubai-guide": "https://www.bookdubaiguide.com/",
+  "actors-index": "https://actorsindex.com",
 };
 
 export type SuccessPractice = {

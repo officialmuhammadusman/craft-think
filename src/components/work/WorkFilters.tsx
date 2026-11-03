@@ -10,6 +10,7 @@ const filters = [
   { label: "Healthcare", href: "/work?industry=healthcare", value: "healthcare" },
   { label: "Business", href: "/work?industry=business", value: "business" },
   { label: "Sports", href: "/work?industry=sports", value: "sports" },
+  { label: "Media & Entertainment", href: "/work?industry=entertainment", value: "entertainment" },
   { label: "Travel & Tourism", href: "/work?industry=travel", value: "travel" },
 ];
 

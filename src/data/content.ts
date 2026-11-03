@@ -353,7 +353,7 @@ export const services: Service[] = [
 export type Project = {
   slug: string;
   title: string;
-  industry: "saas" | "healthcare" | "business" | "sports" | "travel";
+  industry: "saas" | "healthcare" | "business" | "sports" | "travel" | "entertainment";
   industryLabel: string;
   line: string;
   problem: string;
@@ -555,6 +555,37 @@ export const projects: Project[] = [
     image: "/images/work/work-padel.svg",
     imageAlt: "Illustration of the Padel Connect court booking interface",
   },
+  {
+    slug: "actors-index",
+    title: "Actors Index — Screen Entertainment Directory",
+    industry: "entertainment",
+    industryLabel: "Media & Entertainment",
+    line: "Find what's hot and what's not in screen entertainment — movies, TV, celebrities, jobs and services in one directory.",
+    problem: "Movie and TV fans, and industry users, had to check separate places for titles, talent, jobs, services and news — with no single directory covering screen entertainment end to end.",
+    built: ["Search with Advanced Search across movies, TV shows, celebrities, services and jobs", "Title pages with talent listings, reviews, trailers and streaming options", "Top 10 Trending lists, a trending carousel, Recommended Seasons and Latest Episodes", "Extensive genre filters, from Action and Comedy to Documentary, Horror and Western", "Talent Finder, Job Finder, Service Finder and Event Finder, plus List a Film/TV show and Submit news", "Buy Credits and Buy Voucher options, app download links, and a weekly news signup"],
+    result: "Fans and industry users can search, filter and explore movies, TV shows, celebrities, jobs and services in one directory — from trending titles to talent listings and news — instead of checking separate places.",
+    stack: "Web directory platform",
+    longDescription: "A screen-entertainment directory built around one idea: everything about movies and TV in one place. Visitors search and filter titles by genre, browse trending lists and new episodes, open a title to see its talent, reviews and trailer, and explore streaming options — while industry users use the same directory to find talent, jobs, services and events, list a film or TV show, and submit news.",
+    features: [
+      { title: "Advanced Search", description: "Search across movies, TV shows, celebrities, services and jobs, with filters to narrow by genre and type." },
+      { title: "Title Pages with Talent & Reviews", description: "Each title shows its actors and producers, reviews, and trailer access — the full picture on one page." },
+      { title: "Trending & Recommendations", description: "Top 10 Trending lists, a trending carousel with Watch Trailer and Up Next, Recommended Seasons and Latest Episodes." },
+      { title: "Genre Filters", description: "Browse by genre — Action, Adventure, Anime, Animation, Comedy, Crime, Documentary, Drama, Horror, Musical, Science Fiction, Thriller, Western and Zombie." },
+      { title: "Finders for Industry Users", description: "Talent Finder, Job Finder, Service Finder and Event Finder, so professionals find people, work, services and events in the same directory." },
+      { title: "List & Submit", description: "List a Film or TV show, submit news, buy credits or a voucher, and sign up for the weekly news — all from the same platform." },
+    ],
+    decisions: [
+      { title: "Search first, browse second", explanation: "A directory lives or dies on finding things fast, so search and genre filters sit at the front of the experience, with trending lists for visitors who just want to explore." },
+      { title: "One consistent title page", explanation: "Every title — movie or show — follows the same pattern of talent, reviews, trailers and streaming options, so visitors never have to relearn the page." },
+    ],
+    challenges: [
+      { problem: "Fans and industry users were checking separate places for titles, talent, jobs, services and news.", solution: "Brought them all into one directory with shared search and consistent title pages." },
+      { problem: "A directory with many content types — titles, people, jobs, services, events, news — can easily become confusing.", solution: "Kept separate sections and finders for each type, with one search and one genre-filter system across them." },
+    ],
+    live: "actorsindex.com",
+    image: "/images/work/work-actors.svg",
+    imageAlt: "Illustration of the Actors Index entertainment directory with search and title cards",
+  },
 ];
 
 export const processSteps = [
@@ -746,6 +777,7 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   type Topic = { keywords: string[]; serviceSlug: string; projectSlug?: string; special?: "langchain" | "multi-agent" | "rag" | "automation" };
   const topics: Topic[] = [
     { keywords: ["slow", "loading", "loads slowly", "takes long to load", "fast", "speed", "lag", "crash", "broken", "fix", "bug", "error", "not working", "old", "outdated"], serviceSlug: "fix-improve", projectSlug: "hr-management-system" },
+    { keywords: ["movie", "film", "actor", "actress", "celebrity", "entertainment", "tv show", "streaming"], serviceSlug: "website-design", projectSlug: "actors-index" },
     { keywords: ["mobile app", "app", "android", "iphone", "ios", "react native"], serviceSlug: "mobile-apps", projectSlug: "padel-connect" },
     { keywords: ["langchain", "langgraph"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant", special: "langchain" },
     { keywords: ["multi-agent", "multi agent", "supervisor", "agent team", "team of agents"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant", special: "multi-agent" },

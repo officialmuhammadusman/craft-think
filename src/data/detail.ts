@@ -307,4 +307,15 @@ export const projectDetails: Record<string, ProjectDetail> = {
     ],
     serviceSlugs: ["mobile-apps", "booking"],
   },
+  "actors-index": {
+    clientBackground: "A screen-entertainment directory for movie and TV fans, plus industry users — talent, jobs, services and events — who previously had to check separate places for titles, people, work and news.",
+    phases: [
+      { title: "Directory & search", text: "Movies, TV shows, celebrities, services and jobs organised into one searchable directory, with Advanced Search and genre filters at the front.", exit: "Find it fast · Search and filters first, browsing second." },
+      { title: "Title pages", text: "A consistent page pattern for every title — talent listings, reviews, trailers and streaming options in one place.", exit: "One pattern · Every title reads the same way." },
+      { title: "Trending & discovery", text: "Top 10 Trending lists, a trending carousel, Recommended Seasons and Latest Episodes, so visitors who just want to explore always have somewhere to go.", exit: "Always something new · Trending and latest, up front." },
+      { title: "Finders & launch", text: "Talent, Job, Service and Event Finders for industry users, plus List a Film/TV show, Submit news, credits and vouchers, app links and a weekly news signup.", exit: "Launch checks · Fans and industry users served from one directory." },
+    ],
+    serviceSlugs: ["website-design", "ui-ux-design"],
+    techChips: ["Web directory platform"],
+  },
 };

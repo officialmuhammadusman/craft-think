@@ -24,7 +24,7 @@ import { services, projects, processSteps } from "@/data/content";
  * model from THINK_AI_MODEL (default gpt-4o-mini).
  *
  * The system prompt is built from the REAL site data in
- * src/data/content.ts (the 11 services, 6 projects, process steps, and
+ * src/data/content.ts (the 11 services, 7 projects, process steps, and
  * /consultation as the next step). It forbids inventing prices, clients,
  * testimonials, or stats, and sends visitors to a free consultation
  * when it does not know. Success returns { ai: true, answer }.

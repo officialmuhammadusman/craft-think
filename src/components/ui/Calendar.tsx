@@ -4,8 +4,9 @@
  * Calendar.tsx — Proper shadcn-style Calendar component for CraftThink,
  * built on react-day-picker (single-date mode). CraftThink theme: flat
  * indigo #4F46E5 for the selected day, dark navy #0B1220 text, white
- * background, no gradients. Day buttons are 48px so they are comfortable
- * tap targets on phones. Disabled days are dimmed, not hidden.
+ * background, no gradients. Day buttons are 44px on phones (48px on
+ * desktop) so they are comfortable tap targets without overflowing a
+ * 360px viewport. Disabled days are dimmed, not hidden.
  *
  * The parent passes `disabled` matchers (past dates, Sundays) and handles
  * selection; this component only renders the calendar.
@@ -20,7 +21,7 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("w-full bg-white p-3 text-[#0B1220]", className)}
+      className={cn("w-full bg-white p-2 text-[#0B1220] sm:p-3", className)}
       classNames={{
         root: "w-full",
         months: "w-full",
@@ -36,9 +37,9 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
         weekdays: "w-full",
         weekday: "pb-2 text-center text-sm font-semibold text-[#64748B]",
         week: "w-full",
-        day: "p-0.5 text-center text-[#0B1220]",
+        day: "p-0 text-center text-[#0B1220] sm:p-0.5",
         day_button:
-          "mx-auto flex h-12 w-12 items-center justify-center rounded-full text-base font-medium hover:bg-[#EEF2FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]",
+          "mx-auto flex h-11 w-11 items-center justify-center rounded-full text-base font-medium hover:bg-[#EEF2FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] sm:h-12 sm:w-12",
         today: "font-bold text-[#4F46E5]",
         selected: "[&>button]:bg-[#4F46E5] [&>button]:text-white [&>button]:hover:bg-[#4F46E5]",
         disabled: "opacity-40",

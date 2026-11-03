@@ -54,6 +54,9 @@ export default async function ConsultationPage({ searchParams }: { searchParams?
         </div>
         <p className="mt-6 text-center text-sm text-[#64748B]">Please note: your chosen date and time is a request confirmed by email — this site has no calendar connection yet, so no slot is guaranteed and no double-booking protection applies until we confirm it by email.</p>
         <p className="mt-6 text-center text-sm text-[#64748B]">{siteConfig.tagline}</p>
+        {/* Clearance above the mobile sticky bottom bar (bar height + iOS
+            safe area); the bar itself is untouched. Desktop: no spacer. */}
+        <div aria-hidden="true" className="h-[calc(76px+env(safe-area-inset-bottom))] lg:hidden" />
       </Container>
     </section>
   );

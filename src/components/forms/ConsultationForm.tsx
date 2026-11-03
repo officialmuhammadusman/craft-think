@@ -306,7 +306,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
       </label>
       <div className="flex flex-col gap-2 font-semibold">
         <span id="consult-date-label">Pick a date *</span>
-        <div className="rounded-xl border border-[#E7E9F2] bg-white" role="group" aria-labelledby="consult-date-label">
+        <div className="min-w-0 overflow-hidden rounded-xl border border-[#E7E9F2] bg-white" role="group" aria-labelledby="consult-date-label">
           <Calendar
             mode="single"
             selected={parseLocalDate(date)}
@@ -329,7 +329,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
       </div>
       <div className="flex flex-col gap-2 font-semibold">
         <span id="consult-time-label">Pick a time ({wh.timezoneLabel}, 30 minutes each) *</span>
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4" role="group" aria-labelledby="consult-time-label">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" role="group" aria-labelledby="consult-time-label">
           {slots.map((s) => {
             const busy = busySlots.includes(s);
             const selected = time === s;
@@ -362,7 +362,7 @@ export function ConsultationForm({ initialMessage = "" }: { initialMessage?: str
         {errors.time && <p role="alert" className={errorClass}>{errors.time}</p>}
       </div>
       {date && time && (
-        <p className="text-sm text-[#475569]">
+        <p className="break-words text-sm text-[#475569]">
           Requested slot: {date} at {time} {wh.timezoneLabel} ({wh.days}, {formatSlot(wh.startHour * 60 + wh.startMinute)}–{formatSlot(wh.endHour * 60 + wh.endMinute)} {wh.timezoneLabel}).
           {visitorSlotText ? ` ${visitorSlotText}` : ""}
         </p>

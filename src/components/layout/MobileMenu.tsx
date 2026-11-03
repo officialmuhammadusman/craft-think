@@ -26,7 +26,7 @@
  */
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { X, ChevronRight, ArrowLeft, LayoutGrid, Briefcase, Workflow, User, Mail, Sparkles, CalendarDays } from "lucide-react";
+import { X, ChevronRight, ArrowLeft, LayoutGrid, Briefcase, Workflow, User, Mail, CalendarDays } from "lucide-react";
 import { projects, services } from "@/data/content";
 
 type View = "main" | "services" | "work" | "about";
@@ -48,11 +48,6 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  const talkWithThink = () => {
-    closeAll();
-    window.dispatchEvent(new CustomEvent("craftthink:open-ai"));
-  };
 
   const drillButton = (target: Exclude<View, "main">, label: string, Icon: typeof LayoutGrid) => (
     <button
@@ -88,10 +83,6 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
         {drillButton("about", "About", User)}
         {plainRow("Process", "/process", Workflow)}
         {plainRow("Contact", "/contact", Mail)}
-        <button type="button" onClick={talkWithThink} className="flex min-h-[56px] w-full items-center gap-3 rounded-xl px-3 text-base font-semibold text-[#0B1220] hover:bg-[#F6F7FB]">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><Sparkles size={20} /></span>
-          <span className="flex flex-1 items-center gap-1.5 text-left">Talk with Think <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /></span>
-        </button>
       </nav>
 
       {/* Pinned booking button — main view only */}

@@ -25,6 +25,13 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * there is no dead blank area below a short card. The sheet wrapper
  * itself does not scroll; the message list does. On the full /guide
  * page (bare=false) the same column is used inside the card.
+ *
+ * Behaviour: a vague first message gets ONE clarifying question with
+ * quick-reply choices (from guideAnswer) instead of a guessed
+ * recommendation, and the latest guide answer carries a "Book a free
+ * consultation" action prefilled with the conversation summary, so
+ * the human handoff starts where the chat left off. Lead capture
+ * stays late and optional behind the collapsed follow-up toggle.
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
@@ -99,7 +106,23 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, waiting, bare]);
 
-  const contactHref = `/contact?${new URLSearchParams({ name, email, problem: problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
+  // Conversation summary for the human handoff: the visitor's own
+  // questions plus the last service/project Think suggested.
+  const conversationSummary = (() => {
+    const asked = messages.filter((m) => m.role === "user").map((m) => m.text);
+    const suggested = [...messages].reverse().find((m) => m.role === "guide" && m.reply?.serviceLabel)?.reply;
+    const parts = [
+      asked.length ? `What the visitor asked: ${asked.join(" | ")}` : "",
+      suggested?.serviceLabel ? `Think suggested: ${suggested.serviceLabel}${suggested.projectLabel ? ` (similar project: ${suggested.projectLabel})` : ""}` : "",
+    ].filter(Boolean);
+    return parts.join(" ").slice(0, 500);
+  })();
+
+  const contactHref = `/contact?${new URLSearchParams({ name, email, problem: conversationSummary || problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
+  // Handoff with context: the consultation form is prefilled with the
+  // visitor's own words plus what Think suggested, so the human
+  // conversation starts where the chat left off — no repeating.
+  const consultationHref = `/consultation?${new URLSearchParams({ problem: conversationSummary || problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 
   // Hints: never show all 8 at once. By default show only the first 3.
   // While the visitor types, show up to 3 hints matching what they typed.
@@ -122,12 +145,19 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       </div>
       )}
 
-      <div ref={scrollRef} data-lenis-prevent className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
+      <div ref={scrollRef} className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
             <div className={`max-w-[85%] rounded-[20px] px-4 py-3 ${m.role === "user" ? "rounded-tr-sm bg-[#4F46E5] text-white" : "rounded-tl-sm bg-[#F6F7FB] text-[#0B1220]"}`}>
               <p className="text-base leading-relaxed">{m.text}</p>
+              {m.reply?.quickReplies && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {m.reply.quickReplies.map((qr) => (
+                    <button key={qr} type="button" disabled={waiting} onClick={() => ask(qr)} className="min-h-[48px] rounded-full bg-white px-4 text-base font-semibold text-[#4F46E5] shadow-sm hover:bg-[#EEF2FF] disabled:opacity-50">{qr}</button>
+                  ))}
+                </div>
+              )}
               {m.reply?.serviceHref && (
                 <div className="mt-3 grid gap-2">
                   <Link href={m.reply.serviceHref} className="flex items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-base font-semibold text-[#4F46E5] shadow-sm hover:bg-[#EEF2FF]">
@@ -138,6 +168,14 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
                       Similar project: {m.reply.projectLabel} <ArrowRight size={16} />
                     </Link>
                   )}
+                </div>
+              )}
+              {i === messages.length - 1 && m.role === "guide" && (m.reply?.serviceHref || m.reply?.projectHref) && (
+                <div className="mt-3">
+                  <Link href={consultationHref} className="flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-[#4F46E5] px-4 text-base font-bold text-white shadow-sm hover:bg-[#4338CA]">
+                    Book a free consultation <ArrowRight size={16} />
+                  </Link>
+                  <p className="mt-2 text-sm leading-snug text-[#64748B]">This carries your question and what Think suggested, so you do not have to repeat yourself.</p>
                 </div>
               )}
             </div>
@@ -157,7 +195,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         {shownSuggestions.length > 0 && (
         <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
           <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : "Try one of these:"}</p>
-          <div data-lenis-prevent className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {shownSuggestions.map((s) => (
               <button key={s} type="button" disabled={waiting} onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] disabled:opacity-50">{s}</button>
             ))}

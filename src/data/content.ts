@@ -590,7 +590,7 @@ export const faqs = [
 ];
 
 /** Knowledge base for the Think chat: scored keyword topics -> reply + links. */
-export type GuideReply = { text: string; serviceHref?: string; serviceLabel?: string; projectHref?: string; projectLabel?: string };
+export type GuideReply = { text: string; serviceHref?: string; serviceLabel?: string; projectHref?: string; projectLabel?: string; quickReplies?: string[] };
 
 export type GuideContext = {
   /** Last reply that pointed at a service (for follow-up questions). */
@@ -760,6 +760,47 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
       projectHref: project ? `/work/${project.slug}` : undefined,
       projectLabel: project?.title,
     };
+  }
+
+  // Vague first message: do not guess. On the very first exchange
+  // (no previous topic, no previous visitor message), a bare greeting
+  // or "help", or a generic "I need a website" with no business type
+  // and no goal, gets ONE clarifying question with quick-reply choices
+  // instead of a guessed recommendation. The visitor's answer then
+  // scores normally on the next turn (history carries the business
+  // type), so the clarification leads to a real recommendation.
+  // Specific first messages (slow site, mobile app, booking for a
+  // salon) never hit this branch. Cost, timeline and FAQ answers
+  // above already returned before this point.
+  const isFirstExchange = !lastTopic && history.length === 0;
+  const words = q.split(/\s+/).filter(Boolean);
+  const genericWebsite =
+    best?.topic.serviceSlug === "website-design" &&
+    !business &&
+    words.length <= 8 &&
+    !has("book", "sell", "shop", "store", "booking", "manage", "portfolio", "showcase", "landing", "redesign");
+  const bareGreeting = !best && has("hello", "hi", "hey", "help", "start");
+  if (isFirstExchange && (bareGreeting || genericWebsite)) {
+    return {
+      text: "Happy to help — one quick question so I point you to the right service: what kind of business is it for, and what do you mainly want it to do?",
+      quickReplies: ["Show my work", "Take bookings", "Sell online", "Manage my business"],
+    };
+  }
+
+  // Quick-reply answers from the clarifying question map directly to
+  // the service they name, so tapping a choice never dead-ends
+  // (plain words like "show my work" score no keyword on their own).
+  if (has("show my work", "showcase my work", "show my business", "display my work")) {
+    const service = findService("business-websites")!;
+    return serviceAnswer(service, findProject("cliender"));
+  }
+  if (has("sell online", "sell my products")) {
+    const service = findService("online-store")!;
+    return serviceAnswer(service, findProject("cliender"));
+  }
+  if (has("manage my business", "run my business", "manage my company")) {
+    const service = findService("crm")!;
+    return serviceAnswer(service, findProject("cliender"));
   }
 
   if (best) {

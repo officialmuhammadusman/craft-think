@@ -67,7 +67,8 @@
 }
 
 html {
-  /* Smooth scroll — Lenis JS also handles this; this is the CSS fallback */
+  /* Calm native scrolling: smooth behaviour applies to anchor jumps
+     only. No JS smooth-scroll library is used anywhere on the site. */
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

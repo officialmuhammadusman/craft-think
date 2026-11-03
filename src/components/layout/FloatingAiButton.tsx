@@ -13,10 +13,10 @@ import { AiGuide } from "@/components/ai/AiGuide";
  * drag-handle pill at the top, sitting ABOVE the sticky mobile CTA
  * bar (bottom offset clears it) — never covered by it. Desktop
  * (>=1024px): the existing bottom-right window (~400px).
- * data-lenis-prevent + overscroll-contain are kept everywhere: they
- * fix the Lenis scroll-stealing bug. Not a separate page, not a
- * side drawer. The full /guide page still exists, linked from the
- * header.
+ * Body scroll is locked while the sheet is open and restored on
+ * close; the sheet's own message list scrolls (overscroll-contain).
+ * Not a separate page, not a side drawer. The full /guide page
+ * still exists, linked from the header.
  */
 export function FloatingAiButton() {
   // Keyed remount on route change closes the chat window, without
@@ -42,15 +42,20 @@ function FloatingAiButtonInner() {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    // Lock page scroll while the sheet is open; restore on close.
+    // The sheet's own message list still scrolls (overscroll-contain).
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
   }, [open ]);
 
   return (
     <>
       {open && (
         <div
-          data-lenis-prevent
-          data-chat-scroll
+         
           role="dialog"
           aria-modal="false"
           aria-label="CraftThink AI chat"
@@ -93,7 +98,7 @@ function FloatingAiButtonInner() {
           {/* Not a scroll area itself: AiGuide fills the sheet height and
               its own message list scrolls, so no blank space sits below
               a short card. */}
-          <div data-lenis-prevent className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
             <AiGuide bare />
           </div>
         </div>

@@ -136,7 +136,7 @@ export default function HomePage() {
         <Container>
           <Reveal><SectionHeading eyebrow="Work" title="Work that changed how businesses run" subtitle="One outcome per project. Full problem, build and result on each case page." /></Reveal>
           <Reveal>
-            <div data-lenis-prevent className="-mx-4 mt-8 flex flex-nowrap gap-2 overflow-x-auto overscroll-contain px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            <div className="-mx-4 mt-8 flex flex-nowrap gap-2 overflow-x-auto overscroll-contain px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
               <Link href="/work" className="flex min-h-[48px] shrink-0 items-center rounded-full bg-[#0B1220] px-4 text-sm font-semibold text-white">All work</Link>
               {industries.map((ind) => (
                 <Link key={ind.label} href={ind.href} className="flex min-h-[48px] shrink-0 items-center rounded-full border border-[#E7E9F2] bg-white px-4 text-sm font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">

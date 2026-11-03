@@ -22,7 +22,7 @@
  * existing AI sheet, closing the menu first, as before); Work →
  * "Want work like this? Book a free consultation" (link).
  * Body scroll locked while any view is open; drill lists scroll
- * natively (data-lenis-prevent + overscroll-contain).
+ * natively (overscroll-contain).
  * Desktop header is untouched by this file.
  */
 import { useEffect, useState } from "react";
@@ -75,7 +75,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   );
 
   return (
-    <div id="mobile-menu" aria-label="Mobile navigation" data-lenis-prevent className="fixed inset-0 z-[100] flex flex-col overflow-hidden overscroll-contain bg-white lg:hidden">
+    <div id="mobile-menu" aria-label="Mobile navigation" className="fixed inset-0 z-[100] flex flex-col overflow-hidden overscroll-contain bg-white lg:hidden">
       {/* Dark-navy top bar — GetYourGuide Profile style */}
       <div className="flex items-center justify-between gap-3 bg-[#0B1220] px-4 py-3 pt-[calc(0.75rem+env(safe-area-inset-top))]">
         <p className="text-base font-bold text-white">Menu</p>
@@ -83,7 +83,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
       </div>
 
       {/* MAIN VIEW */}
-      <nav aria-label="Main navigation" data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+      <nav aria-label="Main navigation" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
         {drillButton("services", "Services", LayoutGrid)}
         {drillButton("work", "Work", Briefcase)}
         {drillButton("about", "About", User)}
@@ -112,7 +112,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
             <button type="button" onClick={closeAll} aria-label="Close menu" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"><X size={22} /></button>
           </div>
 
-          <div data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
             {/* Help card at the top of each drill panel */}
             {view === "about" ? (
               <div className="rounded-[20px] border border-[#E7E9F2] bg-[#EEF2FF] p-5">

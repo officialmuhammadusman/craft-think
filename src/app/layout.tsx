@@ -4,7 +4,8 @@
  *   (body/UI) and Instrument Serif italic (hero accent word only).
  * - Sets SEO metadata from site config.
  * - Wraps all pages with Header, Footer, and StickyMobileCTA.
- * - Initialises Lenis smooth scroll (disabled when prefers-reduced-motion is set).
+ * - Scrolling is calm native browser scrolling (CSS scroll-behavior
+ *   smooth applies to anchor jumps only); no JS smooth-scroll library.
  */
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Instrument_Sans, Instrument_Serif } from "next/font/google";
@@ -12,7 +13,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingAiButton } from "@/components/layout/FloatingAiButton";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
-import { LenisProvider } from "@/components/layout/LenisProvider";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -88,27 +88,24 @@ export default function RootLayout({
       className={`${bricolage.variable} ${instrumentSans.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#0B1220]">
-        {/* Lenis smooth scroll wrapper — disabled if prefers-reduced-motion */}
-        <LenisProvider>
-          {/* Sticky header — sits above all page content */}
-          <Header />
+        {/* Sticky header — sits above all page content */}
+        <Header />
 
-          {/* Page content — grows to fill available space */}
-          <main className="flex-1 pt-[64px] lg:pt-[112px]">
-            {/* Offsets the fixed two-tier header: 64px single row on
-                phones, 64px Tier 1 + 48px Tier 2 = 112px on desktop. */}
-            {children}
-          </main>
+        {/* Page content — grows to fill available space */}
+        <main className="flex-1 pt-[64px] lg:pt-[112px]">
+          {/* Offsets the fixed two-tier header: 64px single row on
+              phones, 64px Tier 1 + 48px Tier 2 = 112px on desktop. */}
+          {children}
+        </main>
 
-          {/* Footer */}
-          <Footer />
+        {/* Footer */}
+        <Footer />
 
-          {/* Floating AI button — plain link to the /guide page */}
-          <FloatingAiButton />
+        {/* Floating AI button — plain link to the /guide page */}
+        <FloatingAiButton />
 
-          {/* Mobile-only fixed bottom CTA bar */}
-          <StickyMobileCTA />
-        </LenisProvider>
+        {/* Mobile-only fixed bottom CTA bar */}
+        <StickyMobileCTA />
       </body>
     </html>
   );

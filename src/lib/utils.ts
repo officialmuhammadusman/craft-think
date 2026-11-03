@@ -3,11 +3,13 @@
  * Import clsx here so we only have one import across the codebase.
  */
 import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 /**
- * cn — Merge Tailwind class names conditionally.
+ * cn — Merge Tailwind class names conditionally, with conflicting
+ * Tailwind classes resolved (later classes win).
  * Usage: cn("base-class", condition && "conditional-class", { "object-class": bool })
  */
 export function cn(...inputs: ClassValue[]): string {
-  return clsx(inputs);
+  return twMerge(clsx(inputs));
 }

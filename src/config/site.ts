@@ -21,8 +21,10 @@ export const siteConfig = {
   phone: "+92 313 526 3300",
 
   // ── Working Hours (consultation slots) ────────────────────────────────────
-  // Used ONLY to generate the consultation time-slot picker. No calendar
-  // connection exists yet, so a picked slot is a REQUEST confirmed by
+  // Used ONLY to generate the consultation time-slot picker. Live slot
+  // locking via Google Calendar is env-gated (see src/lib/calendar.ts):
+  // with credentials set, taken slots are greyed out and submit locks
+  // the slot; without them, a picked slot is a REQUEST confirmed by
   // email, not a confirmed booking. Booking link stays TODO (see links).
   workingHours: {
     days: "Monday–Saturday",

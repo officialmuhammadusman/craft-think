@@ -590,7 +590,7 @@ export const faqs = [
 ];
 
 /** Knowledge base for the Think chat: scored keyword topics -> reply + links. */
-export type GuideReply = { text: string; serviceHref?: string; serviceLabel?: string; projectHref?: string; projectLabel?: string; quickReplies?: string[] };
+export type GuideReply = { text: string; serviceHref?: string; serviceLabel?: string; projectHref?: string; projectLabel?: string; quickReplies?: string[]; followUps?: string[]; noAnswer?: boolean };
 
 export type GuideContext = {
   /** Last reply that pointed at a service (for follow-up questions). */
@@ -631,6 +631,20 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   const findService = (slug: string) => services.find((s) => s.slug === slug);
   const findProject = (slug: string) => projects.find((p) => p.slug === slug);
 
+  // Follow-up chips shown BELOW the next answer (max 3, handled by
+  // AiGuide): they are always questions guideAnswer can actually
+  // answer — cost, timeline, a similar project, or the consultation
+  // handoff — so tapping one never dead-ends. The "see a similar
+  // project" and "book a free consultation" chips are intercepted
+  // early below, before topic scoring could misread them.
+  const topicFollowUps = (project?: ReturnType<typeof findProject>) => [
+    "How much does it cost?",
+    "How long does it take?",
+    project ? "See a similar project" : "Book a free consultation",
+  ];
+  const afterCostFollowUps = (project?: ReturnType<typeof findProject>) =>
+    project ? ["How long does it take?", "See a similar project", "Book a free consultation"] : ["How long does it take?", "Book a free consultation"];
+
   // --- Business context from this and earlier messages ----------------------
   const businessTypes: { keywords: string[]; label: string }[] = [
     { keywords: ["salon", "barber", "spa"], label: "salon" },
@@ -648,6 +662,33 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   };
   const business = businessOf(q) ?? [...history].reverse().map(businessOf).find(Boolean);
 
+  // --- Intercepted follow-up chips (before topic scoring) ------------------
+  // "See a similar project" reuses the last discussed service/project;
+  // without one it falls through to the honest no-answer reply below.
+  if (has("see a similar project", "show me a similar project", "similar project")) {
+    const project = lastTopic?.projectHref ? findProject(lastTopic.projectHref.replace("/work/", "")) : undefined;
+    const service = lastTopic?.serviceHref?.startsWith("/services/") ? findService(lastTopic.serviceHref.replace("/services/", "")) : undefined;
+    if (project && service) {
+      return {
+        text: `A similar project is ${project.title} — ${project.line} The next step is a free consultation, where we confirm the scope and a firm quote for your business.`,
+        serviceHref: `/services/${service.slug}`,
+        serviceLabel: service.title,
+        projectHref: `/work/${project.slug}`,
+        projectLabel: project.title,
+        followUps: topicFollowUps(project),
+      };
+    }
+  }
+  // "Book a free consultation" must not be misread as a booking topic.
+  if (has("consultation", "book a call", "free call", "talk to someone", "speak to someone", "talk to a human", "speak to a human")) {
+    return {
+      text: "You can book a free consultation — tell us about your business and what you need, and we will talk it through with a clear next step and no obligation.",
+      serviceHref: "/consultation",
+      serviceLabel: "Book a Free Consultation",
+      followUps: ["How much does it cost?", "How long does it take?"],
+    };
+  }
+
   // --- Composed answers from real service / project data --------------------
   const nextStep = "The next step is a free consultation, where we confirm the scope and a firm quote for your business.";
   function serviceAnswer(service: NonNullable<ReturnType<typeof findService>>, project?: ReturnType<typeof findProject>, second?: ReturnType<typeof findService>): GuideReply {
@@ -662,6 +703,7 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
       serviceLabel: service.title,
       projectHref: project ? `/work/${project.slug}` : undefined,
       projectLabel: project?.title,
+      followUps: topicFollowUps(project),
     };
   }
   function aiService() {
@@ -731,7 +773,7 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   // and a FAQ still wins when nothing else scored.
   if (bestFaq && bestFaq.score >= 2 && (!best || bestFaq.score >= best.score)) {
     const link = faqLink(bestFaq.q);
-    return { text: `${bestFaq.a} ${nextStep}`, serviceHref: link.href, serviceLabel: link.label };
+    return { text: `${bestFaq.a} ${nextStep}`, serviceHref: link.href, serviceLabel: link.label, followUps: ["How long does it take?", "Book a free consultation"] };
   }
 
   // Cost: never a number. Keep the best topic's cards when one scored,
@@ -748,6 +790,7 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
       serviceLabel: linkService ? linkService.title : "Get an Estimate",
       projectHref: project ? `/work/${project.slug}` : lastTopic?.projectHref,
       projectLabel: project?.title ?? lastTopic?.projectLabel,
+      followUps: afterCostFollowUps(project ?? (lastTopic?.projectHref ? findProject(lastTopic.projectHref.replace("/work/", "")) : undefined)),
     };
   }
   // Timeline questions get the process answer, keeping topic cards.
@@ -759,6 +802,7 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
       serviceLabel: "Our Process",
       projectHref: project ? `/work/${project.slug}` : undefined,
       projectLabel: project?.title,
+      followUps: project ? ["How much does it cost?", "See a similar project", "Book a free consultation"] : ["How much does it cost?", "Book a free consultation"],
     };
   }
 
@@ -809,30 +853,34 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
     const secondService = second ? findService(second.serviceSlug) : undefined;
     // Remote-work questions are not a service: keep the honest answer.
     if (best.topic.keywords.includes("remote") && best.topic.serviceSlug === "website-design" && !has("website", "site", "portfolio")) {
-      return { text: "We work remotely with clients worldwide, with weekly demos planned around your time zone as far as possible. There is no office you need to visit.", serviceHref: "/about", serviceLabel: "About the CEO" };
+      return { text: "We work remotely with clients worldwide, with weekly demos planned around your time zone as far as possible. There is no office you need to visit.", serviceHref: "/about", serviceLabel: "About the CEO", followUps: ["How much does it cost?", "Book a free consultation"] };
     }
     if (best.topic.special === "langchain") {
       return {
         text: `LangChain — ${aiTech("LangChain")} LangGraph — ${aiTech("LangGraph")} Together, that means instead of one chatbot answering one question, you get a small team of AI steps that follow a process, with checks along the way. ${nextStep}`,
         serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+        followUps: ["How much does it cost?", "How long does it take?", "Book a free consultation"],
       };
     }
     if (best.topic.special === "multi-agent") {
       return {
         text: `${aiCapability("Multi-Agent Teams")} ${aiCapability("Human Handover")} ${nextStep}`,
         serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+        followUps: ["How much does it cost?", "How long does it take?", "Book a free consultation"],
       };
     }
     if (best.topic.special === "rag") {
       return {
         text: `${aiCapability("RAG Pipelines")} ${aiCapability("Corrective RAG")} ${aiCapability("Self-RAG Checking")} ${nextStep}`,
         serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+        followUps: ["How much does it cost?", "How long does it take?", "Book a free consultation"],
       };
     }
     if (best.topic.special === "automation") {
       return {
         text: `${aiCapability("Agentic Workflows")} ${nextStep}`,
         serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant",
+        followUps: ["How much does it cost?", "How long does it take?", "Book a free consultation"],
       };
     }
     return serviceAnswer(service, project, secondService);
@@ -840,10 +888,10 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
 
   // Greetings and thanks: friendly, but never a dead end.
   if (has("thank", "thanks", "great", "perfect", "awesome")) {
-    return { text: "You are welcome! Tell me a little about your business and what you need, and I will point you to the right service — or book a free call and we will talk it through.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation" };
+    return { text: "You are welcome! Tell me a little about your business and what you need, and I will point you to the right service — or book a free call and we will talk it through.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation", followUps: ["My website is slow", "I need a booking system", "I need a mobile app"] };
   }
   if (has("hello", "hi", "hey", "help", "start", "need")) {
-    return { text: "Hello! Tell me what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation" };
+    return { text: "Hello! Tell me what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation", followUps: ["My website is slow", "I need a booking system", "I need a mobile app"] };
   }
 
   // Follow-ups with no new topic ("and for that?", "tell me more",
@@ -858,10 +906,14 @@ export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   }
 
   // Unknown topic: honest, with a consultation card — never a dead end
-  // and never an invented answer.
+  // and never an invented answer. Marked noAnswer so the chat UI
+  // automatically opens the follow-up form, asking the visitor to
+  // leave their details so CraftThink can contact them about it.
   return {
-    text: "I am not sure about that one yet — Think only helps with CraftThink's own services, projects and process, so I cannot answer that one properly. The best next step is a free consultation, where Muhammad can answer it for your business.",
+    text: "I do not have information on that question yet — Think only covers CraftThink's own services, projects and process, so I cannot answer it properly. Please leave your details below so CraftThink can contact you about it, or book a free consultation and we will talk it through.",
     serviceHref: "/consultation",
     serviceLabel: "Book a Free Consultation",
+    followUps: ["Book a free consultation"],
+    noAnswer: true,
   };
 }

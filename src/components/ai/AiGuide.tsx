@@ -45,6 +45,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const [followupOpen, setFollowupOpen] = useState(false);
   const askedInitial = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const lastTopicRef = useRef<GuideReply | undefined>(undefined);
 
@@ -87,6 +88,9 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       history: messages.filter((m) => m.role === "user").map((m) => m.text),
     });
     if (reply.serviceHref) lastTopicRef.current = reply;
+    // No answer to this question: open the follow-up form at once so
+    // the visitor can leave their details and be contacted about it.
+    if (reply.noAnswer) setFollowupOpen(true);
     setMessages((m) => [...m, { role: "guide", text: reply.text, reply }]);
     setWaiting(false);
     inputRef.current?.focus();
@@ -105,6 +109,11 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, waiting, bare]);
+  // When the follow-up form opens, scroll the bottom block itself so
+  // the Continue button is brought into view inside the sheet.
+  useEffect(() => {
+    if (followupOpen) bottomRef.current?.scrollTo({ top: bottomRef.current.scrollHeight, behavior: "smooth" });
+  }, [followupOpen]);
 
   // Conversation summary for the human handoff: the visitor's own
   // questions plus the last service/project Think suggested.
@@ -124,12 +133,22 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   // conversation starts where the chat left off — no repeating.
   const consultationHref = `/consultation?${new URLSearchParams({ problem: conversationSummary || problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 
-  // Hints: never show all 8 at once. By default show only the first 3.
-  // While the visitor types, show up to 3 hints matching what they typed.
+  // Suggestions UPDATE below each answer: the latest guide reply's
+  // follow-ups (max 3, fitted to that answer's topic) replace the
+  // defaults. A clarifying question keeps its quick replies inside
+  // its own bubble, so no bottom chips are shown for it. While the
+  // visitor types, the current set is filtered by the typed text.
+  // Before any answer, the original 3 default hints are shown.
+  const lastGuideReply = [...messages].reverse().find((m) => m.role === "guide" && m.reply)?.reply;
+  const baseSuggestions = lastGuideReply?.followUps?.length
+    ? lastGuideReply.followUps
+    : lastGuideReply?.quickReplies
+      ? []
+      : SUGGESTIONS.slice(0, 3);
   const typed = input.trim().toLowerCase();
   const shownSuggestions = typed
-    ? SUGGESTIONS.filter((s) => s.toLowerCase().includes(typed)).slice(0, 3)
-    : SUGGESTIONS.slice(0, 3);
+    ? baseSuggestions.filter((s) => s.toLowerCase().includes(typed)).slice(0, 3)
+    : baseSuggestions.slice(0, 3);
 
   return (
     <div className={bare ? "flex min-h-0 flex-1 flex-col overflow-hidden bg-white" : "overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl"}>
@@ -191,10 +210,15 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
         )}
       </div>
 
-      <div className="shrink-0">
+      {/* Bottom block: in bare mode (fixed-height sheet) it is capped
+          at 45% of the sheet with its own scroll, so when the
+          follow-up form expands the Continue button stays fully
+          inside the sheet — never clipped at the sheet edge and
+          never overlapping the sticky mobile bar below. */}
+      <div ref={bottomRef} className={bare ? "shrink-0 max-h-[45%] overflow-y-auto overscroll-contain" : "shrink-0"}>
         {shownSuggestions.length > 0 && (
         <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
-          <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : "Try one of these:"}</p>
+          <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : lastGuideReply?.followUps?.length ? "What next?" : "Try one of these:"}</p>
           <div className="flex flex-wrap gap-2">
             {shownSuggestions.map((s) => (
               <button key={s} type="button" disabled={waiting} onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] disabled:opacity-50">{s}</button>

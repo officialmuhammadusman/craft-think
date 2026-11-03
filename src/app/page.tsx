@@ -216,7 +216,10 @@ export default function HomePage() {
             <Image src="/images/sections/industries.svg" alt="Illustration of the industries CraftThink has built for, from healthcare to travel" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
           </Reveal>
           <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((ind) => (
+            {/* Homepage shows 6 industries: Sports & Clubs is detail-only here,
+                matching the Work grid where Padel Connect is detail-only. The
+                full industries data (including Sports & Clubs) is untouched. */}
+            {industries.filter((ind) => ind.label !== "Sports & Clubs").map((ind) => (
               <StaggerItem key={ind.label} className="h-full">
                 <article className="ct-lift flex h-full flex-col rounded-[24px] border border-[#E7E9F2] bg-white p-7 shadow-sm">
                   <h3 className="ct-h4">{ind.label}</h3>

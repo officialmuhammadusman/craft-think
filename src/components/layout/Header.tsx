@@ -196,7 +196,6 @@ export function Header() {
               {openPanel === "about" && (
                 <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
                   {[
-                    { title: "About CraftThink", href: "/about", line: "Overview — who we are, what we build, and how we work." },
                     { title: "About the Company", href: "/about/company", line: "How CraftThink works, from first call to support after launch." },
                     { title: "About the CEO", href: "/about/ceo", line: "Meet Muhammad Usman, the CEO who leads your project personally." },
                   ].map((item) => (

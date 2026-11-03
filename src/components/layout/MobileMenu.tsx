@@ -12,8 +12,8 @@
  * on the sticky bar). Tapping Services or Work opens a second
  * panel that SLIDES IN FROM RIGHT TO LEFT like a drawer, covering
  * the main menu, with its own top bar (← Back, centred title, X).
- * About is a drill-down too: About CraftThink, About the Company,
- * About the CEO — each goes to its own page.
+ * About is a drill-down too: About the Company and About the CEO
+ * only — each goes to its own page.
  * Back returns to the main menu (panel slides back out to the
  * right); X or any link closes the whole menu.
  *
@@ -117,7 +117,7 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
             {view === "about" ? (
               <div className="rounded-[20px] border border-[#E7E9F2] bg-[#EEF2FF] p-5">
                 <p className="text-base font-bold text-[#0B1220]">Who are you working with?</p>
-                <p className="mt-1 text-sm leading-snug text-[#475569]">Start with the overview, then meet the company and the CEO who leads your project.</p>
+                <p className="mt-1 text-sm leading-snug text-[#475569]">Meet the company and the CEO who leads your project.</p>
                 <Link href="/consultation" onClick={closeAll} className="mt-3 flex min-h-[48px] w-fit items-center rounded-full bg-[#4F46E5] px-5 text-base font-semibold text-white">Book a Free Consultation</Link>
               </div>
             ) : view === "services" ? (
@@ -151,7 +151,6 @@ export function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () =
             ) : view === "about" ? (
               <ul className="mt-4 flex flex-col gap-0.5">
                 {[
-                  { title: "About CraftThink", href: "/about", line: "Overview — who we are, what we build, and how we work." },
                   { title: "About the Company", href: "/about/company", line: "How CraftThink works, from first call to support after launch." },
                   { title: "About the CEO", href: "/about/ceo", line: "Meet Muhammad Usman, the CEO who leads your project personally." },
                 ].map((a) => (

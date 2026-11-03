@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bot, ChevronDown, Send, User, X } from "lucide-react";
+import { ArrowRight, Bot, ChevronDown, Send, User } from "lucide-react";
 import { guideAnswer, type GuideReply } from "@/data/content";
 import { Button } from "@/components/ui/Button";
 
@@ -35,7 +35,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * the human handoff starts where the chat left off. Lead capture
  * stays late and optional behind the collapsed follow-up toggle.
  */
-export function AiGuide({ initial = "", bare = false, onClose }: { initial?: string; bare?: boolean; onClose?: () => void }) {
+export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
     { role: "guide", text: "Hello! I am Think — your guide to CraftThink. Tell me what your business needs, and I will point you to the right service and a similar project, then help you book a free call." },
   ]);
@@ -171,43 +171,6 @@ export function AiGuide({ initial = "", bare = false, onClose }: { initial?: str
 
   // Bare-mode sheet header: rendered INSIDE the single sheet
   // scroller (below) so it scrolls away with the rest of the sheet
-  // content instead of sitting fixed at the top. The sheet wrapper
-  // (FloatingAiButton) no longer renders its own header.
-  const sheetHeader = (
-    <div className="flex items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]">
-          <Bot size={20} />
-        </span>
-        <div>
-          <p className="text-base font-bold leading-tight">Think</p>
-          <p className="flex items-center gap-1.5 text-xs text-white/60">
-            <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Ask what you need — I guide you to the right service
-          </p>
-        </div>
-      </div>
-      <div className="flex shrink-0 items-center gap-1">
-        <Link
-          href="/guide"
-          onClick={onClose}
-          className="flex min-h-[40px] items-center rounded-full px-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white"
-        >
-          Full page
-        </Link>
-        {onClose && (
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close AI chat"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10 sm:flex"
-          >
-            <X size={18} />
-          </button>
-        )}
-      </div>
-    </div>
-  );
-
   const suggestionsBlock = shownSuggestions.length > 0 && (
     <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
       <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : lastGuideReply?.followUps?.length ? "What next?" : "Try one of these:"}</p>
@@ -258,7 +221,6 @@ export function AiGuide({ initial = "", bare = false, onClose }: { initial?: str
       )}
 
       <div ref={scrollRef} className={bare ? "min-h-0 flex-1 overflow-y-auto overscroll-contain" : "flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"} aria-live="polite">
-        {bare && sheetHeader}
         <div className={bare ? "flex flex-col gap-4 px-5 py-5 sm:px-6" : "contents"}>
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>

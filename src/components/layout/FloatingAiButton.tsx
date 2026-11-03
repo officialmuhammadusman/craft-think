@@ -80,7 +80,7 @@ function FloatingAiButtonInner() {
               drag-handle X is the one close button; on larger
               screens this row is hidden and the header X shows. */}
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
-            <AiGuide bare onClose={() => setOpen(false)} />
+            <AiGuide bare />
           </div>
         </div>
       )}

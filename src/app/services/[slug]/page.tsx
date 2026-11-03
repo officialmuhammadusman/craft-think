@@ -57,14 +57,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
           <div className="mt-8">
             <Image src={s.image} alt={s.imageAlt} width={1200} height={700} className="w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
-            <p className="mt-2 text-sm text-[#64748B]">Service visual — illustrative image for this service, not a client screenshot.</p>
           </div>
 
           {/* PROOF STRIP — real facts only, counted from this service's own data */}
           <div className="mt-8 flex flex-col gap-2 rounded-[24px] border border-[#E7E9F2] bg-[#F6F7FB] p-6 text-base sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
             <span><strong>{relatedProjects.length}</strong> related {relatedProjects.length === 1 ? "project" : "projects"} on this site</span>
             <span><strong>{s.capabilities?.length ?? 0}</strong> capabilities explained below</span>
-            <span><strong>{s.techStack?.length ?? 0}</strong> technologies, explained in plain terms</span>
+            <span><strong>{s.techStack?.length ?? 0}</strong> technologies, explained below</span>
             {closerProject && (
               <span>See it in action: <Link href={`/work/${closerProject.slug}`} className="font-semibold text-[#4F46E5]">{closerProject.title} →</Link></span>
             )}
@@ -120,7 +119,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
           {/* IN DETAIL — capabilities, per service (existing strong section, kept) */}
           {s.capabilities && s.capabilities.length > 0 && (
-            <Section title="In detail" intro="The technical detail, in plain language — so you can see exactly what is included before you commit.">
+            <Section title="In detail" intro="The technical detail — so you can see exactly what is included before you commit.">
               <div className="grid gap-4 sm:grid-cols-2">
                 {s.capabilities.map((c) => (
                   <article key={c.title} className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
@@ -134,7 +133,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
           {/* TECHNOLOGY — grouped by the service's own stack, with plain glosses */}
           {s.techStack && s.techStack.length > 0 && (
-            <Section title="Technology, in plain terms" intro="The tools behind this service, and why each one is there — no jargon without an explanation.">
+            <Section title="Technology" intro="The tools behind this service, and why each one is there — no jargon without an explanation.">
               <div className="grid gap-4 sm:grid-cols-2">
                 {s.techStack.map((t) => (
                   <article key={t.name} className="rounded-[20px] border border-[#E7E9F2] bg-[#F6F7FB] p-5">
@@ -174,7 +173,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <ol className="grid gap-4 sm:grid-cols-3">
               <li className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-widest text-[#4F46E5]">1 · Free consultation</p>
-                <p className="mt-2 text-[#475569]">Tell us the problem in plain words. We show you the closest project and a clear next step — with no obligation.</p>
+                <p className="mt-2 text-[#475569]">Tell us the problem. We show you the closest project and a clear next step — with no obligation.</p>
               </li>
               <li className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-widest text-[#4F46E5]">2 · Written scope &amp; quote</p>

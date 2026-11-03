@@ -28,7 +28,7 @@ export default function ContactPage() {
             ))}
             <div className="rounded-[24px] bg-[#0B1220] p-6 text-white">
               <p className="text-base font-bold">Working remotely with clients worldwide.</p>
-              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use email or WhatsApp above until then.</p>
+              <p className="mt-2 text-white/70">Or reach us by email or WhatsApp.</p>
             </div>
           </div>
           <ContactForm />

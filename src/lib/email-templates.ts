@@ -71,7 +71,7 @@ export function postCallFollowUp(input: { name: string; service?: string }): Ema
   return wrap(`Next steps after your CraftThink call, ${input.name}`, [
     `Hello ${input.name}, thank you for speaking with us.${serviceLine}`,
     "As agreed on the call, we will follow up by email with the next step. Nothing is charged and nothing is started until you agree the scope in writing.",
-    "If anything from the call was unclear, just reply to this email and we will explain it in plain words.",
+    "If anything from the call was unclear, just reply to this email and we will explain it clearly.",
     "— Muhammad Usman, CEO & Founder, CraftThink",
   ]);
 }

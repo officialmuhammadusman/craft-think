@@ -210,14 +210,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "fix-improve": {
     pain: "Software that works slowly, breaks often or looks ten years old quietly costs you customers and staff time. Every workaround your team invents is a sign the software is not doing its job.",
     process: [
-      { title: "Free audit", text: "We measure first: slow queries, missing indexes, uncached work and real bugs — and list the top fixes in plain language.", exit: "Audit first · A clear fix list, before you pay for any fix." },
+      { title: "Free audit", text: "We measure first: slow queries, missing indexes, uncached work and real bugs — and list the top fixes.", exit: "Audit first · A clear fix list, before you pay for any fix." },
       { title: "Fix plan", text: "We order the fixes by impact, so you pay for what matters first, not everything at once.", exit: "Written plan · Scope, order and price agreed before fixing starts." },
       { title: "Fix in steps", text: "Each fix is small and tested, so your live software never breaks while it is being improved.", exit: "Weekly demos · You see each fix working before the next one starts." },
       { title: "Test & handback", text: "We test the fixed software end to end, on phones and computers, and hand it back with a record of what changed.", exit: "Launch checks · Your data and history kept safe throughout." },
     ],
     benefits: ["Software that feels new again, fixed in the order of what matters most.", "Live software that never breaks while it is being improved.", "Your data and history kept safe through every change.", "A clear plan, so you never pay for fixes that do not matter."],
     faqs: [
-      { q: "Is the audit really free?", a: "Yes. The audit lists what is slow, broken or risky in plain language — you decide which fixes to pay for." },
+      { q: "Is the audit really free?", a: "Yes. The audit lists what is slow, broken or risky — you decide which fixes to pay for." },
       { q: "Will fixing break my live software?", a: "No. Fixes are small and tested, so live software keeps running while it is improved." },
       { q: "Do I need a full rebuild?", a: "Not always. Many clients start with a small fix sprint and only rebuild the parts that truly need it." },
       { q: "Will I lose my data?", a: "No. Moving from old systems to modern ones is planned so records, customers and history are kept safe." },
@@ -229,7 +229,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     pain: "A broken checkout, form or app page is usually discovered by a customer, not by your team — and by then the sale or booking is already lost. Software that is never tested slowly breaks as browsers, phones and payment rules change.",
     process: [
       { title: "Test plan", text: "We agree what must be tested — features, payments, forms, phones and computers — before every release.", exit: "Written plan · Test scope agreed before testing starts." },
-      { title: "Test & report", text: "Manual checks plus automated tests, with every problem reported in plain language, not jargon.", exit: "Weekly demos · You see what was tested and what failed, in plain words." },
+      { title: "Test & report", text: "Manual checks plus automated tests, with every problem reported clearly, not in jargon.", exit: "Weekly demos · You see what was tested and what failed." },
       { title: "Fix & retest", text: "Bugs are fixed and retested until the release passes — nothing ships on hope.", exit: "Retest first · No release goes out with known breaking bugs." },
       { title: "Care & monitoring", text: "After launch we monitor, fix bugs, update and add small improvements, so problems are found before customers report them.", exit: "Care plan · Cancel anytime, and you keep everything we built." },
     ],

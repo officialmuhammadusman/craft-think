@@ -204,7 +204,7 @@ export default function BriefPage() {
           as="h1"
           eyebrow="Project brief"
           title="Tell us about your project"
-          subtitle="Answer in plain words — as much or as little as you know. We will reply by email and then talk it through on a free call."
+          subtitle="Answer — as much or as little as you know. We will reply by email and then talk it through on a free call."
         />
         <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-5 rounded-2xl border border-[#E7E9F2] bg-white p-6 shadow-sm" noValidate>
           {/* Honeypot trap field: real visitors never see or fill this. */}
@@ -217,7 +217,7 @@ export default function BriefPage() {
           </label>
 
           <label className={labelClass}>What do you want this project to do for your business? *
-            <textarea value={goals} onChange={(e) => setGoals(e.target.value)} rows={5} placeholder="In plain words: what problem should it solve, and what should be easier afterwards?" className="rounded-xl border border-[#E7E9F2] px-4 py-3 text-base font-normal" />
+            <textarea value={goals} onChange={(e) => setGoals(e.target.value)} rows={5} placeholder="What problem should it solve, and what should be easier afterwards?" className="rounded-xl border border-[#E7E9F2] px-4 py-3 text-base font-normal" />
             {errors.message && <span className={errorClass}>{errors.message}</span>}
           </label>
 

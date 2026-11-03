@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { WorkFilters } from "@/components/work/WorkFilters";
 
-export const metadata: Metadata = { title: "Work", description: "Real projects with real business results — from CraftThink, in plain language." };
+export const metadata: Metadata = { title: "Work", description: "Real projects with real business results — from CraftThink." };
 
 export default async function WorkPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
   const industry = (await searchParams).industry;
@@ -16,7 +16,7 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
     <>
       <section className="ct-section">
         <Container>
-          <SectionHeading as="h1" eyebrow="Projects" title="Our Work" subtitle="Real projects, real results — in plain business language. No invented clients or testimonials." />
+          <SectionHeading as="h1" eyebrow="Projects" title="Our Work" subtitle="Real projects, real results. No invented clients or testimonials." />
           <WorkFilters current={industry} />
           {list.length === 0 ? (
             <p className="mt-10 text-center text-[#475569]">No projects in this industry yet. <Link href="/work" className="font-semibold text-[#4F46E5] underline">See all work</Link>.</p>

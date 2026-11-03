@@ -64,7 +64,6 @@ export function DashboardMockup() {
             </div>
             <div className="relative mt-4 overflow-hidden rounded-2xl">
               <Image src="/images/hero/hero-dashboard.jpg" alt="A business dashboard on a laptop, showing charts and results" width={900} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
-              <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#0B1220]">Real product view — placeholder photo</span>
             </div>
           </div>
         </div>

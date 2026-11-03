@@ -80,7 +80,7 @@ function SearchInner() {
           as="h1"
           eyebrow="Search"
           title="Search CraftThink"
-          subtitle="Search our real services, projects and frequently asked questions — in plain words."
+          subtitle="Search our real services, projects and frequently asked questions."
         />
         <form onSubmit={submit} className="mt-10 flex flex-col gap-3 sm:flex-row">
           <label className="sr-only" htmlFor="site-search">Search services, projects and FAQs</label>

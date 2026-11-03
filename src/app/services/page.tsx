@@ -6,14 +6,14 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/ui/CtaBand";
 
-export const metadata: Metadata = { title: "Services", description: "Websites, apps, CRM, booking systems, AI solutions and more — in plain language, from CraftThink." };
+export const metadata: Metadata = { title: "Services", description: "Websites, apps, CRM, booking systems, AI solutions and more — from CraftThink." };
 
 export default function ServicesPage() {
   return (
     <>
       <section className="ct-section">
         <Container>
-          <SectionHeading as="h1" eyebrow="What We Build" title="Services, in plain language" subtitle="No jargon first. Pick the problem you have — the technical detail is inside each page." />
+          <SectionHeading as="h1" eyebrow="What We Build" title="Services" subtitle="Pick the problem you have — the technical detail is inside each page." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
               <Link key={s.slug} href={`/services/${s.slug}`} className="ct-card group overflow-hidden">

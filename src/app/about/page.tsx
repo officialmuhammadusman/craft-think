@@ -43,7 +43,6 @@ export default function AboutPage() {
                   <span><span className="block text-base font-bold text-[#0B1220]">Muhammad Usman</span><span className="text-sm text-[#64748B]">CEO & Founder · CraftThink</span></span>
                   <span className="rounded-full bg-[#EEF2FF] px-3 py-1 text-xs font-bold text-[#4F46E5]">CEO-led</span>
                 </div>
-                <p className="mt-8 text-sm text-[#64748B]">Workspace photo, not a photo of Muhammad Usman. A real CEO photo will replace it when supplied.</p>
               </div>
             </Reveal>
           </div>
@@ -95,7 +94,6 @@ export default function AboutPage() {
               <div>
                 <h2 className="ct-h4">Education — one credibility line, not a full CV</h2>
                 <p className="mt-1 text-[#475569]">BSc Computer Science, 2021–2025, COMSATS University Islamabad, Abbottabad Campus.</p>
-                <p className="mt-2 text-sm text-[#64748B]">Experience history is draft only and will be confirmed by Muhammad Usman — no employment timeline is presented as final on this site.</p>
               </div>
             </article>
           </Reveal>

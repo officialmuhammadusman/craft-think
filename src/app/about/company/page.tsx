@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 const journey = [
-  { icon: Search, title: "1. You search and ask", text: "Find the service you need in plain language, or ask Think, the guide on this site, and it points you to the right service and a similar project." },
-  { icon: Compass, title: "2. Discovery, in plain words", text: "On a free call we learn what your business does, who your customers are, and what is slow, manual, or losing you sales — before anyone talks about code." },
+  { icon: Search, title: "1. You search and ask", text: "Find the service you need, or ask Think, the guide on this site, and it points you to the right service and a similar project." },
+  { icon: Compass, title: "2. Discovery", text: "On a free call we learn what your business does, who your customers are, and what is slow, manual, or losing you sales — before anyone talks about code." },
   { icon: ShieldCheck, title: "3. Built safely, in phases", text: "Your project is built in clear phases you can see and approve. Security, logins, and data protection are built in from the start, not added later." },
   { icon: Rocket, title: "4. Launch and handover", text: "Your website, app, or system goes live, your team learns how to use it, and nothing is left half-finished or unexplained." },
   { icon: HeartHandshake, title: "5. Support after launch", text: "Fixes, small improvements, and care plans keep your software working as your business grows — you are not left alone after launch day." },
@@ -26,7 +26,7 @@ const facilities = [
   { title: "Security built in", text: "Safe logins, controlled access for different staff roles, and encrypted data as standard practice." },
   { title: "Deployment and hosting", text: "Your project is launched properly and kept running, with updates handled for you." },
   { title: "Support and maintenance", text: "A care plan covers fixes and improvements after launch, so small problems never become lost sales." },
-  { title: "Clear communication", text: "One lead contact, plain-language updates, and no jargon you have to translate." },
+  { title: "Clear communication", text: "One lead contact, clear updates, and no jargon." },
 ];
 
 export default function CompanyPage() {
@@ -52,7 +52,7 @@ export default function CompanyPage() {
           </div>
 
           <div className="mt-14">
-            <SectionHeading eyebrow="What we build" title="Services, in plain language" subtitle="If you are not technical, start here. The technical detail lives inside each service page." />
+            <SectionHeading eyebrow="What we build" title="Services" subtitle="If you are not technical, start here. The technical detail lives inside each service page." />
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((s) => (
                 <Reveal key={s.slug}>

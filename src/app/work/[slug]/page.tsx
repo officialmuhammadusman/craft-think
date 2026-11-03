@@ -56,7 +56,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <p className="ct-body-lg mt-4 max-w-3xl text-[#475569]">{p.line}</p>
           <div className="mt-8">
             <Image src={p.image} alt={p.imageAlt} width={1200} height={700} className="w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
-            <p className="mt-2 text-sm text-[#64748B]">Project visual — illustrative image for this project, not a screenshot of a real client site.</p>
           </div>
 
           {/* AT-A-GLANCE FACT STRIP — only facts honestly known; no invented duration/team */}
@@ -70,13 +69,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   ))}
                 </span>
               )}
-              <span><strong>Live:</strong>{" "}
-                {live ? (
-                  <a href={live} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#4F46E5]">{live.replace("https://", "")} ↗</a>
-                ) : (
-                  "Demo on request — ask in a free consultation. The old live link for this project is not shown as working, so we do not claim it."
-                )}
-              </span>
+              {live && (
+                <span><strong>Live:</strong>{" "}
+                  <a href={live} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#4F46E5]">Visit live site ↗</a>
+                </span>
+              )}
             </div>
             <div className="flex flex-wrap gap-2">
               {techChips.map((t) => (
@@ -177,7 +174,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </Section>
 
           {/* BUSINESS RESULT — evidenced qualitative before/after; no invented numbers */}
-          <Section title="The business result" intro="Before and after, in plain language — what changed for the business, without invented numbers.">
+          <Section title="The business result" intro="Before and after — what changed for the business, without invented numbers.">
             <div className="grid gap-4 sm:grid-cols-2">
               <article className="rounded-[20px] border border-[#E7E9F2] bg-white p-6 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-widest text-[#64748B]">Before</p>

@@ -74,7 +74,7 @@ export default function ProposalPage() {
               <legend className="font-semibold">Scope — what we will build (add or remove lines)</legend>
               {scope.map((l) => (
                 <div key={l.id} className="flex items-center gap-2">
-                  <input value={l.text} onChange={(e) => update(scope, setScope, l.id, e.target.value)} placeholder="One scope item, in plain words" className={inputClass} />
+                  <input value={l.text} onChange={(e) => update(scope, setScope, l.id, e.target.value)} placeholder="One scope item" className={inputClass} />
                   <button type="button" onClick={() => remove(scope, setScope, l.id)} disabled={scope.length <= 1} className="min-h-[48px] shrink-0 px-2 font-semibold text-[#4F46E5] disabled:opacity-40">Remove</button>
                 </div>
               ))}
@@ -85,7 +85,7 @@ export default function ProposalPage() {
               <legend className="font-semibold">Phases — how the work is split (add or remove lines)</legend>
               {phases.map((l) => (
                 <div key={l.id} className="flex items-center gap-2">
-                  <input value={l.text} onChange={(e) => update(phases, setPhases, l.id, e.target.value)} placeholder="One phase, in plain words" className={inputClass} />
+                  <input value={l.text} onChange={(e) => update(phases, setPhases, l.id, e.target.value)} placeholder="One phase" className={inputClass} />
                   <button type="button" onClick={() => remove(phases, setPhases, l.id)} disabled={phases.length <= 1} className="min-h-[48px] shrink-0 px-2 font-semibold text-[#4F46E5] disabled:opacity-40">Remove</button>
                 </div>
               ))}
@@ -112,7 +112,7 @@ export default function ProposalPage() {
             </div>
 
             <h2 className="ct-h3 mt-6">Proposal for {clientLabel}</h2>
-            <p className="mt-2 text-[#475569]">Prepared by CraftThink for {clientLabel}. This proposal describes, in plain words, what we will build, how the work is split, and when it will happen.</p>
+            <p className="mt-2 text-[#475569]">Prepared by CraftThink for {clientLabel}. This proposal describes what we will build, how the work is split, and when it will happen.</p>
 
             <h3 className="mt-8 text-lg font-bold">What we will build</h3>
             {scopeFilled.length > 0 ? (

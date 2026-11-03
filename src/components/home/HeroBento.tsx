@@ -69,7 +69,7 @@ const tiles = [
   {
     label: "AI assistant",
     href: "/services/ai-solutions",
-    caption: "The assistant that answers your customers — day and night, in plain words.",
+    caption: "The assistant that answers your customers — day and night.",
     fragment: (
       <div className="flex flex-col gap-2.5">
         <span className="max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-3 py-2 text-xs font-medium text-[#475569] ring-1 ring-[#E7E9F2]">

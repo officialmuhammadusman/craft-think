@@ -38,7 +38,7 @@ export default function CeoPage() {
                 CraftThink is led by its CEO, not by an account manager. Muhammad Usman leads sales, architecture, AI, complex backend work and client communication, while a development team behind him delivers design, frontend, backend and mobile app work — and a designer creates the unique images and visuals.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-[#475569]">
-                That matters for a business owner who is not technical: you explain your problem once, in plain words, to the person who will actually build the solution — and you keep talking to that same person while it is built.
+                That matters for a business owner who is not technical: you explain your problem once, to the person who will actually build the solution — and you keep talking to that same person while it is built.
               </p>
             </Reveal>
           </div>
@@ -65,7 +65,7 @@ export default function CeoPage() {
           </Reveal>
           <Reveal className="mt-6">
             <article className="ct-card p-7">
-              <h2 className="flex items-center gap-2 ct-h3"><Bot size={22} className="text-[#4F46E5]" /> Applied AI, in plain words</h2>
+              <h2 className="flex items-center gap-2 ct-h3"><Bot size={22} className="text-[#4F46E5]" /> Applied AI</h2>
               <p className="mt-3 text-[#475569]">AI that answers your customers from your own documents and data, with answers checked before they are shown — and a human handover when it is unsure. That includes RAG systems and multi-agent setups, not just a chatbot pasted on a page.</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {aiStack.map((s) => (<span key={s} className="rounded-full border border-[#E7E9F2] bg-[#EEF2FF] px-3 py-1.5 text-sm font-medium text-[#4F46E5]">{s}</span>))}

@@ -278,7 +278,7 @@ export const services: Service[] = [
       { title: "Self-RAG Checking", description: "Before an answer is shown, it is graded against the source. If it does not check out, it is not shown as fact." },
       { title: "Agentic Workflows", description: "Multi-step work handled by LangGraph: plan, use tools, check the result, and only then act — with a human step wherever an action matters." },
       { title: "Multi-Agent Teams", description: "A supervisor agent splits work between specialists — one finds, one checks, one writes — instead of one agent guessing everything at once." },
-      { title: "Database Answers, Safely", description: "Ask in plain words and get an answer from your own database, through checked, read-only queries that cannot change your data." },
+      { title: "Database Answers, Safely", description: "Ask and get an answer from your own database, through checked, read-only queries that cannot change your data." },
       { title: "Human Handover", description: "Whenever the AI is unsure, it hands over to a person instead of inventing an answer." },
     ],
     techStack: [
@@ -522,7 +522,7 @@ export const projects: Project[] = [
     ],
     live: "bookdubaiguide.com",
     image: "/images/work/work-dubai.jpg",
-    imageAlt: "A traveller booking a Dubai tour online — project visual, not a screenshot of the live site",
+    imageAlt: "A traveller booking a Dubai tour online",
   },
   {
     slug: "padel-connect",
@@ -558,7 +558,7 @@ export const projects: Project[] = [
 ];
 
 export const processSteps = [
-  { n: 1, title: "Discover", text: "We learn your business, your customers, and the problem in plain words. You get a clear scope, timeline and estimate before we build anything." },
+  { n: 1, title: "Discover", text: "We learn your business, your customers, and the problem. You get a clear scope, timeline and estimate before we build anything." },
   { n: 2, title: "Design", text: "Wireframes and a clickable prototype first, so you see and approve the design before a single line of production code." },
   { n: 3, title: "Build", text: "We build in small, tested steps and show you progress every week — no long silence, no surprise at the end." },
   { n: 4, title: "Test", text: "Manual and automated testing, on phones and computers, for speed, accessibility and security, before every release." },
@@ -578,14 +578,14 @@ export const faqs = [
   { q: "How much does a website or app cost?", a: "It depends on size and features. As a rough guide only: a small website starts in a lower range, a website with booking or CRM costs more, and a custom system or mobile app costs more again. Use the Estimator for a rough range, then book a free consultation for a firm quote — we never hide the price until the end." },
   { q: "How long does a project take?", a: "A small website can take a few weeks. A booking system, CRM or mobile app usually takes longer, built in phases: a prototype first, then a working version, then the full product. You will get a timeline in writing before we start." },
   { q: "Do you work with clients outside your country?", a: "Yes. CraftThink works remotely with clients worldwide. Communication is by video call, chat and email, with weekly demos, planned around your time zone as far as possible." },
-  { q: "I already have a website or software. Can you fix it?", a: "Yes. Start with the free audit: tell us what is slow, broken or confusing, and we will list the top fixes in plain language. Many clients start with a small fix sprint before a bigger rebuild." },
+  { q: "I already have a website or software. Can you fix it?", a: "Yes. Start with the free audit: tell us what is slow, broken or confusing, and we will list the top fixes. Many clients start with a small fix sprint before a bigger rebuild." },
   { q: "What is the AI assistant on this site?", a: "It is a guided demo that answers only from our own services, projects, process and FAQs. It suggests the right service and project for your problem, and hands you to a free consultation when it does not know. A live AI connection can be added later; nothing here pretends to be a real external AI service." },
   { q: "Can AI answer my customers for me?", a: "Yes — that is one of our services. We build AI assistants that answer from your own business data, with factual checking, and hand over to a human whenever they are unsure. See the RAG AI Assistant project." },
   { q: "Will I own my website, app and data?", a: "Yes. Your website, app, code and customer data are yours. We hand over access, logins and documentation at launch, and we never hold your business hostage." },
   { q: "Do you build mobile apps, or only websites?", a: "Both. Mobile apps are a full service, not a side note: one React Native app for iOS and Android, with bookings, memberships or subscriptions, plus a web admin panel for you." },
   { q: "What happens after launch?", a: "We test, monitor and support your software. A care plan covers bug fixes, updates and small improvements, so your site does not slowly break as browsers, phones and payment rules change." },
   { q: "How do we start?", a: "Book a free consultation, or try the Estimator or Free Audit first. In the first call we will understand your problem, show you a similar project, and give you a clear next step — with no obligation." },
-  { q: "Do you need all my content and photos before we start?", a: "No. We start with what you have, and we will tell you exactly what we still need — text, photos, logo, prices — in a simple checklist. Stock photos are used here only as placeholders until your designer images are ready." },
+  { q: "Do you need all my content and photos before we start?", a: "No. We start with what you have, and we will tell you exactly what we still need — text, photos, logo, prices — in a simple checklist." },
   { q: "How do payments work?", a: "We agree milestones in writing before building. For medium projects a common split is a deposit to start, a payment at demo, and the balance at launch. The exact split is confirmed in your quote, not guessed here." },
 ];
 
@@ -599,7 +599,7 @@ export function guideAnswer(input: string): GuideReply {
   if (has("app", "android", "iphone", "ios", "mobile")) return { text: "A mobile app puts your business in your customer's pocket. We build one React Native app for both iOS and Android, with bookings or memberships inside, plus an admin panel for you.", serviceHref: "/services/mobile-apps", serviceLabel: "Mobile Apps", projectHref: "/work/padel-connect", projectLabel: "Padel Connect" };
   // --- AI depth branches (BEFORE the generic AI branch, so specific
   // questions are never swallowed by the generic reply) ---
-  if (has("langchain", "langgraph")) return { text: "LangChain is the toolkit for building AI apps that use your own data and tools, and LangGraph builds multi-step agent workflows on top of it — for example, an agent that checks a document, then decides the next step, then acts. In plain terms: instead of one chatbot answering one question, you get a small team of AI steps that follow a process, with checks along the way.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
+  if (has("langchain", "langgraph")) return { text: "LangChain is the toolkit for building AI apps that use your own data and tools, and LangGraph builds multi-step agent workflows on top of it — for example, an agent that checks a document, then decides the next step, then acts. In short: instead of one chatbot answering one question, you get a small team of AI steps that follow a process, with checks along the way.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
   if (has("multi-agent", "multi agent", "supervisor", "agent team", "team of agents")) return { text: "A multi-agent system is a small team of AI agents working together under one supervisor: one agent finds the answer, another checks it, another takes the action. That is how our HR work is built — LangGraph agents that validate leave and flag payroll problems, instead of one agent guessing everything at once. The supervisor keeps the team on task, and anything unsure goes to a human.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
   if (has("rag", "corrective", "self-rag", "self rag", "vector", "pinecone", "chromadb", "from my documents", "my documents", "own documents", "our documents", "answers from")) return { text: "RAG means the AI answers from YOUR documents — price lists, policies, manuals — not from general knowledge. It searches your documents first (vector search over Pinecone or ChromaDB), rewrites the question when it is unclear, and falls back to the web only when your documents do not cover it. Corrective RAG is that rewriting and fallback step; Self-RAG is the extra check: the AI verifies its answer against the source before showing it to your customer, so answers are grounded, not guessed.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
   const automationHit = has("automation") || has("agents doing", "agent that does", "agents that do", "do work for", "does work for") || (has("agent", "agents") && has("screening", "approvals", "data entry"));
@@ -616,6 +616,6 @@ export function guideAnswer(input: string): GuideReply {
   if (has("remote", "worldwide", "country", "location")) return { text: "We work remotely with clients worldwide, with weekly demos planned around your time zone as far as possible. There is no office you need to visit.", serviceHref: "/about", serviceLabel: "About the CEO" };
   if (has("website", "site", "portfolio", "online")) return { text: "A fast, beautiful website brings you customers and builds trust. Tell me if you need a simple business site, a portfolio, or a full store — I can point you to the right one.", serviceHref: "/services/website-design", serviceLabel: "Website Design & Development", projectHref: "/work/cliender", projectLabel: "Cliender" };
   if (has("support", "care", "test", "maintenance", "after launch")) return { text: "After launch we test, monitor, fix bugs and update your software, so it keeps working as browsers, phones and payment rules change.", serviceHref: "/services/testing-care", serviceLabel: "Testing, Support & Care" };
-  if (has("hello", "hi", "help", "start", "need")) return { text: "Hello! Tell me in plain words what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project." };
+  if (has("hello", "hi", "help", "start", "need")) return { text: "Hello! Tell me what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project." };
   return { text: "I am not sure about that one yet — this guide only answers from CraftThink's own services, projects, process and FAQs. The best next step is a free consultation, where Muhammad can answer it properly. Tell me your problem in the lead form below and we will take it from there." };
 }

@@ -17,7 +17,7 @@ const ARTICLES = [
   },
   {
     slug: "what-a-crm-does-for-a-small-business",
-    title: "What a CRM does for a small business, in plain words",
+    title: "What a CRM does for a small business",
     summary: "A CRM is not a fancy spreadsheet. It is one place where your customers, conversations, follow-ups, and sales live together.",
   },
   {
@@ -35,7 +35,7 @@ export default function InsightsPage() {
           <SectionHeading
             as="h1"
             eyebrow="Insights"
-            title="Advice in plain words"
+            title="Practical advice"
             subtitle="General advice from the CraftThink team — no jargon, no sales talk, just things that help you decide well."
           />
           <div className="mt-10 flex flex-col gap-4">

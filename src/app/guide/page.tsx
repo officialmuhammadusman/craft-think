@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GuideClient } from "@/components/ai/GuideClient";
 
-export const metadata: Metadata = { title: "AI Guide", description: "Ask the CraftThink guide in plain language — a demo that answers only from this site's services, projects, process and FAQs." };
+export const metadata: Metadata = { title: "AI Guide", description: "Ask the CraftThink guide — a demo that answers only from this site's services, projects, process and FAQs." };
 
 export default function GuidePage() {
   return (

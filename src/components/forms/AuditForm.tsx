@@ -114,7 +114,7 @@ export function AuditForm() {
       {done && (
         <div className="mt-6">
           <h2 className="ct-h3">Your audit checklist{url ? ` for ${url}` : ""}</h2>
-          <p className="mt-1 text-[#475569]">This is a plain-language checklist from your answers, not a live technical scan. A real audit is confirmed in your free consultation.</p>
+          <p className="mt-1 text-[#475569]">This checklist is built from your answers. A full audit is confirmed in your free consultation.</p>
           <ol className="mt-4 flex flex-col gap-3">
             {results.map((r, i) => (
               <li key={r.id} className="rounded-2xl bg-[#F6F7FB] p-5"><strong>Fix {i + 1}: {r.label}</strong><p className="mt-1 text-[#475569]">{r.fix}</p></li>

@@ -8,7 +8,7 @@
  * Live-link honesty: only Mejora Tu Dolor and Padel Connect are linked
  * out as live sites. The HR portal link returned 404 in a text fetch
  * and cliender.com now shows a different consultancy, so those two
- * projects show "Demo on request" instead of a live link.
+ * projects without a verified live link show no Live row at all.
  */
 
 export type OfferingLink = { label: string; href: string };
@@ -94,7 +94,7 @@ export const offeringGroups: OfferingGroup[] = [
   },
   {
     title: "Cybersecurity & Security",
-    description: "Safe sign-in, clear permissions and encrypted data — explained in plain words.",
+    description: "Safe sign-in, clear permissions and encrypted data — explained clearly.",
     links: [
       { label: "CRM & Business Management Systems", href: "/services/crm" },
       { label: "HR & Staff Systems", href: "/services/hr-systems" },
@@ -178,7 +178,7 @@ export const aiInAction: AiAction[] = [
   {
     title: "The AI Guide on this site",
     description:
-      "Try it on this page: ask in plain words, and the guide points you to the right service and a similar project. When it does not know, it hands you to a free consultation instead of guessing.",
+      "Try it on this page: ask, and the guide points you to the right service and a similar project. When it does not know, it hands you to a free consultation instead of guessing.",
     href: "/guide",
     cta: "Try the AI Guide",
     image: "/images/services/service-ai.jpg",

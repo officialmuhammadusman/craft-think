@@ -44,7 +44,7 @@ const ARTICLES: Record<string, Article> = {
       {
         heading: "Hidden rules destroy trust",
         paragraphs: [
-          "Nothing puts a visitor off faster than discovering the real rules at the last step: a deposit they did not expect, a cancellation rule buried in small print, or a pickup detail that only appears after payment. People do not mind rules. They mind surprises. Put payment, cancellation, and arrival details where the booking decision is made, in plain words, before anyone is asked to pay.",
+          "Nothing puts a visitor off faster than discovering the real rules at the last step: a deposit they did not expect, a cancellation rule buried in small print, or a pickup detail that only appears after payment. People do not mind rules. They mind surprises. Put payment, cancellation, and arrival details where the booking decision is made, before anyone is asked to pay.",
           "The same honesty applies to price. If the price depends on options, say so early and show how the total is built up. A visitor who feels tricked at checkout will not just abandon that booking — they will be wary of booking with you again.",
         ],
       },
@@ -75,10 +75,10 @@ const ARTICLES: Record<string, Article> = {
       },
     ],
     closing:
-      "If several of those answers are no, the problem is usually fixable without starting over: clearer booking steps, real time slots, honest rules up front, and a proper confirmation. A free software audit is a good way to get that fix list in plain words, in order of what matters most, before you commit to anything bigger.",
+      "If several of those answers are no, the problem is usually fixable without starting over: clearer booking steps, real time slots, honest rules up front, and a proper confirmation. A free software audit is a good way to get that fix list, in order of what matters most, before you commit to anything bigger.",
   },
   "what-a-crm-does-for-a-small-business": {
-    title: "What a CRM does for a small business, in plain words",
+    title: "What a CRM does for a small business",
     summary: "A CRM is not a fancy spreadsheet. It is one place where your customers, conversations, follow-ups, and sales live together.",
     sections: [
       {
@@ -124,7 +124,7 @@ const ARTICLES: Record<string, Article> = {
       },
     ],
     closing:
-      "The best way to start is small: list what you actually lose track of today — enquiries, follow-ups, payments, or all three — and choose a system that fixes that list first. Everything else can wait. If you would like help working out what that first version should look like, a free consultation is a good place to talk it through in plain words.",
+      "The best way to start is small: list what you actually lose track of today — enquiries, follow-ups, payments, or all three — and choose a system that fixes that list first. Everything else can wait. If you would like help working out what that first version should look like, a free consultation is a good place to talk it through.",
   },
   "what-to-check-before-hiring-a-developer": {
     title: "What to check before hiring a developer",
@@ -154,7 +154,7 @@ const ARTICLES: Record<string, Article> = {
       {
         heading: "Get the scope, timeline, and price in writing",
         paragraphs: [
-          "“A website” can mean ten different things, and that ambiguity is where most disputes come from. Before work starts, the agreement should list, in plain words: what will be built, which pages and features are included, what is explicitly not included, how long each phase should take, and what the price covers. If a feature matters to you — online payments, booking, a customer login — it should be named, not assumed.",
+          "“A website” can mean ten different things, and that ambiguity is where most disputes come from. Before work starts, the agreement should list: what will be built, which pages and features are included, what is explicitly not included, how long each phase should take, and what the price covers. If a feature matters to you — online payments, booking, a customer login — it should be named, not assumed.",
           "Be wary of a price given before anyone has asked about your business, your customers, and what the software must do. A serious quote follows questions, not precedes them. And be wary of a timeline with no phases: a project delivered in stages, with something to try at each stage, is far safer than a single big reveal at the end.",
         ],
       },
@@ -179,7 +179,7 @@ const ARTICLES: Record<string, Article> = {
         ],
         list: [
           "Can you try their past work on your own phone, not just look at screenshots?",
-          "Is the scope, timeline, and price written down in plain words?",
+          "Is the scope, timeline, and price written down clearly?",
           "Will you own the code, content, data, and logins at launch?",
           "Who is your contact, and how often will you see real progress?",
           "What happens after launch — who fixes bugs, and what does support cost?",

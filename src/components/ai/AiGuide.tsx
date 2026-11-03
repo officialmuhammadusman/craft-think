@@ -27,7 +27,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "guide", text: "Hello! I am Think — your guide to CraftThink. Tell me in plain words what your business needs, and I will point you to the right service and a similar project, then help you book a free call." },
+    { role: "guide", text: "Hello! I am Think — your guide to CraftThink. Tell me what your business needs, and I will point you to the right service and a similar project, then help you book a free call." },
   ]);
   const [input, setInput] = useState(initial);
   const [name, setName] = useState("");
@@ -108,7 +108,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]"><Bot size={22} /></span>
           <div>
             <p className="text-lg font-bold">Ask Think</p>
-            <p className="mt-0.5 max-w-md text-sm leading-snug text-white/60">Guided demo — answers come only from this site&apos;s services, projects and FAQs. No live AI API is connected yet.</p>
+            <p className="mt-0.5 max-w-md text-sm leading-snug text-white/60">Answers come from this site&apos;s services, projects and FAQs.</p>
           </div>
         </div>
         <span className="hidden shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white sm:flex"><span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Guided demo</span>

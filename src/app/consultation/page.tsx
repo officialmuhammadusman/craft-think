@@ -5,10 +5,10 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ConsultationForm } from "@/components/forms/ConsultationForm";
 
-export const metadata: Metadata = { title: "Book a Free Consultation", description: "Book a free consultation with CraftThink. Tell us your problem in plain words — no obligation, no backend, your message opens as an email." };
+export const metadata: Metadata = { title: "Book a Free Consultation", description: "Book a free consultation with CraftThink. Tell us your problem — no obligation, your message opens as an email." };
 
 const steps = [
-  { n: "1", title: "Tell us your problem", text: "Fill in the form in plain words — what your business does and what you need help with." },
+  { n: "1", title: "Tell us your problem", text: "Fill in the form — what your business does and what you need help with." },
   { n: "2", title: "We reply with a clear next step", text: "We read your message, look at a similar project if one fits, and reply by email." },
   { n: "3", title: "You decide, no pressure", text: "If it fits, we agree scope, timeline and price in writing before you pay anything." },
 ];
@@ -19,7 +19,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams?
   return (
     <section className="ct-section">
       <Container>
-        <SectionHeading as="h1" eyebrow="Free consultation" title="Book a Free Consultation" subtitle="Tell us your problem in plain words. No obligation — just a conversation with the person leading your project." />
+        <SectionHeading as="h1" eyebrow="Free consultation" title="Book a Free Consultation" subtitle="Tell us your problem. No obligation — just a conversation with the person leading your project." />
         <ol className="mt-10 grid gap-4 sm:grid-cols-3">
           {steps.map((s) => (
             <li key={s.n} className="rounded-[20px] border border-[#E7E9F2] bg-white px-5 py-4 shadow-sm">
@@ -41,7 +41,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams?
             </a>
             <div className="rounded-[24px] bg-[#0B1220] p-6 text-white">
               <p className="text-base font-bold">Working remotely with clients worldwide.</p>
-              <p className="mt-2 text-white/70">Booking calendar link is still to be supplied — use the form, email or WhatsApp above until then.</p>
+              <p className="mt-2 text-white/70">Or reach us by email or WhatsApp.</p>
             </div>
           </div>
           <ConsultationForm initialMessage={initialMessage} />

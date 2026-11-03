@@ -180,7 +180,6 @@ export default function HomePage() {
               );
             })}
           </div>
-          <p className="mt-8 text-center text-sm text-[#64748B]">Live-site note: Mejora Tu Dolor, Padel Connect and BookDubaiGuide link out to their live sites. The HR portal link returned a 404 in a recent check and cliender.com now shows a different consultancy, so those two are not linked as live. Project images are project visuals, not client screenshots.</p>
         </Container>
       </section>
 

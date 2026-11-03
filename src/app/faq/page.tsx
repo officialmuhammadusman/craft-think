@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/ui/CtaBand";
 
-export const metadata: Metadata = { title: "FAQ", description: "Real questions about cost, time, remote work, AI, fixing old software and support — answered in plain language." };
+export const metadata: Metadata = { title: "FAQ", description: "Real questions about cost, time, remote work, AI, fixing old software and support — answered clearly." };
 
 export default function FaqPage() {
   return (

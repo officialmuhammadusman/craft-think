@@ -90,6 +90,13 @@ const whyChoose = [
 ];
 
 export default function HomePage() {
+  // Homepage Work grid mirrors the /work listing exactly: the same 6
+  // cards in the same order. Padel Connect stays reachable via its own
+  // detail URL and via "Related projects" links, but never as a card
+  // here. The "7 delivered projects" wording above is untouched — 7
+  // projects still exist in total; only the grid shows 6.
+  const gridOrder = ["telemedicine", "cliender", "hr-management-system", "actors-index", "rag-ai-assistant", "book-dubai-guide"];
+  const gridProjects = gridOrder.map((slug) => projects.find((p) => p.slug === slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
   return (
     <>
       {/* HERO — Concept A "The Path" (restored after Concept C was
@@ -173,7 +180,7 @@ export default function HomePage() {
             </div>
           </Reveal>
           <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p) => {
+            {gridProjects.map((p) => {
               const live = verifiedLiveLinks[p.slug];
               const chips = p.stack.split(", ").slice(0, 3);
               return (

@@ -9,6 +9,7 @@ import { verifiedLiveLinks } from "@/data/offering";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
+import { WorkFilters } from "@/components/work/WorkFilters";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -51,6 +52,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="ct-section pb-0">
         <Container>
           <Link href="/work" className="flex min-h-[48px] items-center text-base font-semibold text-[#4F46E5]">← All work</Link>
+          {/* Industry filters — same chips as the /work listing, so a
+              visitor can jump to other work in any industry from here.
+              On phones this is the same single horizontal scroll row;
+              on desktop the chips wrap and centre. */}
+          <div className="mt-4">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#64748B]">Browse more work by industry</p>
+            <WorkFilters current={p.industry} />
+          </div>
           <span className="mt-4 block"><span className="ct-eyebrow">{p.industryLabel} · Case study</span></span>
           <h1 className="ct-h1 mt-4">{p.title}</h1>
           <p className="ct-body-lg mt-4 max-w-3xl text-[#475569]">{p.line}</p>

@@ -12,7 +12,13 @@ export const metadata: Metadata = { title: "Work", description: "Real projects w
 
 export default async function WorkPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
   const industry = (await searchParams).industry;
-  const list = industry ? projects.filter((p) => p.industry === industry) : projects;
+  // The listing grid shows exactly these 6 cards, in this order. Padel
+  // Connect stays reachable via its own detail URL and via "Related
+  // projects" links on other case pages, but never as a card here —
+  // so industry filters also apply within this same 6-card set.
+  const gridOrder = ["telemedicine", "cliender", "hr-management-system", "actors-index", "rag-ai-assistant", "book-dubai-guide"];
+  const gridProjects = gridOrder.map((slug) => projects.find((p) => p.slug === slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const list = industry ? gridProjects.filter((p) => p.industry === industry) : gridProjects;
   return (
     <>
       <section className="ct-section">

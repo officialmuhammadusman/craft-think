@@ -169,16 +169,6 @@ export default function HomePage() {
       <section className="ct-section bg-white">
         <Container>
           <Reveal><SectionHeading eyebrow="Work" title="Work that changed how businesses run" subtitle="One outcome per project. Full problem, build and result on each case page." /></Reveal>
-          <Reveal>
-            <div className="-mx-4 mt-8 flex flex-nowrap gap-2 overflow-x-auto overscroll-contain px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
-              <Link href="/work" className="flex min-h-[48px] shrink-0 items-center rounded-full bg-[#0B1220] px-4 text-sm font-semibold text-white">All work</Link>
-              {industries.map((ind) => (
-                <Link key={ind.label} href={ind.href} className="flex min-h-[48px] shrink-0 items-center rounded-full border border-[#E7E9F2] bg-white px-4 text-sm font-semibold text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">
-                  {ind.label}
-                </Link>
-              ))}
-            </div>
-          </Reveal>
           <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {gridProjects.map((p) => {
               const live = verifiedLiveLinks[p.slug];
@@ -214,6 +204,7 @@ export default function HomePage() {
               );
             })}
           </Stagger>
+          <div className="mt-10 text-center"><Button href="/work" variant="secondary" size="lg" className="w-full sm:w-auto">View all work →</Button></div>
         </Container>
       </section>
 

@@ -90,7 +90,10 @@ function FloatingAiButtonInner() {
               </button>
             </div>
           </div>
-          <div data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          {/* Not a scroll area itself: AiGuide fills the sheet height and
+              its own message list scrolls, so no blank space sits below
+              a short card. */}
+          <div data-lenis-prevent className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
             <AiGuide bare />
           </div>
         </div>

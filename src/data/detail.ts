@@ -51,10 +51,10 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     process: [
       { title: "Discover", text: "We learn what you sell, who your customers are, and what the site must do for them.", exit: "Week 1 · A written plan: pages, scope and price, agreed before we build." },
       { title: "Design prototype", text: "A clickable version of the site first, so you approve the look and flow on your phone.", exit: "Prototype first · No production build starts without your sign-off." },
-      { title: "Build", text: "We build the site mobile-first, with forms, pages and search basics in small, tested steps.", exit: "Weekly demos · You see progress every week and can steer it." },
+      { title: "Build", text: "We build the site mobile-first, with forms, pages and search basics in small, tested steps.", exit: "Weekly demos · You see progress every week and can guide it." },
       { title: "Test & launch", text: "We test on phones and computers, check forms and speed, then launch with you.", exit: "Launch checks · You own the site, code and content from day one." },
     ],
-    benefits: ["Customers find you, trust you and contact you — instead of bouncing to a competitor.", "A site that works on phones, where most of your visitors actually are.", "Pages that explain what you sell clearly, so enquiries arrive already informed.", "A design system that keeps every new page looking like one brand as you grow."],
+    benefits: ["Customers find you, trust you and contact you — instead of bouncing to a competitor.", "A site that works on phones, where most of your visitors are.", "Pages that explain what you sell clearly, so enquiries arrive already informed.", "A design system that keeps every new page looking like one brand as you grow."],
     faqs: [
       { q: "How long does a website take?", a: "A small website can take a few weeks. You get a timeline in writing before we start, and weekly demos while it is built." },
       { q: "Do I need all my content ready first?", a: "No. We start with what you have and give you a simple checklist — text, photos, logo, prices — for the rest." },
@@ -69,7 +69,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     process: [
       { title: "Scope", text: "We agree the core pages first — services, about, work, contact — and cut everything that does not help a visitor decide.", exit: "Week 1 · A written plan: pages, scope and price, agreed before we build." },
       { title: "Prototype", text: "A clickable version of the site for you to try on your phone and approve.", exit: "Prototype first · No production build starts without your sign-off." },
-      { title: "Build", text: "We build the approved design with a simple content structure you can update yourself.", exit: "Weekly demos · You see progress every week and can steer it." },
+      { title: "Build", text: "We build the approved design with a simple content structure you can update yourself.", exit: "Weekly demos · You see progress every week and can guide it." },
       { title: "Launch & updates", text: "We launch, check forms and mobile display with you, and show you how everyday updates work.", exit: "Launch checks · You own the site and can update services and photos yourself." },
     ],
     benefits: ["A business customers can check in minutes — services, photos, contact, all in one place.", "A premium, established look, even for a small business.", "A fast mobile version, because most visitors are on phones.", "Everyday updates without paying a developer for each small change."],
@@ -89,9 +89,9 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       { title: "Build & payments", text: "We build the store, wire up verified payments, and connect orders, customers and stock.", exit: "Weekly demos · You test the checkout yourself as it is built." },
       { title: "Test & launch", text: "We test payments, orders and receipts end to end, on phones, before launch.", exit: "Launch checks · Every payment verified before an order is marked paid." },
     ],
-    benefits: ["Orders taken while you sleep, with payments verified — not assumed.", "No more chasing messages to confirm an order or a payment.", "Orders, customers and stock in one dashboard, instead of scattered chats.", "A checkout customers actually finish, built phone-first."],
+    benefits: ["Orders taken while you sleep, with payments verified — not assumed.", "No more chasing messages to confirm an order or a payment.", "Orders, customers and stock in one dashboard, instead of scattered chats.", "A checkout customers complete, built phone-first."],
     faqs: [
-      { q: "How are payments handled safely?", a: "Every payment is confirmed with the payment provider before an order is marked paid, so you never ship an order that was never actually paid for." },
+      { q: "How are payments handled safely?", a: "Every payment is confirmed with the payment provider before an order is marked paid, so you never ship an order that was never paid for." },
       { q: "Can I manage stock and orders myself?", a: "Yes. Orders, customers and stock live in one dashboard, and we show you how it works at launch." },
       { q: "What about subscriptions?", a: "Repeat billing is handled automatically, with clear records when a plan changes or a payment fails." },
       { q: "Will the store work well on phones?", a: "Yes — checkout is built phone-first, with few steps and clear totals, because most shoppers are on phones." },
@@ -118,14 +118,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     relatedProjects: ["padel-connect"],
   },
   crm: {
-    pain: "Leads in chats, sales in spreadsheets, billing somewhere else — nothing agrees, and nobody can say what is actually happening in the business. Growing like that means hiring people just to chase information.",
+    pain: "Leads in chats, sales in spreadsheets, billing somewhere else — nothing agrees, and nobody can say what is happening in the business. Growing like that means hiring people just to chase information.",
     process: [
       { title: "Discover", text: "We map how customers, sales, billing and staff work today, and where information gets lost.", exit: "Week 1 · A written plan: modules, permissions and price, agreed before we build." },
       { title: "Design workflows", text: "We design the dashboard and the workflows — leads, sales, billing, staff views — and prototype the key screens.", exit: "Prototype first · You approve the workflows before we build them." },
       { title: "Build", text: "We build module by module — customers, billing, staff, reports — with role permissions from the start.", exit: "Weekly demos · Your team tests each module as it is built." },
       { title: "Rollout & support", text: "We launch with your real data, check billing and reports with you, then support and improve it.", exit: "Launch checks · Support after launch, on a plan you can cancel anytime." },
     ],
-    benefits: ["One dashboard for customers, sales, staff and billing — no more tool sprawl.", "Billing that runs itself, with clear records instead of manual chasing.", "Reports that show what is actually happening, so decisions use real numbers.", "Every staff member sees only what their job needs, with a record of who changed what."],
+    benefits: ["One dashboard for customers, sales, staff and billing — no more tool sprawl.", "Billing that runs itself, with clear records instead of manual chasing.", "Reports that show what is happening, so decisions use real numbers.", "Every staff member sees only what their job needs, with a record of who changed what."],
     faqs: [
       { q: "We already use spreadsheets — will we lose our data?", a: "No. Moving to the new system keeps your records, customers and history — migration is planned so nothing important is lost." },
       { q: "Can different staff see different things?", a: "Yes. Permissions are set by role, so managers, staff and admins each get their own view." },
@@ -235,7 +235,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
     benefits: ["Releases your customers can trust, tested before they ever see them.", "Problems found by monitoring, not by angry customers.", "Software that keeps working as browsers, phones and payment rules change.", "A care plan you can cancel anytime — no lock-in."],
     faqs: [
-      { q: "What does testing actually cover?", a: "Features, payments, forms, speed, accessibility and security — on phones and computers — before every release." },
+      { q: "What does testing cover?", a: "Features, payments, forms, speed, accessibility and security — on phones and computers — before every release." },
       { q: "What happens after launch?", a: "Monitoring, bug fixes, updates and small improvements on a care plan, so software keeps working as rules and devices change." },
       { q: "Can I cancel the care plan?", a: "Yes. The care plan can be cancelled anytime, and you keep your website, app, code and data." },
       { q: "Do you test my existing software too?", a: "Yes. Testing is part of the fix-and-improve work as well — start with a free audit to see what is broken first." },

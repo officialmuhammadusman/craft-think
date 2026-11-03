@@ -24,7 +24,7 @@ const journey = [
 const facilities = [
   { title: "Discovery first", text: "We understand the business problem before building, so you do not pay for features nobody needs." },
   { title: "Security built in", text: "Safe logins, controlled access for different staff roles, and encrypted data as standard practice." },
-  { title: "Deployment and hosting", text: "Your project is launched properly and kept running, with updates handled for you." },
+  { title: "Deployment and hosting", text: "Your project is launched carefully and kept running smoothly, with updates handled for you." },
   { title: "Support and maintenance", text: "A care plan covers fixes and improvements after launch, so small problems never become lost sales." },
   { title: "Clear communication", text: "One lead contact, clear updates, and no jargon." },
 ];
@@ -46,7 +46,7 @@ export default function CompanyPage() {
                 CraftThink is not a static portfolio. It is a software house you can explore, ask questions of, and be guided through: search for what you need, talk to Think, look at real projects, and book a free consultation — all before you spend anything.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-[#475569]">
-                Clients come from Fiverr, Upwork, cold outreach, and this website itself. Wherever you found us, the experience is the same: one senior lead, a team behind him, and a project built around how your business actually works.
+                Clients come from Fiverr, Upwork, cold outreach, and this website itself. Wherever you found us, the experience is the same: one senior lead, a team behind him, and a project built around how your business works.
               </p>
             </Reveal>
           </div>
@@ -108,7 +108,7 @@ export default function CompanyPage() {
           </div>
 
           <div className="mt-16">
-            <SectionHeading eyebrow="Proof, not promises" title="Real projects, real businesses" subtitle="Every project below is work CraftThink has actually built. Click one to see what it does and how it was built." />
+            <SectionHeading eyebrow="Proof, not promises" title="Real projects, real businesses" subtitle="Every project below is work CraftThink has built. Open one to see what it does and how it was built." />
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
                 <Reveal key={p.slug}>

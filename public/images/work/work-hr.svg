@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="HR management dashboard interface illustration">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <!-- window bar -->
+  <rect width="1200" height="48" fill="#FFFFFF"/>
+  <circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/>
+  <rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+  <!-- sidebar -->
+  <rect y="48" width="240" height="652" fill="#0B1220"/>
+  <rect x="28" y="76" width="120" height="20" rx="6" fill="#FFFFFF"/>
+  <rect x="28" y="120" width="180" height="34" rx="10" fill="#4F46E5"/>
+  <rect x="28" y="170" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="200" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="230" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="260" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="300" width="120" height="14" rx="7" fill="#14B8A6"/>
+  <!-- stat cards -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="272" y="76" width="280" height="110" rx="18" fill="#FFFFFF"/>
+    <text x="296" y="112" font-size="16" fill="#64748B">Staff directory</text>
+    <text x="296" y="152" font-size="30" font-weight="bold" fill="#0B1220">Employees</text>
+    <rect x="576" y="76" width="280" height="110" rx="18" fill="#FFFFFF"/>
+    <text x="600" y="112" font-size="16" fill="#64748B">Leave requests</text>
+    <text x="600" y="152" font-size="30" font-weight="bold" fill="#0B1220">Approvals</text>
+    <rect x="880" y="76" width="280" height="110" rx="18" fill="#4F46E5"/>
+    <text x="904" y="112" font-size="16" fill="#C7D2FE">Payroll checks</text>
+    <text x="904" y="152" font-size="30" font-weight="bold" fill="#FFFFFF">Flagged items</text>
+  </g>
+  <!-- approvals table -->
+  <rect x="272" y="210" width="888" height="330" rx="18" fill="#FFFFFF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="300" y="248" font-size="20" font-weight="bold" fill="#0B1220">Leave approvals</text>
+    <rect x="300" y="272" width="832" height="10" rx="5" fill="#EEF2FF"/>
+    <text x="300" y="322" font-size="17" fill="#0B1220">Annual leave request</text>
+    <rect x="900" y="302" width="130" height="30" rx="15" fill="#DCFCE7"/><text x="965" y="323" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">Approved</text>
+    <rect x="300" y="352" width="832" height="10" rx="5" fill="#EEF2FF"/>
+    <text x="300" y="402" font-size="17" fill="#0B1220">Remote work request</text>
+    <rect x="900" y="382" width="130" height="30" rx="15" fill="#FEF3C7"/><text x="965" y="403" font-size="14" font-weight="bold" fill="#92400E" text-anchor="middle">Pending</text>
+    <rect x="300" y="432" width="832" height="10" rx="5" fill="#EEF2FF"/>
+    <text x="300" y="482" font-size="17" fill="#0B1220">Expense approval</text>
+    <rect x="900" y="462" width="130" height="30" rx="15" fill="#DCFCE7"/><text x="965" y="483" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">Approved</text>
+  </g>
+  <!-- audit note -->
+  <rect x="272" y="564" width="888" height="72" rx="18" fill="#EEF2FF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <circle cx="308" cy="600" r="10" fill="#14B8A6"/>
+    <text x="330" y="606" font-size="17" fill="#0B1220">Every change is recorded in the audit log, with who approved it.</text>
+  </g>
+</svg>

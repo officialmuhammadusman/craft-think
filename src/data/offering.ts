@@ -21,7 +21,7 @@ export type OfferingGroup = {
 export const offeringGroups: OfferingGroup[] = [
   {
     title: "AI Transformation",
-    description: "AI that does real work for your business, not just a chatbot demo.",
+    description: "AI that does real work for your business, beyond simple chatbots.",
     links: [
       { label: "AI Solutions & AI Assistant", href: "/services/ai-solutions" },
       { label: "HR AI Agents", href: "/services/hr-systems" },
@@ -50,7 +50,7 @@ export const offeringGroups: OfferingGroup[] = [
   },
   {
     title: "Application Services",
-    description: "The apps your customers and staff actually use every day.",
+    description: "The apps your customers and staff use every day.",
     links: [
       { label: "CRM & Business Management Systems", href: "/services/crm" },
       { label: "Booking & Appointment Systems", href: "/services/booking" },
@@ -172,7 +172,7 @@ export const aiInAction: AiAction[] = [
       "An AI assistant that answers from a business's own documents, rewrites unclear questions, and checks answers before showing them — so customers get correct answers and staff stop repeating themselves.",
     href: "/work/rag-ai-assistant",
     cta: "See the AI case study",
-    image: "/images/work/work-ai.jpg",
+    image: "/images/work/work-ai.svg",
     imageAlt: "Abstract visualisation of an AI assistant at work",
   },
   {
@@ -190,7 +190,7 @@ export const aiInAction: AiAction[] = [
       "In Mejora Tu Dolor, patients describe their problem first, are routed to the right specialist, and upload medical files before the consultation — so specialists see the full history, not just a name on a list.",
     href: "/work/telemedicine",
     cta: "See the healthcare case study",
-    image: "/images/work/work-telemedicine.jpg",
+    image: "/images/work/work-telemedicine.svg",
     imageAlt: "A doctor consulting a patient on a tablet",
   },
 ];

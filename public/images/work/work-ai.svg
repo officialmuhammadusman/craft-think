@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="AI assistant chat interface illustration">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <rect width="1200" height="48" fill="#FFFFFF"/>
+  <circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/>
+  <rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+  <rect x="60" y="76" width="720" height="548" rx="24" fill="#FFFFFF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <circle cx="110" cy="128" r="22" fill="#EEF2FF"/><circle cx="110" cy="128" r="6" fill="#14B8A6"/>
+    <rect x="148" y="96" width="520" height="64" rx="16" fill="#F6F7FB"/>
+    <text x="168" y="122" font-size="18" fill="#0B1220">Hello! How can I help you today?</text>
+    <text x="168" y="146" font-size="14" fill="#64748B">Ask about your business documents.</text>
+    <rect x="348" y="184" width="380" height="56" rx="16" fill="#4F46E5"/>
+    <text x="700" y="219" font-size="18" fill="#FFFFFF" text-anchor="end">What is our refund policy?</text>
+    <circle cx="110" cy="292" r="22" fill="#EEF2FF"/><circle cx="110" cy="292" r="6" fill="#14B8A6"/>
+    <rect x="148" y="252" width="560" height="96" rx="16" fill="#F6F7FB"/>
+    <text x="168" y="282" font-size="18" fill="#0B1220">Refunds are available within the period</text>
+    <text x="168" y="308" font-size="18" fill="#0B1220">stated in your policy document.</text>
+    <text x="168" y="332" font-size="14" fill="#64748B">Source: refund-policy.pdf</text>
+    <rect x="168" y="392" width="220" height="32" rx="16" fill="#DCFCE7"/>
+    <text x="278" y="413" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">✓ Verified against source</text>
+    <rect x="148" y="448" width="520" height="64" rx="32" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <text x="172" y="487" font-size="17" fill="#94A3B8">Ask a question…</text>
+    <rect x="596" y="460" width="52" height="40" rx="12" fill="#4F46E5"/>
+    <text x="622" y="487" font-size="18" fill="#FFFFFF" text-anchor="middle">→</text>
+  </g>
+  <!-- agent steps -->
+  <rect x="812" y="76" width="328" height="548" rx="24" fill="#0B1220"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="844" y="124" font-size="20" font-weight="bold" fill="#FFFFFF">How it answers</text>
+    <rect x="844" y="152" width="264" height="84" rx="14" fill="#1E293B"/>
+    <text x="866" y="184" font-size="16" font-weight="bold" fill="#FFFFFF">1. Find</text>
+    <text x="866" y="208" font-size="14" fill="#94A3B8">Search your documents</text>
+    <rect x="844" y="252" width="264" height="84" rx="14" fill="#1E293B"/>
+    <text x="866" y="284" font-size="16" font-weight="bold" fill="#FFFFFF">2. Check</text>
+    <text x="866" y="308" font-size="14" fill="#94A3B8">Grade against the source</text>
+    <rect x="844" y="352" width="264" height="84" rx="14" fill="#4F46E5"/>
+    <text x="866" y="384" font-size="16" font-weight="bold" fill="#FFFFFF">3. Answer</text>
+    <text x="866" y="408" font-size="14" fill="#C7D2FE">Or hand over to a human</text>
+    <text x="844" y="480" font-size="15" fill="#94A3B8">No answer is shown as fact</text>
+    <text x="844" y="504" font-size="15" fill="#94A3B8">until it has been checked.</text>
+    <circle cx="856" cy="552" r="6" fill="#14B8A6"/>
+    <text x="874" y="558" font-size="15" fill="#FFFFFF">Checked, not guessed</text>
+  </g>
+</svg>

@@ -169,7 +169,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           )}
 
           {/* ENGAGEMENT / STARTING POINT — no prices, honest scope guidance */}
-          <Section title="How to start" intro="No prices are guessed here — your price is confirmed in writing after a free consultation. This is how starting works.">
+          <Section title="How to start" intro="Your price is confirmed in writing after a free consultation. Here is how starting works.">
             <ol className="grid gap-4 sm:grid-cols-3">
               <li className="rounded-[20px] border border-[#E7E9F2] bg-white p-5 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-widest text-[#4F46E5]">1 · Free consultation</p>

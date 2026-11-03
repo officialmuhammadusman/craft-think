@@ -41,7 +41,7 @@ export const services: Service[] = [
     image: "/images/services/service-website.jpg",
     imageAlt: "Designer working on a website layout on a computer",
     keywords: ["website", "web design", "new website", "site", "webpage", "landing page"],
-    outcome: "A website that brings you customers — and can grow with you, not just a pretty page.",
+    outcome: "A website that brings you customers and grows with your business — not just a pretty page.",
     deliverables: ["A Next.js / React website, built mobile-first", "A TypeScript + Tailwind design system, so every page looks like one brand", "Clear pages that explain what you sell, with working contact forms", "Search-friendly pages, so people can find you", "Testing on phones before launch"],
     capabilities: [
       { title: "Frontend Architecture", description: "Scalable React and Next.js apps using App Router and server components, so pages load fast and stay easy to grow." },
@@ -61,7 +61,7 @@ export const services: Service[] = [
   {
     slug: "business-websites",
     title: "Business Websites & Portfolios",
-    line: "Your business online, beautifully.",
+    line: "A polished online home for your business.",
     forWhom: "Shops, clinics, professionals and agencies that need a trusted online home.",
     gets: ["A clean portfolio or company website", "Your services, photos and contact details in one place", "A fast mobile version, because most visitors are on phones", "Easy updates when your services change"],
     example: "Cliender",
@@ -125,7 +125,7 @@ export const services: Service[] = [
     image: "/images/services/service-mobile.jpg",
     imageAlt: "A person holding a smartphone showing an app",
     keywords: ["app", "mobile app", "android", "iphone", "ios", "react native"],
-    outcome: "One app for iOS and Android that customers actually keep on their phones.",
+    outcome: "One app for iOS and Android that customers keep coming back to.",
     deliverables: ["A React Native app for iOS and Android from one codebase", "Bookings, memberships or subscriptions inside the app", "Sign-in, notifications and an offline-ready experience", "An admin panel so you control what customers see", "An app-store-ready build pipeline and support after launch"],
     capabilities: [
       { title: "Cross-Platform, One Codebase", description: "iOS and Android from a single React Native app — one build to maintain, not two." },
@@ -270,7 +270,7 @@ export const services: Service[] = [
     image: "/images/services/service-ai.jpg",
     imageAlt: "Abstract visualisation of artificial intelligence",
     keywords: ["ai", "chatbot", "assistant", "rag", "agent", "automation", "chat", "artificial intelligence", "langchain", "langgraph", "multi-agent", "multi agent", "corrective rag", "self-rag", "self rag", "vector", "pinecone", "chromadb", "agents"],
-    outcome: "AI that answers from your own data and does checked work — not a demo.",
+    outcome: "AI that answers from your own data, with every answer checked.",
     deliverables: ["An AI assistant that answers from your own business data", "RAG pipelines with grounded retrieval", "LangChain / LangGraph agents, including multi-agent teams", "Vector search over Pinecone, ChromaDB or pgvector", "Agents that answer from a database, safely", "A handover to a human whenever the AI is unsure"],
     capabilities: [
       { title: "RAG Pipelines", description: "The AI searches your documents first — price lists, policies, manuals — and answers from them, instead of guessing from general knowledge." },
@@ -295,7 +295,7 @@ export const services: Service[] = [
   {
     slug: "fix-improve",
     title: "Fix & Improve Your Existing Software",
-    line: "Your software is slow or old? We make it fast and better.",
+    line: "Slow or outdated software, fixed and improved.",
     forWhom: "Businesses with software that works, but slowly, with bugs, or with old design.",
     gets: ["A free audit first — what is slow, broken, or risky", "Speed fixes, bug fixes and query improvements", "A modern look without losing your data", "A clear plan, so you pay for fixes that matter first"],
     example: "HR work made faster, with less manual checking",
@@ -332,7 +332,7 @@ export const services: Service[] = [
     image: "/images/services/service-testing.jpg",
     imageAlt: "Code and testing tools on a developer screen",
     keywords: ["test", "testing", "support", "care", "maintenance", "qa", "bug fix", "after launch"],
-    outcome: "Software that keeps working after launch — not slowly breaking.",
+    outcome: "Software that keeps working after launch, instead of slowly breaking down.",
     deliverables: ["Manual and automated testing before every release", "Performance, accessibility and security checks", "Bug fixes and updates after launch", "Monitoring, so problems are found before customers report them"],
     capabilities: [
       { title: "Testing Before Every Release", description: "Manual checks plus automated tests, on phones and computers, before anything reaches your customers." },
@@ -401,8 +401,8 @@ export const projects: Project[] = [
       { problem: "Hardcoded permissions blocked different organisations from structuring roles their own way.", solution: "Built a dynamic permission matrix configurable from the admin panel." },
       { problem: "HR work was done by hand, with slow checks for leave, payroll and hiring.", solution: "Added AI agents that help validate leave and flag payroll problems, plus a real-time audit log of every change." },
     ],
-    image: "/images/work/work-hr.jpg",
-    imageAlt: "HR dashboard with staff and approval data",
+    image: "/images/work/work-hr.svg",
+    imageAlt: "Illustration of the HR management dashboard interface",
   },
   {
     slug: "rag-ai-assistant",
@@ -431,8 +431,8 @@ export const projects: Project[] = [
       { problem: "AI chatbots gave answers that sounded confident but were wrong, or missed the right information entirely.", solution: "Built Corrective RAG plus Self-RAG: retrieve, grade, rewrite and fall back when needed, and grade the answer before showing it." },
       { problem: "An agent answering from a database could get the query wrong.", solution: "Added checking and retry steps, and a human handover whenever the answer is unsure — the agent never presents a guess as fact." },
     ],
-    image: "/images/work/work-ai.jpg",
-    imageAlt: "Abstract visualisation of an AI assistant at work",
+    image: "/images/work/work-ai.svg",
+    imageAlt: "Illustration of the AI assistant chat interface with verified answers",
   },
   {
     slug: "telemedicine",
@@ -462,8 +462,8 @@ export const projects: Project[] = [
       { problem: "Complex cases required specialists outside the patient's local region.", solution: "Implemented a referral flow so physicians can hand off cases inside the same platform." },
     ],
     live: "mejoratudolor.cl",
-    image: "/images/work/work-telemedicine.jpg",
-    imageAlt: "A doctor consulting a patient on a tablet",
+    image: "/images/work/work-telemedicine.svg",
+    imageAlt: "Illustration of the telemedicine booking and consultation interface",
   },
   {
     slug: "cliender",
@@ -491,8 +491,8 @@ export const projects: Project[] = [
     challenges: [
       { problem: "Local businesses were losing leads and time across disconnected point-of-sale, calendar and marketing tools.", solution: "Unified the core modules into one cloud cockpit with live operational metrics." },
     ],
-    image: "/images/work/work-cliender.jpg",
-    imageAlt: "A point-of-sale and billing dashboard",
+    image: "/images/work/work-cliender.svg",
+    imageAlt: "Illustration of the Cliender business management dashboard",
   },
   {
     slug: "book-dubai-guide",
@@ -521,8 +521,8 @@ export const projects: Project[] = [
       { problem: "Separate sites left pickup, payment and cancellation rules unclear.", solution: "Put every experience, rule and confirmation in one booking site." },
     ],
     live: "bookdubaiguide.com",
-    image: "/images/work/work-dubai.jpg",
-    imageAlt: "A traveller booking a Dubai tour online",
+    image: "/images/work/work-dubai.svg",
+    imageAlt: "Illustration of the Dubai tours booking interface",
   },
   {
     slug: "padel-connect",
@@ -552,8 +552,8 @@ export const projects: Project[] = [
       { problem: "Clubs were scheduling matches and chasing memberships by phone and paper lists.", solution: "Added court scheduling, occupancy views and automatic subscription billing in one platform." },
     ],
     live: "padel-fe.vercel.app",
-    image: "/images/work/work-padel.jpg",
-    imageAlt: "A padel tennis court ready for a match",
+    image: "/images/work/work-padel.svg",
+    imageAlt: "Illustration of the Padel Connect court booking interface",
   },
 ];
 
@@ -571,51 +571,256 @@ export const facilities = [
   { title: "Security", text: "Sign-in with JWT and OAuth 2.0, role-based permissions, and encryption. Health data is handled with HIPAA-aligned practices — a practice standard, not a certification claim." },
   { title: "DevOps & Deployment", text: "Docker, AWS and Vercel hosting, with GitHub Actions CI/CD, so every release is repeatable and safe." },
   { title: "Support & Maintenance", text: "Bug fixes, updates, performance monitoring and new features after launch, on a care plan you can cancel." },
-  { title: "Clear Communication", text: "One point of contact, weekly progress and demos, and work planned around your time zone as far as possible." },
+  { title: "Clear Communication", text: "One point of contact, weekly progress and demos, and work scheduled to suit your time zone." },
 ];
 
 export const faqs = [
-  { q: "How much does a website or app cost?", a: "It depends on size and features. As a rough guide only: a small website starts in a lower range, a website with booking or CRM costs more, and a custom system or mobile app costs more again. Use the Estimator for a rough range, then book a free consultation for a firm quote — we never hide the price until the end." },
+  { q: "How much does a website or app cost?", a: "It depends on size and features. As a rough guide only: a small website starts in a lower range, a website with booking or CRM costs more, and a custom system or mobile app costs more again. Use the Estimator for a rough range, then book a free consultation for a firm quote — the full price is agreed before work starts." },
   { q: "How long does a project take?", a: "A small website can take a few weeks. A booking system, CRM or mobile app usually takes longer, built in phases: a prototype first, then a working version, then the full product. You will get a timeline in writing before we start." },
-  { q: "Do you work with clients outside your country?", a: "Yes. CraftThink works remotely with clients worldwide. Communication is by video call, chat and email, with weekly demos, planned around your time zone as far as possible." },
+  { q: "Do you work with clients outside your country?", a: "Yes. CraftThink works remotely with clients worldwide. Communication is by video call, chat and email, with weekly demos, scheduled to suit your time zone." },
   { q: "I already have a website or software. Can you fix it?", a: "Yes. Start with the free audit: tell us what is slow, broken or confusing, and we will list the top fixes. Many clients start with a small fix sprint before a bigger rebuild." },
-  { q: "What is the AI assistant on this site?", a: "It is a guided demo that answers only from our own services, projects, process and FAQs. It suggests the right service and project for your problem, and hands you to a free consultation when it does not know. A live AI connection can be added later; nothing here pretends to be a real external AI service." },
+  { q: "What is the AI assistant on this site?", a: "It is Think, the guide on this site. It answers only from our own services, projects, process and FAQs. It suggests the right service and project for your problem, and hands you to a free consultation when it does not know." },
   { q: "Can AI answer my customers for me?", a: "Yes — that is one of our services. We build AI assistants that answer from your own business data, with factual checking, and hand over to a human whenever they are unsure. See the RAG AI Assistant project." },
   { q: "Will I own my website, app and data?", a: "Yes. Your website, app, code and customer data are yours. We hand over access, logins and documentation at launch, and we never hold your business hostage." },
   { q: "Do you build mobile apps, or only websites?", a: "Both. Mobile apps are a full service, not a side note: one React Native app for iOS and Android, with bookings, memberships or subscriptions, plus a web admin panel for you." },
   { q: "What happens after launch?", a: "We test, monitor and support your software. A care plan covers bug fixes, updates and small improvements, so your site does not slowly break as browsers, phones and payment rules change." },
   { q: "How do we start?", a: "Book a free consultation, or try the Estimator or Free Audit first. In the first call we will understand your problem, show you a similar project, and give you a clear next step — with no obligation." },
   { q: "Do you need all my content and photos before we start?", a: "No. We start with what you have, and we will tell you exactly what we still need — text, photos, logo, prices — in a simple checklist." },
-  { q: "How do payments work?", a: "We agree milestones in writing before building. For medium projects a common split is a deposit to start, a payment at demo, and the balance at launch. The exact split is confirmed in your quote, not guessed here." },
+  { q: "How do payments work?", a: "We agree milestones in writing before building. For medium projects a common split is a deposit to start, a payment at demo, and the balance at launch. The exact split is confirmed in your quote." },
 ];
 
-/** Knowledge base for the guided demo chat: keyword -> reply + links. */
+/** Knowledge base for the Think chat: scored keyword topics -> reply + links. */
 export type GuideReply = { text: string; serviceHref?: string; serviceLabel?: string; projectHref?: string; projectLabel?: string };
 
-export function guideAnswer(input: string): GuideReply {
+export type GuideContext = {
+  /** Last reply that pointed at a service (for follow-up questions). */
+  topic?: GuideReply;
+  /** Previous visitor messages, oldest first (for business context). */
+  history?: string[];
+};
+
+/**
+ * The on-site guide brain. No external key, no paid dependency, and no
+ * visitor data leaves the site: every answer is composed here from
+ * CraftThink's own services, projects and FAQs below.
+ *
+ * How it answers:
+ * 1. FAQ match — if the question closely matches a real FAQ question,
+ *    the answer is that FAQ's own answer, plus a next-step card.
+ * 2. Scored topic match — keyword/synonym hits across services (with
+ *    multi-word phrases worth more, short words matched whole-word so
+ *    "site" never fires inside "website"). The winning service's real
+ *    title, line, outcome and a similar project's real line are
+ *    composed into natural sentences — not a single canned line.
+ * 3. Follow-ups — a question with no new topic ("and for that?",
+ *    "what about price?") reuses the last discussed service, and a
+ *    business type mentioned earlier ("my salon", "my shop") is
+ *    carried into the answer.
+ * 4. Anything else — an honest answer that Think only covers
+ *    CraftThink's services, projects and process, with a free
+ *    consultation card. Nothing is invented.
+ * Cost answers never give a number: cost depends on size and features,
+ * and a free consultation gives the firm quote.
+ */
+export function guideAnswer(input: string, context?: GuideContext): GuideReply {
   const q = input.toLowerCase();
   const has = (...words: string[]) => words.some((w) => q.includes(w));
-  if (has("slow", "broken", "fix", "bug", "old", "outdated")) return { text: "That sounds like a Fix & Improve job. We start with a free audit, find what is slow or broken, and fix it in small tested steps — without losing your data.", serviceHref: "/services/fix-improve", serviceLabel: "Fix & Improve Your Existing Software", projectHref: "/work/hr-management-system", projectLabel: "HR Management System" };
-  if (has("app", "android", "iphone", "ios", "mobile")) return { text: "A mobile app puts your business in your customer's pocket. We build one React Native app for both iOS and Android, with bookings or memberships inside, plus an admin panel for you.", serviceHref: "/services/mobile-apps", serviceLabel: "Mobile Apps", projectHref: "/work/padel-connect", projectLabel: "Padel Connect" };
-  // --- AI depth branches (BEFORE the generic AI branch, so specific
-  // questions are never swallowed by the generic reply) ---
-  if (has("langchain", "langgraph")) return { text: "LangChain is the toolkit for building AI apps that use your own data and tools, and LangGraph builds multi-step agent workflows on top of it — for example, an agent that checks a document, then decides the next step, then acts. In short: instead of one chatbot answering one question, you get a small team of AI steps that follow a process, with checks along the way.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
-  if (has("multi-agent", "multi agent", "supervisor", "agent team", "team of agents")) return { text: "A multi-agent system is a small team of AI agents working together under one supervisor: one agent finds the answer, another checks it, another takes the action. That is how our HR work is built — LangGraph agents that validate leave and flag payroll problems, instead of one agent guessing everything at once. The supervisor keeps the team on task, and anything unsure goes to a human.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
-  if (has("rag", "corrective", "self-rag", "self rag", "vector", "pinecone", "chromadb", "from my documents", "my documents", "own documents", "our documents", "answers from")) return { text: "RAG means the AI answers from YOUR documents — price lists, policies, manuals — not from general knowledge. It searches your documents first (vector search over Pinecone or ChromaDB), rewrites the question when it is unclear, and falls back to the web only when your documents do not cover it. Corrective RAG is that rewriting and fallback step; Self-RAG is the extra check: the AI verifies its answer against the source before showing it to your customer, so answers are grounded, not guessed.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
-  const automationHit = has("automation") || has("agents doing", "agent that does", "agents that do", "do work for", "does work for") || (has("agent", "agents") && has("screening", "approvals", "data entry"));
-  if (automationHit) return { text: "AI agents can do work, not just chat. For example: an agent that books appointments, screens applications, routes approvals, or checks data entries against your rules — and flags anything odd for a human instead of acting blindly. You save the hours your team spends on repeated checks, and every action stays traceable.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant" };
-  if (has("ai", "chatbot", "assistant", "answer customer", "automate")) return { text: "An AI assistant can answer your customers from your own business data, with answers checked before they are shown — and it hands over to a human when it is unsure.", serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant" };
-  if (has("crm", "customer", "sales", "billing", "manage business", "pos")) return { text: "A CRM and business system puts customers, sales, staff and billing in one place, instead of spreadsheets and separate tools.", serviceHref: "/services/crm", serviceLabel: "CRM & Business Management Systems", projectHref: "/work/cliender", projectLabel: "Cliender" };
-  if (has("tour", "dubai", "desert", "safari", "buggy", "yacht", "travel")) return { text: "A tours booking site puts every experience in one place — desert safaris, buggy rides, yacht cruises and city tours — with hotel pickup and a clear booking and cancellation flow.", serviceHref: "/services/booking", serviceLabel: "Booking & Appointment Systems", projectHref: "/work/book-dubai-guide", projectLabel: "BookDubaiGuide" };
-  if (has("book", "appointment", "schedule", "reservation", "clinic", "salon", "court")) return { text: "A booking system lets customers book, pay and come — without phone calls. Slots are locked so two people cannot book the same time.", serviceHref: "/services/booking", serviceLabel: "Booking & Appointment Systems", projectHref: "/work/telemedicine", projectLabel: "Mejora Tu Dolor" };
-  if (has("shop", "store", "sell", "ecommerce", "e-commerce", "checkout", "product")) return { text: "An online store lets you sell, take payments and manage orders in one place, with a checkout that works well on phones.", serviceHref: "/services/online-store", serviceLabel: "Online Store / E-commerce", projectHref: "/work/cliender", projectLabel: "Cliender" };
-  if (has("hr", "staff", "leave", "payroll", "employee", "hiring")) return { text: "An HR and staff system handles leave, payroll checks, hiring and onboarding in one place, with clear approvals and an audit log.", serviceHref: "/services/hr-systems", serviceLabel: "HR & Staff Systems", projectHref: "/work/hr-management-system", projectLabel: "HR Management System" };
-  if (has("design", "redesign", "look", "premium", "ui", "ux")) return { text: "Good design is easy to use and looks premium. We research your customers, prototype first, and only then build — so you approve the look before we code it.", serviceHref: "/services/ui-ux-design", serviceLabel: "UI/UX Design", projectHref: "/work/cliender", projectLabel: "Cliender" };
-  if (has("cost", "price", "estimate", "quote", "budget")) return { text: "Costs depend on size and features. The Estimator gives a rough range and timeline, labelled as an estimate only — then a free consultation gives you a firm quote.", serviceHref: "/estimate", serviceLabel: "Get an Estimate" };
-  if (has("time", "how long", "duration")) return { text: "A small website can take a few weeks; a booking system, CRM or app takes longer, built in phases. Your timeline is agreed in writing before we start. See our process for the 6 steps.", serviceHref: "/process", serviceLabel: "Our Process" };
-  if (has("remote", "worldwide", "country", "location")) return { text: "We work remotely with clients worldwide, with weekly demos planned around your time zone as far as possible. There is no office you need to visit.", serviceHref: "/about", serviceLabel: "About the CEO" };
-  if (has("website", "site", "portfolio", "online")) return { text: "A fast, beautiful website brings you customers and builds trust. Tell me if you need a simple business site, a portfolio, or a full store — I can point you to the right one.", serviceHref: "/services/website-design", serviceLabel: "Website Design & Development", projectHref: "/work/cliender", projectLabel: "Cliender" };
-  if (has("support", "care", "test", "maintenance", "after launch")) return { text: "After launch we test, monitor, fix bugs and update your software, so it keeps working as browsers, phones and payment rules change.", serviceHref: "/services/testing-care", serviceLabel: "Testing, Support & Care" };
-  if (has("hello", "hi", "help", "start", "need")) return { text: "Hello! Tell me what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project." };
-  return { text: "I am not sure about that one yet — this guide only answers from CraftThink's own services, projects, process and FAQs. The best next step is a free consultation, where Muhammad can answer it properly. Tell me your problem in the lead form below and we will take it from there." };
+  const lastTopic = context?.topic;
+  const history = context?.history ?? [];
+
+  const findService = (slug: string) => services.find((s) => s.slug === slug);
+  const findProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+  // --- Business context from this and earlier messages ----------------------
+  const businessTypes: { keywords: string[]; label: string }[] = [
+    { keywords: ["salon", "barber", "spa"], label: "salon" },
+    { keywords: ["clinic", "doctor", "dentist", "patient"], label: "clinic" },
+    { keywords: ["shop", "store", "boutique"], label: "shop" },
+    { keywords: ["restaurant", "cafe"], label: "restaurant" },
+    { keywords: ["gym", "club"], label: "club" },
+    { keywords: ["school", "academy"], label: "school" },
+    { keywords: ["tour", "travel", "dubai"], label: "tour business" },
+    { keywords: ["hotel", "guesthouse"], label: "hotel" },
+  ];
+  const businessOf = (text: string) => {
+    const t = text.toLowerCase();
+    return businessTypes.find((b) => b.keywords.some((k) => t.includes(k)))?.label;
+  };
+  const business = businessOf(q) ?? [...history].reverse().map(businessOf).find(Boolean);
+
+  // --- Composed answers from real service / project data --------------------
+  const nextStep = "The next step is a free consultation, where we confirm the scope and a firm quote for your business.";
+  function serviceAnswer(service: NonNullable<ReturnType<typeof findService>>, project?: ReturnType<typeof findProject>, second?: ReturnType<typeof findService>): GuideReply {
+    const lead = business ? `For a ${business}, ${service.title} fits best.` : `${service.title} fits best here.`;
+    let text = `${lead} ${service.line}${service.outcome ? ` ${service.outcome}` : ""}`;
+    if (project) text += ` A similar project is ${project.title} — ${project.line}`;
+    if (second) text += ` You may also need ${second.title}: ${second.line}`;
+    text += ` ${nextStep}`;
+    return {
+      text,
+      serviceHref: `/services/${service.slug}`,
+      serviceLabel: service.title,
+      projectHref: project ? `/work/${project.slug}` : undefined,
+      projectLabel: project?.title,
+    };
+  }
+  function aiService() {
+    return findService("ai-solutions")!;
+  }
+  function aiCapability(title: string) {
+    return aiService().capabilities?.find((c) => c.title === title)?.description ?? "";
+  }
+  function aiTech(name: string) {
+    return aiService().techStack?.find((t) => t.name === name)?.description ?? "";
+  }
+
+  // --- FAQ match -------------------------------------------------------------
+  const stopwords = new Set("how does you your can the and for with before after what when where why will would should about this that are its from have has had but not all any out per use using need needs want wants get got make made".split(" "));
+  const tokens = (text: string) =>
+    text.toLowerCase().replace(/[^a-z\s]/g, " ").split(/\s+/).filter((w) => w.length > 3 && !stopwords.has(w));
+  const qTokens = tokens(q);
+  let bestFaq: { a: string; q: string; score: number } | null = null;
+  for (const f of faqs) {
+    const overlap = tokens(f.q).filter((w) => qTokens.includes(w)).length;
+    if (overlap > (bestFaq?.score ?? 0)) bestFaq = { a: f.a, q: f.q, score: overlap };
+  }
+  function faqLink(faqQ: string): { href: string; label: string } {
+    if (faqQ.includes("cost")) return { href: "/estimate", label: "Get an Estimate" };
+    if (faqQ.includes("how long")) return { href: "/process", label: "Our Process" };
+    if (faqQ.includes("outside your country")) return { href: "/about", label: "About the CEO" };
+    if (faqQ.includes("fix it")) return { href: "/services/fix-improve", label: "Fix & Improve Your Existing Software" };
+    if (faqQ.includes("AI assistant on this site") || faqQ.includes("answer my customers")) return { href: "/services/ai-solutions", label: "AI Solutions & AI Assistant" };
+    if (faqQ.includes("mobile apps")) return { href: "/services/mobile-apps", label: "Mobile Apps" };
+    if (faqQ.includes("after launch")) return { href: "/services/testing-care", label: "Testing, Support & Care" };
+    return { href: "/consultation", label: "Book a Free Consultation" };
+  }
+
+  // --- Scored topic match ------------------------------------------------------
+  // Short keywords match whole words only, so "site" does not fire inside
+  // "website" and "app" does not fire inside "apple". Longer keywords
+  // and phrases match as substrings, as before.
+  const matchKw = (kw: string) =>
+    kw.includes(" ") ? q.includes(kw) : kw.length <= 4 ? new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(q) : q.includes(kw);
+  type Topic = { keywords: string[]; serviceSlug: string; projectSlug?: string; special?: "langchain" | "multi-agent" | "rag" | "automation" };
+  const topics: Topic[] = [
+    { keywords: ["slow", "loading", "loads slowly", "takes long to load", "fast", "speed", "lag", "crash", "broken", "fix", "bug", "error", "not working", "old", "outdated"], serviceSlug: "fix-improve", projectSlug: "hr-management-system" },
+    { keywords: ["mobile app", "app", "android", "iphone", "ios", "react native"], serviceSlug: "mobile-apps", projectSlug: "padel-connect" },
+    { keywords: ["langchain", "langgraph"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant", special: "langchain" },
+    { keywords: ["multi-agent", "multi agent", "supervisor", "agent team", "team of agents"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant", special: "multi-agent" },
+    { keywords: ["rag", "corrective", "self-rag", "self rag", "vector", "pinecone", "chromadb", "from my documents", "my documents", "own documents", "our documents", "answers from"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant", special: "rag" },
+    { keywords: ["automation", "agents doing", "agent that does", "agents that do", "do work for", "does work for", "automate"], serviceSlug: "ai-solutions", special: "automation" },
+    { keywords: ["ai", "chatbot", "assistant", "answer customer", "answer my customers"], serviceSlug: "ai-solutions", projectSlug: "rag-ai-assistant" },
+    { keywords: ["crm", "customer", "sales", "billing", "manage business", "pos"], serviceSlug: "crm", projectSlug: "cliender" },
+    { keywords: ["tour", "dubai", "desert", "safari", "buggy", "yacht", "travel", "holiday", "trip", "excursion"], serviceSlug: "booking", projectSlug: "book-dubai-guide" },
+    { keywords: ["book", "booking", "appointment", "schedule", "reservation", "clinic", "doctor", "dentist", "patient", "salon", "barber", "spa", "restaurant", "cafe", "gym", "club", "school", "class", "court"], serviceSlug: "booking", projectSlug: "telemedicine" },
+    { keywords: ["shop", "store", "sell", "ecommerce", "e-commerce", "checkout", "product", "market", "boutique"], serviceSlug: "online-store", projectSlug: "cliender" },
+    { keywords: ["hr", "staff", "leave", "payroll", "employee", "hiring"], serviceSlug: "hr-systems", projectSlug: "hr-management-system" },
+    { keywords: ["design", "redesign", "look", "premium", "ui", "ux"], serviceSlug: "ui-ux-design", projectSlug: "cliender" },
+    { keywords: ["website", "site", "portfolio", "online"], serviceSlug: "website-design", projectSlug: "cliender" },
+    { keywords: ["support", "care", "test", "maintenance", "after launch"], serviceSlug: "testing-care" },
+    { keywords: ["remote", "worldwide", "country", "location"], serviceSlug: "website-design", projectSlug: "cliender" },
+  ];
+  const scored = topics
+    .map((t) => ({ topic: t, score: t.keywords.reduce((s, kw) => s + (matchKw(kw) ? (kw.includes(" ") ? 2 : 1) : 0), 0) }))
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score);
+  const best = scored[0];
+  const second = scored[1] && scored[1].score >= 2 && scored[1].score >= (best?.score ?? 0) - 1 ? scored[1].topic : undefined;
+
+  // A FAQ match beats a weaker topic match; otherwise the topic wins,
+  // and a FAQ still wins when nothing else scored.
+  if (bestFaq && bestFaq.score >= 2 && (!best || bestFaq.score >= best.score)) {
+    const link = faqLink(bestFaq.q);
+    return { text: `${bestFaq.a} ${nextStep}`, serviceHref: link.href, serviceLabel: link.label };
+  }
+
+  // Cost: never a number. Keep the best topic's cards when one scored,
+  // or the last discussed service for follow-up price questions.
+  const costHit = has("cost", "price", "budget", "quote", "estimate", "how much", "expensive", "cheap");
+  if (costHit) {
+    const topic = best?.topic;
+    const service = topic ? findService(topic.serviceSlug) : undefined;
+    const project = topic?.projectSlug ? findProject(topic.projectSlug) : undefined;
+    const linkService = service ?? (lastTopic?.serviceHref?.startsWith("/services/") ? findService(lastTopic.serviceHref.replace("/services/", "")) : undefined);
+    return {
+      text: `Costs depend on size and features. The Estimator gives a rough range and timeline, labelled as an estimate only — then a free consultation gives you a firm quote.${linkService ? ` For ${linkService.title}, that quote follows the same free consultation.` : ""}`,
+      serviceHref: linkService ? `/services/${linkService.slug}` : "/estimate",
+      serviceLabel: linkService ? linkService.title : "Get an Estimate",
+      projectHref: project ? `/work/${project.slug}` : lastTopic?.projectHref,
+      projectLabel: project?.title ?? lastTopic?.projectLabel,
+    };
+  }
+  // Timeline questions get the process answer, keeping topic cards.
+  if (has("how long", "duration", "turnaround", "deadline") || (has("time") && has("take"))) {
+    const project = best?.topic.projectSlug ? findProject(best.topic.projectSlug) : undefined;
+    return {
+      text: "A small website can take a few weeks; a booking system, CRM or app takes longer, built in phases. Your timeline is agreed in writing before we start. See our process for the 6 steps.",
+      serviceHref: "/process",
+      serviceLabel: "Our Process",
+      projectHref: project ? `/work/${project.slug}` : undefined,
+      projectLabel: project?.title,
+    };
+  }
+
+  if (best) {
+    const service = findService(best.topic.serviceSlug)!;
+    const project = best.topic.projectSlug ? findProject(best.topic.projectSlug) : undefined;
+    const secondService = second ? findService(second.serviceSlug) : undefined;
+    // Remote-work questions are not a service: keep the honest answer.
+    if (best.topic.keywords.includes("remote") && best.topic.serviceSlug === "website-design" && !has("website", "site", "portfolio")) {
+      return { text: "We work remotely with clients worldwide, with weekly demos planned around your time zone as far as possible. There is no office you need to visit.", serviceHref: "/about", serviceLabel: "About the CEO" };
+    }
+    if (best.topic.special === "langchain") {
+      return {
+        text: `LangChain — ${aiTech("LangChain")} LangGraph — ${aiTech("LangGraph")} Together, that means instead of one chatbot answering one question, you get a small team of AI steps that follow a process, with checks along the way. ${nextStep}`,
+        serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+      };
+    }
+    if (best.topic.special === "multi-agent") {
+      return {
+        text: `${aiCapability("Multi-Agent Teams")} ${aiCapability("Human Handover")} ${nextStep}`,
+        serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+      };
+    }
+    if (best.topic.special === "rag") {
+      return {
+        text: `${aiCapability("RAG Pipelines")} ${aiCapability("Corrective RAG")} ${aiCapability("Self-RAG Checking")} ${nextStep}`,
+        serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant", projectHref: "/work/rag-ai-assistant", projectLabel: "RAG-Based Agentic AI Assistant",
+      };
+    }
+    if (best.topic.special === "automation") {
+      return {
+        text: `${aiCapability("Agentic Workflows")} ${nextStep}`,
+        serviceHref: "/services/ai-solutions", serviceLabel: "AI Solutions & AI Assistant",
+      };
+    }
+    return serviceAnswer(service, project, secondService);
+  }
+
+  // Greetings and thanks: friendly, but never a dead end.
+  if (has("thank", "thanks", "great", "perfect", "awesome")) {
+    return { text: "You are welcome! Tell me a little about your business and what you need, and I will point you to the right service — or book a free call and we will talk it through.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation" };
+  }
+  if (has("hello", "hi", "hey", "help", "start", "need")) {
+    return { text: "Hello! Tell me what you need help with — for example: 'my website is slow', 'I need an app', or 'I need AI to answer customers'. I will point you to the right service and a similar project.", serviceHref: "/consultation", serviceLabel: "Book a Free Consultation" };
+  }
+
+  // Follow-ups with no new topic ("and for that?", "tell me more",
+  // "what about that?") reuse the last discussed service, composed
+  // from its real data, with the business type carried over.
+  if (lastTopic?.serviceHref?.startsWith("/services/")) {
+    const service = findService(lastTopic.serviceHref.replace("/services/", ""));
+    if (service && has("and", "what about", "tell me more", "more about", "that one", "also", "too", "how does that work", "how would that work", "what else", "anything else")) {
+      const project = lastTopic.projectHref ? findProject(lastTopic.projectHref.replace("/work/", "")) : undefined;
+      return serviceAnswer(service, project);
+    }
+  }
+
+  // Unknown topic: honest, with a consultation card — never a dead end
+  // and never an invented answer.
+  return {
+    text: "I am not sure about that one yet — Think only helps with CraftThink's own services, projects and process, so I cannot answer that one properly. The best next step is a free consultation, where Muhammad can answer it for your business.",
+    serviceHref: "/consultation",
+    serviceLabel: "Book a Free Consultation",
+  };
 }

@@ -6,22 +6,33 @@ import { services, projects, processSteps } from "@/data/content";
  *
  * Body: { messages: [{ role: "user" | "assistant", content: string }] }
  *
- * (a) If THINK_AI_API_KEY is set, the conversation is sent to a generic
- * OpenAI-compatible chat-completions endpoint — URL from
+ * Provider priority (keys are read ONLY from the environment — never
+ * hardcoded, never fetched from the web; a Hugging Face token belongs
+ * to a free personal account and must be pasted into the environment
+ * by the site owner):
+ *
+ * (a) If HF_API_KEY is set, the conversation is sent to Hugging Face's
+ * free OpenAI-compatible router (https://router.huggingface.co/v1/chat/completions),
+ * model from THINK_AI_MODEL (default Qwen/Qwen2.5-7B-Instruct, a free,
+ * openly available instruction model) — using plain fetch. No new npm
+ * dependency. The key is only ever sent as a Bearer token to that
+ * endpoint.
+ *
+ * (b) Otherwise, if THINK_AI_API_KEY is set, the conversation is sent
+ * to a generic OpenAI-compatible chat-completions endpoint — URL from
  * THINK_AI_API_URL (default https://api.openai.com/v1/chat/completions),
- * model from THINK_AI_MODEL (default gpt-4o-mini) — using plain fetch.
- * No new npm dependency, no hardcoded key: the key is read only from
- * the environment and only ever sent as a Bearer token to that endpoint.
+ * model from THINK_AI_MODEL (default gpt-4o-mini).
+ *
  * The system prompt is built from the REAL site data in
  * src/data/content.ts (the 11 services, 6 projects, process steps, and
  * /consultation as the next step). It forbids inventing prices, clients,
  * testimonials, or stats, and sends visitors to a free consultation
  * when it does not know. Success returns { ai: true, answer }.
  *
- * (b) If no key is set, returns { ai: false, reason: "think_key_missing" }
- * and the chat UI falls back silently to its rule-based answers.
+ * (c) If neither key is set, returns { ai: false, reason: "think_key_missing" }
+ * and the chat UI falls back silently to its on-site guide brain.
  *
- * (c) On ANY provider error (bad status, timeout, bad payload, empty
+ * (d) On ANY provider error (bad status, timeout, bad payload, empty
  * answer) returns { ai: false, reason: "think_error" } — an answer is
  * never invented to cover a provider failure.
  */
@@ -78,13 +89,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ ai: false, reason: "think_error" }, { status: 400 });
   }
 
-  const apiKey = process.env.THINK_AI_API_KEY;
-  if (!apiKey) {
-    // Gated, not broken: the chat UI falls back to rule-based answers.
+  // Hugging Face first (free tier): a personal token in HF_API_KEY.
+  // Otherwise the existing OpenAI-compatible key. Neither set means
+  // gated, not broken: the chat UI falls back to the on-site brain.
+  const hfKey = process.env.HF_API_KEY;
+  const genericKey = process.env.THINK_AI_API_KEY;
+  if (!hfKey && !genericKey) {
     return NextResponse.json({ ai: false, reason: "think_key_missing" });
   }
-  const apiUrl = process.env.THINK_AI_API_URL || "https://api.openai.com/v1/chat/completions";
-  const model = process.env.THINK_AI_MODEL || "gpt-4o-mini";
+  const apiKey = hfKey ?? genericKey!;
+  const apiUrl = hfKey
+    ? "https://router.huggingface.co/v1/chat/completions"
+    : process.env.THINK_AI_API_URL || "https://api.openai.com/v1/chat/completions";
+  const model = process.env.THINK_AI_MODEL || (hfKey ? "Qwen/Qwen2.5-7B-Instruct" : "gpt-4o-mini");
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), PROVIDER_TIMEOUT_MS);

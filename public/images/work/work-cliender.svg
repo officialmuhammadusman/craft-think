@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Business management dashboard illustration">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <rect width="1200" height="48" fill="#FFFFFF"/>
+  <circle cx="32" cy="24" r="8" fill="#E7E9F2"/><circle cx="58" cy="24" r="8" fill="#E7E9F2"/><circle cx="84" cy="24" r="8" fill="#4F46E5"/>
+  <rect x="120" y="16" width="300" height="16" rx="8" fill="#EEF2FF"/>
+  <rect y="48" width="240" height="652" fill="#0B1220"/>
+  <rect x="28" y="76" width="120" height="20" rx="6" fill="#FFFFFF"/>
+  <rect x="28" y="120" width="180" height="34" rx="10" fill="#4F46E5"/>
+  <rect x="28" y="170" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="200" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="230" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="260" width="150" height="14" rx="7" fill="#334155"/>
+  <rect x="28" y="300" width="120" height="14" rx="7" fill="#14B8A6"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="272" y="76" width="280" height="110" rx="18" fill="#FFFFFF"/>
+    <text x="296" y="112" font-size="16" fill="#64748B">Sales today</text>
+    <text x="296" y="152" font-size="30" font-weight="bold" fill="#0B1220">Point of sale</text>
+    <rect x="576" y="76" width="280" height="110" rx="18" fill="#FFFFFF"/>
+    <text x="600" y="112" font-size="16" fill="#64748B">Billing</text>
+    <text x="600" y="152" font-size="30" font-weight="bold" fill="#0B1220">Subscriptions</text>
+    <rect x="880" y="76" width="280" height="110" rx="18" fill="#4F46E5"/>
+    <text x="904" y="112" font-size="16" fill="#C7D2FE">Customers</text>
+    <text x="904" y="152" font-size="30" font-weight="bold" fill="#FFFFFF">Leads tracked</text>
+  </g>
+  <!-- chart -->
+  <rect x="272" y="210" width="540" height="300" rx="18" fill="#FFFFFF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="300" y="248" font-size="20" font-weight="bold" fill="#0B1220">Revenue overview</text>
+    <rect x="300" y="420" width="46" height="60" rx="8" fill="#C7D2FE"/>
+    <rect x="366" y="380" width="46" height="100" rx="8" fill="#C7D2FE"/>
+    <rect x="432" y="340" width="46" height="140" rx="8" fill="#4F46E5"/>
+    <rect x="498" y="300" width="46" height="180" rx="8" fill="#4F46E5"/>
+    <rect x="564" y="360" width="46" height="120" rx="8" fill="#C7D2FE"/>
+    <rect x="630" y="320" width="46" height="160" rx="8" fill="#4F46E5"/>
+    <rect x="300" y="500" width="484" height="2" fill="#E7E9F2"/>
+  </g>
+  <!-- invoices -->
+  <rect x="836" y="210" width="324" height="300" rx="18" fill="#FFFFFF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="864" y="248" font-size="20" font-weight="bold" fill="#0B1220">Invoices</text>
+    <text x="864" y="296" font-size="16" fill="#0B1220">Invoice — Services</text>
+    <rect x="1010" y="276" width="120" height="30" rx="15" fill="#DCFCE7"/><text x="1070" y="297" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">Paid</text>
+    <rect x="864" y="326" width="266" height="10" rx="5" fill="#EEF2FF"/>
+    <text x="864" y="376" font-size="16" fill="#0B1220">Invoice — Subscription</text>
+    <rect x="1010" y="356" width="120" height="30" rx="15" fill="#FEF3C7"/><text x="1070" y="377" font-size="14" font-weight="bold" fill="#92400E" text-anchor="middle">Due</text>
+    <rect x="864" y="406" width="266" height="10" rx="5" fill="#EEF2FF"/>
+    <text x="864" y="456" font-size="16" fill="#0B1220">Invoice — Products</text>
+    <rect x="1010" y="436" width="120" height="30" rx="15" fill="#DCFCE7"/><text x="1070" y="457" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">Paid</text>
+  </g>
+  <rect x="272" y="534" width="888" height="102" rx="18" fill="#EEF2FF"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <circle cx="308" cy="585" r="10" fill="#14B8A6"/>
+    <text x="330" y="591" font-size="17" fill="#0B1220">Sales, billing, appointments and leads — one dashboard, no separate tools.</text>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bot, Send, User } from "lucide-react";
+import { ArrowRight, Bot, ChevronDown, Send, User } from "lucide-react";
 import { guideAnswer, type GuideReply } from "@/data/content";
 import { Button } from "@/components/ui/Button";
 
@@ -10,20 +10,21 @@ type Msg = { role: "user" | "guide"; text: string; reply?: GuideReply };
 const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to answer customers", "I need a booking system", "How much does it cost?", "I need LangChain / LangGraph agents", "I need a multi-agent system", "I need AI that answers from my documents"];
 
 /**
- * Premium guided-demo chat. It tries POST /api/think first: when a real
- * AI key is configured server-side, Think answers from the site's own
- * data via that provider. When the API is gated ({ ai: false }) or the
- * request fails, it falls back SILENTLY to the rule-based answers from
- * guideAnswer in src/data/content.ts — unchanged. The visitor never
- * sees an error for the missing key or a failed provider call.
- * Suggestions are shown as cards (service + project), not plain links.
+ * Think chat. It tries POST /api/think first: when a real AI key is
+ * configured server-side, Think answers from the site's own data via
+ * that provider. When the API is gated ({ ai: false }) or the request
+ * fails, it falls back SILENTLY to the on-site guide brain in
+ * guideAnswer (src/data/content.ts), which composes answers from the
+ * site's own services, projects and FAQs with no external call. The
+ * visitor never sees an error for the missing key or a failed
+ * provider call.
  *
- * Scroll fix (design unchanged): the sheet wrapper is the ONE scroll
- * container in bare mode — the message list has no max-h/overflow, so
- * scrolling over messages reaches the sheet instead of being trapped
- * inside a nested list. data-lenis-prevent is kept on the sheet and
- * the message area so Lenis never steals wheel/touch scroll. On the
- * full /guide page (bare=false) the inner list keeps its own scroll.
+ * Layout: in bare mode (chat sheet) this is a full-height flex column
+ * — header (rendered by the sheet), message list flex-1 with its own
+ * scroll, suggestions + input + follow-up pinned at the bottom — so
+ * there is no dead blank area below a short card. The sheet wrapper
+ * itself does not scroll; the message list does. On the full /guide
+ * page (bare=false) the same column is used inside the card.
  */
 export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
   const [messages, setMessages] = useState<Msg[]>([
@@ -33,12 +34,16 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [problem, setProblem] = useState("");
+  const [waiting, setWaiting] = useState(false);
+  const [followupOpen, setFollowupOpen] = useState(false);
   const askedInitial = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const lastTopicRef = useRef<GuideReply | undefined>(undefined);
 
   async function ask(text: string) {
     const clean = text.trim();
-    if (!clean) return;
+    if (!clean || waiting) return;
     // Conversation so far (guide turns become "assistant" for the API),
     // plus this new question. The API caps and validates it server-side.
     const history = [
@@ -48,6 +53,8 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     setMessages((m) => [...m, { role: "user", text: clean }]);
     setProblem(clean);
     setInput("");
+    setWaiting(true);
+    inputRef.current?.focus();
     // Live AI first. ANY failure or { ai: false } gating falls back
     // silently to the existing rule-based answer — never an error, and
     // never an invented answer.
@@ -61,13 +68,21 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       const aiAnswer = typeof data.answer === "string" ? data.answer.trim() : "";
       if (data?.ai === true && aiAnswer) {
         setMessages((m) => [...m, { role: "guide", text: aiAnswer }]);
+        setWaiting(false);
+        inputRef.current?.focus();
         return;
       }
     } catch {
       // Fall through to the rule-based answer below.
     }
-    const reply = guideAnswer(clean);
+    const reply = guideAnswer(clean, {
+      topic: lastTopicRef.current,
+      history: messages.filter((m) => m.role === "user").map((m) => m.text),
+    });
+    if (reply.serviceHref) lastTopicRef.current = reply;
     setMessages((m) => [...m, { role: "guide", text: reply.text, reply }]);
+    setWaiting(false);
+    inputRef.current?.focus();
   }
 
   useEffect(() => {
@@ -78,18 +93,11 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // Single-scroll-area fix: in bare mode (chat sheet) the message list is
-  // NOT its own scroll container (see below) — the sheet wrapper is the
-  // one scroll area, so new messages scroll THAT container to the bottom.
-  // On the full /guide page (bare=false) the inner list still scrolls.
+  // New messages (and the Thinking indicator) scroll the message list
+  // itself to the bottom — in both bare and full-page mode.
   useEffect(() => {
-    if (bare) {
-      const outer = scrollRef.current?.closest("[data-chat-scroll]");
-      outer?.scrollTo({ top: outer.scrollHeight, behavior: "smooth" });
-    } else {
-      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-    }
-  }, [messages, bare]);
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, waiting, bare]);
 
   const contactHref = `/contact?${new URLSearchParams({ name, email, problem: problem || messages.filter((m) => m.role === "user").at(-1)?.text || "" }).toString()}`;
 
@@ -101,7 +109,7 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     : SUGGESTIONS.slice(0, 3);
 
   return (
-    <div className="overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl">
+    <div className={bare ? "flex min-h-0 flex-1 flex-col overflow-hidden bg-white" : "overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl"}>
       {!bare && (
       <div className="flex items-start justify-between gap-4 bg-[#0B1220] px-6 py-5 text-white">
         <div className="flex items-start gap-3">
@@ -111,11 +119,10 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
             <p className="mt-0.5 max-w-md text-sm leading-snug text-white/60">Answers come from this site&apos;s services, projects and FAQs.</p>
           </div>
         </div>
-        <span className="hidden shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white sm:flex"><span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Guided demo</span>
       </div>
       )}
 
-      <div ref={scrollRef} data-lenis-prevent className={bare ? "flex flex-col gap-4 px-5 py-5 sm:px-6" : "flex max-h-[460px] flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"} aria-live="polite">
+      <div ref={scrollRef} data-lenis-prevent className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
@@ -136,33 +143,47 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
             </div>
           </div>
         ))}
+        {waiting && (
+          <div className="flex gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF2FF] text-[#4F46E5]"><Bot size={17} /></span>
+            <div className="rounded-[20px] rounded-tl-sm bg-[#F6F7FB] px-4 py-3 text-base text-[#64748B]">
+              <span className="animate-pulse">Thinking…</span>
+            </div>
+          </div>
+        )}
       </div>
 
-      {shownSuggestions.length > 0 && (
-      <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
-        <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : "Try one of these:"}</p>
-        <div data-lenis-prevent className="flex flex-wrap gap-2">
-          {shownSuggestions.map((s) => (
-            <button key={s} type="button" onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5]">{s}</button>
-          ))}
+      <div className="shrink-0">
+        {shownSuggestions.length > 0 && (
+        <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
+          <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : "Try one of these:"}</p>
+          <div data-lenis-prevent className="flex flex-wrap gap-2">
+            {shownSuggestions.map((s) => (
+              <button key={s} type="button" disabled={waiting} onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] disabled:opacity-50">{s}</button>
+            ))}
+          </div>
         </div>
-      </div>
-      )}
+        )}
 
-      <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
-        <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>
-        <input id="ai-input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="What do you need help with?" className="min-h-[52px] flex-1 rounded-full border border-[#E7E9F2] px-5 text-base outline-none focus:border-[#4F46E5]" />
-        <Button type="submit" className="gap-2">Ask <Send size={16} /></Button>
-      </form>
+        <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
+          <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>
+          <input ref={inputRef} id="ai-input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="What do you need help with?" className="min-h-[52px] flex-1 rounded-full border border-[#E7E9F2] px-5 text-base outline-none focus:border-[#4F46E5]" />
+          <Button type="submit" disabled={waiting} className="gap-2">{waiting ? "Thinking…" : "Ask"} <Send size={16} /></Button>
+        </form>
 
-      <div className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-5 sm:px-6">
-        <p className="text-base font-bold">Want us to follow up? Leave your details:</p>
-        <div className="mt-3 flex flex-col gap-3">
-          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" aria-label="Your email" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
-          <Button href={contactHref} className="w-full">Continue to Contact →</Button>
+        <div className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-4 sm:px-6">
+          <button type="button" onClick={() => setFollowupOpen((v) => !v)} aria-expanded={followupOpen} className="flex min-h-[48px] w-full items-center justify-between gap-2 text-left text-base font-bold text-[#0B1220]">
+            Leave your details for a follow-up
+            <ChevronDown size={18} className={`shrink-0 transition-transform ${followupOpen ? "rotate-180" : ""}`} />
+          </button>
+          {followupOpen && (
+            <div className="mt-3 flex flex-col gap-3">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" aria-label="Your email" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
+              <Button href={contactHref} className="w-full">Continue to Contact →</Button>
+            </div>
+          )}
         </div>
-        <p className="mt-2 text-sm text-[#64748B]">This sends nothing by itself — it opens the contact form with your details prefilled. No backend stores your details on this demo site.</p>
       </div>
     </div>
   );

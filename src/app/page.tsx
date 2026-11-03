@@ -57,7 +57,7 @@ const phases = [
 const whyChoose = [
   { title: "A plan in writing, before you pay", proof: "Scope, timeline and price agreed up front — see how we run projects on the process page.", href: "/process" },
   { title: "Security built in, not added later", proof: "JWT and OAuth 2.0 sign-in, role-based permissions and encryption — as used in the HR case study.", href: "/work/hr-management-system" },
-  { title: "Releases you can repeat", proof: "Docker, Vercel hosting and GitHub Actions CI/CD — this very site deploys that way.", href: "/process" },
+  { title: "Reliable, repeatable releases", proof: "Docker, Vercel hosting and GitHub Actions CI/CD — this very site deploys that way.", href: "/process" },
   { title: "Support after launch", proof: "Bug fixes, updates and monitoring on a care plan you can cancel anytime.", href: "/services/testing-care" },
   { title: "One contact, weekly demos", proof: "Weekly progress and demos, planned around your time zone — led by CEO Muhammad Usman.", href: "/about" },
 ];
@@ -121,7 +121,7 @@ export default function HomePage() {
                   <div className="border-t-4 border-[#4F46E5] p-6">
                     <h3 className="ct-h4">{s.title}</h3>
                     <p className="mt-2 text-[#475569]">{s.line}</p>
-                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See who it is for <ArrowRight size={17} /></p>
+                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See who it&apos;s for <ArrowRight size={17} /></p>
                   </div>
                 </Link>
               </Reveal>
@@ -183,6 +183,31 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* WHY WORK WITH US — trust strip built ONLY from real facts already on the site:
+          a direct line to the CEO, a written plan before payment, real linked live sites
+          and case studies, and support after launch. No stars, logos, counts or claims. */}
+      <section className="ct-section bg-[#0B1220] text-white">
+        <Container>
+          <Reveal><SectionHeading dark eyebrow="Why work with CraftThink" title="A partner you can check, before you commit" subtitle="No obligation at any step — start with a free consultation and decide from there." /></Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Talk to the person in charge", text: "Your contact is CEO Muhammad Usman, the person leading your project — not a ticket queue.", href: "/about/ceo" },
+              { title: "A written plan before you pay", text: "Scope, timeline and price agreed in writing first, through discovery, build, launch and support.", href: "/process" },
+              { title: "Real work you can open", text: "Six case studies, with live sites linked wherever they exist, so you judge the work itself.", href: "/work" },
+              { title: "Support after launch", text: "Monitoring, fixes and updates on a care plan you can cancel anytime — you own the code and data.", href: "/services/testing-care" },
+            ].map((t) => (
+              <Reveal key={t.title}>
+                <Link href={t.href} className="ct-lift block h-full rounded-[24px] border border-white/15 bg-white/5 p-6">
+                  <h3 className="ct-h4 text-white">{t.title}</h3>
+                  <p className="mt-2 text-white/70">{t.text}</p>
+                  <p className="mt-4 flex items-center gap-1 font-semibold text-white">Learn more <ArrowRight size={16} /></p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* TECHNOLOGIES — one-line marquee strip (slide only, no gradient) */}
       <section className="overflow-hidden bg-white py-10">
         <Container>
@@ -198,7 +223,7 @@ export default function HomePage() {
       {/* ENGAGEMENT MODELS — one differentiating sentence each */}
       <section className="ct-section bg-[#F6F7FB]">
         <Container>
-          <Reveal><SectionHeading eyebrow="Working together" title="Three ways to work with us" subtitle="The difference is what you commit to — not a list of features." /></Reveal>
+          <Reveal><SectionHeading eyebrow="Working together" title="Three ways to work with us" subtitle="Pick the arrangement that fits your budget and timeline." /></Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {[
               { title: "Fixed Project", best: "One defined product, one agreed price — scope, timeline and price in writing.", cta: "Get an estimate", href: "/estimate" },
@@ -225,7 +250,7 @@ export default function HomePage() {
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {phases.map((p, i) => (
               <Reveal key={p.n} delay={i * 0.06}>
-                <li className="h-full rounded-[24px] border border-[#E7E9F2] bg-white p-7 shadow-sm">
+                <li className="ct-lift h-full rounded-[24px] border border-[#E7E9F2] bg-white p-7 shadow-sm">
                   <span className="font-display text-4xl font-bold text-[#4F46E5]">{p.n}</span>
                   <h3 className="ct-h4 mt-3">{p.title}</h3>
                   <p className="mt-2 text-[#475569]">{p.text}</p>
@@ -241,7 +266,7 @@ export default function HomePage() {
       {/* WHY CHOOSE — one checkable proof per reason, plain list (no cards) */}
       <section className="ct-section bg-[#F6F7FB]">
         <Container>
-          <Reveal><SectionHeading eyebrow="Why CraftThink" title="What you get, beyond the code" subtitle="Every reason below is checkable — a document, a tool, or a case you can open." /></Reveal>
+          <Reveal><SectionHeading eyebrow="Why CraftThink" title="More than just code" subtitle="Every point below can be checked — in a document, a tool, or a case study you can open." /></Reveal>
           <div className="mt-12 flex flex-col divide-y divide-[#E7E9F2] border-y border-[#E7E9F2]">
             {whyChoose.map((w) => (
               <Reveal key={w.title}>

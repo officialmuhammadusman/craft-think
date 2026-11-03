@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bot, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AiGuide } from "@/components/ai/AiGuide";
 
 /**
@@ -14,9 +13,11 @@ import { AiGuide } from "@/components/ai/AiGuide";
  * bar (bottom offset clears it) — never covered by it. Desktop
  * (>=1024px): the existing bottom-right window (~400px).
  * Body scroll is locked while the sheet is open and restored on
- * close; the sheet's own message list scrolls (overscroll-contain).
- * Not a separate page, not a side drawer. The full /guide page
- * still exists, linked from the header.
+ * close; the sheet's own content scrolls as ONE region (header,
+ * greeting, messages, chips, follow-up) with only the input row
+ * pinned at the bottom — no fixed header above a separately
+ * scrolling list. Not a separate page, not a side drawer. The full
+ * /guide page still exists, linked from the header.
  */
 export function FloatingAiButton() {
   // Keyed remount on route change closes the chat window, without
@@ -43,7 +44,7 @@ function FloatingAiButtonInner() {
     };
     document.addEventListener("keydown", onKey);
     // Lock page scroll while the sheet is open; restore on close.
-    // The sheet's own message list still scrolls (overscroll-contain).
+    // The sheet's own content still scrolls (overscroll-contain).
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
@@ -62,44 +63,23 @@ function FloatingAiButtonInner() {
           className="ct-sheet-up fixed bottom-[calc(92px+env(safe-area-inset-bottom))] left-0 right-0 z-[95] flex h-[min(85dvh,calc(100dvh-108px-env(safe-area-inset-bottom)))] w-auto flex-col overflow-hidden overscroll-contain rounded-t-[24px] rounded-b-[24px] border border-[#E7E9F2] bg-white shadow-2xl sm:bottom-24 sm:left-auto sm:right-4 sm:h-[min(620px,calc(100dvh-120px))] sm:w-[calc(100vw-2rem)] sm:max-w-[420px] lg:bottom-6 lg:right-6"
 
         >
-          <div aria-hidden="true" className="flex shrink-0 justify-center bg-white pb-1 pt-2.5 sm:hidden">
-            <span className="h-1.5 w-10 rounded-full bg-[#E7E9F2]" />
+          <div className="relative flex shrink-0 justify-center bg-white pb-1 pt-2.5 sm:hidden">
+            <span aria-hidden="true" className="h-1.5 w-10 rounded-full bg-[#E7E9F2]" />
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close AI chat"
+              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-[#64748B] hover:bg-[#F6F7FB]"
+            >
+              <X size={18} />
+            </button>
           </div>
-          <div className="flex shrink-0 items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]">
-                <Bot size={20} />
-              </span>
-              <div>
-                <p className="text-base font-bold leading-tight">Think</p>
-                <p className="flex items-center gap-1.5 text-xs text-white/60">
-                  <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Ask what you need — I guide you to the right service
-                </p>
-              </div>
-            </div>
-            <div className="flex shrink-0 items-center gap-1">
-              <Link
-                href="/guide"
-                onClick={() => setOpen(false)}
-                className="flex min-h-[40px] items-center rounded-full px-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white"
-              >
-                Full page
-              </Link>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close AI chat"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10"
-              >
-                <X size={18} />
-              </button>
-            </div>
-          </div>
-          {/* Not a scroll area itself: AiGuide fills the sheet height and
-              its own message list scrolls, so no blank space sits below
-              a short card. */}
+          {/* The sheet header lives inside AiGuide's single scroll
+              region (it scrolls with the rest of the sheet content);
+              the drag-handle close button above stays reachable so
+              the sheet can always be closed on phones. */}
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
-            <AiGuide bare />
+            <AiGuide bare onClose={() => setOpen(false)} />
           </div>
         </div>
       )}

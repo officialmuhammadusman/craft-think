@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bot, ChevronDown, Send, User } from "lucide-react";
+import { ArrowRight, Bot, ChevronDown, Send, User, X } from "lucide-react";
 import { guideAnswer, type GuideReply } from "@/data/content";
 import { Button } from "@/components/ui/Button";
 
@@ -19,12 +19,14 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * visitor never sees an error for the missing key or a failed
  * provider call.
  *
- * Layout: in bare mode (chat sheet) this is a full-height flex column
- * — header (rendered by the sheet), message list flex-1 with its own
- * scroll, suggestions + input + follow-up pinned at the bottom — so
- * there is no dead blank area below a short card. The sheet wrapper
- * itself does not scroll; the message list does. On the full /guide
- * page (bare=false) the same column is used inside the card.
+ * Layout: in bare mode (chat sheet) this is ONE scrollable region —
+ * the sheet header, the greeting message, the messages, the
+ * suggestion chips and the follow-up form all scroll together inside
+ * a single scroller, and only the message input row stays pinned at
+ * the sheet bottom — so nothing above the input sits fixed while the
+ * rest moves. On the full /guide page (bare=false) the previous
+ * layout is kept: the message list scrolls on its own and the
+ * suggestions + input + follow-up sit in a bottom block.
  *
  * Behaviour: a vague first message gets ONE clarifying question with
  * quick-reply choices (from guideAnswer) instead of a guessed
@@ -33,7 +35,7 @@ const SUGGESTIONS = ["My website is slow", "I need a mobile app", "I need AI to 
  * the human handoff starts where the chat left off. Lead capture
  * stays late and optional behind the collapsed follow-up toggle.
  */
-export function AiGuide({ initial = "", bare = false }: { initial?: string; bare?: boolean }) {
+export function AiGuide({ initial = "", bare = false, onClose }: { initial?: string; bare?: boolean; onClose?: () => void }) {
   const [messages, setMessages] = useState<Msg[]>([
     { role: "guide", text: "Hello! I am Think — your guide to CraftThink. Tell me what your business needs, and I will point you to the right service and a similar project, then help you book a free call." },
   ]);
@@ -46,6 +48,8 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
   const askedInitial = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const followupRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const lastTopicRef = useRef<GuideReply | undefined>(undefined);
 
@@ -104,16 +108,31 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // New messages (and the Thinking indicator) scroll the message list
-  // itself to the bottom — in both bare and full-page mode.
+  // New messages (and the Thinking indicator) keep the latest turn
+  // visible. In bare mode the whole sheet content shares one
+  // scroller, so scroll the end of the messages into view instead of
+  // jumping to the very bottom of the sheet (which would hide the
+  // latest message above the suggestions and follow-up form). In
+  // full-page mode the message list itself still scrolls to bottom.
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    if (bare) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    } else {
+      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
   }, [messages, waiting, bare]);
-  // When the follow-up form opens, scroll the bottom block itself so
-  // the Continue button is brought into view inside the sheet.
+  // When the follow-up form opens, bring it into view so the
+  // Continue button is reachable inside the sheet. In bare mode the
+  // form lives in the single sheet scroller; in full-page mode the
+  // bottom block keeps its own scroll as before.
   useEffect(() => {
-    if (followupOpen) bottomRef.current?.scrollTo({ top: bottomRef.current.scrollHeight, behavior: "smooth" });
-  }, [followupOpen]);
+    if (!followupOpen) return;
+    if (bare) {
+      followupRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    } else {
+      bottomRef.current?.scrollTo({ top: bottomRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [followupOpen, bare]);
 
   // Conversation summary for the human handoff: the visitor's own
   // questions plus the last service/project Think suggested.
@@ -150,6 +169,80 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
     ? baseSuggestions.filter((s) => s.toLowerCase().includes(typed)).slice(0, 3)
     : baseSuggestions.slice(0, 3);
 
+  // Bare-mode sheet header: rendered INSIDE the single sheet
+  // scroller (below) so it scrolls away with the rest of the sheet
+  // content instead of sitting fixed at the top. The sheet wrapper
+  // (FloatingAiButton) no longer renders its own header.
+  const sheetHeader = (
+    <div className="flex items-center justify-between gap-3 bg-[#0B1220] px-5 py-4 text-white">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#4F46E5]">
+          <Bot size={20} />
+        </span>
+        <div>
+          <p className="text-base font-bold leading-tight">Think</p>
+          <p className="flex items-center gap-1.5 text-xs text-white/60">
+            <span className="h-2 w-2 rounded-full bg-[#14B8A6]" /> Ask what you need — I guide you to the right service
+          </p>
+        </div>
+      </div>
+      <div className="flex shrink-0 items-center gap-1">
+        <Link
+          href="/guide"
+          onClick={onClose}
+          className="flex min-h-[40px] items-center rounded-full px-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white"
+        >
+          Full page
+        </Link>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close AI chat"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10"
+          >
+            <X size={18} />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+
+  const suggestionsBlock = shownSuggestions.length > 0 && (
+    <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
+      <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : lastGuideReply?.followUps?.length ? "What next?" : "Try one of these:"}</p>
+      <div className="flex flex-wrap gap-2">
+        {shownSuggestions.map((s) => (
+          <button key={s} type="button" disabled={waiting} onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] disabled:opacity-50">{s}</button>
+        ))}
+      </div>
+    </div>
+  );
+
+  const inputForm = (
+    <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
+      <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>
+      <input ref={inputRef} id="ai-input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="What do you need help with?" className="min-h-[52px] flex-1 rounded-full border border-[#E7E9F2] px-5 text-base outline-none focus:border-[#4F46E5]" />
+      <Button type="submit" disabled={waiting} className="gap-2">{waiting ? "Thinking…" : "Ask"} <Send size={16} /></Button>
+    </form>
+  );
+
+  const followupBlock = (
+    <div ref={followupRef} className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-4 sm:px-6">
+      <button type="button" onClick={() => setFollowupOpen((v) => !v)} aria-expanded={followupOpen} className="flex min-h-[48px] w-full items-center justify-between gap-2 text-left text-base font-bold text-[#0B1220]">
+        Leave your details for a follow-up
+        <ChevronDown size={18} className={`shrink-0 transition-transform ${followupOpen ? "rotate-180" : ""}`} />
+      </button>
+      {followupOpen && (
+        <div className="mt-3 flex flex-col gap-3">
+          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
+          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" aria-label="Your email" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
+          <Button href={contactHref} className="w-full">Continue to Contact →</Button>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className={bare ? "flex min-h-0 flex-1 flex-col overflow-hidden bg-white" : "overflow-hidden rounded-[24px] border border-[#E7E9F2] bg-white shadow-xl"}>
       {!bare && (
@@ -164,7 +257,9 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
       </div>
       )}
 
-      <div ref={scrollRef} className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6" aria-live="polite">
+      <div ref={scrollRef} className={bare ? "min-h-0 flex-1 overflow-y-auto overscroll-contain" : "flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"} aria-live="polite">
+        {bare && sheetHeader}
+        <div className={bare ? "flex flex-col gap-4 px-5 py-5 sm:px-6" : "contents"}>
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${m.role === "user" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#EEF2FF] text-[#4F46E5]"}`}>{m.role === "user" ? <User size={17} /> : <Bot size={17} />}</span>
@@ -208,45 +303,30 @@ export function AiGuide({ initial = "", bare = false }: { initial?: string; bare
             </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
+        </div>
+        {bare && suggestionsBlock}
+        {bare && followupBlock}
+        {bare && <div aria-hidden="true" className="h-3 shrink-0" />}
       </div>
 
-      {/* Bottom block: in bare mode (fixed-height sheet) it is capped
-          at 45% of the sheet with its own scroll, so when the
-          follow-up form expands the Continue button stays fully
-          inside the sheet — never clipped at the sheet edge and
-          never overlapping the sticky mobile bar below. */}
-      <div ref={bottomRef} className={bare ? "shrink-0 max-h-[45%] overflow-y-auto overscroll-contain" : "shrink-0"}>
-        {shownSuggestions.length > 0 && (
-        <div className="border-t border-[#E7E9F2] px-5 pb-2 pt-4 sm:px-6">
-          <p className="mb-2 text-sm font-semibold text-[#64748B]">{typed ? "Hints for what you typed:" : lastGuideReply?.followUps?.length ? "What next?" : "Try one of these:"}</p>
-          <div className="flex flex-wrap gap-2">
-            {shownSuggestions.map((s) => (
-              <button key={s} type="button" disabled={waiting} onClick={() => ask(s)} className="min-h-[48px] rounded-full border border-[#E7E9F2] bg-white px-4 text-base font-medium text-[#0B1220] hover:border-[#4F46E5] hover:text-[#4F46E5] disabled:opacity-50">{s}</button>
-            ))}
-          </div>
+      {/* Bottom block: full-page mode only. In bare mode the
+          suggestions, input and follow-up live in the single sheet
+          scroller above (input pinned below it), so this block is
+          the non-bare layout: suggestions + input + follow-up. */}
+      {bare ? (
+        <div className="shrink-0 border-t border-[#E7E9F2] bg-white">
+          {inputForm}
         </div>
-        )}
+      ) : (
+      <div ref={bottomRef} className="shrink-0">
+        {suggestionsBlock}
 
-        <form className="flex gap-2 p-4 sm:p-5" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
-          <label className="sr-only" htmlFor="ai-input">What do you need help with?</label>
-          <input ref={inputRef} id="ai-input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="What do you need help with?" className="min-h-[52px] flex-1 rounded-full border border-[#E7E9F2] px-5 text-base outline-none focus:border-[#4F46E5]" />
-          <Button type="submit" disabled={waiting} className="gap-2">{waiting ? "Thinking…" : "Ask"} <Send size={16} /></Button>
-        </form>
+        {inputForm}
 
-        <div className="border-t border-[#E7E9F2] bg-[#F6F7FB] px-5 py-4 sm:px-6">
-          <button type="button" onClick={() => setFollowupOpen((v) => !v)} aria-expanded={followupOpen} className="flex min-h-[48px] w-full items-center justify-between gap-2 text-left text-base font-bold text-[#0B1220]">
-            Leave your details for a follow-up
-            <ChevronDown size={18} className={`shrink-0 transition-transform ${followupOpen ? "rotate-180" : ""}`} />
-          </button>
-          {followupOpen && (
-            <div className="mt-3 flex flex-col gap-3">
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" aria-label="Your name" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" aria-label="Your email" className="min-h-[52px] rounded-xl border border-[#E7E9F2] bg-white px-4 text-base" />
-              <Button href={contactHref} className="w-full">Continue to Contact →</Button>
-            </div>
-          )}
-        </div>
+        {followupBlock}
       </div>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Code2, Bot, MessagesSquare, GraduationCap, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
+import { CEO_PHOTO } from "@/data/team-photos";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -35,7 +36,10 @@ export default function CeoPage() {
           />
           <div className="mx-auto mt-10 max-w-3xl">
             <Reveal>
-              <Image src="/images/sections/about-ceo.svg" alt="Illustration of direct contact with the project lead: one conversation, no ticket queue" width={1200} height={700} className="mb-8 h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+              <figure className="mx-auto mb-8 max-w-[420px]">
+                <Image src={CEO_PHOTO} alt="Muhammad Usman — CEO, CraftThink" width={900} height={918} unoptimized className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+                <figcaption className="mt-3 text-center text-base font-semibold text-[#0B1220]">Muhammad Usman — CEO, CraftThink</figcaption>
+              </figure>
             </Reveal>
             <Reveal>
               <p className="text-lg leading-relaxed text-[#475569]">
@@ -44,6 +48,9 @@ export default function CeoPage() {
               <p className="mt-4 text-lg leading-relaxed text-[#475569]">
                 That matters if you are not technical: you explain your problem once, to the person building your solution, and you keep talking to that same person throughout.
               </p>
+            </Reveal>
+            <Reveal>
+              <Image src="/images/sections/about-ceo.svg" alt="Illustration of direct contact with the project lead: one conversation, no ticket queue" width={1200} height={700} className="mt-8 h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
             </Reveal>
           </div>
 

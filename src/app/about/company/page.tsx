@@ -8,6 +8,31 @@ import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
 import { services, projects } from "@/data/content";
+import { CEO_PHOTO, SHAHZAD_PHOTO } from "@/data/team-photos";
+
+const team = [
+  {
+    name: "Muhammad Usman",
+    role: "CEO",
+    photo: CEO_PHOTO,
+    photoAlt: "Muhammad Usman — CEO, CraftThink",
+    text: "Leads every project personally — full-stack development and applied AI, from the first call to support after launch.",
+    href: "/about/ceo",
+    linkLabel: "About the CEO →",
+    external: false,
+  },
+  {
+    name: "Shahzad Akbar",
+    role: "Team Lead & Partner",
+    photo: SHAHZAD_PHOTO,
+    photoAlt: "Shahzad Akbar — Team Lead & Partner, CraftThink",
+    text: "Team lead and partner at CraftThink, working across web applications and AI systems.",
+    href: "https://www.linkedin.com/in/shahzad-akbar-aa910725b/",
+    linkLabel: "LinkedIn →",
+    external: true,
+    skills: ["Laravel", "React", "Next.js", "RAG", "LangChain", "PyTorch", "REST APIs", "MySQL", "Redis"],
+  },
+];
 
 export const metadata: Metadata = {
   title: "About the Company — CraftThink",
@@ -122,6 +147,36 @@ export default function CompanyPage() {
                     <p className="mt-2 text-[#475569]">{p.line}</p>
                     <span className="mt-4 block text-base font-semibold text-[#4F46E5]">See the project →</span>
                   </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-14">
+            <SectionHeading eyebrow="Our team" title="The people behind your project" subtitle="You talk to the person leading your project — and the team behind him builds it." />
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {team.map((m) => (
+                <Reveal key={m.name}>
+                  <article className="ct-card h-full overflow-hidden p-0">
+                    <Image src={m.photo} alt={m.photoAlt} width={900} height={900} unoptimized className="h-auto w-full object-cover" />
+                    <div className="p-6">
+                      <h3 className="ct-h4">{m.name}</h3>
+                      <p className="mt-1 text-base font-semibold text-[#4F46E5]">{m.role}</p>
+                      <p className="mt-3 text-[#475569]">{m.text}</p>
+                      {"skills" in m && m.skills && (
+                        <ul className="mt-4 flex flex-wrap gap-2">
+                          {m.skills.map((s) => (
+                            <li key={s} className="rounded-full bg-[#EEF2FF] px-3 py-1 text-sm font-medium text-[#312E81]">{s}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {m.external ? (
+                        <a href={m.href} target="_blank" rel="noreferrer" className="mt-4 block text-base font-semibold text-[#4F46E5]">{m.linkLabel}</a>
+                      ) : (
+                        <Link href={m.href} className="mt-4 block text-base font-semibold text-[#4F46E5]">{m.linkLabel}</Link>
+                      )}
+                    </div>
+                  </article>
                 </Reveal>
               ))}
             </div>

@@ -75,9 +75,10 @@ function FloatingAiButtonInner() {
             </button>
           </div>
           {/* The sheet header lives inside AiGuide's single scroll
-              region (it scrolls with the rest of the sheet content);
-              the drag-handle close button above stays reachable so
-              the sheet can always be closed on phones. */}
+              region (it scrolls with the rest of the sheet content).
+              On phones the header's own X is hidden, so this
+              drag-handle X is the one close button; on larger
+              screens this row is hidden and the header X shows. */}
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
             <AiGuide bare onClose={() => setOpen(false)} />
           </div>

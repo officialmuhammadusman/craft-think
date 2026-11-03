@@ -199,7 +199,7 @@ export function AiGuide({ initial = "", bare = false, onClose }: { initial?: str
             type="button"
             onClick={onClose}
             aria-label="Close AI chat"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:bg-white/10 sm:flex"
           >
             <X size={18} />
           </button>

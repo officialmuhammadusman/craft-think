@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Illustration of booking a free consultation: a calendar with an open slot and a call">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif">
+    <rect x="120" y="110" width="560" height="480" rx="24" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <rect x="120" y="110" width="560" height="76" rx="24" fill="#0B1220"/>
+    <text x="400" y="158" text-anchor="middle" font-size="24" font-weight="bold" fill="#FFFFFF">Pick a day that suits you</text>
+    <g text-anchor="middle" font-size="18" fill="#475569">
+      <text x="190" y="240" font-weight="bold" fill="#0B1220">Mon</text><text x="290" y="240" font-weight="bold" fill="#0B1220">Tue</text><text x="390" y="240" font-weight="bold" fill="#0B1220">Wed</text><text x="490" y="240" font-weight="bold" fill="#0B1220">Thu</text><text x="590" y="240" font-weight="bold" fill="#0B1220">Fri</text>
+    </g>
+    <g font-size="18" text-anchor="middle">
+      <rect x="160" y="270" width="60" height="60" rx="14" fill="#EEF2FF"/><text x="190" y="308" fill="#0B1220">10:00</text>
+      <rect x="260" y="270" width="60" height="60" rx="14" fill="#4F46E5"/><text x="290" y="308" fill="#FFFFFF">11:30</text>
+      <rect x="360" y="270" width="60" height="60" rx="14" fill="#EEF2FF"/><text x="390" y="308" fill="#0B1220">14:00</text>
+      <rect x="460" y="270" width="60" height="60" rx="14" fill="#EEF2FF"/><text x="490" y="308" fill="#0B1220">16:00</text>
+      <rect x="560" y="270" width="60" height="60" rx="14" fill="#EEF2FF"/><text x="590" y="308" fill="#0B1220">18:00</text>
+    </g>
+    <rect x="160" y="380" width="480" height="120" rx="16" fill="#EEF2FF"/>
+    <text x="400" y="430" text-anchor="middle" font-size="22" font-weight="bold" fill="#0B1220">Free consultation — no obligation</text>
+    <text x="400" y="465" text-anchor="middle" font-size="18" fill="#475569">Talk to the person leading your project</text>
+    <g>
+      <rect x="760" y="200" width="320" height="300" rx="24" fill="#4F46E5"/>
+      <circle cx="920" cy="300" r="52" fill="#FFFFFF"/><text x="920" y="312" text-anchor="middle" font-size="34" fill="#4F46E5">☎</text>
+      <text x="920" y="400" text-anchor="middle" font-size="22" font-weight="bold" fill="#FFFFFF">A real conversation</text>
+      <text x="920" y="432" text-anchor="middle" font-size="17" fill="#FFFFFF" opacity="0.85">Not a ticket queue</text>
+      <circle cx="1052" cy="220" r="12" fill="#14B8A6"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustration of the Test step: checks passed">
+  <rect width="800" height="600" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <circle cx="400" cy="240" r="110" fill="#4F46E5"/>
+    <path d="M340 240 L385 285 L465 195" stroke="#FFFFFF" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="400" y="440" font-size="30" font-weight="bold" fill="#0B1220">Test</text>
+    <text x="400" y="485" font-size="20" fill="#475569">Phones, speed, security</text>
+  </g>
+</svg>

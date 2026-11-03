@@ -9,6 +9,8 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/Stagger";
+import { WhatHappensNext } from "@/components/sections/WhatHappensNext";
 import { HeroPathCollage } from "@/components/home/HeroPathCollage";
 
 export const metadata: Metadata = {
@@ -110,9 +112,9 @@ export default function HomePage() {
       <section className="ct-section bg-[#F6F7FB]">
         <Container>
           <Reveal><SectionHeading eyebrow="Services" title="What we build" subtitle="Eleven services, one team. Choose the outcome you need — the technology follows." /></Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.slice(0, 6).map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 3) * 0.06}>
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.slice(0, 6).map((s) => (
+              <StaggerItem key={s.slug} className="h-full">
                 <Link href={`/services/${s.slug}`} className="ct-tile group block h-full">
                   <div className="relative overflow-hidden bg-[#EEF2FF]">
                     <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
@@ -124,9 +126,9 @@ export default function HomePage() {
                     <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">See who it&apos;s for <ArrowRight size={17} /></p>
                   </div>
                 </Link>
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
           <div className="mt-10 text-center"><Button href="/services" variant="secondary" size="lg" className="w-full sm:w-auto">View all services →</Button></div>
         </Container>
       </section>
@@ -145,12 +147,12 @@ export default function HomePage() {
               ))}
             </div>
           </Reveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p) => {
               const live = verifiedLiveLinks[p.slug];
               const chips = p.stack.split(", ").slice(0, 3);
               return (
-                <Reveal key={p.slug}>
+                <StaggerItem key={p.slug} className="h-full">
                   <article className="ct-tile group flex h-full flex-col">
                     <Link href={`/work/${p.slug}`} className="block">
                       <div className="relative overflow-hidden bg-[#EEF2FF]">
@@ -176,10 +178,34 @@ export default function HomePage() {
                       </div>
                     </div>
                   </article>
-                </Reveal>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
+        </Container>
+      </section>
+
+      {/* INDUSTRIES — only industries with a real project behind them */}
+      <section className="ct-section bg-[#F6F7FB]">
+        <Container>
+          <Reveal><SectionHeading eyebrow="Who we build for" title="Industries we have actually built for" subtitle="Every industry below links to a real case study — no industry is listed without work behind it." /></Reveal>
+          <Reveal className="mt-10">
+            <Image src="/images/sections/industries.svg" alt="Illustration of the industries CraftThink has built for, from healthcare to travel" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </Reveal>
+          <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((ind) => (
+              <StaggerItem key={ind.label} className="h-full">
+                <article className="ct-lift flex h-full flex-col rounded-[24px] border border-[#E7E9F2] bg-white p-7 shadow-sm">
+                  <h3 className="ct-h4">{ind.label}</h3>
+                  <p className="mt-2 flex-1 text-[#475569]">{ind.description}</p>
+                  {ind.projectHref && (
+                    <Link href={ind.projectHref} className="mt-4 flex min-h-[48px] items-center gap-1 font-semibold text-[#4F46E5]">See the case study: {ind.projectLabel} <ArrowRight size={16} /></Link>
+                  )}
+                  <Link href={ind.href} className="flex min-h-[48px] items-center gap-1 font-semibold text-[#0B1220]">All {ind.label} work <ArrowRight size={16} /></Link>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </Container>
       </section>
 
@@ -224,11 +250,14 @@ export default function HomePage() {
       <section className="ct-section bg-[#F6F7FB]">
         <Container>
           <Reveal><SectionHeading eyebrow="Working together" title="Three ways to work with us" subtitle="Pick the arrangement that fits your budget and timeline." /></Reveal>
+          <Reveal className="mt-10">
+            <Image src="/images/sections/engagement.svg" alt="Illustration of the three ways to work with CraftThink: fixed project, dedicated team, and support and care" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {[
-              { title: "Fixed Project", best: "One defined product, one agreed price — scope, timeline and price in writing.", cta: "Get an estimate", href: "/estimate" },
-              { title: "Dedicated Team", best: "Ongoing product work, month to month — scale the team up or down as you go.", cta: "Book a consultation", href: "/consultation" },
-              { title: "Support & Care", best: "Software you already run, kept healthy — bug fixes and updates, cancel anytime.", cta: "See support", href: "/services/testing-care" },
+              { title: "Fixed Project", best: "One defined product, one agreed price — scope, timeline and price in writing.", cta: "Get an estimate", href: "/estimate", tool: "Start with a free audit", toolHref: "/audit" },
+              { title: "Dedicated Team", best: "Ongoing product work, month to month — scale the team up or down as you go.", cta: "Book a consultation", href: "/consultation", tool: "Try the estimator first", toolHref: "/estimate" },
+              { title: "Support & Care", best: "Software you already run, kept healthy — bug fixes and updates, cancel anytime.", cta: "See support", href: "/services/testing-care", tool: "Run a free audit", toolHref: "/audit" },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 0.06}>
                 <article className="flex h-full flex-col rounded-[24px] border border-[#E7E9F2] bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
@@ -236,6 +265,7 @@ export default function HomePage() {
                   <p className="mt-2 flex-1 text-[#475569]">{m.best}</p>
                   <p className="mt-3 text-sm text-[#64748B]">All three include weekly demos.</p>
                   <Link href={m.href} className="mt-6 flex min-h-[48px] items-center gap-1 font-semibold text-[#4F46E5]">{m.cta} <ArrowRight size={16} /></Link>
+                  <Link href={m.toolHref} className="flex min-h-[48px] items-center gap-1 font-semibold text-[#0B1220]">{m.tool} <ArrowRight size={16} /></Link>
                 </article>
               </Reveal>
             ))}
@@ -247,6 +277,9 @@ export default function HomePage() {
       <section className="ct-section bg-white">
         <Container>
           <Reveal><SectionHeading eyebrow="Process" title="From first call to launch, in four phases" subtitle="Each phase ends with something you can approve — or stop at." /></Reveal>
+          <Reveal className="mt-10">
+            <Image src="/images/sections/process.svg" alt="Illustration of the four project phases, from assess to launch and support" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </Reveal>
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {phases.map((p, i) => (
               <Reveal key={p.n} delay={i * 0.06}>
@@ -263,10 +296,23 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* WHAT HAPPENS NEXT — honest journey after contact, with illustration */}
+      <section className="ct-section bg-[#F6F7FB]">
+        <Container>
+          <Reveal className="mb-10">
+            <Image src="/images/sections/journey.svg" alt="Illustration of the journey after contacting CraftThink, from request to support" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </Reveal>
+          <WhatHappensNext />
+        </Container>
+      </section>
+
       {/* WHY CHOOSE — one checkable proof per reason, plain list (no cards) */}
       <section className="ct-section bg-[#F6F7FB]">
         <Container>
           <Reveal><SectionHeading eyebrow="Why CraftThink" title="More than just code" subtitle="Every point below can be checked — in a document, a tool, or a case study you can open." /></Reveal>
+          <Reveal className="mt-10">
+            <Image src="/images/sections/why.svg" alt="Illustration of why to trust CraftThink: direct contact, a written plan, real work, and support" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </Reveal>
           <div className="mt-12 flex flex-col divide-y divide-[#E7E9F2] border-y border-[#E7E9F2]">
             {whyChoose.map((w) => (
               <Reveal key={w.title}>
@@ -284,7 +330,63 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* TOOLS — one-line strip only */}
+      {/* TECHNOLOGIES — visual showcase: illustrated cards, not just chips */}
+      <section className="ct-section bg-white">
+        <Container>
+          <Reveal><SectionHeading eyebrow="Technologies" title="Technologies we use" subtitle="Proven tools, chosen for reliability — the same stack behind the case studies above." /></Reveal>
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Frontend", image: "/images/sections/tech-frontend.svg", alt: "Illustration of frontend development: website components and pages", stack: "Next.js · React · TypeScript", href: "/services/website-design", cta: "See website services" },
+              { title: "Backend", image: "/images/sections/tech-backend.svg", alt: "Illustration of backend development: servers and APIs", stack: "Node.js · NestJS", href: "/services/crm", cta: "See business systems" },
+              { title: "Data", image: "/images/sections/tech-data.svg", alt: "Illustration of data and databases", stack: "PostgreSQL · Prisma · Supabase", href: "/services/crm", cta: "See business systems" },
+              { title: "AI & RAG", image: "/images/sections/tech-ai.svg", alt: "Illustration of AI answering from documents with sources", stack: "LangChain · LangGraph · Pinecone", href: "/services/ai-solutions", cta: "See AI solutions" },
+              { title: "Mobile", image: "/images/sections/tech-mobile.svg", alt: "Illustration of mobile apps on phones", stack: "React Native", href: "/services/mobile-apps", cta: "See mobile apps" },
+              { title: "DevOps & Care", image: "/images/sections/tech-devops.svg", alt: "Illustration of deployment and support: code shipped safely and monitored", stack: "Docker · Vercel · GitHub Actions", href: "/services/testing-care", cta: "See support & care" },
+            ].map((t) => (
+              <StaggerItem key={t.title} className="h-full">
+                <article className="ct-tile group flex h-full flex-col">
+                  <div className="relative overflow-hidden bg-[#EEF2FF]">
+                    <Image src={t.image} alt={t.alt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="ct-h4">{t.title}</h3>
+                    <p className="mt-2 flex-1 text-[#475569]">{t.stack}</p>
+                    <Link href={t.href} className="mt-4 flex min-h-[48px] items-center gap-1 font-semibold text-[#4F46E5]">{t.cta} <ArrowRight size={16} /></Link>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Container>
+      </section>
+
+      {/* INSIGHTS PREVIEW — branded illustration per article */}
+      <section className="ct-section bg-[#F6F7FB]">
+        <Container>
+          <Reveal><SectionHeading eyebrow="Insights" title="Practical advice, before you spend anything" subtitle="General advice from the CraftThink team — no jargon, no sales talk." /></Reveal>
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { slug: "why-a-booking-site-loses-customers", title: "Why a booking site loses customers", summary: "Most lost bookings are not about price. They are about confusion, friction, and missing trust at the moment someone is ready to book.", image: "/images/sections/insight-booking.svg", alt: "Illustration of a booking journey losing customers at confusing steps" },
+              { slug: "what-a-crm-does-for-a-small-business", title: "What a CRM does for a small business", summary: "A CRM is not a fancy spreadsheet. It is one place where your customers, conversations, follow-ups, and sales live together.", image: "/images/sections/insight-crm.svg", alt: "Illustration of a CRM: customers, conversations, and follow-ups in one place" },
+              { slug: "what-to-check-before-hiring-a-developer", title: "What to check before hiring a developer", summary: "Before you pay anyone to build your website or app, check these things: past work, ownership, written scope, and support after launch.", image: "/images/sections/insight-hiring.svg", alt: "Illustration of a checklist for hiring a developer: past work, ownership, scope, and support" },
+            ].map((a) => (
+              <StaggerItem key={a.slug} className="h-full">
+                <Link href={`/insights/${a.slug}`} className="ct-tile group flex h-full flex-col">
+                  <div className="relative overflow-hidden bg-[#EEF2FF]">
+                    <Image src={a.image} alt={a.alt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover" />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="ct-h4">{a.title}</h3>
+                    <p className="mt-2 flex-1 text-[#475569]">{a.summary}</p>
+                    <p className="mt-4 flex items-center gap-1 font-semibold text-[#4F46E5]">Read the article <ArrowRight size={16} /></p>
+                  </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+          <div className="mt-10 text-center"><Button href="/insights" variant="secondary" size="lg" className="w-full sm:w-auto">View all insights →</Button></div>
+        </Container>
+      </section>
       <section className="border-b border-[#E7E9F2] bg-white py-8">
         <Container>
           <p className="text-center text-base text-[#475569]">
@@ -305,6 +407,10 @@ export default function HomePage() {
       <section className="border-t border-[#E7E9F2] bg-white py-16 text-[#0B1220] sm:py-20">
         <Container>
           <div className="flex flex-col items-start gap-5">
+            <svg aria-hidden="true" viewBox="0 0 320 24" className="h-6 w-80 max-w-full" fill="none">
+              <path d="M4 12 H280" stroke="#4F46E5" strokeWidth="3" strokeLinecap="round" strokeDasharray="2 12" />
+              <circle cx="300" cy="12" r="8" fill="#14B8A6" />
+            </svg>
             <span className="rounded-full border border-[#E7E9F2] bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#4F46E5]">Free consultation · No obligation</span>
             <h2 className="ct-section-title max-w-2xl">Not sure where to start?</h2>
             <p className="max-w-xl text-lg leading-relaxed text-[#475569]">Book a free consultation. We will understand your problem, show you a similar project, and give you a clear next step — with no obligation.</p>

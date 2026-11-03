@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustration of the Launch step: going live">
+  <rect width="800" height="600" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="220" y="150" width="360" height="220" rx="20" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <path d="M400 200 L470 290 L330 290 Z" fill="#4F46E5"/>
+    <rect x="380" y="290" width="40" height="40" rx="8" fill="#0B1220"/>
+    <circle cx="540" cy="180" r="12" fill="#14B8A6"/>
+    <text x="400" y="440" font-size="30" font-weight="bold" fill="#0B1220">Launch</text>
+    <text x="400" y="485" font-size="20" fill="#475569">Checked live with you</text>
+  </g>
+</svg>

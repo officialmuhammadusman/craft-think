@@ -96,6 +96,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </ol>
               </Section>
 
+              {/* MID-PAGE ILLUSTRATION — process motif, after Process */}
+              <div className="mt-10">
+                <Image src="/images/sections/process.svg" alt="Illustration of the four project phases, from assess to launch and support" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+              </div>
+
               {/* MID-PAGE PROMPT — short, after Process */}
               <div className="mt-10 flex flex-col gap-4 rounded-[24px] bg-[#0B1220] p-7 text-white shadow-xl sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-lg font-semibold">Not sure which scope fits? Talk it through — free, no obligation.</p>

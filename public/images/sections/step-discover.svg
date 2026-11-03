@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustration of the Discover step: learning the business">
+  <rect width="800" height="600" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <circle cx="400" cy="230" r="110" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <text x="400" y="250" font-size="72" fill="#4F46E5">?</text>
+    <text x="400" y="440" font-size="30" font-weight="bold" fill="#0B1220">Discover</text>
+    <text x="400" y="485" font-size="20" fill="#475569">Learn the business first</text>
+  </g>
+</svg>

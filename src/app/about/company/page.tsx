@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, Compass, ShieldCheck, Rocket, HeartHandshake, Users } from "lucide-react";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -41,6 +42,9 @@ export default function CompanyPage() {
             subtitle="Software, built with thought, guided by AI. Led by CEO Muhammad Usman, working remotely with clients worldwide."
           />
           <div className="mx-auto mt-10 max-w-3xl">
+            <Reveal>
+              <Image src="/images/sections/about-company.svg" alt="Illustration of CraftThink as a guided software house: search, ask, explore, and book" width={1200} height={700} className="mb-8 h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+            </Reveal>
             <Reveal>
               <p className="text-lg leading-relaxed text-[#475569]">
                 CraftThink is not a static portfolio. It is a software house you can explore, ask questions of, and be guided through: search for what you need, talk to Think, look at real projects, and book a free consultation — all before you spend anything.

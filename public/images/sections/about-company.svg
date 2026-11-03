@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Illustration of CraftThink as a guided software house: search, ask, explore, and book">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g><rect x="90" y="180" width="240" height="240" rx="20" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/><text x="210" y="290" font-size="34" fill="#4F46E5">⌕</text><text x="210" y="360" font-size="22" font-weight="bold" fill="#0B1220">Search</text><text x="210" y="390" font-size="16" fill="#475569">Find your service</text></g>
+    <path d="M330 300 H390" stroke="#4F46E5" stroke-width="4" stroke-dasharray="2 12"/>
+    <g><rect x="390" y="180" width="240" height="240" rx="20" fill="#4F46E5"/><text x="510" y="290" font-size="34" fill="#FFFFFF">✦</text><text x="510" y="360" font-size="22" font-weight="bold" fill="#FFFFFF">Ask Think</text><text x="510" y="390" font-size="16" fill="#FFFFFF" opacity="0.85">Get guided to it</text></g>
+    <path d="M630 300 H690" stroke="#4F46E5" stroke-width="4" stroke-dasharray="2 12"/>
+    <g><rect x="690" y="180" width="240" height="240" rx="20" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/><text x="810" y="290" font-size="34" fill="#4F46E5">▦</text><text x="810" y="360" font-size="22" font-weight="bold" fill="#0B1220">Explore work</text><text x="810" y="390" font-size="16" fill="#475569">Open real case studies</text></g>
+    <path d="M930 300 H990" stroke="#4F46E5" stroke-width="4" stroke-dasharray="2 12"/>
+    <g><rect x="990" y="180" width="150" height="240" rx="20" fill="#0B1220"/><text x="1065" y="290" font-size="34" fill="#FFFFFF">☎</text><text x="1065" y="360" font-size="22" font-weight="bold" fill="#FFFFFF">Book</text><text x="1065" y="390" font-size="16" fill="#FFFFFF" opacity="0.75">Free call</text></g>
+    <text x="600" y="540" font-size="24" font-weight="bold" fill="#0B1220">A house you explore — not a static portfolio</text>
+  </g>
+</svg>

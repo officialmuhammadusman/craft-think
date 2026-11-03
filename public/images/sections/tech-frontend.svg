@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Illustration of frontend development: website components and pages">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif">
+    <rect x="120" y="110" width="960" height="480" rx="24" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <rect x="120" y="110" width="960" height="64" rx="24" fill="#0B1220"/>
+    <circle cx="170" cy="142" r="10" fill="#4F46E5"/><circle cx="200" cy="142" r="10" fill="#FFFFFF" opacity="0.4"/><circle cx="230" cy="142" r="10" fill="#FFFFFF" opacity="0.4"/>
+    <rect x="180" y="220" width="420" height="28" rx="14" fill="#4F46E5"/>
+    <rect x="180" y="270" width="300" height="20" rx="10" fill="#C7D2FE"/>
+    <rect x="180" y="310" width="360" height="20" rx="10" fill="#E7E9F2"/>
+    <rect x="180" y="380" width="180" height="56" rx="28" fill="#4F46E5"/>
+    <text x="270" y="417" text-anchor="middle" font-size="20" font-weight="bold" fill="#FFFFFF">Get started</text>
+    <rect x="680" y="220" width="340" height="220" rx="16" fill="#EEF2FF"/>
+    <rect x="710" y="250" width="280" height="20" rx="10" fill="#4F46E5"/>
+    <rect x="710" y="285" width="200" height="20" rx="10" fill="#C7D2FE"/>
+    <rect x="710" y="320" width="240" height="20" rx="10" fill="#C7D2FE"/>
+    <circle cx="990" cy="480" r="14" fill="#14B8A6"/>
+    <text x="600" y="640" text-anchor="middle" font-size="24" font-weight="bold" fill="#0B1220">Frontend — pages visitors love</text>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Illustration of a checklist for hiring a developer: past work, ownership, scope, and support">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif">
+    <rect x="200" y="110" width="800" height="480" rx="24" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/>
+    <text x="600" y="175" text-anchor="middle" font-size="26" font-weight="bold" fill="#0B1220">Before you pay anyone, check:</text>
+    <g font-size="22" fill="#0B1220">
+      <g><rect x="260" y="215" width="36" height="36" rx="9" fill="#EEF2FF"/><path d="M268 233 L278 243 L292 224" stroke="#14B8A6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="320" y="242">Past work you can open</text></g>
+      <g><rect x="260" y="285" width="36" height="36" rx="9" fill="#EEF2FF"/><path d="M268 303 L278 313 L292 294" stroke="#14B8A6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="320" y="312">You own the code and data</text></g>
+      <g><rect x="260" y="355" width="36" height="36" rx="9" fill="#EEF2FF"/><path d="M268 373 L278 383 L292 364" stroke="#14B8A6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="320" y="382">Scope in writing, before payment</text></g>
+      <g><rect x="260" y="425" width="36" height="36" rx="9" fill="#EEF2FF"/><path d="M268 443 L278 453 L292 434" stroke="#14B8A6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="320" y="452">Support after launch</text></g>
+    </g>
+  </g>
+</svg>

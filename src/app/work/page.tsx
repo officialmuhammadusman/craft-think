@@ -4,6 +4,7 @@ import Image from "next/image";
 import { projects } from "@/data/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { WorkFilters } from "@/components/work/WorkFilters";
 
@@ -21,10 +22,11 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
           {list.length === 0 ? (
             <p className="mt-10 text-center text-[#475569]">No projects in this industry yet. <Link href="/work" className="font-semibold text-[#4F46E5] underline">See all work</Link>.</p>
           ) : (
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <Stagger className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {list.map((p) => (
+                <StaggerItem key={p.slug} className="h-full">
                 <Link key={p.slug} href={`/work/${p.slug}`} className="ct-card group overflow-hidden">
-                  <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Image src={p.image} alt={p.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                   <div className="p-6">
                     <p className="text-sm font-semibold uppercase tracking-widest text-[#4F46E5]">{p.industryLabel}</p>
                     <h2 className="ct-h4 mt-1">{p.title}</h2>
@@ -32,8 +34,9 @@ export default async function WorkPage({ searchParams }: { searchParams: Promise
                     <p className="mt-3 text-sm text-[#475569]">{p.stack}</p>
                   </div>
                 </Link>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           )}
         </Container>
       </section>

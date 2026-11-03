@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Illustration of a booking journey losing customers at confusing steps">
+  <rect width="1200" height="700" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g><rect x="110" y="200" width="280" height="220" rx="16" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/><text x="250" y="290" font-size="22" font-weight="bold" fill="#0B1220">Find it</text><text x="250" y="325" font-size="17" fill="#475569">Clear offer</text><circle cx="250" cy="380" r="12" fill="#14B8A6"/></g>
+    <path d="M390 310 H470" stroke="#4F46E5" stroke-width="4" stroke-dasharray="2 12"/>
+    <g><rect x="470" y="200" width="280" height="220" rx="16" fill="#FFFFFF" stroke="#E7E9F2" stroke-width="2"/><text x="610" y="290" font-size="22" font-weight="bold" fill="#0B1220">Book it</text><text x="610" y="325" font-size="17" fill="#475569">Simple steps, honest rules</text><circle cx="610" cy="380" r="12" fill="#14B8A6"/></g>
+    <path d="M750 310 H830" stroke="#4F46E5" stroke-width="4" stroke-dasharray="2 12"/>
+    <g><rect x="830" y="200" width="280" height="220" rx="16" fill="#4F46E5"/><text x="970" y="290" font-size="22" font-weight="bold" fill="#FFFFFF">Confirmed</text><text x="970" y="325" font-size="17" fill="#FFFFFF" opacity="0.85">No surprises at payment</text><circle cx="970" cy="380" r="12" fill="#FFFFFF"/></g>
+    <text x="600" y="520" font-size="24" font-weight="bold" fill="#0B1220">Booking should feel this simple</text>
+  </g>
+</svg>

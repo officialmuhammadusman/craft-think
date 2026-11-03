@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Globe, Code2, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -20,6 +21,7 @@ export default function ContactPage() {
         <SectionHeading as="h1" eyebrow="Contact" title="Book a Free Consultation" subtitle="Talk to Muhammad Usman about your project. No pressure — just a conversation." />
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="flex flex-col gap-4">
+            <Image src="/images/sections/contact.svg" alt="Illustration of contacting CraftThink by email or WhatsApp" width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
             {cards.map((c) => (
               <a key={c.label} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined} className="ct-card flex min-h-[72px] items-center gap-4 p-5">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#4F46E5]"><c.icon size={20} /></span>

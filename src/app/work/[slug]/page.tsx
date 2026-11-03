@@ -122,6 +122,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </ul>
           </Section>
 
+          {/* MID-PAGE ILLUSTRATION — the project's own motif, reused */}
+          <div className="mt-10">
+            <Image src={p.image} alt={p.imageAlt} width={1200} height={700} className="h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+          </div>
+
           {/* FEATURES */}
           {p.features && p.features.length > 0 && (
             <Section title="Features">

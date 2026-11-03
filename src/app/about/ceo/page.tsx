@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Code2, Bot, MessagesSquare, GraduationCap, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -33,6 +34,9 @@ export default function CeoPage() {
             subtitle="CEO & Founder, CraftThink — Full Stack and Applied AI Engineer, 2+ years. You talk directly with the person leading your project."
           />
           <div className="mx-auto mt-10 max-w-3xl">
+            <Reveal>
+              <Image src="/images/sections/about-ceo.svg" alt="Illustration of direct contact with the project lead: one conversation, no ticket queue" width={1200} height={700} className="mb-8 h-auto w-full rounded-[24px] border border-[#E7E9F2] object-cover shadow-xl" />
+            </Reveal>
             <Reveal>
               <p className="text-lg leading-relaxed text-[#475569]">
                 CraftThink is led by its CEO, not by an account manager. Muhammad Usman leads sales, architecture, AI, complex backend work and client communication, while a development team behind him delivers design, frontend, backend and mobile app work — and a designer creates the unique images and visuals.

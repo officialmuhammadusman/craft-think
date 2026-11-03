@@ -4,6 +4,7 @@ import Image from "next/image";
 import { services } from "@/data/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { CtaBand } from "@/components/ui/CtaBand";
 
 export const metadata: Metadata = { title: "Services", description: "Websites, apps, CRM, booking systems, AI solutions and more — from CraftThink." };
@@ -14,10 +15,11 @@ export default function ServicesPage() {
       <section className="ct-section">
         <Container>
           <SectionHeading as="h1" eyebrow="What We Build" title="Services" subtitle="Pick the problem you have — the technical detail is inside each page." />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
+              <StaggerItem key={s.slug} className="h-full">
               <Link key={s.slug} href={`/services/${s.slug}`} className="ct-card group overflow-hidden">
-                <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={s.image} alt={s.imageAlt} width={800} height={520} className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div className="p-6">
                   <h2 className="ct-h4">{s.title}</h2>
                   <p className="mt-2 text-[#475569]">{s.line}</p>
@@ -25,8 +27,9 @@ export default function ServicesPage() {
                   <p className="mt-3 text-sm font-semibold text-[#4F46E5]">Learn more →</p>
                 </div>
               </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
       <CtaBand />

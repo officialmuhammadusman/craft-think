@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustration of the Build step: small tested steps">
+  <rect width="800" height="600" fill="#F6F7FB"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="180" y="130" width="440" height="240" rx="20" fill="#0B1220"/>
+    <rect x="220" y="175" width="360" height="20" rx="10" fill="#4F46E5"/>
+    <rect x="220" y="215" width="260" height="20" rx="10" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="220" y="255" width="300" height="20" rx="10" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="220" y="300" width="180" height="20" rx="10" fill="#14B8A6"/>
+    <text x="400" y="440" font-size="30" font-weight="bold" fill="#0B1220">Build</text>
+    <text x="400" y="485" font-size="20" fill="#475569">Small steps, weekly demos</text>
+  </g>
+</svg>

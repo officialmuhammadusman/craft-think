@@ -26,34 +26,34 @@ export function EstimateForm() {
   const low = Math.round((base.low * sizeMul + (features - 1) * 200) / 100) * 100;
   const high = Math.round((base.high * sizeMul + (features - 1) * 400) / 100) * 100;
   return (
-    <div className="rounded-2xl border border-[#E7E9F2] bg-white p-6 shadow-sm">
-      <div className="grid gap-4">
-        <label className="flex flex-col gap-2 font-semibold">What do you need?
-          <select value={type} onChange={(e) => setType(e.target.value)} className="min-h-[48px] rounded-xl border border-[#E7E9F2] px-4 text-base font-normal">
+    <div className="min-w-0 break-words rounded-2xl border border-[#E7E9F2] bg-white p-4 shadow-sm sm:p-6">
+      <div className="grid min-w-0 gap-4">
+        <label className="flex min-w-0 flex-col gap-2 font-semibold">What do you need?
+          <select value={type} onChange={(e) => setType(e.target.value)} className="min-h-[48px] w-full min-w-0 rounded-xl border border-[#E7E9F2] px-4 text-base font-normal">
             {Object.keys(BASE).map((k) => <option key={k}>{k}</option>)}
           </select>
         </label>
-        <label className="flex flex-col gap-2 font-semibold">Project size
-          <select value={size} onChange={(e) => setSize(e.target.value)} className="min-h-[48px] rounded-xl border border-[#E7E9F2] px-4 text-base font-normal">
+        <label className="flex min-w-0 flex-col gap-2 font-semibold">Project size
+          <select value={size} onChange={(e) => setSize(e.target.value)} className="min-h-[48px] w-full min-w-0 rounded-xl border border-[#E7E9F2] px-4 text-base font-normal">
             <option value="small">Small — a few pages / features</option>
             <option value="medium">Medium — several pages / features</option>
             <option value="large">Large — many pages / features / integrations</option>
           </select>
         </label>
-        <label className="flex flex-col gap-2 font-semibold">Extra features (payments, booking, admin, AI, etc.): {features}
-          <input type="range" min={0} max={5} value={features} onChange={(e) => setFeatures(Number(e.target.value))} className="w-full" />
+        <label className="flex min-w-0 flex-col gap-2 font-semibold">Extra features (payments, booking, admin, AI, etc.): {features}
+          <input type="range" min={0} max={5} value={features} onChange={(e) => setFeatures(Number(e.target.value))} className="w-full min-w-0" />
         </label>
       </div>
-      <div className="mt-6 rounded-2xl bg-[#EEF2FF] p-6">
+      <div className="mt-6 min-w-0 break-words rounded-2xl bg-[#EEF2FF] p-4 sm:p-6">
         {/* Consultation-led result: the firm estimate comes on the call.
             The range below is only an indicative starting range. */}
         <p className="text-base font-bold text-[#0B1220]">Your firm estimate is given on your free consultation call.</p>
-        <p className="mt-1 text-[#475569]">Tell us your project on the call and we will confirm the price in writing — no fixed price is promised here.</p>
-        <div className="mt-4"><Button href={`/consultation?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Indicative range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
+        <p className="mt-1 break-words text-[#475569]">Tell us your project on the call and we will confirm the price in writing — no fixed price is promised here.</p>
+        <div className="mt-4 min-w-0"><Button className="w-full whitespace-normal text-center sm:w-auto" href={`/consultation?problem=${encodeURIComponent(`Estimate request: ${type}, size ${size}, ${features} extra features. Indicative range $${low}–$${high}.`)}`}>Book a Free Consultation →</Button></div>
         <p className="mt-5 text-sm font-bold uppercase tracking-widest text-[#4F46E5]">Indicative starting range only — not a quote</p>
-        <p className="ct-h2 mt-2">${low.toLocaleString()} – ${high.toLocaleString()}+</p>
-        <p className="mt-1 text-[#475569]">Rough timeline: {base.weeks}. Final price depends on your exact pages, features and content, and is confirmed in writing after a free consultation.</p>
-        <p className="mt-3 text-sm text-[#475569]">Or see <Link href="/audit" className="font-semibold text-[#4F46E5] underline">the free audit</Link> if you already have software.</p>
+        <p className="ct-h2 mt-2 break-words">${low.toLocaleString()} – ${high.toLocaleString()}+</p>
+        <p className="mt-1 break-words text-[#475569]">Rough timeline: {base.weeks}. Final price depends on your exact pages, features and content, and is confirmed in writing after a free consultation.</p>
+        <p className="mt-3 break-words text-sm text-[#475569]">Or see <Link href="/audit" className="font-semibold text-[#4F46E5] underline">the free audit</Link> if you already have software.</p>
       </div>
     </div>
   );
